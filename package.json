@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "json-server --watch db.json --port 3004"
+    "server": "json-server src/database/db.json --port 3004"
   },
   "dependencies": {
     "json-server": "^1.0.0-beta.3",
