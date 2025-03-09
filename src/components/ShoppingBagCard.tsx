@@ -7,15 +7,13 @@ const ShoppingBagCard = ({ id }: { id: string }) => {
   const [productDetails, setProductDetails] = useState<EachProduct|null>(null);
   useEffect(() => {
     axios(`http://localhost:3004/products/${id}`).then((res) => {
-      console.log(res);
-
       setProductDetails(res.data);
     });
   }, [id]);
 
   return (
     <>
-    {productDetails && <div className="px-10 py-2">
+    {productDetails && <div className="">
       <div className="flex border p-2">
         <img className="w-40 px-5" src={productDetails.image} alt="" />
         <div className="py-5 px-10">

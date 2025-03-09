@@ -42,7 +42,7 @@ const AddToCard = ({ id }: { id: string }) => {
           >
             +
           </button>
-          <span>{handleProductQty()}</span>
+          <span className="py-1">{handleProductQty()}</span>
           <button 
             onClick={() => handleDecreaseProduct(id)}
             className="bg-sky-200 w-7 text-center"

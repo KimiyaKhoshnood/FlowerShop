@@ -10,11 +10,15 @@
     "server": "json-server src/database/db.json --port 3004"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.7",
     "axios": "^1.8.2",
     "json-server": "^1.0.0-beta.3",
     "next": "15.2.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

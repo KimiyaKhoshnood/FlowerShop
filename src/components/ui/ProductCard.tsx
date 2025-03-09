@@ -2,6 +2,7 @@ import { EachProduct } from "@/app/store/page";
 import Link from "next/link";
 import React from "react";
 import AddRemove from "../AddToCard";
+import CardPrice from "../CardPrice";
 
 const ProductCard = ({ id, title, price, image }: EachProduct) => {
   return (
@@ -15,7 +16,8 @@ const ProductCard = ({ id, title, price, image }: EachProduct) => {
           <h2 className="text-xl">{title}</h2>
           <div className="flex justify-between py-2">
             <AddRemove id={id} />
-            <span className="text-lg">{price} $</span>
+            {/* <span className="text-lg">{price} $</span> */}
+            <CardPrice price={price}/>
           </div>
         </div>
       </div>

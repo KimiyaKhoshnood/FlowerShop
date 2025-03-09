@@ -12,11 +12,11 @@ export const Header = () => {
     </header>
 }
 
-export const TotalPrice = ({price}:{price:number}) => {
-    return <div className="py-2 px-8 shadow bg-amber-100/80 sticky top-12">
-        Price: {price} $
-    </div>
-}
+// export const TotalPrice = ({price}:{price:number}) => {
+//     return <div className="py-2 px-8 shadow bg-amber-100/80 sticky top-12">
+//         Price: {price} $
+//     </div>
+// }
 
 export const Footer = () => {
     return <footer className="p-3 shadow bg-sky-100">

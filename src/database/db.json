@@ -28,5 +28,22 @@
       "image": "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/3/3/33_3_png.webp",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     }
+  ],
+  "discounts": [
+    {
+      "code": "OFF5",
+      "percent": 5,
+      "id": "1"
+    },
+    {
+      "code": "OFF10",
+      "percent": 10,
+      "id": "2"
+    },
+    {
+      "code": "OFF15",
+      "percent": 15,
+      "id": "3"
+    }
   ]
 }

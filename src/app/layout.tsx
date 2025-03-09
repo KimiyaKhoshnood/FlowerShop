@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Footer, Header, TotalPrice } from "@/components/headerAndFooter";
+import { Footer, Header } from "@/components/headerAndFooter";
 import ContextProviderLayout from "@/context/context";
 
 const geistSans = Geist({
@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <ContextProviderLayout>
         <Header/>
-        <TotalPrice price={22}/>
+        {/* <TotalPrice price={22}/> */}
         {children}
         {/* <Footer/> */}
         </ContextProviderLayout>

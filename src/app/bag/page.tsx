@@ -1,60 +1,48 @@
-"use client"
-import AddRemove from "@/components/AddToCard";
+"use client";
 import ShoppingBagCard from "@/components/ShoppingBagCard";
 import { useShoppingItemsContext } from "@/context/context";
-import { GetProductByID } from "@/data/GetData";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { EachProduct } from "../store/page";
+import axios from "axios";
+import Discount from "@/components/Discount";
 
 const ShoppingBag = () => {
-  const products = [
-    {
-      id: "1",
-      title: "Product 1",
-      price: 10.99,
-      image:
-        "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/2/5/25_3_png.webp",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt.",
-    },
-    {
-      id: "2",
-      title: "Product 2",
-      price: 10,
-      image:
-        "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/3/3/33_3_png.webp",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt.",
-    },
-    {
-      id: "3",
-      title: "Product 3",
-      price: 19,
-      image:
-        "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/2/5/25_3_png.webp",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt.",
-    },
-    {
-      id: "4",
-      title: "Product 4",
-      price: 9,
-      image:
-        "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/3/3/33_3_png.webp",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt.",
-    },
-  ];
+  const { shoppingItems, discount } = useShoppingItemsContext();
 
-  const { shoppingItems } = useShoppingItemsContext();
+  const [allProducts, setAllProducts] = useState<EachProduct[]>([]);
+  useEffect(() => {
+    axios(`http://localhost:3004/products/`).then((res) => {
+      setAllProducts(res.data);
+    });
+  }, []);
 
   return (
-    <div>
+    <div className="px-10 py-2">
       {shoppingItems?.map((each) => {
-        return (
-          <ShoppingBagCard key={each.id} id={each.id}/>
-        );
+        return <ShoppingBagCard key={each.id} id={each.id} />;
       })}
+
+      {/* component for discount and process and total price */}
+      <div className="border">
+        <div className="p-3">
+          <p>Total Discount: <span>{discount}%</span></p>
+          <span>Total Price: </span>{" "}
+          <span>
+            {shoppingItems
+              ?.reduce((total, item) => {
+                let selectedProduct = allProducts.find(
+                  (product) => product.id == item.id
+                );
+                return total + (selectedProduct?.price || 0) * item.qty * (100-discount)/100;
+              }, 0)
+              .toFixed(2)}{" "}
+            $
+          </span>
+        </div>
+        <Discount/>
+      </div>
+
+      <div className="flex justify-center p-10"><button className="bg-sky-200 px-10 py-1 rounded-2xl">buy</button></div>
     </div>
   );
 };

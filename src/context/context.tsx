@@ -10,6 +10,8 @@ type TContextProvider = {
   shoppingItems: ShoppingItems[];
   handleIncreaseProduct: (id:string) => void
   handleDecreaseProduct: (id:string) => void
+  discount: number
+  setDiscount: (discount: number) => void
 };
 
 const ContextProvider = createContext({} as TContextProvider);
@@ -26,6 +28,7 @@ export default function ContextProviderLayout({
 }) {  
 
   const [shoppingItems, setShoppingItems] = useState<ShoppingItems[]>([]);
+  const [discount, setDiscount] = useState<number>(0);
 
   const handleIncreaseProduct = (id:string) => {
     setShoppingItems((current:ShoppingItems[])=>{
@@ -68,7 +71,7 @@ export default function ContextProviderLayout({
   }
   
   return (
-    <ContextProvider.Provider value={{ shoppingItems, handleIncreaseProduct, handleDecreaseProduct }}>
+    <ContextProvider.Provider value={{ shoppingItems, handleIncreaseProduct, handleDecreaseProduct, discount, setDiscount }}>
       {children}
     </ContextProvider.Provider>
   );
