@@ -1,28 +1,74 @@
+"use client"
 import { createContext, useContext, useState } from "react";
 
-type ShopingItems = {
-    id: number;
-    qty: number;
-}
+type ShoppingItems = {
+  id: string;
+  qty: number;
+};
 
 type TContextProvider = {
-    shopingItems: ShopingItems[]
-}
+  shoppingItems: ShoppingItems[];
+  handleIncreaseProduct: (id:string) => void
+  handleDecreaseProduct: (id:string) => void
+};
 
-const ContextProvider = createContext({} as TContextProvider)
+const ContextProvider = createContext({} as TContextProvider);
 
-export const useShopingItemsContext = () => {
-    return useContext(ContextProvider)
-}
+export const useShoppingItemsContext = () => {
+  return useContext(ContextProvider);
+};
 
-export default function RootLayout({
+
+export default function ContextProviderLayout({
   children,
-}: { children: React.ReactNode}) {
+}: {
+  children: React.ReactNode;
+}) {  
 
-    const [shopingItems, setShopingItems] = useState<ShopingItems[]>([])
+  const [shoppingItems, setShoppingItems] = useState<ShoppingItems[]>([]);
 
+  const handleIncreaseProduct = (id:string) => {
+    setShoppingItems((current:ShoppingItems[])=>{
+      const notInShoppingBag = current.find((item)=>item.id==id) == null
+
+      if (notInShoppingBag) {
+        return [...shoppingItems, { id: id, qty: 1 }]
+      }
+      else {
+        return current.map((item)=>{
+          if (item.id == id) {
+            return { ...item, qty: item.qty + 1 }
+          } else {
+            return item
+          }
+        }) 
+      }
+    })
+  }
+
+  const handleDecreaseProduct = (id:string) => {
+    setShoppingItems((current:ShoppingItems[])=>{
+      const findByID = current.find((item)=>item.id==id)
+    if (findByID) {
+      if (findByID?.qty==1) {
+        return current.filter((item)=>item.id!=id)
+      } else {
+        return current.map((item)=>{
+          if (item.id == id) {
+            return { ...item, qty: item.qty - 1 }
+          } else {
+            return item
+          }
+        }) 
+      }
+    } else {
+      return current
+    }
+    })
+  }
+  
   return (
-    <ContextProvider.Provider value={{shopingItems}}>
+    <ContextProvider.Provider value={{ shoppingItems, handleIncreaseProduct, handleDecreaseProduct }}>
       {children}
     </ContextProvider.Provider>
   );

@@ -1,5 +1,3 @@
-import { log } from "console"
-
 export const GetAllProducts = async() => {
     const allProducts = (await fetch("http://localhost:3004/products")).json()    
     return allProducts
