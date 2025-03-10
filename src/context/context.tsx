@@ -1,25 +1,10 @@
 "use client"
 import { createContext, useContext, useState } from "react";
-
-type ShoppingItems = {
-  id: string;
-  qty: number;
-};
-
-type TContextProvider = {
-  shoppingItems: ShoppingItems[];
-  handleIncreaseProduct: (id:string) => void
-  handleDecreaseProduct: (id:string) => void
-  discount: number
-  setDiscount: (discount: number) => void
-};
+import { ShoppingItems, TContextProvider } from "./contextType";
 
 const ContextProvider = createContext({} as TContextProvider);
 
-export const useShoppingItemsContext = () => {
-  return useContext(ContextProvider);
-};
-
+export const useShoppingItemsContext = () => { return useContext(ContextProvider) }
 
 export default function ContextProviderLayout({
   children,

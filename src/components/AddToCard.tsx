@@ -1,6 +1,5 @@
 "use client";
 import { useShoppingItemsContext } from "@/context/context";
-import React from "react";
 
 
 export const ProductQty = () => {
@@ -10,7 +9,6 @@ export const ProductQty = () => {
 
 
 const AddToCard = ({ id }: { id: string }) => {
-
   const { handleIncreaseProduct, handleDecreaseProduct, shoppingItems } = useShoppingItemsContext();
 
   const handleProductQty = () => {
@@ -26,7 +24,7 @@ const AddToCard = ({ id }: { id: string }) => {
 
 
   return (
-    <>
+    <div className="h-fit">
       {handleProductQty() == 0 ? (
         <button
           onClick={() => handleIncreaseProduct(id)}
@@ -51,7 +49,7 @@ const AddToCard = ({ id }: { id: string }) => {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

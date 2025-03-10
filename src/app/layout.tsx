@@ -31,9 +31,8 @@ export default function RootLayout({
       >
         <ContextProviderLayout>
         <Header/>
-        {/* <TotalPrice price={22}/> */}
         {children}
-        {/* <Footer/> */}
+        <Footer/>
         </ContextProviderLayout>
       </body>
     </html>

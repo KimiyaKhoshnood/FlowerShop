@@ -1,6 +1,7 @@
 import { GetProductByID } from "@/data/GetData";
 import { EachProduct } from "../page";
-import AddRemove from "@/components/AddToCard";
+import AddToCard from "@/components/AddToCard";
+import CardPrice from "@/components/CardPrice";
 
 type TPageProps = {
   params: Promise<{ id: string }>;
@@ -19,8 +20,8 @@ const page = async ({ params }: TPageProps) => {
       <div className="col-span-3 p-10">
         <h2 className="text-3xl py-2">{product.title}</h2>
         <p>{product?.description}</p>
-        <span className="py-2 block text-xl">{product.price} $</span>
-        <AddRemove id={resolvedParams.id} />
+        <CardPrice price={product.price}/>
+        <div><AddToCard id={resolvedParams.id} /></div>
       </div>
     </div>
   );

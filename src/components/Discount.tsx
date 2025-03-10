@@ -23,15 +23,14 @@ const Discount = () => {
     register,
     handleSubmit,
   } = useForm<Inputs>()
+  
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     axios(`http://localhost:3004/discounts?code=${data.discount}`).then(res=>{
         if (res.data.length!=0) {
             setIsPendingDiscount(false)
-            // setIsPendingDiscount("Discount")
             setDiscount(res.data[0].percent)
         } else {
             setIsPendingDiscount(false)
-            // setIsPendingDiscount("noDiscount")
             setOpenSnackbar(true);
         }
     })
@@ -80,7 +79,6 @@ const Discount = () => {
           <span
             onClick={() => {
                 setDiscount(0)
-                // setIsPendingDiscount("noDiscount")
             }}
             className="py-2 px-4 bg-red-200 rounded-2xl cursor-pointer"
           >

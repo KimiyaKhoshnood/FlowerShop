@@ -12,7 +12,7 @@ export type EachProduct = {
 
 const page = async() => {
 
-    const allProducts : EachProduct[] = await GetAllProducts()
+  const allProducts : EachProduct[] = await GetAllProducts()
 
   return (
     <div className='grid grid-cols-4 gap-5 p-5'>
