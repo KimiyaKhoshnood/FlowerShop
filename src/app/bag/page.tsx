@@ -22,7 +22,7 @@ const ShoppingBag = () => {
         return <ShoppingBagCard key={each.id} id={each.id} />;
       })}
 
-      {/* component for discount and process and total price */}
+      {/* component for total price and discount and process */}
       <div className="border">
         <div className="p-3">
           <p>Total Discount: <span>{discount}%</span></p>

@@ -1,5 +1,5 @@
 "use client"
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ShoppingItems, TContextProvider } from "./contextType";
 
 const ContextProvider = createContext({} as TContextProvider);
@@ -54,6 +54,17 @@ export default function ContextProviderLayout({
     }
     })
   }
+
+  useEffect(()=>{
+    const storedshoppingItems = localStorage.getItem("shoppingItems")
+    if (storedshoppingItems) {
+      setShoppingItems(JSON.parse(storedshoppingItems))
+    }
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem("shoppingItems", JSON.stringify(shoppingItems))
+  },[shoppingItems])
   
   return (
     <ContextProvider.Provider value={{ shoppingItems, handleIncreaseProduct, handleDecreaseProduct, discount, setDiscount }}>
