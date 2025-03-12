@@ -2,8 +2,9 @@ import { GetProductByID } from "@/data/GetData";
 import { EachProduct } from "../page";
 import AddToCard from "@/components/AddToCard";
 import CardPrice from "@/components/CardPrice";
+import EachProductDetails from "@/components/EachProductDetails";
 
-type TPageProps = {
+export type TPageProps = {
   params: Promise<{ id: string }>;
   searchParams: Promise<{}>;
 };
@@ -13,16 +14,9 @@ const page = async ({ params }: TPageProps) => {
   const product: EachProduct = await GetProductByID(resolvedParams.id);
 
   return (
-    <div className="grid grid-cols-4">
-      <div className="col-span-1">
-        <img src={product.image} alt="" />
-      </div>
-      <div className="col-span-3 p-10">
-        <h2 className="text-3xl py-2">{product.title}</h2>
-        <p>{product?.description}</p>
-        <CardPrice price={product.price}/>
-        <div><AddToCard id={resolvedParams.id} /></div>
-      </div>
+    <div className="py-10">
+      <EachProductDetails id={ product.id} title={product.title} price={product.price} image={product.image} description={product.description}/>
+      <div className="px-10 flex justify-center"><AddToCard id={resolvedParams.id} /></div>
     </div>
   );
 };

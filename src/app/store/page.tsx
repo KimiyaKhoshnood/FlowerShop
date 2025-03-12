@@ -10,6 +10,11 @@ export type EachProduct = {
     description?: string
   }
 
+export type ProductCardType = EachProduct & {
+    haveAddToCardSection: boolean
+    linkToUrl: string
+}
+
 const page = async() => {
 
   const allProducts : EachProduct[] = await GetAllProducts()
@@ -24,6 +29,8 @@ const page = async() => {
                   title={eachProduct.title}
                   price={eachProduct.price}
                   image={eachProduct.image}
+                  haveAddToCardSection={true}
+                  linkToUrl={`/store/`}
                   />
             })
         }
