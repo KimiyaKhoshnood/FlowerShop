@@ -55,6 +55,13 @@
       "price": 6,
       "image": "https://imageskincare.com/cdn/shop/products/I_BEAUTY_facial_wipes_PDP_R01a.jpg?v=1679405765&width=600",
       "description": "lorem epsimom about product"
+    },
+    {
+      "id": "c5ee",
+      "title": "Product 9",
+      "price": "14",
+      "image": "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/2/5/25_3_png.webp",
+      "description": "looooooooooooooooreemmmmmmmmmmmmmmmmmmmmmmmmmmmm"
     }
   ],
   "discounts": [
@@ -72,6 +79,18 @@
       "code": "OFF15",
       "percent": 15,
       "id": "3"
+    }
+  ],
+  "orders": [
+    {
+      "id": "0cb0",
+      "shoppingItems": [
+        {
+          "id": "2",
+          "qty": 1
+        }
+      ],
+      "discount": 0
     }
   ]
 }

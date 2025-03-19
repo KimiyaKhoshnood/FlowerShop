@@ -16,6 +16,21 @@ const ShoppingBag = () => {
     });
   }, []);
 
+  const handleBuy = () => {
+    if (shoppingItems[0]) {
+      axios
+      .post("http://localhost:3004/orders", {
+        shoppingItems,
+        discount: discount,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+    } else {
+      console.log("Empty Bag!");
+    }
+  };
+
   return (
     <div className="px-10 py-2">
       {shoppingItems?.map((each) => {
@@ -25,7 +40,9 @@ const ShoppingBag = () => {
       {/* component for total price and discount and process */}
       <div className="border">
         <div className="p-3">
-          <p>Total Discount: <span>{discount}%</span></p>
+          <p>
+            Total Discount: <span>{discount}%</span>
+          </p>
           <span>Total Price: </span>{" "}
           <span>
             {shoppingItems
@@ -33,16 +50,29 @@ const ShoppingBag = () => {
                 let selectedProduct = allProducts.find(
                   (product) => product.id == item.id
                 );
-                return total + (selectedProduct?.price || 0) * item.qty * (100-discount)/100;
+                return (
+                  total +
+                  ((selectedProduct?.price || 0) *
+                    item.qty *
+                    (100 - discount)) /
+                    100
+                );
               }, 0)
               .toFixed(2)}{" "}
             $
           </span>
         </div>
-        <Discount/>
+        <Discount />
       </div>
 
-      <div className="flex justify-center p-10"><button className="bg-sky-200 px-10 py-1 rounded-2xl">buy</button></div>
+      {shoppingItems[0] && <div className="flex justify-center p-10">
+        <button
+          onClick={handleBuy}
+          className="bg-sky-200 px-10 py-1 rounded-2xl"
+        >
+          buy
+        </button>
+      </div>}
     </div>
   );
 };
