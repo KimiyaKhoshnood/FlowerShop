@@ -91,6 +91,52 @@
         }
       ],
       "discount": 0
+    },
+    {
+      "id": "49f9",
+      "shoppingItems": [
+        {
+          "id": "f530",
+          "qty": 2
+        },
+        {
+          "id": "104c",
+          "qty": 1
+        },
+        {
+          "id": "4",
+          "qty": 1
+        }
+      ],
+      "discount": 5
+    },
+    {
+      "id": "a58b",
+      "shoppingItems": [
+        {
+          "id": "f530",
+          "qty": 2
+        },
+        {
+          "id": "104c",
+          "qty": 5
+        }
+      ],
+      "discount": 10
+    },
+    {
+      "id": "b070",
+      "shoppingItems": [
+        {
+          "id": "f530",
+          "qty": 2
+        },
+        {
+          "id": "104c",
+          "qty": 3
+        }
+      ],
+      "discount": 15
     }
   ]
 }

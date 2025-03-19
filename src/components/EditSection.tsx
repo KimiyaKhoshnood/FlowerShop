@@ -3,7 +3,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { redirect, useParams } from "next/navigation";
-import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Snackbar,
+} from "@mui/material";
 import { capitalizeFirstLetter } from "@/utils/utils";
 
 type Inputs = {
@@ -25,25 +34,27 @@ const EditSection = () => {
   };
 
   const handleDelete = () => {
-    axios
-      .delete(`http://localhost:3004/products/${id}`)
-      .then((res) => {
-        console.log("Done", res)
-        if (res.status==200) {
-          redirect("/dashboard/edit")
-        }
-      });
-  }
+    axios.delete(`http://localhost:3004/products/${id}`).then((res) => {
+      console.log("Done", res);
+      if (res.status == 200) {
+        redirect("/dashboard/edit");
+      }
+    });
+  };
 
   const id = useParams().id;
 
   useEffect(() => {
     axios(`http://localhost:3004/products/${id}`).then((res) => {
-      setProductDetails(res.data)
+      setProductDetails(res.data);
     });
   }, []);
 
-  const { register, handleSubmit, formState:{errors} } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     axios
@@ -51,45 +62,49 @@ const EditSection = () => {
         [selectedCategory]: data.input,
       })
       .then((res) => {
-        console.log("Done", res)
-        if (res.status==200) {
-          setOpenSuccessSnackbar(true)
+        console.log("Done", res);
+        if (res.status == 200) {
+          setOpenSuccessSnackbar(true);
         }
       });
   };
 
   return (
     <>
-    <Snackbar
-          open={openSuccessSnackbar}
-          autoHideDuration={3000}
-          onClose={() => setOpenSuccessSnackbar(false)}
-        >
-          <Alert onClose={() => setOpenSuccessSnackbar(false)} severity="success">
-            Edited!
-          </Alert>
-    </Snackbar>
+      <Snackbar
+        open={openSuccessSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSuccessSnackbar(false)}
+      >
+        <Alert onClose={() => setOpenSuccessSnackbar(false)} severity="success">
+          Edited!
+        </Alert>
+      </Snackbar>
 
-    <Dialog
+      <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Are You Sure?"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Are You Sure?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             This action can't be undone and it will be deleted permenantly.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="inherit">Cancel</Button>
-          <Button onClick={()=>{
-            handleClose()
-            handleDelete()
-            }} autoFocus color="error">
+          <Button onClick={handleClose} color="inherit">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              handleClose();
+              handleDelete();
+            }}
+            autoFocus
+            color="error"
+          >
             DELETE
           </Button>
         </DialogActions>
@@ -140,14 +155,17 @@ const EditSection = () => {
                 Change
               </button>
             </form>
-            {errors.input && <p className="text-center text-red-700">{errors.input.message}</p>}
-              
+            {errors.input && (
+              <p className="text-center text-red-700">{errors.input.message}</p>
+            )}
           </div>
-
         </div>
 
         <div className="flex justify-center w-full">
-          <button onClick={handleClickOpen} className="bg-red-800 py-2 px-5 text-center w-fit">
+          <button
+            onClick={handleClickOpen}
+            className="bg-red-800 py-2 px-5 text-center w-fit"
+          >
             DELETE PRODUCT
           </button>
         </div>
