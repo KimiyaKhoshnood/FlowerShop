@@ -4,42 +4,42 @@
       "id": "1",
       "title": "Product 1",
       "price": 10.99,
-      "image": "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/2/5/25_3_png.webp",
+      "image": "/Flower1Rose.svg",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
       "id": "2",
       "title": "Product 2",
       "price": 10,
-      "image": "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/3/3/33_3_png.webp",
+      "image": "/Flower2GardenRose.svg",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
       "id": "3",
       "title": "Product 3",
       "price": 19,
-      "image": "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/2/5/25_3_png.webp",
+      "image": "/Flower3PinkTulip.svg",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
       "id": "4",
       "title": "Product 4",
       "price": 9,
-      "image": "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/3/3/33_3_png.webp",
+      "image": "/Flower4GerberaDaisy.svg",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
       "id": "82a6",
       "title": "Product 5",
       "price": 20,
-      "image": "https://imageskincare.com/cdn/shop/files/AGELESS_total_pure_hyaluronic6_filler_PDP_R01a_6a65925b-b8c8-43a6-ab6c-d5c7486de71b.jpg?v=1696440618&width=600",
+      "image": "/Flower5Chrysanthemum.svg",
       "description": "lorem epsimom about product"
     },
     {
       "id": "104c",
       "title": "Product 6",
       "price": 4,
-      "image": "https://imageskincare.com/cdn/shop/products/ILUMA_intense_brightening_exfoliating_cleanser_PDP_R01a.jpg?v=1679328461&width=600",
+      "image": "/Flower6Carnations.svg",
       "description": "lorem epsimom about product"
     },
     {

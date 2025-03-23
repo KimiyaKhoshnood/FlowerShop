@@ -19,8 +19,7 @@
     --foreground: #ededed;
   }
 }
-/* Arial, Helvetica, sans-serif */
-/* 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif */
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -31,4 +30,32 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
+}
+
+.swiper-button-prev:after{
+  color: #0a0a0a;
+  font-size: 12px !important;
+  font-weight: bolder;
+  border: solid #0a0a0a 1px; 
+  background-color: #ffffff;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-next:after{
+  color: #0a0a0a;
+  font-size: 12px !important;
+  font-weight: bolder;
+  border: solid #0a0a0a 1px; 
+  background-color: #ffffff;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

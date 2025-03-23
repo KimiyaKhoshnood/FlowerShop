@@ -41,11 +41,13 @@ const featuresProps: feature[] = [
 
 const Herosection = () => {
   return (
-    <div className="shadow-black shadow relative mb-20">
+    <div className="shadow-black shadow relative md:mb-20">
       <div
-        className={`w-full h-[85vh] md:bg-[url(../../public/HeroBg.svg)] bg-[url(../../public/VerticalHeroBg.svg)] bg-cover md:bg-bottom bg-center flex flex-col gap-2 justify-center items-center text-(--Burgundy)`}
+        className={`w-full h-[85vh] md:bg-[url(../../public/HeroBg.svg)] bg-[url(../../public/VerticalHeroBg.svg)] bg-cover md:bg-bottom bg-center flex flex-col gap-2 justify-center items-center text-(--Burgundy) px-5`}
       >
-        <h1 className="md:text-6xl text-5xl text-center font-bold sm:px-10 px-3">Fresh Wholesale Flowers</h1>
+        <h1 className="md:text-6xl text-5xl text-center font-bold sm:px-10 px-3">
+          Fresh Wholesale Flowers
+        </h1>
         <span className="text-xl font-thin font-serif">
           {"Direct to you".toUpperCase()}
         </span>
@@ -55,15 +57,20 @@ const Herosection = () => {
           className="bg-(--Magenta) text-white mt-7"
         />
       </div>
-      <div className="md:px-10 w-full md:absolute -bottom-16">
+      <div className="lg:px-20 md:px-10 w-full md:absolute -bottom-16">
         <div className="sth bg-white/60 rounded-md grid lg:divide-x py-5 lg:grid-cols-4 grid-cols-2 w-full h-full  text-black/10 border">
           {featuresProps.map((elem) => {
             return (
-              <div key={elem.id} className="flex md:flex-row flex-col items-center gap-4 md:px-7 p-3">
+              <div
+                key={elem.id}
+                className="flex md:flex-row flex-col items-center gap-4 md:px-7 p-3"
+              >
                 <Image alt="" src={elem.image} />
                 <div className="flex flex-col md:gap-2 text-(--Burgundy)">
                   <h3 className="md:text-xl text-sm">{elem.title}</h3>
-                  <span className="text-xs md:block hidden">{elem.description}</span>
+                  <span className="text-xs md:block hidden">
+                    {elem.description}
+                  </span>
                 </div>
               </div>
             );
