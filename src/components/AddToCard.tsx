@@ -4,7 +4,7 @@ import { useShoppingItemsContext } from "@/context/context";
 
 export const ProductQty = () => {
   const { shoppingItems } = useShoppingItemsContext()
-  return <span className="bg-red-500 rounded-full px-1">{shoppingItems.length}</span>
+  return <span className="bg-red-500 rounded-full w-5 h-5 text-sm flex justify-center items-center">{shoppingItems.length}</span>
 }
 
 
