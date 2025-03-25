@@ -41,7 +41,7 @@ export const Header = () => {
           <Link href={"/"}><Image alt="logo" src={logo} width={144} /></Link>
         </div>
         <div className="md:flex hidden gap-8 items-center text-(--Burgundy) font-bold">
-          <Link href={"/store"}>Store</Link>
+          <Link href={"/store"}>All Products</Link>
           <Link href={"/dashboard"}>Dashboard</Link>
         </div>
         <div className="flex gap-8 items-center">

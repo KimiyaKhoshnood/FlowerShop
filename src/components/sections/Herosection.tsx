@@ -54,7 +54,7 @@ const Herosection = () => {
         <div className="h-[1px] w-20 bg-(--Burgundy) my-3"></div>
         <Button
           text="Start Shopping"
-          className="bg-(--Magenta) text-white mt-7"
+          className="bg-(--Magenta) text-white mt-7 md:w-fit w-full"
         />
       </div>
       <div className="lg:px-20 md:px-10 w-full md:absolute -bottom-16">
