@@ -46,22 +46,15 @@
       "id": "f530",
       "title": "Product 7",
       "price": 15,
-      "image": "https://imageskincare.com/cdn/shop/files/IMAGE_MD_restoring_power-C_serum_PDP_R01a_c5c1be03-fe0e-4fda-911f-bad2bf725159.jpg?v=1708047463&width=6000",
+      "image": "/Flower7RedTulip.svg",
       "description": "lorem epsimom about product"
     },
     {
       "id": "2e21",
       "title": "Product 8",
       "price": 6,
-      "image": "https://imageskincare.com/cdn/shop/products/I_BEAUTY_facial_wipes_PDP_R01a.jpg?v=1679405765&width=600",
+      "image": "/Flower8OrangeTulip.svg",
       "description": "lorem epsimom about product"
-    },
-    {
-      "id": "c5ee",
-      "title": "Product 9",
-      "price": "14",
-      "image": "https://www.imageskincare.de/media/amasty/webp/catalog/product/cache/1e1e9baf02c2daa40c835fad34d48eeb/2/5/25_3_png.webp",
-      "description": "looooooooooooooooreemmmmmmmmmmmmmmmmmmmmmmmmmmmm"
     }
   ],
   "discounts": [

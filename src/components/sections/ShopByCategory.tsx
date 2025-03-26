@@ -63,7 +63,7 @@ const ShopByCategory = () => {
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
                       <img alt="" src={product.image} />
                     </div>
-                    <span className="text-lg">{product.title}</span>
+                    <span className="text-lg text-(--Burgundy)">{product.title}</span>
                   </div>
                 </SwiperSlide>
               );

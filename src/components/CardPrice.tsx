@@ -6,10 +6,10 @@ const CardPrice = ({price, className}:{price:number, className?:string}) => {
     
   return (
     <>
-    {discount==0?<span className="text-lg block">{price} $</span>:
+    {discount==0?<span className={`${className} text-2xl block`}>$ {price}</span>:
     <div className='flex flex-col'>
-        <span className="text-xl">{price*(100-discount)/100} $</span>
-        <span className="text-sm text-gray-400 line-through">{price} $</span>
+        <span className="text-xl">$ {price*(100-discount)/100}</span>
+        <span className={`${className} text-sm text-gray-400 line-through`}>$ {price}</span>
     </div>}
     </>
   )
