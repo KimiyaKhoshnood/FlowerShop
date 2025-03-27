@@ -30,7 +30,7 @@ const AddToCard = ({ id }: { id: string }) => {
     <div className="h-fit">
       {handleProductQty() == 0 ? (
         <div onClick={() => handleIncreaseProduct(id)} className="w-fit rounded-3xl">
-          <Button text="Add Product" className="bg-(--Magenta) text-white" />
+          <Button text="Add Product" className="bg-(--Magenta) text-white text-nowrap" />
         </div>
       ) : (
         <div className="flex text-(--Burgundy) text-3xl gap-2">

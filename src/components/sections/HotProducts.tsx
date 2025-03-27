@@ -13,7 +13,6 @@ const HotProducts = () => {
   const { data, loading, error } = useDataClient(
     "http://localhost:3004/products"
   );
-  console.log(data);
 
   return (
     <div className="md:px-10 px-5 py-10">

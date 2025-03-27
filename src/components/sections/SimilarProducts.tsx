@@ -7,8 +7,9 @@ import { Navigation } from "swiper/modules";
 import useDataClient from "@/data/GetDataClient";
 import { EachProduct } from "@/app/store/page";
 import Link from "next/link";
+import CardPrice from "../CardPrice";
 
-const ShopByCategory = () => {
+const SimilarProducts = () => {
   const { data, loading, error } = useDataClient(
     "http://localhost:3004/products"
   );
@@ -17,16 +18,8 @@ const ShopByCategory = () => {
     <div className="md:px-10 px-5 py-10">
       <div className="flex justify-between lg:px-10">
         <h2 className="sm:text-4xl text-3xl text-(--Burgundy) font-bold">
-          Shop by Category
+          You may also like
         </h2>
-        <div className="hidden sm:block">
-          <Link href={"/store"}>
-          <Button
-            text="All Categories"
-            className="bg-(--BabyPink) text-(--Burgundy)"
-          />
-          </Link>
-        </div>
       </div>
       <div className="py-7 lg:px-10">
         {data && (
@@ -58,28 +51,23 @@ const ShopByCategory = () => {
             {data.map((product: EachProduct) => {
               return (
                 <SwiperSlide>
-                  <div className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center">
+                  <Link href={`/store/${product.id}`} className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center">
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
                       <img alt="" src={product.image} />
                     </div>
-                    <span className="text-lg text-(--Burgundy)">{product.title}</span>
-                  </div>
+                    <div className="w-full flex justify-between text-(--Burgundy)">
+                        <span className="text-lg">{product.title}</span>
+                        <CardPrice price={product.price}/>
+                    </div>
+                  </Link>
                 </SwiperSlide>
               );
             })}
           </Swiper>
         )}
       </div>
-      <div className="block md:hidden">
-        <Link href={"/store"}>
-        <Button
-          text="All Categories"
-          className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"
-        />
-        </Link>
-      </div>
     </div>
   );
 };
 
-export default ShopByCategory;
+export default SimilarProducts;
