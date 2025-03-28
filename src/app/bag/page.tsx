@@ -110,7 +110,7 @@ const ShoppingBag = () => {
             <span className="text-(--Burgundy) font-bold">
               {shoppingItems
                 ?.reduce((total, item) => {
-                  let selectedProduct = allProducts.find(
+                  const selectedProduct = allProducts.find(
                     (product) => product.id == item.id
                   );
                   return (

@@ -16,7 +16,7 @@ const Login = () => {
         handleSubmit,
       } = useForm<Inputs>()
       
-      const onSubmit: SubmitHandler<Inputs> = (data) => {
+      const onSubmit: SubmitHandler<Inputs> = () => {
 
         const response = {
             token: "alalkiewjfdokwodmfeiorjgkkos",

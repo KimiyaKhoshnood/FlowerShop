@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
+import Image from "next/image";
 
 type OrderList = {
   id: string;
@@ -96,12 +97,13 @@ const OrderList = ({
           {orderDetails.map((elem, i) => {
             return (
               <div
+                key={i}
                 className={`grid grid-cols-5 items-center gap-5 px-2 ${
                   i % 2 ? "bg-gray-100" : ""
                 }`}
               >
                 <div className="flex justify-center">
-                  <img src={elem.image} className="w-14 h-14" alt="" />
+                  <Image src={elem.image} className="w-14 h-14" alt="" />
                 </div>
                 <div className="text-center">{elem.title}</div>
                 <div className="text-center">{elem.qty}</div>

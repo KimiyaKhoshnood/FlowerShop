@@ -2,6 +2,7 @@ import { ProductCardType } from "@/app/store/page";
 import Link from "next/link";
 import AddToCard from "../AddToCard";
 import CardPrice from "../CardPrice";
+import Image from "next/image";
 
 const ProductCard = ({
   id,
@@ -15,12 +16,12 @@ const ProductCard = ({
     <>
       <Link
         href={`${linkToUrl}${id}`}
-        className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center"
+        className="border border-gray-200 rounded-md p-4 flex flex-col gap-2  items-center"
       >
         <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
-          <img alt="" src={image} />
+          <Image alt="" src={image} />
         </div>
-        <div className="w-full flex justify-between text-(--Burgundy)">
+        <div className="w-full flex flex-col items-center text-(--Burgundy)">
           <span className="text-lg">{title}</span>
           <CardPrice price={price} />
         </div>

@@ -48,7 +48,7 @@ const EditSection = () => {
     axios(`http://localhost:3004/products/${id}`).then((res) => {
       setProductDetails(res.data);
     });
-  }, []);
+  }, [id]);
 
   const {
     register,
@@ -90,7 +90,7 @@ const EditSection = () => {
         <DialogTitle id="alert-dialog-title">{"Are You Sure?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            This action can't be undone and it will be deleted permenantly.
+            {"This action can't be undone and it will be deleted permenantly."}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

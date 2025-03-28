@@ -4,13 +4,11 @@ import AddToCard from "@/components/AddToCard";
 import CardPrice from "@/components/CardPrice";
 import EachProductDetails from "@/components/EachProductDetails";
 import HotDeals from "@/components/sections/HotDeals";
-import HotProducts from "@/components/sections/HotProducts";
 import SimilarProducts from "@/components/sections/SimilarProducts";
-import Button from "@/components/ui/ButtonUI";
 
 export type TPageProps = {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{}>;
+  searchParams: Promise<object>;
 };
 
 const page = async ({ params }: TPageProps) => {
@@ -22,6 +20,7 @@ const page = async ({ params }: TPageProps) => {
       <div className="lg:bg-(--Burgundy)/10">
         <div className="lg:px-20 lg:pb-10 lg:pt-20">
           <EachProductDetails
+            category={product.id}
             id={product.id}
             title={product.title}
             price={product.price}

@@ -13,9 +13,8 @@ import {
 } from "@mui/material";
 import ButtonUI from "./ui/ButtonUI";
 import { useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import {
-  DatePicker,
   LocalizationProvider,
   DateCalendar,
   PickersDay,
@@ -50,12 +49,6 @@ const ChangeDate = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const formattedDate = new Date().toLocaleDateString("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  });
 
   return (
     <>

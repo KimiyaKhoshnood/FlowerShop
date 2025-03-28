@@ -2,23 +2,23 @@
   "products": [
     {
       "id": "1",
-      "title": "Product 1",
+      "title": "White Rose",
       "price": 10.99,
       "image": "/Flower1Rose.svg",
       "category": "Roses",
-      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
+      "description": "Lorem ipsum, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
       "id": "2",
-      "title": "Product 2",
+      "title": "Garden Rose",
       "price": 10,
       "image": "/Flower2GardenRose.svg",
       "category": "Roses",
-      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
+      "description": "Lorem ipsum, explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
       "id": "3",
-      "title": "Product 3",
+      "title": "Pink Tulip",
       "price": 19,
       "image": "/Flower3PinkTulip.svg",
       "category": "Tulips",
@@ -26,42 +26,154 @@
     },
     {
       "id": "4",
-      "title": "Product 4",
+      "title": "Gerbera Daisy",
       "price": 9,
       "image": "/Flower4GerberaDaisy.svg",
-      "category": "Gerbera Daisy",
-      "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
+      "category": "Daisy",
+      "description": "Lorem ipsum, possimus repellendus recusandae"
     },
     {
-      "id": "82a6",
-      "title": "Product 5",
+      "id": "5",
+      "title": "Chrysanthemum",
       "price": 20,
       "image": "/Flower5Chrysanthemum.svg",
       "category": "Chrysanthemum",
       "description": "lorem epsimom about product"
     },
     {
-      "id": "104c",
-      "title": "Product 6",
+      "id": "6",
+      "title": "Carnation",
       "price": 4,
       "image": "/Flower6Carnations.svg",
       "category": "Carnations",
       "description": "lorem epsimom about product"
     },
     {
-      "id": "f530",
-      "title": "Product 7",
+      "id": "7",
+      "title": "Red Tulip",
       "price": 15,
       "image": "/Flower7RedTulip.svg",
       "category": "Tulips",
       "description": "lorem epsimom about product"
     },
     {
-      "id": "2e21",
-      "title": "Product 8",
+      "id": "8",
+      "title": "Orange Tulip",
       "price": 6,
       "image": "/Flower8OrangeTulip.svg",
       "category": "Tulips",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "9",
+      "title": "Limonium Blue",
+      "price": 1.39,
+      "image": "/Flower9LimoniumBlue.svg",
+      "category": "Fillers",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "10",
+      "title": "Limonium White",
+      "price": 1.39,
+      "image": "/Flower10LimoniumWhite.svg",
+      "category": "Fillers",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "11",
+      "title": "Purpleish Blue",
+      "price": 2,
+      "image": "/Flower11PurpleishBlue.svg",
+      "category": "Iris",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "12",
+      "title": "Dusty Miller",
+      "price": 1,
+      "image": "/Flower12DustyMiller.svg",
+      "category": "Fillers",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "13",
+      "title": "Moth Orchid",
+      "price": 2.2,
+      "image": "/Flower13MothOrchid.svg",
+      "category": "Dendrobium",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "14",
+      "title": "Spray Roses",
+      "price": 5.8,
+      "image": "/Flower14SprayRoses.svg",
+      "category": "Roses",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "15",
+      "title": "Lisianthus",
+      "price": 6,
+      "image": "/Flower15Lisianthus.svg",
+      "category": "Roses",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "16",
+      "title": "Calla Lily White",
+      "price": 3,
+      "image": "/Flower16CallaLiliesWhite.svg",
+      "category": "Lilies",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "17",
+      "title": "Asiatic Lily Pink",
+      "price": 2,
+      "image": "/Flower17AsiaticLilyPink.svg",
+      "category": "Lilies",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "18",
+      "title": "Oriental Lily Pink",
+      "price": 4,
+      "image": "/Flower18OrientalLilyPink.svg",
+      "category": "Lilies",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "19",
+      "title": "Lavender Purple",
+      "price": 6,
+      "image": "/Flower19LavenderPurple.svg",
+      "category": "Fillers",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "20",
+      "title": "Eucalyptus Parvifolia",
+      "price": 1.5,
+      "image": "/Flower20EucalyptusParvifolia.svg",
+      "category": "Fillers",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "21",
+      "title": "Lavender Pink",
+      "price": 6,
+      "image": "/Flower21LavenderPink.svg",
+      "category": "Fillers",
+      "description": "lorem epsimom about product"
+    },
+    {
+      "id": "22",
+      "title": "Ranunculus Yellow",
+      "price": 6,
+      "image": "/Flower22RanunculusYellow.svg",
+      "category": "Ranunculus",
       "description": "lorem epsimom about product"
     }
   ],

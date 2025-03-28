@@ -6,11 +6,10 @@ import Rate from "./ui/Rate";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ButtonUI from "./ui/ButtonUI";
+import Image from "next/image";
 
 const EachProductDetails = ({
-  id,
   title,
-  price,
   image,
   description,
 }: EachProduct) => {
@@ -33,7 +32,7 @@ const EachProductDetails = ({
             {"< Back To Tulip Category"}
           </Link>
         </div>
-        <img
+        <Image
           src={image}
           alt=""
           className="lg:w-full md:w-1/3 sm:w-1/2 w-full max-w-[500px] pr-5"

@@ -1,5 +1,3 @@
-import Price from "../../../public/Price.svg";
-import CreditCardBlocked from "../../../public/Credit-Card-Blocked.svg";
 import Tulip from "../../../public/tulipSvg.svg";
 import CustomerService from "../../../public/Customer-Service.svg";
 import Image from "next/image";
@@ -7,7 +5,7 @@ import ButtonUI from "@/components/ui/ButtonUI";
 import Link from "next/link";
 
 type feature = {
-  image: any;
+  image: string;
   title: string;
   description: string;
   id: string;
@@ -15,13 +13,13 @@ type feature = {
 
 const featuresProps: feature[] = [
   {
-    image: Price,
+    image: "/Price.svg",
     title: "Wholesale Prices",
     description: "Vel at hendrerit urna et maecenas venenatis.",
     id: "1",
   },
   {
-    image: CreditCardBlocked,
+    image: "Credit-Card-Blocked.svg",
     title: "Secure Checkout",
     description: "Vitae gravida arcu, ante lorem leo.",
     id: "2",

@@ -7,11 +7,26 @@ import useDataClient from "@/data/GetDataClient";
 import { EachProduct } from "@/app/store/page";
 import Link from "next/link";
 import ButtonUI from "../ui/ButtonUI";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const ShopByCategory = () => {
-  const { data, loading, error } = useDataClient(
+  const [categories, setCategories] = useState<string[]>([]);
+  const allData: EachProduct[] = useDataClient(
     "http://localhost:3004/products"
-  );
+  ).data || [];
+
+  useEffect(() => {
+    if (allData) {
+      const uniqueCategories = [...new Set(allData.map((item) => item.category))];
+      setCategories(uniqueCategories);
+    }
+  }, [allData]);
+
+  const categoryImages = categories.map((category) => {
+    const foundItem = allData.find((item) => item.category === category);
+    return { category, image: foundItem ? foundItem.image : "/default.jpg" };
+  });
 
   return (
     <div className="md:px-10 px-5 py-10">
@@ -20,7 +35,7 @@ const ShopByCategory = () => {
           Shop by Category
         </h2>
         <div className="hidden sm:block">
-          <Link href={"/store"}>
+          <Link href={"/categories"}>
             <ButtonUI
               text="All Categories"
               className="bg-(--BabyPink) text-(--Burgundy)"
@@ -29,7 +44,7 @@ const ShopByCategory = () => {
         </div>
       </div>
       <div className="py-7 lg:px-10">
-        {data && (
+        {categoryImages && (
           <Swiper
             slidesPerView={1}
             spaceBetween={5}
@@ -55,15 +70,15 @@ const ShopByCategory = () => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {data.map((product: EachProduct) => {
+            {categoryImages.map((product) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={product.image}>
                   <div className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center">
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
-                      <img alt="" src={product.image} />
+                      <Image alt="" src={product.image} />
                     </div>
                     <span className="text-lg text-(--Burgundy)">
-                      {product.title}
+                      {product.category}
                     </span>
                   </div>
                 </SwiperSlide>
@@ -73,7 +88,7 @@ const ShopByCategory = () => {
         )}
       </div>
       <div className="block md:hidden">
-        <Link href={"/store"}>
+        <Link href={"/categories"}>
           <ButtonUI
             text="All Categories"
             className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"

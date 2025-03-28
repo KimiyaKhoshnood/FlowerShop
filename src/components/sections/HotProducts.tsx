@@ -8,11 +8,12 @@ import { EachProduct } from "@/app/store/page";
 import Link from "next/link";
 import CardPrice from "../CardPrice";
 import ButtonUI from "../ui/ButtonUI";
+import Image from "next/image";
 
 const HotProducts = () => {
-  const { data, loading, error } = useDataClient(
+  const data:EachProduct[] = useDataClient(
     "http://localhost:3004/products"
-  );
+  ).data || [];
 
   return (
     <div className="md:px-10 px-5 py-10">
@@ -58,15 +59,15 @@ const HotProducts = () => {
           >
             {data.map((product: EachProduct) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={product.id}>
                   <Link
                     href={`/store/${product.id}`}
                     className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center"
                   >
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
-                      <img alt="" src={product.image} />
+                      <Image alt="" src={product.image} />
                     </div>
-                    <div className="w-full flex justify-between text-(--Burgundy)">
+                    <div className="w-full flex flex-col items-center text-(--Burgundy)">
                       <span className="text-lg">{product.title}</span>
                       <CardPrice price={product.price} />
                     </div>

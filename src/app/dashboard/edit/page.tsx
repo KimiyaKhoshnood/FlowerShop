@@ -16,6 +16,7 @@ const EditProduct = async () => {
               title={eachProduct.title}
               price={eachProduct.price}
               image={eachProduct.image}
+              category={eachProduct.category}
               haveAddToCardSection={false}
               linkToUrl="/dashboard/edit/"
             />

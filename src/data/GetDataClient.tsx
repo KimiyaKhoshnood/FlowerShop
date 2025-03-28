@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useDataClient = (url: string) => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,8 +19,9 @@ const useDataClient = (url: string) => {
           setData(response.data);
           setLoading(false);
         }
-      } catch (err) {
+      } catch (err: unknown) {
         if (isMounted) {
+          console.log(err);
           setError("مشکلی پیش آمد!");
           setLoading(false);
         }
