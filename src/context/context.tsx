@@ -55,6 +55,10 @@ export default function ContextProviderLayout({
     })
   }
 
+  const handleCleanProducts = () => {
+    setShoppingItems([])
+  }
+
   useEffect(()=>{
     const storedshoppingItems = localStorage.getItem("shoppingItems")
     if (storedshoppingItems) {
@@ -67,7 +71,7 @@ export default function ContextProviderLayout({
   },[shoppingItems])
   
   return (
-    <ContextProvider.Provider value={{ shoppingItems, handleIncreaseProduct, handleDecreaseProduct, discount, setDiscount }}>
+    <ContextProvider.Provider value={{ shoppingItems, handleIncreaseProduct, handleDecreaseProduct, handleCleanProducts, discount, setDiscount }}>
       {children}
     </ContextProvider.Provider>
   );

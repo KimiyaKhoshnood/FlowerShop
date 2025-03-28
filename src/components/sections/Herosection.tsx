@@ -1,9 +1,10 @@
-import Button from "@/components/ui/Button";
 import Price from "../../../public/Price.svg";
 import CreditCardBlocked from "../../../public/Credit-Card-Blocked.svg";
 import Tulip from "../../../public/tulipSvg.svg";
 import CustomerService from "../../../public/Customer-Service.svg";
 import Image from "next/image";
+import ButtonUI from "@/components/ui/ButtonUI";
+import Link from "next/link";
 
 type feature = {
   image: any;
@@ -52,10 +53,12 @@ const Herosection = () => {
           {"Direct to you".toUpperCase()}
         </span>
         <div className="h-[1px] w-20 bg-(--Burgundy) my-3"></div>
-        <Button
-          text="Start Shopping"
-          className="bg-(--Magenta) text-white mt-7 md:w-fit w-full"
-        />
+        <Link href={"/store"} className="rounded-3xl">
+          <ButtonUI
+            text="Start Shopping"
+            className="bg-(--Magenta) text-white mt-7 md:w-fit w-full"
+          />
+        </Link>
       </div>
       <div className="lg:px-20 md:px-10 w-full md:absolute -bottom-16">
         <div className="sth bg-white/60 rounded-md grid lg:divide-x py-5 lg:grid-cols-4 grid-cols-2 w-full h-full  text-black/10 border">

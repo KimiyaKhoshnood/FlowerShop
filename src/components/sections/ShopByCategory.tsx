@@ -1,5 +1,4 @@
 "use client";
-import Button from "../ui/Button";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -7,6 +6,7 @@ import { Navigation } from "swiper/modules";
 import useDataClient from "@/data/GetDataClient";
 import { EachProduct } from "@/app/store/page";
 import Link from "next/link";
+import ButtonUI from "../ui/ButtonUI";
 
 const ShopByCategory = () => {
   const { data, loading, error } = useDataClient(
@@ -21,10 +21,10 @@ const ShopByCategory = () => {
         </h2>
         <div className="hidden sm:block">
           <Link href={"/store"}>
-          <Button
-            text="All Categories"
-            className="bg-(--BabyPink) text-(--Burgundy)"
-          />
+            <ButtonUI
+              text="All Categories"
+              className="bg-(--BabyPink) text-(--Burgundy)"
+            />
           </Link>
         </div>
       </div>
@@ -62,7 +62,9 @@ const ShopByCategory = () => {
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
                       <img alt="" src={product.image} />
                     </div>
-                    <span className="text-lg text-(--Burgundy)">{product.title}</span>
+                    <span className="text-lg text-(--Burgundy)">
+                      {product.title}
+                    </span>
                   </div>
                 </SwiperSlide>
               );
@@ -72,10 +74,10 @@ const ShopByCategory = () => {
       </div>
       <div className="block md:hidden">
         <Link href={"/store"}>
-        <Button
-          text="All Categories"
-          className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"
-        />
+          <ButtonUI
+            text="All Categories"
+            className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"
+          />
         </Link>
       </div>
     </div>

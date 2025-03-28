@@ -1,10 +1,11 @@
-"use client"
+"use client";
 import { EachProduct } from "@/app/store/page";
 import ChartRadialBar from "./ui/ChartRadialBar";
-import Button from "./ui/Button";
+import Button from "./ui/ButtonUI";
 import Rate from "./ui/Rate";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ButtonUI from "./ui/ButtonUI";
 
 const EachProductDetails = ({
   id,
@@ -13,7 +14,6 @@ const EachProductDetails = ({
   image,
   description,
 }: EachProduct) => {
-
   const [showMore, setShowMore] = useState(true);
 
   useEffect(() => {
@@ -29,20 +29,23 @@ const EachProductDetails = ({
     <div className="grid lg:grid-cols-3 grid-cols-1 gap-3">
       <div className="flex flex-col pt-5 justify-between items-center lg:bg-inherit bg-(--Burgundy)/10">
         <div className="w-full text-(--Burgundy) text-lg lg:block hidden">
-          <Link
-            href={"/store"}
-            className="font-bold"
-          >
+          <Link href={"/store"} className="font-bold">
             {"< Back To Tulip Category"}
           </Link>
         </div>
-        <img src={image} alt="" className="lg:w-full md:w-1/3 sm:w-1/2 w-full max-w-[500px] pr-5" />
+        <img
+          src={image}
+          alt=""
+          className="lg:w-full md:w-1/3 sm:w-1/2 w-full max-w-[500px] pr-5"
+        />
       </div>
       <div className="lg:hidden p-5 flex flex-col gap-2">
         <h2 className="text-(--Burgundy) font-bold text-2xl">{title}</h2>
         <p className="text-sm text-wrap">{description}</p>
       </div>
-      <div className={`${showMore?"flex":"hidden"} flex-col gap-3 lg:p-0 px-5`}>
+      <div
+        className={`${showMore ? "flex" : "hidden"} flex-col gap-3 lg:p-0 px-5`}
+      >
         <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex justify-between">
           <span>{"Colour".toUpperCase()}</span>
           <span className="text-(--Burgundy)">Purpleish Blue</span>
@@ -96,7 +99,11 @@ const EachProductDetails = ({
           </div>
         </div>
       </div>
-      <div className={`${showMore?"flex":"hidden"} flex flex-col gap-3 lg:p-0 px-5`}>
+      <div
+        className={`${
+          showMore ? "flex" : "hidden"
+        } flex flex-col gap-3 lg:p-0 px-5`}
+      >
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between gap-3">
             <span>{"Availability".toUpperCase()}</span>
@@ -177,8 +184,14 @@ const EachProductDetails = ({
           </div>
         </div>
       </div>
-      <div onClick={()=>setShowMore(!showMore)} className="text-(--Burgundy) lg:hidden block px-5 rounded-2xl">
-          <Button text={showMore?"Show Less":"Show More"} className="bg-(--Burgundy)/10 w-full"/>
+      <div
+        onClick={() => setShowMore(!showMore)}
+        className="text-(--Burgundy) lg:hidden block px-5 rounded-2xl"
+      >
+        <ButtonUI
+          text={showMore ? "Show Less" : "Show More"}
+          className="bg-(--Burgundy)/10 w-full"
+        />
       </div>
     </div>
   );

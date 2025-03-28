@@ -1,5 +1,5 @@
 "use client";
-import Button from "../ui/Button";
+import Button from "../ui/ButtonUI";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -51,13 +51,16 @@ const SimilarProducts = () => {
             {data.map((product: EachProduct) => {
               return (
                 <SwiperSlide>
-                  <Link href={`/store/${product.id}`} className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center">
+                  <Link
+                    href={`/store/${product.id}`}
+                    className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center"
+                  >
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
                       <img alt="" src={product.image} />
                     </div>
                     <div className="w-full flex justify-between text-(--Burgundy)">
-                        <span className="text-lg">{product.title}</span>
-                        <CardPrice price={product.price}/>
+                      <span className="text-lg">{product.title}</span>
+                      <CardPrice price={product.price} />
                     </div>
                   </Link>
                 </SwiperSlide>

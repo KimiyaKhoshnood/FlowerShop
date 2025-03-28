@@ -5,6 +5,7 @@
       "title": "Product 1",
       "price": 10.99,
       "image": "/Flower1Rose.svg",
+      "category": "Roses",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
@@ -12,6 +13,7 @@
       "title": "Product 2",
       "price": 10,
       "image": "/Flower2GardenRose.svg",
+      "category": "Roses",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
@@ -19,6 +21,7 @@
       "title": "Product 3",
       "price": 19,
       "image": "/Flower3PinkTulip.svg",
+      "category": "Tulips",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
@@ -26,6 +29,7 @@
       "title": "Product 4",
       "price": 9,
       "image": "/Flower4GerberaDaisy.svg",
+      "category": "Gerbera Daisy",
       "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam atque possimus repellendus recusandae, quam similique, dolorem ducimus, ipsum blanditiis explicabo necessitatibus quibusdam cumque obcaecati quo sunt."
     },
     {
@@ -33,6 +37,7 @@
       "title": "Product 5",
       "price": 20,
       "image": "/Flower5Chrysanthemum.svg",
+      "category": "Chrysanthemum",
       "description": "lorem epsimom about product"
     },
     {
@@ -40,6 +45,7 @@
       "title": "Product 6",
       "price": 4,
       "image": "/Flower6Carnations.svg",
+      "category": "Carnations",
       "description": "lorem epsimom about product"
     },
     {
@@ -47,6 +53,7 @@
       "title": "Product 7",
       "price": 15,
       "image": "/Flower7RedTulip.svg",
+      "category": "Tulips",
       "description": "lorem epsimom about product"
     },
     {
@@ -54,6 +61,7 @@
       "title": "Product 8",
       "price": 6,
       "image": "/Flower8OrangeTulip.svg",
+      "category": "Tulips",
       "description": "lorem epsimom about product"
     }
   ],
@@ -130,6 +138,58 @@
         }
       ],
       "discount": 15
+    },
+    {
+      "id": "0680",
+      "shoppingItems": [
+        {
+          "id": "2",
+          "qty": 5
+        },
+        {
+          "id": "f530",
+          "qty": 1
+        },
+        {
+          "id": "4",
+          "qty": 1
+        },
+        {
+          "id": "1",
+          "qty": 1
+        },
+        {
+          "id": "3",
+          "qty": 8
+        }
+      ],
+      "discount": 10
+    },
+    {
+      "id": "cd4a",
+      "shoppingItems": [
+        {
+          "id": "2",
+          "qty": 5
+        },
+        {
+          "id": "f530",
+          "qty": 1
+        },
+        {
+          "id": "4",
+          "qty": 1
+        },
+        {
+          "id": "1",
+          "qty": 1
+        },
+        {
+          "id": "3",
+          "qty": 8
+        }
+      ],
+      "discount": 0
     }
   ]
 }

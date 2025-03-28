@@ -1,6 +1,6 @@
 "use client";
 import { useShoppingItemsContext } from "@/context/context";
-import Button from "./ui/Button";
+import ButtonUI from "./ui/ButtonUI";
 
 export const ProductQty = () => {
   const { shoppingItems } = useShoppingItemsContext();
@@ -29,8 +29,14 @@ const AddToCard = ({ id }: { id: string }) => {
   return (
     <div className="h-fit">
       {handleProductQty() == 0 ? (
-        <div onClick={() => handleIncreaseProduct(id)} className="w-fit rounded-3xl">
-          <Button text="Add Product" className="bg-(--Magenta) text-white text-nowrap" />
+        <div
+          onClick={() => handleIncreaseProduct(id)}
+          className="w-fit rounded-3xl"
+        >
+          <ButtonUI
+            text="Add Product"
+            className="bg-(--Magenta) text-white text-nowrap"
+          />
         </div>
       ) : (
         <div className="flex text-(--Burgundy) text-3xl gap-2">

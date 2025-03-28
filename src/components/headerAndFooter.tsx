@@ -43,6 +43,7 @@ export const Header = () => {
         <div className="md:flex hidden gap-8 items-center text-(--Burgundy) font-bold">
           <Link href={"/store"}>All Products</Link>
           <Link href={"/dashboard"}>Dashboard</Link>
+          <Link href={"/categories"}>Categories</Link>
         </div>
         <div className="flex gap-8 items-center">
           <Link href={"/bag"} className="flex relative">
@@ -77,5 +78,8 @@ export const DashboardHeader = () => {
 };
 
 export const Footer = () => {
-  return <footer className="p-3 shadow bg-sky-100">footer</footer>;
+  return <footer className="shadow flex justify-between items-center gap-5 p-10">
+    <p className="text-center text-xs text-(--Burgundy)">Developed By Kimia Khoshnood As A Test Project.</p>
+    <Image alt="" src={logo}/>
+  </footer>;
 };

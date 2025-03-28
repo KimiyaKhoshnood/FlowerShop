@@ -32,6 +32,7 @@ export default function RootLayout({
         <ContextProviderLayout>
         <Header/>
         {children}
+        <hr className="text-gray-300 w-full"/>
         <Footer/>
         </ContextProviderLayout>
       </body>

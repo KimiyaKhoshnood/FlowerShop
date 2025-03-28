@@ -15,15 +15,16 @@ const ShoppingBagCard = ({ id }: { id: string }) => {
 
   return (
     <>
-    {productDetails && <div className="">
-      <div className="flex border p-2">
-        <img className="w-40 px-5" src={productDetails.image} alt="" />
-        <div className="py-5 px-10">
-          <h2 className="text-2xl">{productDetails.title}</h2>
-          <CardPrice price={productDetails.price}/>
-          <AddToCard id={id} />
+    {productDetails && <div className="border border-gray-300 rounded-lg p-2 bg-(--Burgundy)/5 flex justify-between items-center">
+      <div className="flex md:gap-10 gap-2">
+        <img className="md:w-40 w-28 " src={productDetails.image} alt="" />
+        <div className="py-5">
+          <h2 className="md:text-2xl text-lg">{productDetails.title}</h2>
+          <CardPrice price={productDetails.price} />
+          {/* <AddToCard id={id} /> */}
         </div>
       </div>
+      <AddToCard id={id} />
     </div>}
     </>
   );

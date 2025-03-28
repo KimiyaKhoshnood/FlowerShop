@@ -6,7 +6,7 @@ import EachProductDetails from "@/components/EachProductDetails";
 import HotDeals from "@/components/sections/HotDeals";
 import HotProducts from "@/components/sections/HotProducts";
 import SimilarProducts from "@/components/sections/SimilarProducts";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/ButtonUI";
 
 export type TPageProps = {
   params: Promise<{ id: string }>;
@@ -37,15 +37,20 @@ const page = async ({ params }: TPageProps) => {
         </div>
         <div className="flex flex-col gap-6 lg:items-end items-center">
           <div className="flex items-end lg:gap-10 gap-5">
-            <CardPrice price={product.price} className="text-(--Burgundy) text-3xl text-nowrap" />
+            <CardPrice
+              price={product.price}
+              className="text-(--Burgundy) text-3xl"
+            />
             <span className="text-(--Burgundy) text-nowrap">per flower</span>
           </div>
           <AddToCard id={resolvedParams.id} />
         </div>
       </div>
-      <div className="text-gray-300 lg:px-20 px-10"><hr /></div>
-      <SimilarProducts/>
-      <HotDeals/>
+      <div className="text-gray-300 lg:px-20 px-10">
+        <hr />
+      </div>
+      <SimilarProducts />
+      <HotDeals />
     </>
   );
 };

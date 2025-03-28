@@ -5,11 +5,21 @@ import React, { useEffect, useState } from "react";
 import { EachProduct } from "../store/page";
 import axios from "axios";
 import Discount from "@/components/Discount";
-import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from "@mui/material";
-import { redirect } from "next/navigation";
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Snackbar,
+} from "@mui/material";
+import ButtonUI from "@/components/ui/ButtonUI";
 
 const ShoppingBag = () => {
-  const { shoppingItems, discount } = useShoppingItemsContext();
+  const { shoppingItems, handleCleanProducts, discount } =
+    useShoppingItemsContext();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [allProducts, setAllProducts] = useState<EachProduct[]>([]);
   const [open, setOpen] = useState(false);
@@ -20,9 +30,9 @@ const ShoppingBag = () => {
     });
   }, []);
 
-  const handleClickOpen = () => setOpen(true)
+  const handleClickOpen = () => setOpen(true);
 
-  const handleClose = () => setOpen(false)
+  const handleClose = () => setOpen(false);
 
   const handleBuy = () => {
     if (shoppingItems[0]) {
@@ -34,7 +44,8 @@ const ShoppingBag = () => {
         .then((res) => {
           console.log(res);
           if (res.status == 201) {
-            setOpenSnackbar(true)
+            setOpenSnackbar(true);
+            handleCleanProducts();
           }
         });
     } else {
@@ -83,19 +94,20 @@ const ShoppingBag = () => {
         </DialogActions>
       </Dialog>
 
-      <div className="px-10 py-2">
+      <div className="lg:px-10 px-5 py-5 flex flex-col gap-5">
         {shoppingItems?.map((each) => {
           return <ShoppingBagCard key={each.id} id={each.id} />;
         })}
 
         {/* component for total price and discount and process */}
-        <div className="border">
-          <div className="p-3">
-            <p>
-              Total Discount: <span>{discount}%</span>
-            </p>
-            <span>Total Price: </span>{" "}
-            <span>
+        <div className="">
+          <p>
+            Total Discount:{" "}
+            <span className="text-(--Burgundy) font-bold">{discount}%</span>
+          </p>
+          <p>
+            Total Price:{" "}
+            <span className="text-(--Burgundy) font-bold">
               {shoppingItems
                 ?.reduce((total, item) => {
                   let selectedProduct = allProducts.find(
@@ -112,18 +124,18 @@ const ShoppingBag = () => {
                 .toFixed(2)}{" "}
               $
             </span>
-          </div>
+          </p>
+          <p>
+            Delivery Date:{" "}
+            <span className="text-(--Burgundy) font-bold">{"???"}</span>
+          </p>
+
           <Discount />
         </div>
 
         {shoppingItems[0] && (
-          <div className="flex justify-center p-10">
-            <button
-              onClick={handleClickOpen}
-              className="bg-sky-200 px-10 py-1 rounded-2xl"
-            >
-              buy
-            </button>
+          <div className="w-full" onClick={handleClickOpen}>
+            <ButtonUI text="Buy" className="bg-(--Magenta) text-white w-full" />
           </div>
         )}
       </div>

@@ -4,6 +4,7 @@ import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form"
+import ButtonUI from "./ui/ButtonUI";
 
 type Inputs = {
   discount: string
@@ -48,13 +49,13 @@ const Discount = () => {
       </Alert>
     </Snackbar>
     
-    <div className="p-3">
+    <div className="py-3">
       {(isPendingDiscount == false) && (discount==0) ? (
         <span
           onClick={() => setIsPendingDiscount(true)}
-          className="py-2 px-4 bg-amber-200 rounded-2xl cursor-pointer"
+          className="rounded-3xl"
         >
-          Discount Code?
+          <ButtonUI text="Discount Code?" className="bg-(--Burgundy)/10 text-(--Burgundy)"/>
         </span>
       ) : null}
       {isPendingDiscount == true ? (
@@ -67,9 +68,9 @@ const Discount = () => {
           />
           <button
             type="submit"
-            className="bg-lime-300 px-2 py-1 rounded-md"
+            className="rounded-3xl"
           >
-            Check
+            <ButtonUI text="Check" className="bg-(--Burgundy)/10 text-(--Burgundy)"/>
           </button>
         </form>
       ) : null}
@@ -80,9 +81,9 @@ const Discount = () => {
             onClick={() => {
                 setDiscount(0)
             }}
-            className="py-2 px-4 bg-red-200 rounded-2xl cursor-pointer"
+            className="rounded-3xl"
           >
-            Disable
+            <ButtonUI text="Disable" className="bg-(--Burgundy)/10 text-(--Burgundy) text-sm"/>
           </span>
         </>
       ) : null}
