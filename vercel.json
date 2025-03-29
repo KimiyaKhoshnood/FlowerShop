@@ -1,8 +1,0 @@
-  {
-    "version": 2,
-    "routes": [
-      { "src": "/database/(.*)", "dest": "database/server.js" }
-    ]
-  }
-  
-  
