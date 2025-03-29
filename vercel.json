@@ -1,7 +1,7 @@
   {
     "version": 2,
     "routes": [
-      { "src": "/database/(.*)", "dest": "src/database/server.js" }
+      { "src": "/database/(.*)", "dest": "database/server.js" }
     ]
   }
   
