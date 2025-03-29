@@ -11,9 +11,8 @@ import ButtonUI from "../ui/ButtonUI";
 import Image from "next/image";
 
 const HotProducts = () => {
-  const data:EachProduct[] = useDataClient(
-    "http://localhost:3004/products"
-  ).data || [];
+  const data: EachProduct[] =
+    useDataClient("http://localhost:3004/products").data || [];
 
   return (
     <div className="md:px-10 px-5 py-10">
@@ -65,7 +64,12 @@ const HotProducts = () => {
                     className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center"
                   >
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
-                      <Image alt="" src={product.image} />
+                      <Image
+                        alt=""
+                        src={product.image}
+                        width={160}
+                        height={160}
+                      />
                     </div>
                     <div className="w-full flex flex-col items-center text-(--Burgundy)">
                       <span className="text-lg">{product.title}</span>

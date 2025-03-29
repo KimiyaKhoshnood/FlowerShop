@@ -17,7 +17,7 @@ const ShopByCategory = () => {
   ).data || [];
 
   useEffect(() => {
-    if (allData) {
+    if (allData.length > 0) {
       const uniqueCategories = [...new Set(allData.map((item) => item.category))];
       setCategories(uniqueCategories);
     }
@@ -44,7 +44,7 @@ const ShopByCategory = () => {
         </div>
       </div>
       <div className="py-7 lg:px-10">
-        {categoryImages && (
+        {categoryImages.length > 0 && (
           <Swiper
             slidesPerView={1}
             spaceBetween={5}
@@ -70,20 +70,24 @@ const ShopByCategory = () => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {categoryImages.map((product) => {
-              return (
-                <SwiperSlide key={product.image}>
-                  <div className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center">
-                    <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
-                      <Image alt="" src={product.image} />
-                    </div>
-                    <span className="text-lg text-(--Burgundy)">
-                      {product.category}
-                    </span>
+            {categoryImages.map((product) => (
+              <SwiperSlide key={product.category}>
+                <div className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center">
+                  <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
+                    <Image 
+                      alt={product.category} 
+                      src={product.image} 
+                      width={160} 
+                      height={160} 
+                      className="object-contain"
+                    />
                   </div>
-                </SwiperSlide>
-              );
-            })}
+                  <span className="text-lg text-(--Burgundy)">
+                    {product.category}
+                  </span>
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         )}
       </div>

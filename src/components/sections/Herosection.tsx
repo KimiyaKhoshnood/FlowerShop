@@ -66,7 +66,7 @@ const Herosection = () => {
                 key={elem.id}
                 className="flex md:flex-row flex-col items-center gap-4 md:px-7 p-3"
               >
-                <Image alt="" src={elem.image} />
+                <Image alt="" src={elem.image}  width={60} height={60} />
                 <div className="flex flex-col md:gap-2 text-(--Burgundy)">
                   <h3 className="md:text-xl text-sm">{elem.title}</h3>
                   <span className="text-xs md:block hidden">

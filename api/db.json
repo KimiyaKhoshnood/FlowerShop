@@ -209,15 +209,15 @@
       "id": "49f9",
       "shoppingItems": [
         {
-          "id": "f530",
+          "id": "10",
           "qty": 2
         },
         {
-          "id": "104c",
+          "id": "15",
           "qty": 1
         },
         {
-          "id": "4",
+          "id": "21",
           "qty": 1
         }
       ],
@@ -227,81 +227,15 @@
       "id": "a58b",
       "shoppingItems": [
         {
-          "id": "f530",
+          "id": "3",
           "qty": 2
         },
         {
-          "id": "104c",
+          "id": "9",
           "qty": 5
         }
       ],
       "discount": 10
-    },
-    {
-      "id": "b070",
-      "shoppingItems": [
-        {
-          "id": "f530",
-          "qty": 2
-        },
-        {
-          "id": "104c",
-          "qty": 3
-        }
-      ],
-      "discount": 15
-    },
-    {
-      "id": "0680",
-      "shoppingItems": [
-        {
-          "id": "2",
-          "qty": 5
-        },
-        {
-          "id": "f530",
-          "qty": 1
-        },
-        {
-          "id": "4",
-          "qty": 1
-        },
-        {
-          "id": "1",
-          "qty": 1
-        },
-        {
-          "id": "3",
-          "qty": 8
-        }
-      ],
-      "discount": 10
-    },
-    {
-      "id": "cd4a",
-      "shoppingItems": [
-        {
-          "id": "2",
-          "qty": 5
-        },
-        {
-          "id": "f530",
-          "qty": 1
-        },
-        {
-          "id": "4",
-          "qty": 1
-        },
-        {
-          "id": "1",
-          "qty": 1
-        },
-        {
-          "id": "3",
-          "qty": 8
-        }
-      ],
-      "discount": 0
     }
   ]
 }

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "node src/database/server.js"
+    "server": "json-server api/db.json --port 3004"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

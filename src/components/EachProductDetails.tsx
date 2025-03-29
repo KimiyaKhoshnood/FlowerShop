@@ -36,6 +36,8 @@ const EachProductDetails = ({
           src={image}
           alt=""
           className="lg:w-full md:w-1/3 sm:w-1/2 w-full max-w-[500px] pr-5"
+          width={500}
+          height={500}
         />
       </div>
       <div className="lg:hidden p-5 flex flex-col gap-2">

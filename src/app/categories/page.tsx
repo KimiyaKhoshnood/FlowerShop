@@ -10,9 +10,8 @@ import Image from "next/image";
 
 const Categories = () => {
   const [categories, setCategories] = useState<string[]>([]);
-  const sth: EachProduct[] = useDataClient(
-    "http://localhost:3004/products"
-  ).data || [];
+  const sth: EachProduct[] =
+    useDataClient("http://localhost:3004/products").data || [];
 
   useEffect(() => {
     if (sth) {
@@ -25,7 +24,6 @@ const Categories = () => {
     const foundItem = sth.find((item) => item.category === category);
     return { category, image: foundItem ? foundItem.image : "/default.jpg" };
   });
-
 
   return (
     <>
@@ -44,18 +42,21 @@ const Categories = () => {
         <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 lg:px-20 sm:px-10 px-5 sm:gap-5 gap-2">
           {categoryImages.map((elem) => {
             return (
-              <Link href={`/store?category=${elem.category}`} key={elem.category}>
-              <div className="border border-gray-200 rounded-md sm:p-4 px-4 flex sm:flex-col gap-2 justify-between items-center">
-                <div className="flex sm:flex-col items-center gap-2">
-                  <div className="sm:w-40 sm:h-40 h-16 w-16 flex justify-center sm:bg-(--BabyPink)">
-                    <Image alt="" src={elem.image} />
+              <Link
+                href={`/store?category=${elem.category}`}
+                key={elem.category}
+              >
+                <div className="border border-gray-200 rounded-md sm:p-4 px-4 flex sm:flex-col gap-2 justify-between items-center">
+                  <div className="flex sm:flex-col items-center gap-2">
+                    <div className="sm:w-40 sm:h-40 h-16 w-16 flex justify-center sm:bg-(--BabyPink)">
+                      <Image alt="" src={elem.image} width={160} height={160} />
+                    </div>
+                    <span className="text-lg text-(--Burgundy) text-nowrap">
+                      {elem.category}
+                    </span>
                   </div>
-                  <span className="text-lg text-(--Burgundy) text-nowrap">
-                    {elem.category}
-                  </span>
+                  <span className="sm:hidden">{">"}</span>
                 </div>
-                <span className="sm:hidden">{">"}</span>
-              </div>
               </Link>
             );
           })}

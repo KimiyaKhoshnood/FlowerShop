@@ -103,7 +103,7 @@ const OrderList = ({
                 }`}
               >
                 <div className="flex justify-center">
-                  <Image src={elem.image} className="w-14 h-14" alt="" />
+                  <Image src={elem.image} alt="" width={56} height={56} />
                 </div>
                 <div className="text-center">{elem.title}</div>
                 <div className="text-center">{elem.qty}</div>
