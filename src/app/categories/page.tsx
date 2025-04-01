@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const Categories = () => {
+  const {loading} = useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
   const [categories, setCategories] = useState<string[]>([]);
   const allProducts: EachProduct[] =
     useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
@@ -43,6 +44,7 @@ const Categories = () => {
           </Link>
         </div>
         <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 lg:px-20 sm:px-10 px-5 sm:gap-5 gap-2">
+          {loading && <span className="text-3xl">Loading...</span>}
           {categoryImages.map((elem) => {
             return (
               <Link

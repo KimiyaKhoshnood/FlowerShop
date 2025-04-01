@@ -8,6 +8,8 @@ import Profile from "../../public/Profile.svg";
 import Bag from "../../public/Bag.svg";
 import HamMenuIcon from "../../public/HamMenuIcon.svg";
 import Image from "next/image";
+import { useState } from "react";
+import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 
 // export const Header = () => {
 //   return (
@@ -29,12 +31,59 @@ import Image from "next/image";
 // };
 
 export const Header = () => {
+  const [openSidebar, setOpenSidebar] = useState(false)
+
+  const toggleDrawer = (newOpen: boolean) => () => setOpenSidebar(newOpen)
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {['Home', 'All Products', 'Categories', 'Dashboard'].map((text) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton href={
+              text=="Home"?"/"
+              :text=="All Products"?"/store"
+              :text=="Dashboard"?"/dashboard"
+              :text=="Categories"?"/categories"
+              :""
+              }>
+              {/* <ListItemIcon>
+              </ListItemIcon> */}
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {
+          Cookie.get("token") ?(
+          <ListItem disablePadding>
+          <ListItemButton>
+            <LogoutButton />
+          </ListItemButton>
+        </ListItem>
+          ):(
+        <ListItem disablePadding>
+          <ListItemButton href="/login">
+            {/* <ListItemIcon>
+            </ListItemIcon> */}
+            <ListItemText primary={"Login"} />
+          </ListItemButton>
+        </ListItem>
+        )}
+      </List>
+    </Box>
+  )
+
+
   return (
     <header className="py-3 md:px-8 px-4 shadow bg-(--background) sticky top-0 z-10">
       <nav className="flex justify-between">
         <div className="md:hidden block">
-          <div className="flex relative">
-            <Image alt="HamMenuIcon" src={HamMenuIcon} />
+          <div className="flex relative" onClick={()=>setOpenSidebar(!openSidebar)}>
+            <Image alt="HamMenuIcon" src={HamMenuIcon} className="cursor-pointer"/>
+            <Drawer open={openSidebar} onClose={toggleDrawer(false)}>{DrawerList}</Drawer>
           </div>
         </div>
         <div className="flex gap-8 items-center">
@@ -52,13 +101,13 @@ export const Header = () => {
               <ProductQty />
             </div>
           </Link>
-          <Link href={"/login"} className="md:block hidden">
+          <div className="md:block hidden">
             {Cookie.get("token") ? (
               <LogoutButton />
             ) : (
-              <Image alt="Profile" src={Profile} />
+              <Link href={"/login"}><Image alt="Profile" src={Profile} /></Link>
             )}
-          </Link>
+          </div>
         </div>
       </nav>
     </header>

@@ -7,6 +7,7 @@ import { useState } from "react";
 
 const ProductsByCategory = () => {
   const [url, setUrl] = useState("");
+  const {loading} = useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
   const allProducts: EachProduct[] =
     useDataClient(`https://json-server-vercel-flower-shop.vercel.app/products`)
       .data || [];
@@ -35,6 +36,7 @@ const ProductsByCategory = () => {
             </span>
             <h3 className="text-(--Burgundy) font-bold text-lg">Category</h3>
             <div className="flex flex-wrap gap-2 text-(--Burgundy)">
+              {loading && <span className="text-3xl">Loading...</span>}
               {uniqueCategories.map((elem, i) => {
                 return (
                   <span

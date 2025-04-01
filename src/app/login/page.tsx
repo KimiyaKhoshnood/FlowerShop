@@ -2,6 +2,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Cookie from "js-cookie"
 import { redirect } from 'next/navigation'
+import ButtonUI from '@/components/ui/ButtonUI'
 
 
 type Inputs = {
@@ -29,8 +30,8 @@ const Login = () => {
 
   return (
     <div className='p-10'>
-        <h1>Login</h1>
-        <form action="" className=" flex gap-3" onSubmit={handleSubmit(onSubmit)}>
+        <h1 className='text-4xl pb-10'>Login</h1>
+        <form action="" className="flex sm:flex-row flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
           <input
             type="text"
             placeholder="Username"
@@ -43,12 +44,10 @@ const Login = () => {
             className="border rounded-md py-1 px-3"
             {...register("password", { required: true })}
           />
-          <button
-            type="submit"
-            className="bg-lime-300 px-2 py-1 rounded-md"
-          >
-            Check
-          </button>
+          <ButtonUI
+            text='Check'
+            className="bg-(--Magenta)"
+          />
         </form>
     </div>
   )

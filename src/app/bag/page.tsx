@@ -133,6 +133,7 @@ const ShoppingBag = () => {
           </p>
 
           <Discount />
+          <span className="text-yellow-500 text-xs">{'(Hint: use OFF5 or OFF10 or OFF15)'}</span>
         </div>
 
         {shoppingItems[0] && (

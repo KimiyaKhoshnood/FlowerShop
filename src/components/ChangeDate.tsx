@@ -20,6 +20,7 @@ import {
   PickersDay,
 } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import CloseIcon from '@mui/icons-material/Close';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -71,7 +72,7 @@ const ChangeDate = () => {
             color: theme.palette.grey[500],
           })}
         >
-          x{/* <CloseIcon /> */}
+          <CloseIcon />
         </IconButton>
         <DialogContent dividers>
           <div className="grid md:grid-cols-2 gap-2">
@@ -89,18 +90,18 @@ const ChangeDate = () => {
                         {...props}
                         sx={{
                           "&.Mui-selected": {
-                            backgroundColor: "#4e0629 !important", // تغییر رنگ دکمه انتخاب‌شده
+                            backgroundColor: "#4e0629 !important", 
                             color: "#fff !important",
                           },
                           "&.Mui-selected:hover": {
-                            backgroundColor: "#3b041f !important", // تغییر رنگ هاور
+                            backgroundColor: "#3b041f !important",
                           },
                           "&.MuiPickersDay-root:hover": {
-                            backgroundColor: "#4e0629 !important", // حذف آبی هنگام هاور
+                            backgroundColor: "#4e0629 !important",
                             color: "#fff !important",
                           },
                           "&.Mui-focusVisible": {
-                            backgroundColor: "#4e0629 !important", // حذف آبی هنگام فوکوس
+                            backgroundColor: "#4e0629 !important",
                             color: "#fff !important",
                           },
                         }}
@@ -112,10 +113,10 @@ const ChangeDate = () => {
               </LocalizationProvider>
             </div>
             <div className="py-5 flex flex-col gap-5 order-1">
-              <h3 className="text-(--Burgundy) font-bold text-2xl">
+              <h3 className="text-(--Burgundy) font-bold text-2xl md:block hidden">
                 Delivery Date
               </h3>
-              <hr />
+              <hr className="md:block hidden"/>
               <p>
                 Please select a delivery date to obtain an accurate price. We
                 suggest selecting delivery date 2-3 days before the event date.

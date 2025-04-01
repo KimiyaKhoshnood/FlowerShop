@@ -40,7 +40,7 @@ const featuresProps: feature[] = [
 
 const Herosection = () => {
   return (
-    <div className="shadow-black shadow relative md:mb-20">
+    <div className="shadow relative md:mb-20">
       <div
         className={`w-full h-[85vh] md:bg-[url(../../public/HeroBg.svg)] bg-[url(../../public/VerticalHeroBg.svg)] bg-cover md:bg-bottom bg-center flex flex-col gap-2 justify-center items-center text-(--Burgundy) px-5`}
       >
