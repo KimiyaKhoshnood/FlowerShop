@@ -25,9 +25,11 @@ const ShoppingBag = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    axios(`http://localhost:3004/products/`).then((res) => {
-      setAllProducts(res.data);
-    });
+    axios(`https://json-server-vercel-flower-shop.vercel.app/products/`).then(
+      (res) => {
+        setAllProducts(res.data);
+      }
+    );
   }, []);
 
   const handleClickOpen = () => setOpen(true);
@@ -37,7 +39,7 @@ const ShoppingBag = () => {
   const handleBuy = () => {
     if (shoppingItems[0]) {
       axios
-        .post("http://localhost:3004/orders", {
+        .post("https://json-server-vercel-flower-shop.vercel.app/orders", {
           shoppingItems,
           discount: discount,
         })

@@ -12,13 +12,15 @@ import Image from "next/image";
 
 const ShopByCategory = () => {
   const [categories, setCategories] = useState<string[]>([]);
-  const allData: EachProduct[] = useDataClient(
-    "http://localhost:3004/products"
-  ).data || [];
+  const allData: EachProduct[] =
+    useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
+      .data || [];
 
   useEffect(() => {
     if (allData.length > 0) {
-      const uniqueCategories = [...new Set(allData.map((item) => item.category))];
+      const uniqueCategories = [
+        ...new Set(allData.map((item) => item.category)),
+      ];
       setCategories(uniqueCategories);
     }
   }, [allData]);
@@ -74,11 +76,11 @@ const ShopByCategory = () => {
               <SwiperSlide key={product.category}>
                 <div className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center">
                   <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
-                    <Image 
-                      alt={product.category} 
-                      src={product.image} 
-                      width={160} 
-                      height={160} 
+                    <Image
+                      alt={product.category}
+                      src={product.image}
+                      width={160}
+                      height={160}
                       className="object-contain"
                     />
                   </div>

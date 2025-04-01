@@ -38,10 +38,14 @@ const OrderList = ({
   const fetchOrderDetails = async () => {
     try {
       const requests = shoppingItems.map((item) =>
-        axios.get(`http://localhost:3004/products/${item.id}`).then((res) => ({
-          ...item,
-          ...res.data,
-        }))
+        axios
+          .get(
+            `https://json-server-vercel-flower-shop.vercel.app/products/${item.id}`
+          )
+          .then((res) => ({
+            ...item,
+            ...res.data,
+          }))
       );
       const results = await Promise.all(requests);
       setOrderDetails(results);

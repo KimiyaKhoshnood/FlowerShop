@@ -10,18 +10,21 @@ import Image from "next/image";
 
 const Categories = () => {
   const [categories, setCategories] = useState<string[]>([]);
-  const sth: EachProduct[] =
-    useDataClient("http://localhost:3004/products").data || [];
+  const allProducts: EachProduct[] =
+    useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
+      .data || [];
 
   useEffect(() => {
-    if (sth) {
-      const uniqueCategories = [...new Set(sth.map((item) => item.category))];
+    if (allProducts) {
+      const uniqueCategories = [
+        ...new Set(allProducts.map((item) => item.category)),
+      ];
       setCategories(uniqueCategories);
     }
-  }, [sth]);
+  }, [allProducts]);
 
   const categoryImages = categories.map((category) => {
-    const foundItem = sth.find((item) => item.category === category);
+    const foundItem = allProducts.find((item) => item.category === category);
     return { category, image: foundItem ? foundItem.image : "/default.jpg" };
   });
 
