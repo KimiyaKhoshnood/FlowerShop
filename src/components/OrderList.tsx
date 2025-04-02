@@ -112,14 +112,14 @@ const OrderList = ({
                 <div className="text-center">{elem.title}</div>
                 <div className="text-center">{elem.qty}</div>
                 <div className="text-center">{elem.price}</div>
-                <div className="text-center">{elem.price * elem.qty}</div>
+                <div className="text-center">{(elem.price * elem.qty).toFixed(2)}</div>
               </div>
             );
           })}
           <div className="pt-4">Total Price: {sumPrices()}</div>
           <div className="">Discount: {discount}%</div>
           <div className="">
-            Total Price with Discount: {sumPricesWithDiscount()}
+            Total Price with Discount: {sumPricesWithDiscount().toFixed(2)}
           </div>
         </DialogContent>
         <DialogActions>
@@ -137,7 +137,7 @@ const OrderList = ({
         <div className="text-center">{row}</div>
         <div className="text-center">{discount}%</div>
         <div className="text-center">{sumQty()}</div>
-        <div className="text-center">{sumPricesWithDiscount()}</div>
+        <div className="text-center">{sumPricesWithDiscount().toFixed(2)}</div>
         <div className="flex justify-center">
           <button
             className="px-2 w-fit bg-emerald-600/50"

@@ -63,9 +63,9 @@ const SimilarProducts = () => {
                         height={160}
                       />
                     </div>
-                    <div className="w-full flex justify-between text-(--Burgundy)">
+                    <div className="w-full flex flex-col items-center justify-between text-(--Burgundy)">
                       <span className="text-lg">{product.title}</span>
-                      <CardPrice price={product.price} />
+                      <CardPrice price={product.price} justify="items-center"/>
                     </div>
                   </Link>
                 </SwiperSlide>

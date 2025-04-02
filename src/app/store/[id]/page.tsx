@@ -39,6 +39,7 @@ const page = async ({ params }: TPageProps) => {
             <CardPrice
               price={product.price}
               className="text-(--Burgundy) text-3xl"
+              justify="items-center"
             />
             <span className="text-(--Burgundy) text-nowrap">per flower</span>
           </div>

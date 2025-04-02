@@ -6,6 +6,9 @@ import ProductCard from "../ui/ProductCard";
 import { useState } from "react";
 
 const ProductsByCategory = () => {
+  // console.log(useSearchParams().get("category"));
+  
+
   const [url, setUrl] = useState("");
   const {loading} = useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
   const allProducts: EachProduct[] =

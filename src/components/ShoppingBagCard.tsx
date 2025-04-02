@@ -32,7 +32,7 @@ const ShoppingBagCard = ({ id }: { id: string }) => {
             />
             <div className="py-5">
               <h2 className="md:text-2xl text-lg">{productDetails.title}</h2>
-              <CardPrice price={productDetails.price} />
+              <CardPrice price={productDetails.price} justify="items-start" />
               {/* <AddToCard id={id} /> */}
             </div>
           </div>

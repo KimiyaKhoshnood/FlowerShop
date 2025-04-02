@@ -23,7 +23,7 @@ const ProductCard = ({
         </div>
         <div className="w-full flex flex-col items-center text-(--Burgundy)">
           <span className="text-lg">{title}</span>
-          <CardPrice price={price} />
+          <CardPrice price={price} justify="items-center"/>
         </div>
         {haveAddToCardSection && <div className="flex items-center justify-between py-2">
             <AddToCard id={id} />
