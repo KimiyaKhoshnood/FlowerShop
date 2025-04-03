@@ -116,8 +116,8 @@ export const Header = () => {
 
 export const DashboardHeader = () => {
   return (
-    <div className="py-2 px-8 shadow bg-amber-100/80 sticky top-12">
-      <nav className="flex gap-8">
+    <div className="py-2 sm:px-8 px-4 shadow bg-amber-100/80 sticky top-12">
+      <nav className="flex sm:justify-start sm:gap-8 justify-between">
         <Link href={"/dashboard"}>Dashboard</Link>
         <Link href={"/dashboard/add"}>Add Product</Link>
         <Link href={"/dashboard/edit"}>Edit Product</Link>

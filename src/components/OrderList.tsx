@@ -121,6 +121,7 @@ const OrderList = ({
           <div className="">
             Total Price with Discount: {sumPricesWithDiscount().toFixed(2)}
           </div>
+          <div className="">Delivery Date: {"????"}</div>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>

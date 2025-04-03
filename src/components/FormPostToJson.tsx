@@ -8,6 +8,7 @@ type Inputs = {
   title: string;
   price: string;
   image: string;
+  category:string;
   description: string;
 };
 
@@ -80,11 +81,17 @@ const FormPostToJson = () => {
         />
         <input
           type="text"
+          placeholder="Category"
+          className="border rounded-md py-1 px-3"
+          {...register("category", { required: true })}
+        />
+        <input
+          type="text"
           placeholder="Description"
           className="border rounded-md py-1 px-3"
           {...register("description", { required: true })}
         />
-        <button type="submit" className="bg-lime-300 px-2 py-1 rounded-md">
+        <button type="submit" className="bg-(--Magenta) px-2 py-1 rounded-md">
           Check
         </button>
       </form>

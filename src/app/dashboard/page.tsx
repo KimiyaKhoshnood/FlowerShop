@@ -21,9 +21,9 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-0 px-5">
+    <div className="flex flex-col gap-0 sm:px-5">
       <h2 className="text-center p-5 text-4xl">Sales Dashboard</h2>
-      <div className="grid grid-cols-5 bg-amber-300 divide-x text-center text-xl py-1">
+      <div className="grid grid-cols-5 items-center bg-amber-300 divide-x text-center sm:text-xl py-1">
         <div>Row</div>
         <div>Discount</div>
         <div>Total QTY</div>

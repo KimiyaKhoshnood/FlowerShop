@@ -4,13 +4,17 @@ import { EachProduct } from "@/app/store/page";
 import useDataClient from "@/data/GetDataClient";
 import ProductCard from "../ui/ProductCard";
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const ProductsByCategory = () => {
-  // console.log(useSearchParams().get("category"));
-  
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const [url, setUrl] = useState("");
-  const {loading} = useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
+  const [url, setUrl] = useState(searchParams.get("category") || "");
+
+  const { loading } = useDataClient(
+    "https://json-server-vercel-flower-shop.vercel.app/products"
+  );
   const allProducts: EachProduct[] =
     useDataClient(`https://json-server-vercel-flower-shop.vercel.app/products`)
       .data || [];
@@ -24,13 +28,26 @@ const ProductsByCategory = () => {
     ...new Set(allProducts.map((item) => item.category)),
   ];
 
+  const handleCategorySelect = (category?: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (category) {
+      params.set("category", category);
+      router.push(`/store?${params.toString()}`);
+      setUrl(category);
+    } else {
+      params.delete("category");
+      router.push(`?${params.toString()}`);
+      setUrl("");
+    }
+  };
+
   return (
     <>
       <div className="lg:px-20 px-10 w-full grid md:grid-cols-4 grid-cols-1">
         <div className="py-5 pr-5">
           <div className="flex flex-col gap-2">
             <span
-              onClick={() => setUrl("")}
+              onClick={() => handleCategorySelect()}
               className={`block w-full text-center border rounded-3xl py-1 text-(--Burgundy) hover:bg-(--Burgundy) hover:text-white cursor-pointer ${
                 url == "" ? "bg-(--Burgundy) text-white" : ""
               }`}
@@ -44,7 +61,7 @@ const ProductsByCategory = () => {
                 return (
                   <span
                     key={i}
-                    onClick={() => setUrl(elem)}
+                    onClick={() => handleCategorySelect(elem)}
                     className={`block w-fit border rounded-3xl py-1 px-2 text-sm hover:bg-(--Burgundy) hover:text-white cursor-pointer ${
                       url == elem ? "bg-(--Burgundy) text-white" : ""
                     }`}
