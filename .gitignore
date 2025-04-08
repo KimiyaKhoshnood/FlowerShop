@@ -53,3 +53,5 @@ pyvenv.cfg
 .venv
 venv/
 pip-selfcheck.json
+# Django database
+db.sqlite3
