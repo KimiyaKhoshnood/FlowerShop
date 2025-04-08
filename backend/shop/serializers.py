@@ -17,11 +17,18 @@ class DiscountSerializer(serializers.ModelSerializer):
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
-        fields = '__all__'
+        fields = ['product', 'qty']
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    item = OrderItemSerializer(many=True)
+    items = OrderItemSerializer(many=True)
     class Meta:
         model = Order
-        fields = ['id', 'discount', 'item']
+        fields = ['id', 'discount', 'items']
+
+    def create(self, validated_data):
+        items_data = validated_data.pop('items')
+        order = Order.objects.create(**validated_data)
+        for item_data in items_data:
+            OrderItem.objects.create(order=order, **item_data)
+        return order
