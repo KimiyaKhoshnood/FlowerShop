@@ -24,4 +24,4 @@ class OrderSerializer(serializers.ModelSerializer):
     item = OrderItemSerializer(many=True)
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['id', 'discount', 'item']
