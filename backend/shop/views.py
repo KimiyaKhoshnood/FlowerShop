@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Product, Discount, Order
-from .serializers import ProductSerializer, DiscountSerializer, OrderSerializer
+from .models import Product, Discount, Order, Category
+from .serializers import ProductSerializer, DiscountSerializer, OrderSerializer, CategorySerializer
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -16,3 +16,8 @@ class DiscountViewSet(viewsets.ReadOnlyModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
