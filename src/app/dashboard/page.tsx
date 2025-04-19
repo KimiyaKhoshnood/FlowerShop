@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import OrderList from "@/components/OrderList";
+import Cookie from "js-cookie";
 
 type orderType = {
   id: string;
@@ -13,12 +14,26 @@ const Dashboard = () => {
   const [orderList, setOrderList] = useState<orderType[]>([]);
 
   useEffect(() => {
-    axios(`https://json-server-vercel-flower-shop.vercel.app/orders/`).then(
-      (res) => {
-        setOrderList(res.data);
-      }
-    );
+    const token = Cookie.get("accessToken");
+    
+    // if (token) {
+    //   axios
+    //     .get("http://127.0.0.1:8000/orders/", {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`, 
+    //       },
+    //     })
+    //     .then((res) => {
+    //       setOrderList(res.data);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching orders:", error.response?.data);
+    //     });
+    // } else {
+    //   console.log("No token found");
+    // }
   }, []);
+console.log(orderList);
 
   return (
     <div className="flex flex-col gap-0 sm:px-5">

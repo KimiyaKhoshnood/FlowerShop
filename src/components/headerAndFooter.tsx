@@ -57,7 +57,7 @@ export const Header = () => {
       <Divider />
       <List>
         {
-          Cookie.get("token") ?(
+          Cookie.get("accessToken") ?(
           <ListItem disablePadding>
           <ListItemButton>
             <LogoutButton />
@@ -102,7 +102,7 @@ export const Header = () => {
             </div>
           </Link>
           <div className="md:block hidden">
-            {Cookie.get("token") ? (
+            {Cookie.get("accessToken") ? (
               <LogoutButton />
             ) : (
               <Link href={"/login"}><Image alt="Profile" src={Profile} /></Link>

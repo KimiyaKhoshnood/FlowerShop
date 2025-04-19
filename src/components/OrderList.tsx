@@ -38,14 +38,10 @@ const OrderList = ({
   const fetchOrderDetails = async () => {
     try {
       const requests = shoppingItems.map((item) =>
-        axios
-          .get(
-            `https://json-server-vercel-flower-shop.vercel.app/products/${item.id}`
-          )
-          .then((res) => ({
-            ...item,
-            ...res.data,
-          }))
+        axios.get(`http://127.0.0.1:8000/products/${item.id}/`).then((res) => ({
+          ...item,
+          ...res.data,
+        }))
       );
       const results = await Promise.all(requests);
       setOrderDetails(results);
@@ -112,7 +108,9 @@ const OrderList = ({
                 <div className="text-center">{elem.title}</div>
                 <div className="text-center">{elem.qty}</div>
                 <div className="text-center">{elem.price}</div>
-                <div className="text-center">{(elem.price * elem.qty).toFixed(2)}</div>
+                <div className="text-center">
+                  {(elem.price * elem.qty).toFixed(2)}
+                </div>
               </div>
             );
           })}

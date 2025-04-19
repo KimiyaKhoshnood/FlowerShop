@@ -22,17 +22,17 @@ const Discount = () => {
   const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    axios(
-      `https://json-server-vercel-flower-shop.vercel.app/discounts?code=${data.discount}`
-    ).then((res) => {
-      if (res.data.length != 0) {
-        setIsPendingDiscount(false);
-        setDiscount(res.data[0].percent);
-      } else {
-        setIsPendingDiscount(false);
-        setOpenSnackbar(true);
+    axios(`http://127.0.0.1:8000/discounts?code=${data.discount}`).then(
+      (res) => {
+        if (res.data.length != 0) {
+          setIsPendingDiscount(false);
+          setDiscount(res.data[0].percent);
+        } else {
+          setIsPendingDiscount(false);
+          setOpenSnackbar(true);
+        }
       }
-    });
+    );
   };
 
   return (
