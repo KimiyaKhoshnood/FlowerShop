@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Cookie from "js-cookie";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { redirect, useParams } from "next/navigation";
 import {
@@ -34,6 +35,7 @@ const EditSection = () => {
   };
 
   const handleDelete = () => {
+<<<<<<< Updated upstream
     axios
       .delete(
         `https://json-server-vercel-flower-shop.vercel.app/products/${id}`
@@ -44,6 +46,21 @@ const EditSection = () => {
           redirect("/dashboard/edit");
         }
       });
+=======
+    const token = Cookie.get("accessToken");
+    axios.delete(`http://127.0.0.1:8000/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      console.log("Done", res);
+      if (res.status == 200) {
+        redirect("/dashboard/edit");
+      }
+    }).catch((error) => {
+      console.error("خطا در حذف:", error?.response?.data || error.message);
+    });
+>>>>>>> Stashed changes
   };
 
   const id = useParams().id;
@@ -125,7 +142,7 @@ const EditSection = () => {
         </h2>
 
         <div className="py-2">
-          <div className="grid grid-cols-4 bg-gray-200 rounded-t-lg w-full">
+          <div className="grid grid-cols-5 bg-gray-200 rounded-t-lg w-full">
             {productDetails &&
               Object.keys(productDetails)
                 .filter((item) => item !== "id")

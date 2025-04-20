@@ -54,6 +54,9 @@ const OrderList = ({
     }
   };
 
+  console.log("orderDetails: ", orderDetails);
+  
+
   useEffect(() => {
     if (shoppingItems.length > 0) {
       fetchOrderDetails();

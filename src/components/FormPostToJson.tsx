@@ -3,6 +3,7 @@ import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import Cookie from "js-cookie";
 
 type Inputs = {
   title: string;
@@ -23,16 +24,26 @@ const FormPostToJson = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
+    const token = Cookie.get("accessToken")
     axios({
       method: "POST",
+<<<<<<< Updated upstream
       url: "https://json-server-vercel-flower-shop.vercel.app/products",
+=======
+      url: "http://127.0.0.1:8000/products/",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+>>>>>>> Stashed changes
       data: { ...data, price: parseInt(data.price) },
     }).then((res) => {
       console.log(res);
       if (res.status == 201) {
         setOpenSnackbar(true);
       }
-    });
+    }).catch((err) => {
+      console.error("Error creating product:", err.response?.data || err.message);
+    });;
   };
 
   return (
