@@ -27,20 +27,10 @@ const FormPostToJson = () => {
     const token = Cookie.get("accessToken")
     axios({
       method: "POST",
-<<<<<<< Updated upstream
-      url: "https://json-server-vercel-flower-shop.vercel.app/products",
-=======
       url: "http://127.0.0.1:8000/products/",
       headers: {
         Authorization: `Bearer ${token}`,
       },
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       data: { ...data, price: parseInt(data.price) },
     }).then((res) => {
       console.log(res);
@@ -49,11 +39,8 @@ const FormPostToJson = () => {
       }
     }).catch((err) => {
       console.error("Error creating product:", err.response?.data || err.message);
-<<<<<<< Updated upstream
+
     });;
-=======
-    })
->>>>>>> Stashed changes
   };
 
   return (

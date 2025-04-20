@@ -35,24 +35,6 @@ const EditSection = () => {
   };
 
   const handleDelete = () => {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    axios
-      .delete(
-        `https://json-server-vercel-flower-shop.vercel.app/products/${id}`
-      )
-      .then((res) => {
-        console.log("Done", res);
-        if (res.status == 200) {
-          redirect("/dashboard/edit");
-        }
-      });
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     const token = Cookie.get("accessToken");
     axios.delete(`http://127.0.0.1:8000/products/${id}`, {
       headers: {
@@ -66,14 +48,13 @@ const EditSection = () => {
     }).catch((error) => {
       console.error("خطا در حذف:", error?.response?.data || error.message);
     });
->>>>>>> Stashed changes
   };
 
   const id = useParams().id;
 
   useEffect(() => {
     axios(
-      `https://json-server-vercel-flower-shop.vercel.app/products/${id}`
+      `http://127.0.0.1:8000/products/${id}`
     ).then((res) => {
       setProductDetails(res.data);
     });
@@ -88,7 +69,7 @@ const EditSection = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     axios
       .patch(
-        `https://json-server-vercel-flower-shop.vercel.app/products/${id}`,
+        `http://127.0.0.1:8000/products/${id}`,
         {
           [selectedCategory]: data.input,
         }
