@@ -25,11 +25,9 @@ const ShoppingBag = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    axios(`https://json-server-vercel-flower-shop.vercel.app/products/`).then(
-      (res) => {
-        setAllProducts(res.data);
-      }
-    );
+    axios(`http://127.0.0.1:8000/products/`).then((res) => {
+      setAllProducts(res.data);
+    });
   }, []);
 
   const handleClickOpen = () => setOpen(true);
@@ -39,7 +37,7 @@ const ShoppingBag = () => {
   const handleBuy = () => {
     if (shoppingItems[0]) {
       axios
-        .post("https://json-server-vercel-flower-shop.vercel.app/orders", {
+        .post("http://127.0.0.1:8000/orders", {
           shoppingItems,
           discount: discount,
         })
@@ -133,7 +131,9 @@ const ShoppingBag = () => {
           </p>
 
           <Discount />
-          <span className="text-yellow-500 text-xs">{'(Hint: use OFF5 or OFF10 or OFF15)'}</span>
+          <span className="text-yellow-500 text-xs">
+            {"(Hint: use OFF5 or OFF10 or OFF15)"}
+          </span>
         </div>
 
         {shoppingItems[0] && (

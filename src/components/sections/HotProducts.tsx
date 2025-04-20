@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const HotProducts = () => {
   const data: EachProduct[] =
-    useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
+    useDataClient("http://127.0.0.1:8000/products/")
       .data || [];
 
   return (

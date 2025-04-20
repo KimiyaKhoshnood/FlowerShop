@@ -9,11 +9,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const Categories = () => {
-  const {loading} = useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
+  const { loading } = useDataClient("http://127.0.0.1:8000/products/");
   const [categories, setCategories] = useState<string[]>([]);
   const allProducts: EachProduct[] =
-    useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
-      .data || [];
+    useDataClient("http://127.0.0.1:8000/products/").data || [];
 
   useEffect(() => {
     if (allProducts) {

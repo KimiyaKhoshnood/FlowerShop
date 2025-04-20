@@ -11,9 +11,7 @@ const ShoppingBagCard = ({ id }: { id: string }) => {
   );
 
   useEffect(() => {
-    axios(
-      `https://json-server-vercel-flower-shop.vercel.app/products/${id}`
-    ).then((res) => {
+    axios(`http://127.0.0.1:8000/products/${id}/`).then((res) => {
       setProductDetails(res.data);
     });
   }, [id]);
