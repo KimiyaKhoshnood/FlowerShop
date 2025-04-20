@@ -4,7 +4,7 @@ import Cookie from "js-cookie"
 const LogoutButton = () => {
 
     const handleLogout = () => {
-        Cookie.remove("token")
+        Cookie.remove("accessToken")
     }
 
   return (

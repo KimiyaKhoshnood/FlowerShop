@@ -10,9 +10,7 @@ import CardPrice from "../CardPrice";
 import Image from "next/image";
 
 const SimilarProducts = () => {
-  const data =
-    useDataClient("https://json-server-vercel-flower-shop.vercel.app/products")
-      .data || [];
+  const data = useDataClient("http://127.0.0.1:8000/products/").data || [];
 
   return (
     <div className="md:px-10 px-5 py-10">
@@ -65,7 +63,7 @@ const SimilarProducts = () => {
                     </div>
                     <div className="w-full flex flex-col items-center justify-between text-(--Burgundy)">
                       <span className="text-lg">{product.title}</span>
-                      <CardPrice price={product.price} justify="items-center"/>
+                      <CardPrice price={product.price} justify="items-center" />
                     </div>
                   </Link>
                 </SwiperSlide>

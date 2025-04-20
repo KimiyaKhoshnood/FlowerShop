@@ -34,24 +34,18 @@ const EditSection = () => {
   };
 
   const handleDelete = () => {
-    axios
-      .delete(
-        `https://json-server-vercel-flower-shop.vercel.app/products/${id}`
-      )
-      .then((res) => {
-        console.log("Done", res);
-        if (res.status == 200) {
-          redirect("/dashboard/edit");
-        }
-      });
+    axios.delete(`http://127.0.0.1:8000/products/${id}`).then((res) => {
+      console.log("Done", res);
+      if (res.status == 200) {
+        redirect("/dashboard/edit");
+      }
+    });
   };
 
   const id = useParams().id;
 
   useEffect(() => {
-    axios(
-      `https://json-server-vercel-flower-shop.vercel.app/products/${id}`
-    ).then((res) => {
+    axios(`http://127.0.0.1:8000/products/${id}/`).then((res) => {
       setProductDetails(res.data);
     });
   }, [id]);
@@ -64,12 +58,9 @@ const EditSection = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     axios
-      .patch(
-        `https://json-server-vercel-flower-shop.vercel.app/products/${id}`,
-        {
-          [selectedCategory]: data.input,
-        }
-      )
+      .patch(`http://127.0.0.1:8000/products/${id}/`, {
+        [selectedCategory]: data.input,
+      })
       .then((res) => {
         console.log("Done", res);
         if (res.status == 200) {

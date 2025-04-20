@@ -8,7 +8,7 @@ type Inputs = {
   title: string;
   price: string;
   image: string;
-  category:string;
+  category: string;
   description: string;
 };
 
@@ -25,7 +25,7 @@ const FormPostToJson = () => {
     console.log(data);
     axios({
       method: "POST",
-      url: "https://json-server-vercel-flower-shop.vercel.app/products",
+      url: "http://127.0.0.1:8000/products/",
       data: { ...data, price: parseInt(data.price) },
     }).then((res) => {
       console.log(res);
