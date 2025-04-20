@@ -14,12 +14,16 @@ const Dashboard = () => {
 
   useEffect(() => {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     axios(`https://json-server-vercel-flower-shop.vercel.app/orders/`).then(
       (res) => {
         setOrderList(res.data);
       }
     );
   }, []);
+=======
+    const token = Cookie.get("accessToken");
+>>>>>>> Stashed changes
 =======
     const token = Cookie.get("accessToken");
 >>>>>>> Stashed changes

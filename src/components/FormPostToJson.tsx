@@ -34,6 +34,9 @@ const FormPostToJson = () => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       data: { ...data, price: parseInt(data.price) },
     }).then((res) => {
