@@ -35,6 +35,9 @@ const FormPostToJson = () => {
         Authorization: `Bearer ${token}`,
       },
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -46,7 +49,11 @@ const FormPostToJson = () => {
       }
     }).catch((err) => {
       console.error("Error creating product:", err.response?.data || err.message);
+<<<<<<< Updated upstream
     });;
+=======
+    })
+>>>>>>> Stashed changes
   };
 
   return (

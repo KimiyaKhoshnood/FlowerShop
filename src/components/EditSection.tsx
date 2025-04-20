@@ -37,6 +37,7 @@ const EditSection = () => {
   const handleDelete = () => {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     axios
       .delete(
         `https://json-server-vercel-flower-shop.vercel.app/products/${id}`
@@ -48,6 +49,8 @@ const EditSection = () => {
         }
       });
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     const token = Cookie.get("accessToken");

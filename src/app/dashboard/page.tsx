@@ -1,6 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+<<<<<<< Updated upstream
+=======
+import Cookie from "js-cookie";
+>>>>>>> Stashed changes
 import OrderList from "@/components/OrderList";
 
 type orderType = {
@@ -15,11 +19,32 @@ const Dashboard = () => {
   useEffect(() => {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     axios(`https://json-server-vercel-flower-shop.vercel.app/orders/`).then(
       (res) => {
         setOrderList(res.data);
       }
     );
+=======
+    const token = Cookie.get("accessToken");
+    
+    if (token) {
+      axios
+        .get("http://127.0.0.1:8000/orders/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setOrderList(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching orders:", error.response?.data);
+        });
+    } else {
+      console.log("No token found");
+    }
+>>>>>>> Stashed changes
   }, []);
 =======
     const token = Cookie.get("accessToken");
