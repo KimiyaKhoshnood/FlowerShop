@@ -15,12 +15,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     const token = Cookie.get("accessToken");
+
     
     if (token) {
       axios
         .get("http://127.0.0.1:8000/orders/", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, 
           },
         })
         .then((res) => {
@@ -33,8 +34,8 @@ const Dashboard = () => {
       console.log("No token found");
     }
   }, []);
+console.log(orderList);
 
-  
   return (
     <div className="flex flex-col gap-0 sm:px-5">
       <h2 className="text-center p-5 text-4xl">Sales Dashboard</h2>

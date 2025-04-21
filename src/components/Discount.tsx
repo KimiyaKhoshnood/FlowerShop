@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ButtonUI from "./ui/ButtonUI";
+import Cookie from "js-cookie";
 
 type Inputs = {
   discount: string;
@@ -22,7 +23,12 @@ const Discount = () => {
   const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    axios(`http://127.0.0.1:8000/discounts?code=${data.discount}/`).then(
+    const token = Cookie.get("accessToken")
+    axios(`http://127.0.0.1:8000/discounts?code=${data.discount}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(
       (res) => {
         if (res.data.length != 0) {
           setIsPendingDiscount(false);

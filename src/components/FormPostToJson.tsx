@@ -1,7 +1,7 @@
 "use client";
 import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Cookie from "js-cookie";
 
@@ -21,6 +21,26 @@ const FormPostToJson = () => {
   } = useForm<Inputs>();
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  // useEffect(()=>{
+  //   const token = Cookie.get("accessToken")
+
+  //   axios({
+  //     method: "POST",
+  //     url: "http://127.0.0.1:8000/categories/",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     data: { name: "Tulips" },
+  //   }).then((res) => {
+  //     console.log(res);
+  //     if (res.status == 201) {
+  //       setOpenSnackbar(true);
+  //     }
+  //   }).catch((err) => {
+  //     console.error("Error creating product:", err.response?.data || err.message);
+  //   })
+  // },[])
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);

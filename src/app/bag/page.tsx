@@ -37,7 +37,7 @@ const ShoppingBag = () => {
   const handleBuy = () => {
     if (shoppingItems[0]) {
       axios
-        .post("http://127.0.0.1:8000/orders", {
+        .post("http://127.0.0.1:8000/orders/", {
           shoppingItems,
           discount: discount,
         })
@@ -99,7 +99,6 @@ const ShoppingBag = () => {
           return <ShoppingBagCard key={each.id} id={each.id} />;
         })}
 
-        {/* component for total price and discount and process */}
         <div className="">
           <p>
             Total Discount:{" "}
