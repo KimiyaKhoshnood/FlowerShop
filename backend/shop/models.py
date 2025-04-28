@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 import uuid
 
@@ -23,6 +24,7 @@ class Discount(models.Model):
 
 class Order(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     discount = models.ForeignKey('Discount', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
