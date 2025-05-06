@@ -16,7 +16,5 @@ router.register(r'categories', CategoryViewSet)
 urlpatterns = [
     path('', api_root),
     path('', include(router.urls)),
-    path('login/', TokenObtainPairViewSet.as_view(), name='token_obtain_pair'),
-    path('login/refresh', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='auth_register'),
 ]
