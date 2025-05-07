@@ -1,14 +1,14 @@
 from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import RetrieveUpdateAPIView, CreateAPIView
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import generics
 from .models import Product, Discount, Order, Category
 from .serializers import (ProductSerializer, DiscountSerializer, OrderSerializer, CategorySerializer
-                         ,TokenObtainPairSerializer, RegisterSerializer)
+, TokenObtainPairSerializer, RegisterSerializer, UserSerializer)
 
 
 @api_view(['GET'])
@@ -48,7 +48,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 
 # SIGN_UP AND LOGIN
-class RegisterView(generics.CreateAPIView):
+class RegisterView(CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
@@ -57,3 +57,11 @@ class RegisterView(generics.CreateAPIView):
 class TokenObtainPairViewSet(TokenObtainPairView):
     permission_classes = (AllowAny,)
     serializer_class = TokenObtainPairSerializer
+
+
+class UserProfileViewSet(RetrieveUpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
