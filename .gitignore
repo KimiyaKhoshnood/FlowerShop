@@ -55,3 +55,4 @@ venv/
 pip-selfcheck.json
 # Django database
 db.sqlite3
+.idea/
