@@ -12,12 +12,12 @@ const ProductsByCategory = () => {
 
   const [url, setUrl] = useState(searchParams.get("category") || "");
 
-  const { loading } = useDataClient("http://127.0.0.1:8000/products/");
+  const { loading } = useDataClient("http://127.0.0.1:8000/api/products/");
   const allProducts: EachProduct[] =
-    useDataClient(`http://127.0.0.1:8000/products/`).data || [];
+    useDataClient(`http://127.0.0.1:8000/api/products/`).data || [];
   const finalProducts: EachProduct[] =
     useDataClient(
-      `http://127.0.0.1:8000/products${url == "" ? "" : "?category=" + url}/`
+      `http://127.0.0.1:8000/api/products${url == "" ? "" : "?category=" + url}/`
     ).data || [];
   const uniqueCategories: string[] = [
     ...new Set(allProducts.map((item) => item.category)),

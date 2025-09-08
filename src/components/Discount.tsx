@@ -24,7 +24,7 @@ const Discount = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const token = Cookie.get("accessToken")
-    axios(`http://127.0.0.1:8000/discounts?code=${data.discount}/`, {
+    axios(`http://127.0.0.1:8000/api/discounts?code=${data.discount}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

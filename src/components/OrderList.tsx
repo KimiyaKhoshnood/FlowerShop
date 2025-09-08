@@ -38,7 +38,7 @@ const OrderList = ({
   const fetchOrderDetails = async () => {
     try {
       const requests = shoppingItems.map((item) =>
-        axios.get(`http://127.0.0.1:8000/products/${item.id}/`).then((res) => ({
+        axios.get(`http://127.0.0.1:8000/api/products/${item.id}/`).then((res) => ({
           ...item,
           ...res.data,
         }))

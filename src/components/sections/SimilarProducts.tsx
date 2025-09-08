@@ -10,7 +10,7 @@ import CardPrice from "../CardPrice";
 import Image from "next/image";
 
 const SimilarProducts = () => {
-  const data = useDataClient("http://127.0.0.1:8000/products/").data || [];
+  const data = useDataClient("http://127.0.0.1:8000/api/products/").data || [];
 
   return (
     <div className="md:px-10 px-5 py-10">

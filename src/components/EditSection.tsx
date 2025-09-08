@@ -36,7 +36,7 @@ const EditSection = () => {
 
   const handleDelete = () => {
     const token = Cookie.get("accessToken");
-    axios.delete(`http://127.0.0.1:8000/products/${id}/`, {
+    axios.delete(`http://127.0.0.1:8000/api/products/${id}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -54,7 +54,7 @@ const EditSection = () => {
 
   useEffect(() => {
     axios(
-      `http://127.0.0.1:8000/products/${id}/`
+      `http://127.0.0.1:8000/api/products/${id}/`
     ).then((res) => {
       setProductDetails(res.data);
     });
@@ -69,7 +69,7 @@ const EditSection = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     axios
       .patch(
-        `http://127.0.0.1:8000/products/${id}/`,
+        `http://127.0.0.1:8000/api/products/${id}/`,
         {
           [selectedCategory]: data.input,
         }

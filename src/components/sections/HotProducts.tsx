@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const HotProducts = () => {
   const data: EachProduct[] =
-    useDataClient("http://127.0.0.1:8000/products/")
+    useDataClient("http://127.0.0.1:8000/api/products/")
       .data || [];
 
   return (

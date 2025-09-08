@@ -11,7 +11,7 @@ const ShoppingBagCard = ({ id }: { id: string }) => {
   );
 
   useEffect(() => {
-    axios(`http://127.0.0.1:8000/products/${id}/`).then((res) => {
+    axios(`http://127.0.0.1:8000/api/products/${id}/`).then((res) => {
       setProductDetails(res.data);
     });
   }, [id]);

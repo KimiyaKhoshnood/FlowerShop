@@ -13,7 +13,7 @@ import Image from "next/image";
 const ShopByCategory = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const allData: EachProduct[] =
-    useDataClient("http://127.0.0.1:8000/products/").data || [];
+    useDataClient("http://127.0.0.1:8000/api/products/").data || [];
 
   useEffect(() => {
     if (allData.length > 0) {

@@ -47,7 +47,7 @@ const FormPostToJson = () => {
     const token = Cookie.get("accessToken")
     axios({
       method: "POST",
-      url: "http://127.0.0.1:8000/products/",
+      url: "http://127.0.0.1:8000/api/products/",
       headers: {
         Authorization: `Bearer ${token}`,
       },

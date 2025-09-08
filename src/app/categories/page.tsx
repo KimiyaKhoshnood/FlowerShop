@@ -9,10 +9,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const Categories = () => {
-  const { loading } = useDataClient("http://127.0.0.1:8000/products/");
+  const { loading } = useDataClient("http://127.0.0.1:8000/api/products/");
   const [categories, setCategories] = useState<string[]>([]);
   const allProducts: EachProduct[] =
-    useDataClient("http://127.0.0.1:8000/products/").data || [];
+    useDataClient("http://127.0.0.1:8000/api/products/").data || [];
 
   useEffect(() => {
     if (allProducts) {

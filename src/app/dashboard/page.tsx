@@ -19,7 +19,7 @@ const Dashboard = () => {
     
     if (token) {
       axios
-        .get("http://127.0.0.1:8000/orders/", {
+        .get("http://127.0.0.1:8000/api/orders/", {
           headers: {
             Authorization: `Bearer ${token}`, 
           },

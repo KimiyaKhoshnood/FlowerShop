@@ -25,7 +25,7 @@ const ShoppingBag = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    axios(`http://127.0.0.1:8000/products/`).then((res) => {
+    axios(`http://127.0.0.1:8000/api/products/`).then((res) => {
       setAllProducts(res.data);
     });
   }, []);
@@ -37,7 +37,7 @@ const ShoppingBag = () => {
   const handleBuy = () => {
     if (shoppingItems[0]) {
       axios
-        .post("http://127.0.0.1:8000/orders/", {
+        .post("http://127.0.0.1:8000/api/orders/", {
           shoppingItems,
           discount: discount,
         })
