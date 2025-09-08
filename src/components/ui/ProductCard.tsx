@@ -19,7 +19,7 @@ const ProductCard = ({
         className="border border-gray-200 rounded-md p-4 flex flex-col gap-2  items-center"
       >
         <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
-          <Image alt="" src={image} width={160} height={160}  />
+          <img alt="" src={image} width={160} height={160}  />
         </div>
         <div className="w-full flex flex-col items-center text-(--Burgundy)">
           <span className="text-lg">{title}</span>

@@ -10,6 +10,7 @@ import HamMenuIcon from "../../public/HamMenuIcon.svg";
 import Image from "next/image";
 import { useState } from "react";
 import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { useParams, usePathname } from "next/navigation";
 
 // export const Header = () => {
 //   return (
@@ -41,12 +42,12 @@ export const Header = () => {
         {['Home', 'All Products', 'Categories', 'Dashboard'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton href={
-              text=="Home"?"/"
-              :text=="All Products"?"/store"
-              :text=="Dashboard"?"/dashboard"
-              :text=="Categories"?"/categories"
-              :""
-              }>
+              text == "Home" ? "/"
+                : text == "All Products" ? "/store"
+                  : text == "Dashboard" ? "/dashboard"
+                    : text == "Categories" ? "/categories"
+                      : ""
+            }>
               {/* <ListItemIcon>
               </ListItemIcon> */}
               <ListItemText primary={text} />
@@ -57,21 +58,21 @@ export const Header = () => {
       <Divider />
       <List>
         {
-          Cookie.get("accessToken") ?(
-          <ListItem disablePadding>
-          <ListItemButton>
-            <LogoutButton />
-          </ListItemButton>
-        </ListItem>
-          ):(
-        <ListItem disablePadding>
-          <ListItemButton href="/login">
-            {/* <ListItemIcon>
+          Cookie.get("accessToken") ? (
+            <ListItem disablePadding>
+              <ListItemButton>
+                <LogoutButton />
+              </ListItemButton>
+            </ListItem>
+          ) : (
+            <ListItem disablePadding>
+              <ListItemButton href="/login">
+                {/* <ListItemIcon>
             </ListItemIcon> */}
-            <ListItemText primary={"Login"} />
-          </ListItemButton>
-        </ListItem>
-        )}
+                <ListItemText primary={"Login"} />
+              </ListItemButton>
+            </ListItem>
+          )}
       </List>
     </Box>
   )
@@ -81,8 +82,8 @@ export const Header = () => {
     <header className="py-3 md:px-8 px-4 shadow bg-(--background) sticky top-0 z-10">
       <nav className="flex justify-between">
         <div className="md:hidden block">
-          <div className="flex relative" onClick={()=>setOpenSidebar(!openSidebar)}>
-            <Image alt="HamMenuIcon" src={HamMenuIcon} className="cursor-pointer"/>
+          <div className="flex relative" onClick={() => setOpenSidebar(!openSidebar)}>
+            <Image alt="HamMenuIcon" src={HamMenuIcon} className="cursor-pointer" />
             <Drawer open={openSidebar} onClose={toggleDrawer(false)}>{DrawerList}</Drawer>
           </div>
         </div>
@@ -115,12 +116,32 @@ export const Header = () => {
 };
 
 export const DashboardHeader = () => {
+  const pathname = usePathname()
+  console.log(pathname);
+
   return (
     <div className="py-2 sm:px-8 px-4 shadow bg-amber-100/80 sticky top-12">
       <nav className="flex sm:justify-start sm:gap-8 justify-between">
-        <Link href={"/dashboard"}>Dashboard</Link>
-        <Link href={"/dashboard/add"}>Add Product</Link>
-        <Link href={"/dashboard/edit"}>Edit Product</Link>
+        <Link
+          className={pathname == "/dashboard" ? "border-b-2 border-b-amber-600" : ""}
+          href={"/dashboard"}>
+          Dashboard
+        </Link>
+        <Link
+          className={pathname == "/dashboard/product" ? "border-b-2 border-b-amber-600" : ""}
+          href={"/dashboard/product"}>
+          Products
+        </Link>
+        <Link
+          className={pathname == "/dashboard/product/add" ? "border-b-2 border-b-amber-600" : ""}
+          href={"/dashboard/product/add"}>
+          Add Product
+        </Link>
+        <Link
+          className={pathname == "/dashboard/category" ? "border-b-2 border-b-amber-600" : ""}
+          href={"/dashboard/category"}>
+          Categories
+        </Link>
       </nav>
     </div>
   );
@@ -129,6 +150,6 @@ export const DashboardHeader = () => {
 export const Footer = () => {
   return <footer className="shadow flex justify-between items-center gap-5 p-10">
     <p className="text-center text-xs text-(--Burgundy)">Developed By Kimia Khoshnood As A Test Project.</p>
-    <Image alt="" src={logo}/>
+    <Image alt="" src={logo} />
   </footer>;
 };

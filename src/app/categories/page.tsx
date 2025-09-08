@@ -53,7 +53,7 @@ const Categories = () => {
                 <div className="border border-gray-200 rounded-md sm:p-4 px-4 flex sm:flex-col gap-2 justify-between items-center">
                   <div className="flex sm:flex-col items-center gap-2">
                     <div className="sm:w-40 sm:h-40 h-16 w-16 flex justify-center sm:bg-(--BabyPink)">
-                      <Image alt="" src={elem.image} width={160} height={160} />
+                      <img alt="" src={elem.image} width={160} height={160} />
                     </div>
                     <span className="text-lg text-(--Burgundy) text-nowrap">
                       {elem.category}

@@ -32,7 +32,7 @@ const EachProductDetails = ({
             {"< Back To Tulip Category"}
           </Link>
         </div>
-        <Image
+        <img
           src={image}
           alt=""
           className="lg:w-full md:w-1/3 sm:w-1/2 w-full max-w-[500px] pr-5"

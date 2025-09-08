@@ -21,7 +21,7 @@ const ShoppingBagCard = ({ id }: { id: string }) => {
       {productDetails && (
         <div className="border border-gray-300 rounded-lg p-2 bg-(--Burgundy)/5 flex justify-between items-center">
           <div className="flex md:gap-10 gap-2">
-            <Image
+            <img
               className="md:w-40 w-28 "
               width={160}
               height={160}

@@ -3,6 +3,11 @@ export const GetAllProducts = async () => {
   return allProducts;
 };
 
+export const GetAllCategories = async () => {
+  const allCategories = (await fetch("http://127.0.0.1:8000/api/categories/")).json();
+  return allCategories;
+};
+
 export const GetRequestedProducts = async (url: string) => {
   const requestedProducts = (await fetch(url)).json();
   return requestedProducts;

@@ -16,7 +16,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async(data) => {
     try {
-      const res = await axios.post("http://127.0.0.1:8000/login/", data);
+      const res = await axios.post("http://127.0.0.1:8000/api/token/", data);
       console.log("res: ", res);
 
       const loginRes = await axios.post("http://127.0.0.1:8000/api/token/", {

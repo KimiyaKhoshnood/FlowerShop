@@ -18,7 +18,7 @@ const EditProduct = async () => {
               image={eachProduct.image}
               category={eachProduct.category}
               haveAddToCardSection={false}
-              linkToUrl="/dashboard/edit/"
+              linkToUrl="/dashboard/product/"
             />
           );
         })}

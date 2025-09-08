@@ -43,7 +43,7 @@ const EditSection = () => {
     }).then((res) => {
       console.log("Done", res);
       if (res.status == 200) {
-        redirect("/dashboard/edit");
+        redirect("/dashboard/product");
       }
     }).catch((error) => {
       console.error("خطا در حذف:", error?.response?.data || error.message);
