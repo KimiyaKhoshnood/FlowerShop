@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookie from "js-cookie";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { redirect, useParams } from "next/navigation";
+import { redirect, useParams, useRouter } from "next/navigation";
 import {
   Alert,
   Button,
@@ -25,6 +25,7 @@ const EditSection = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("title");
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [open, setOpen] = useState(false);
+  const router = useRouter()
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -67,17 +68,24 @@ const EditSection = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const token = Cookie.get("accessToken");
     axios
       .patch(
         `http://127.0.0.1:8000/api/products/${id}/`,
         {
           [selectedCategory]: data.input,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       )
       .then((res) => {
         console.log("Done", res);
         if (res.status == 200) {
           setOpenSuccessSnackbar(true);
+          router.push("/dashboard/product")
         }
       });
   };
@@ -138,11 +146,10 @@ const EditSection = () => {
                     <div
                       key={elem}
                       onClick={() => setSelectedCategory(elem)}
-                      className={`flex justify-center py-2 cursor-pointer ${
-                        selectedCategory == elem
-                          ? "bg-gray-50 rounded-t-lg border-t border-x border-gray-300"
-                          : "bg-gray-200"
-                      }`}
+                      className={`flex justify-center py-2 cursor-pointer ${selectedCategory == elem
+                        ? "bg-gray-50 rounded-t-lg border-t border-x border-gray-300"
+                        : "bg-gray-200"
+                        }`}
                     >
                       {capitalizeFirstLetter(elem)}
                     </div>
@@ -174,12 +181,13 @@ const EditSection = () => {
           </div>
         </div>
 
-        <div className="flex justify-center w-full">
+        <div className="flex items-center mt-10 gap-2">
+          <span className="text-xs">Want to delete this Product?</span>
           <button
             onClick={handleClickOpen}
-            className="bg-red-800 py-2 px-5 text-center w-fit"
+            className="text-red-500 text-center text-xs cursor-pointer w-fit"
           >
-            DELETE PRODUCT
+            DELETE PRODUCT!
           </button>
         </div>
       </div>

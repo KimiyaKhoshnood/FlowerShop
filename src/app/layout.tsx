@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import {Footer, Header} from "@/components/headerAndFooter";
+import { Footer, Header } from "@/components/headerAndFooter";
 import ContextProviderLayout from "@/context/context";
 
 const geistSans = Geist({
@@ -28,13 +28,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ContextProviderLayout>
-        <Header/>
-        {children}
-        <hr className="text-gray-300 w-full"/>
-        <Footer/>
-        </ContextProviderLayout>
+      ><div className="!min-h-screen flex flex-col">
+          <ContextProviderLayout>
+            <Header />
+            <div className="flex-1 h-full grow-1">{children}</div>
+            <hr className="text-gray-300 w-full" />
+            <Footer />
+          </ContextProviderLayout>
+        </div>
       </body>
     </html>
   );

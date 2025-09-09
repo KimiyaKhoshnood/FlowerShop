@@ -109,6 +109,11 @@ export const DashboardHeader = () => {
           Dashboard
         </Link>
         <Link
+          className={pathname == "/dashboard/profile" ? "border-b-2 border-b-amber-600" : ""}
+          href={"/dashboard/profile"}>
+          Profile
+        </Link>
+        <Link
           className={pathname == "/dashboard/product" ? "border-b-2 border-b-amber-600" : ""}
           href={"/dashboard/product"}>
           Products
