@@ -1,13 +1,5 @@
-import Herosection from "@/components/sections/Herosection";
-import HotDeals from "@/components/sections/HotDeals";
-import HotProducts from "@/components/sections/HotProducts";
-import ShopByCategory from "@/components/sections/ShopByCategory";
+import Home from "@/views/home/home";
 
-export default function Home() {
-  return <>
-  <Herosection />
-  <ShopByCategory/>
-  <HotDeals/>
-  <HotProducts/>
-  </>;
+export default function page() {
+  return <Home />;
 }

@@ -1,9 +1,9 @@
-import { EachProduct } from "@/app/store/page";
+import { IEachProduct } from "@/types/types";
 import ProductCard from "@/components/ui/ProductCard";
 import { GetAllProducts } from "@/data/GetData";
 
 const EditProduct = async () => {
-  const allProducts: EachProduct[] = await GetAllProducts();
+  const allProducts: IEachProduct[] = await GetAllProducts();
   return (
     <div>
       <h2 className="text-center p-5 text-4xl">Edit Product</h2>

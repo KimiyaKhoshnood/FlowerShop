@@ -1,18 +1,17 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { IEachProduct } from "@/types/types";
+import useDataClient from "@/data/GetDataClient";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import useDataClient from "@/data/GetDataClient";
-import { EachProduct } from "@/app/store/page";
-import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonUI from "../ui/ButtonUI";
-import { useEffect, useState } from "react";
-import Image from "next/image";
 
 const ShopByCategory = () => {
   const [categories, setCategories] = useState<string[]>([]);
-  const allData: EachProduct[] =
+  const allData: IEachProduct[] =
     useDataClient("http://127.0.0.1:8000/api/products/").data || [];
 
   useEffect(() => {

@@ -1,18 +1,16 @@
 "use client";
-import { EachProduct } from "@/app/store/page";
-import ChartRadialBar from "./ui/ChartRadialBar";
-import Button from "./ui/ButtonUI";
-import Rate from "./ui/Rate";
+import { IEachProduct } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import ButtonUI from "./ui/ButtonUI";
-import Image from "next/image";
+import { default as Button, default as ButtonUI } from "./ui/ButtonUI";
+import ChartRadialBar from "./ui/ChartRadialBar";
+import Rate from "./ui/Rate";
 
 const EachProductDetails = ({
   title,
   image,
   description,
-}: EachProduct) => {
+}: IEachProduct) => {
   const [showMore, setShowMore] = useState(true);
 
   useEffect(() => {
@@ -101,9 +99,8 @@ const EachProductDetails = ({
         </div>
       </div>
       <div
-        className={`${
-          showMore ? "flex" : "hidden"
-        } flex flex-col gap-3 lg:p-0 px-5`}
+        className={`${showMore ? "flex" : "hidden"
+          } flex flex-col gap-3 lg:p-0 px-5`}
       >
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between gap-3">

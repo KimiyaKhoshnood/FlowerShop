@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import AddToCard from "./AddToCard";
+import { IEachProduct } from "@/types/types";
 import axios from "axios";
-import { EachProduct } from "@/app/store/page";
+import { useEffect, useState } from "react";
+import AddToCard from "./AddToCard";
 import CardPrice from "./CardPrice";
-import Image from "next/image";
 
 const ShoppingBagCard = ({ id }: { id: string }) => {
-  const [productDetails, setProductDetails] = useState<EachProduct | null>(
+  const [productDetails, setProductDetails] = useState<IEachProduct | null>(
     null
   );
 

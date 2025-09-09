@@ -1,13 +1,12 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { IEachProduct } from "@/types/types";
+import useDataClient from "@/data/GetDataClient";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import useDataClient from "@/data/GetDataClient";
-import { EachProduct } from "@/app/store/page";
-import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
 import CardPrice from "../CardPrice";
-import Image from "next/image";
 
 const SimilarProducts = () => {
   const data = useDataClient("http://127.0.0.1:8000/api/products/").data || [];
@@ -46,7 +45,7 @@ const SimilarProducts = () => {
             modules={[Navigation]}
             className="mySwiper"
           >
-            {data.map((product: EachProduct) => {
+            {data.map((product: IEachProduct) => {
               return (
                 <SwiperSlide key={product.id}>
                   <Link

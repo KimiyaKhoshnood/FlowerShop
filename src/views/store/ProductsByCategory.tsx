@@ -1,10 +1,10 @@
 "use client";
 
-import { EachProduct } from "@/app/store/page";
+import { IEachProduct } from "@/types/types";
 import useDataClient from "@/data/GetDataClient";
-import ProductCard from "../ui/ProductCard";
-import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import ProductCard from "../../components/ui/ProductCard";
 
 const ProductsByCategory = () => {
   const router = useRouter();
@@ -13,9 +13,9 @@ const ProductsByCategory = () => {
   const [url, setUrl] = useState(searchParams.get("category") || "");
 
   const { loading } = useDataClient("http://127.0.0.1:8000/api/products/");
-  const allProducts: EachProduct[] =
+  const allProducts: IEachProduct[] =
     useDataClient(`http://127.0.0.1:8000/api/products/`).data || [];
-  const finalProducts: EachProduct[] =
+  const finalProducts: IEachProduct[] =
     useDataClient(
       `http://127.0.0.1:8000/api/products${url == "" ? "" : "?category=" + url}/`
     ).data || [];
@@ -43,9 +43,8 @@ const ProductsByCategory = () => {
           <div className="flex flex-col gap-2">
             <span
               onClick={() => handleCategorySelect()}
-              className={`block w-full text-center border rounded-3xl py-1 text-(--Burgundy) hover:bg-(--Burgundy) hover:text-white cursor-pointer ${
-                url == "" ? "bg-(--Burgundy) text-white" : ""
-              }`}
+              className={`block w-full text-center border rounded-3xl py-1 text-(--Burgundy) hover:bg-(--Burgundy) hover:text-white cursor-pointer ${url == "" ? "bg-(--Burgundy) text-white" : ""
+                }`}
             >
               Show All
             </span>
@@ -57,9 +56,8 @@ const ProductsByCategory = () => {
                   <span
                     key={i}
                     onClick={() => handleCategorySelect(elem)}
-                    className={`block w-fit border rounded-3xl py-1 px-2 text-sm hover:bg-(--Burgundy) hover:text-white cursor-pointer ${
-                      url == elem ? "bg-(--Burgundy) text-white" : ""
-                    }`}
+                    className={`block w-fit border rounded-3xl py-1 px-2 text-sm hover:bg-(--Burgundy) hover:text-white cursor-pointer ${url == elem ? "bg-(--Burgundy) text-white" : ""
+                      }`}
                   >
                     {elem}
                   </span>
