@@ -16,6 +16,7 @@ import {
   Snackbar,
 } from "@mui/material";
 import ButtonUI from "@/components/ui/ButtonUI";
+import Cookie from "js-cookie";
 
 const ShoppingBag = () => {
   const { shoppingItems, handleCleanProducts, discount } =
@@ -35,11 +36,20 @@ const ShoppingBag = () => {
   const handleClose = () => setOpen(false);
 
   const handleBuy = () => {
+    const token = Cookie.get("accessToken");
+
     if (shoppingItems[0]) {
       axios
         .post("http://127.0.0.1:8000/api/orders/", {
-          shoppingItems,
-          discount: discount,
+          items: shoppingItems?.map((item) => ({
+            product: Number(item.id),
+            qty: Number(item.qty),
+          })),
+          id: 1,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
         .then((res) => {
           console.log(res);
@@ -117,7 +127,7 @@ const ShoppingBag = () => {
                     ((selectedProduct?.price || 0) *
                       item.qty *
                       (100 - discount)) /
-                      100
+                    100
                   );
                 }, 0)
                 .toFixed(2)}{" "}

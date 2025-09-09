@@ -10,28 +10,11 @@ import HamMenuIcon from "../../public/HamMenuIcon.svg";
 import Image from "next/image";
 import { useState } from "react";
 import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
-import { useParams, usePathname } from "next/navigation";
-
-// export const Header = () => {
-//   return (
-//     <header className="py-3 px-8 shadow bg-sky-100 sticky top-0">
-//       <nav className="flex gap-8">
-//         <Link href={"/store"}>Store</Link>
-//         <Link href={"/bag"} className="flex">
-//           Shopping Bags <ProductQty />
-//         </Link>
-//         <Link href={"/dashboard"}>Dashboard</Link>
-//         {Cookie.get("token") ? (
-//           <LogoutButton />
-//         ) : (
-//           <Link href={"/login"}>Login</Link>
-//         )}
-//       </nav>
-//     </header>
-//   );
-// };
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
+  const pathname = usePathname()
+
   const [openSidebar, setOpenSidebar] = useState(false)
 
   const toggleDrawer = (newOpen: boolean) => () => setOpenSidebar(newOpen)
@@ -48,8 +31,6 @@ export const Header = () => {
                     : text == "Categories" ? "/categories"
                       : ""
             }>
-              {/* <ListItemIcon>
-              </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -91,9 +72,10 @@ export const Header = () => {
           <Link href={"/"}><Image alt="logo" src={logo} width={144} /></Link>
         </div>
         <div className="md:flex hidden gap-8 items-center text-(--Burgundy) font-bold">
-          <Link href={"/store"}>All Products</Link>
-          <Link href={"/dashboard"}>Dashboard</Link>
-          <Link href={"/categories"}>Categories</Link>
+          <Link className={pathname == "/" ? "border-b-2" : ""} href={"/"}>Home</Link>
+          <Link className={pathname == "/store" ? "border-b-2" : ""} href={"/store"}>Products</Link>
+          <Link className={pathname == "/categories" ? "border-b-2" : ""} href={"/categories"}>Categories</Link>
+          <Link className={pathname == "/dashboard" ? "border-b-2" : ""} href={"/dashboard"}>Dashboard</Link>
         </div>
         <div className="flex gap-8 items-center">
           <Link href={"/bag"} className="flex relative">
@@ -117,7 +99,6 @@ export const Header = () => {
 
 export const DashboardHeader = () => {
   const pathname = usePathname()
-  console.log(pathname);
 
   return (
     <div className="py-2 sm:px-8 px-4 shadow bg-amber-100/80 sticky top-12">

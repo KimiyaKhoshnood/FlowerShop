@@ -33,6 +33,7 @@ const NewCategoryForm = () => {
             console.log(res);
             if (res.status == 201) {
                 setOpenSnackbar(true);
+                window.location.reload()
             }
         }).catch((err) => {
             console.error("Error creating product:", err.response?.data || err.message);

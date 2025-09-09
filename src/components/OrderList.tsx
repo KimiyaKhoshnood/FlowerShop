@@ -24,12 +24,13 @@ const OrderList = ({
   discount,
   row,
 }: {
-  shoppingItems: { id: string; qty: number }[];
+  shoppingItems: { product: number, qty: number }[];
   discount: number;
   row: number;
 }) => {
   const [open, setOpen] = useState(false);
   const [orderDetails, setOrderDetails] = useState<OrderList[]>([]);
+  console.log("shoppingItems", shoppingItems);
 
   const handleClickOpen = () => setOpen(true);
 
@@ -38,7 +39,7 @@ const OrderList = ({
   const fetchOrderDetails = async () => {
     try {
       const requests = shoppingItems.map((item) =>
-        axios.get(`http://127.0.0.1:8000/api/products/${item.id}/`).then((res) => ({
+        axios.get(`http://127.0.0.1:8000/api/products/${item.product}/`).then((res) => ({
           ...item,
           ...res.data,
         }))
@@ -100,9 +101,8 @@ const OrderList = ({
             return (
               <div
                 key={i}
-                className={`grid grid-cols-5 items-center gap-5 px-2 ${
-                  i % 2 ? "bg-gray-100" : ""
-                }`}
+                className={`grid grid-cols-5 items-center gap-5 px-2 ${i % 2 ? "bg-gray-100" : ""
+                  }`}
               >
                 <div className="flex justify-center">
                   <img src={elem.image} alt="" width={56} height={56} />
@@ -131,9 +131,8 @@ const OrderList = ({
       </Dialog>
 
       <div
-        className={`grid grid-cols-5 divide-x py-2 ${
-          row % 2 ? "bg-gray-100" : "bg-gray-50"
-        }`}
+        className={`grid grid-cols-5 divide-x py-2 ${row % 2 ? "bg-gray-100" : "bg-gray-50"
+          }`}
       >
         <div className="text-center">{row}</div>
         <div className="text-center">{discount}%</div>
