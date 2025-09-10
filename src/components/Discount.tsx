@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import ButtonUI from "./ui/ButtonUI";
 import Cookie from "js-cookie";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 
 type Inputs = {
   discount: string;
@@ -24,7 +25,7 @@ const Discount = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const token = Cookie.get("accessToken")
-    axios(`http://127.0.0.1:8000/api/discounts?code=${data.discount}/`, {
+    axios(`${baseUrl}${endpoints.discounts}?code=${data.discount}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

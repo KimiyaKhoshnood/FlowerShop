@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AddToCard from "./AddToCard";
 import CardPrice from "./CardPrice";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const ShoppingBagCard = ({ id }: { id: string }) => {
   const [productDetails, setProductDetails] = useState<IEachProduct | null>(
@@ -10,7 +11,7 @@ const ShoppingBagCard = ({ id }: { id: string }) => {
   );
 
   useEffect(() => {
-    axios(`http://127.0.0.1:8000/api/products/${id}/`).then((res) => {
+    axios(`${baseUrl}${endpoints.products}/${id}/`).then((res) => {
       setProductDetails(res.data);
     });
   }, [id]);

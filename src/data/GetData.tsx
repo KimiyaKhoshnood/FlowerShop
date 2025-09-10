@@ -1,10 +1,12 @@
+import { baseUrl, endpoints } from "@/constants/endpoints";
+
 export const GetAllProducts = async () => {
-  const allProducts = (await fetch("http://127.0.0.1:8000/api/products/")).json();
+  const allProducts = (await fetch(`${baseUrl}${endpoints.products}/`)).json();
   return allProducts;
 };
 
 export const GetAllCategories = async () => {
-  const allCategories = (await fetch("http://127.0.0.1:8000/api/categories/")).json();
+  const allCategories = (await fetch(`${baseUrl}${endpoints.categories}/`)).json();
   return allCategories;
 };
 
@@ -15,7 +17,7 @@ export const GetRequestedProducts = async (url: string) => {
 
 export const GetProductByID = async (id: string) => {
   const productByID = (
-    await fetch(`http://127.0.0.1:8000/api/products/${id}/`)
+    await fetch(`${baseUrl}${endpoints.products}/${id}/`)
   ).json();
   return productByID;
 };

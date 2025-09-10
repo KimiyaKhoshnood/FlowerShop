@@ -7,9 +7,10 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardPrice from "../CardPrice";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const SimilarProducts = () => {
-  const data = useDataClient("http://127.0.0.1:8000/api/products/").data || [];
+  const data = useDataClient(`${baseUrl}${endpoints.products}`).data || [];
 
   return (
     <div className="md:px-10 px-5 py-10">

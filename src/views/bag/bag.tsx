@@ -3,6 +3,7 @@
 import Discount from "@/components/Discount";
 import ShoppingBagCard from "@/components/ShoppingBagCard";
 import ButtonUI from "@/components/ui/ButtonUI";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 import { useShoppingItemsContext } from "@/context/context";
 import { IEachProduct } from "@/types/types";
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from "@mui/material";
@@ -17,7 +18,7 @@ const Bag = () => {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        axios(`http://127.0.0.1:8000/api/products/`).then((res) => {
+        axios(`${baseUrl}${endpoints.products}/`).then((res) => {
             setAllProducts(res.data);
         });
     }, []);
@@ -31,7 +32,7 @@ const Bag = () => {
 
         if (shoppingItems[0]) {
             axios
-                .post("http://127.0.0.1:8000/api/orders/", {
+                .post(`${baseUrl}${endpoints.orders}/`, {
                     items: shoppingItems?.map((item) => ({
                         product: Number(item.id),
                         qty: Number(item.qty),

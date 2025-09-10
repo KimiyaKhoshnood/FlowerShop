@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import Image from "next/image";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 
 type OrderList = {
   id: string;
@@ -39,7 +40,7 @@ const OrderList = ({
   const fetchOrderDetails = async () => {
     try {
       const requests = shoppingItems.map((item) =>
-        axios.get(`http://127.0.0.1:8000/api/products/${item.product}/`).then((res) => ({
+        axios.get(`${baseUrl}${endpoints.products}/${item.product}/`).then((res) => ({
           ...item,
           ...res.data,
         }))

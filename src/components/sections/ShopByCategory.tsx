@@ -8,11 +8,12 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonUI from "../ui/ButtonUI";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const ShopByCategory = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const allData: IEachProduct[] =
-    useDataClient("http://127.0.0.1:8000/api/products/").data || [];
+    useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
 
   useEffect(() => {
     if (allData.length > 0) {

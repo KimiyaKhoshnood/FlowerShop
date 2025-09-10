@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Cookie from "js-cookie";
 import { Alert, Snackbar } from '@mui/material';
+import { baseUrl, endpoints } from '@/constants/endpoints';
 
 type Inputs = {
     categoryName: string;
@@ -24,7 +25,7 @@ const NewCategoryForm = () => {
         const token = Cookie.get("accessToken")
         axios({
             method: "POST",
-            url: "http://127.0.0.1:8000/api/categories/",
+            url: `${baseUrl}${endpoints.categories}/`,
             headers: {
                 Authorization: `Bearer ${token}`,
             },

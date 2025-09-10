@@ -1,12 +1,7 @@
 import Profile from '@/views/profile/profile'
-import React from 'react'
 
 const page = () => {
-  return (
-    <div>
-        <Profile/>
-    </div>
-  )
+  return <Profile />;
 }
 
 export default page

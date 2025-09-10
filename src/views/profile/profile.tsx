@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Cookie from "js-cookie";
 import axios from "axios";
 import { Alert, Snackbar } from "@mui/material";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 
 type Inputs = {
     username: string,
@@ -26,7 +27,7 @@ const Profile = () => {
 
         if (token) {
             axios
-                .get("http://127.0.0.1:8000/api/profile/", {
+                .get(`${baseUrl}${endpoints.profile}/`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -56,7 +57,7 @@ const Profile = () => {
         const token = Cookie.get("accessToken")
         axios({
             method: "PATCH",
-            url: "http://127.0.0.1:8000/api/profile/",
+            url: `${baseUrl}${endpoints.profile}/`,
             headers: {
                 Authorization: `Bearer ${token}`,
             },

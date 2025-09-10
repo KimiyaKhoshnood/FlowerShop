@@ -2,16 +2,17 @@
 
 import HotDeals from "@/components/sections/HotDeals";
 import ButtonUI from "@/components/ui/ButtonUI";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 import useDataClient from "@/data/GetDataClient";
 import { IEachProduct } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Categories = () => {
-    const { loading } = useDataClient("http://127.0.0.1:8000/api/products/");
+    const { loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
     const [categories, setCategories] = useState<string[]>([]);
     const allProducts: IEachProduct[] =
-        useDataClient("http://127.0.0.1:8000/api/products/").data || [];
+        useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
 
     useEffect(() => {
         if (allProducts) {

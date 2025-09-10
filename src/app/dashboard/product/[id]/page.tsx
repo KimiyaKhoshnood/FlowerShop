@@ -1,11 +1,7 @@
-import EditSection from "@/components/EditSection";
+import DashboardEditProduct from "@/views/dashboard/product/editProduct";
 
 const EditPage = () => {
-  return (
-    <div>
-        <EditSection/>
-    </div>
-  )
+  return <DashboardEditProduct />
 }
 
 export default EditPage

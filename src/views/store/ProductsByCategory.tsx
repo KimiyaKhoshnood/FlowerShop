@@ -5,6 +5,7 @@ import useDataClient from "@/data/GetDataClient";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import ProductCard from "../../components/ui/ProductCard";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const ProductsByCategory = () => {
   const router = useRouter();
@@ -12,12 +13,12 @@ const ProductsByCategory = () => {
 
   const [url, setUrl] = useState(searchParams.get("category") || "");
 
-  const { loading } = useDataClient("http://127.0.0.1:8000/api/products/");
+  const { loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
   const allProducts: IEachProduct[] =
-    useDataClient(`http://127.0.0.1:8000/api/products/`).data || [];
+    useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
   const finalProducts: IEachProduct[] =
     useDataClient(
-      `http://127.0.0.1:8000/api/products${url == "" ? "" : "?category=" + url}/`
+      `${baseUrl}${endpoints.products}${url == "" ? "" : "?category=" + url}/`
     ).data || [];
   const uniqueCategories: string[] = [
     ...new Set(allProducts.map((item) => item.category)),

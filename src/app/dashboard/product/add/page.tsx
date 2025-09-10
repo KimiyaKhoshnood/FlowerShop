@@ -1,13 +1,7 @@
-import FormPostToJson from '@/components/FormPostToJson'
-import React from 'react'
+import DashboardAddProduct from '@/views/dashboard/product/addProduct'
 
 const Dashboard = () => {
-  return (
-    <div className=''>
-        <h2 className='text-center p-5 text-4xl'>Add Product</h2>
-        <FormPostToJson/>
-    </div>
-  )
+  return <DashboardAddProduct />
 }
 
 export default Dashboard

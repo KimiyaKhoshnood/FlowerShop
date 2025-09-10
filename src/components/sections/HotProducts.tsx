@@ -8,10 +8,11 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardPrice from "../CardPrice";
 import ButtonUI from "../ui/ButtonUI";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const HotProducts = () => {
   const data: IEachProduct[] =
-    useDataClient("http://127.0.0.1:8000/api/products/")
+    useDataClient(`${baseUrl}${endpoints.products}/`)
       .data || [];
 
   return (
