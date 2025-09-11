@@ -39,7 +39,13 @@ const ProductsByCategory = () => {
 
   return (
     <>
-      <div className="lg:px-20 px-10 w-full grid md:grid-cols-4 grid-cols-1">
+      {loading && <div className="overflow-hidden">
+        <div className='h-32 w-full flex justify-center items-center animate-ping'>
+          <img alt="logo" src="/Logo.svg" width={50} height={150} />
+        </div>
+      </div>}
+
+      {loading || <div className="lg:px-20 px-10 w-full grid md:grid-cols-4 grid-cols-1">
         <div className="py-5 pr-5">
           <div className="flex flex-col gap-2">
             <span
@@ -51,7 +57,6 @@ const ProductsByCategory = () => {
             </span>
             <h3 className="text-(--Burgundy) font-bold text-lg">Category</h3>
             <div className="flex flex-wrap gap-2 text-(--Burgundy)">
-              {loading && <span className="text-3xl">Loading...</span>}
               {uniqueCategories.map((elem, i) => {
                 return (
                   <span
@@ -84,14 +89,7 @@ const ProductsByCategory = () => {
             );
           })}
         </div>
-      </div>
-      {/* <div className="lg:px-20 px-10 py-5 flex justify-end gap-2 text-(--Burgundy)">
-          <span>{"<"}</span>
-          <span>1</span>
-          <span className="font-bold">2</span>
-          <span>3</span>
-          <span>{">"}</span>
-        </div> */}
+      </div>}
     </>
   );
 };

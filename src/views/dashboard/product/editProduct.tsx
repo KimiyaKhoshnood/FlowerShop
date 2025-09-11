@@ -28,6 +28,17 @@ const DashboardEditProduct = () => {
     const [open, setOpen] = useState(false);
     const router = useRouter()
 
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm<Inputs>();
+
+    useEffect(() => {
+        reset()
+    }, [selectedCategory])
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -61,12 +72,6 @@ const DashboardEditProduct = () => {
             setProductDetails(res.data);
         });
     }, [id]);
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         const token = Cookie.get("accessToken");
@@ -138,7 +143,7 @@ const DashboardEditProduct = () => {
                 </h2>
 
                 <div className="py-2">
-                    <div className="grid grid-cols-5 bg-gray-200 rounded-t-lg w-full">
+                    <div className="grid grid-cols-5 rounded-t-lg w-full">
                         {productDetails &&
                             Object.keys(productDetails)
                                 .filter((item) => item !== "id")
@@ -147,9 +152,9 @@ const DashboardEditProduct = () => {
                                         <div
                                             key={elem}
                                             onClick={() => setSelectedCategory(elem)}
-                                            className={`flex justify-center py-2 cursor-pointer ${selectedCategory == elem
-                                                ? "bg-gray-50 rounded-t-lg border-t border-x border-gray-300"
-                                                : "bg-gray-200"
+                                            className={`flex justify-center py-2 cursor-pointer rounded-lg hover:bg-amber-50/50 ${selectedCategory == elem
+                                                ? "border border-gray-300"
+                                                : ""
                                                 }`}
                                         >
                                             {capitalizeFirstLetter(elem)}
@@ -158,26 +163,39 @@ const DashboardEditProduct = () => {
                                 })}
                     </div>
 
-                    <div className="bg-gray-50 border-b border-x border-gray-300 py-10 w-full">
+                    <div className="w-full flex flex-col items-center gap-2 py-10">
+                        <div className="min-w-80 w-full block text-center relative">
+                            <input
+                                type="text"
+                                value={productDetails?.[selectedCategory]}
+                                disabled
+                                className="border border-gray-300 pr-10 pl-4 py-2 focus:outline-0 rounded-lg w-full bg-blue-50/50"
+                            />
+                            <button
+                                onClick={() => navigator.clipboard.writeText(productDetails?.[selectedCategory] || "")}
+                                className="absolute right-0 top-0 bottom-0 content-center text-xs text-gray-300 hover:text-gray-500 cursor-pointer py-0.5 px-2.5">
+                                copy
+                            </button>
+                        </div>
                         <form
-                            className="flex justify-center"
+                            className="flex justify-center min-w-80 w-full"
                             onSubmit={handleSubmit(onSubmit)}
                         >
                             <input
                                 type="text"
                                 placeholder={capitalizeFirstLetter(selectedCategory)}
-                                className="border border-gray-300 px-5 py-2 focus:outline-0"
+                                className="border border-gray-300 px-4 py-2 focus:outline-0 rounded-l-lg w-full"
                                 {...register("input", { required: "Field is Required!" })}
                             />
                             <button
                                 type="submit"
-                                className="bg-gray-700 text-white py-2 px-5"
+                                className="bg-emerald-500/80 hover:bg-emerald-500 cursor-pointer text-white py-2 px-5 rounded-r-lg"
                             >
                                 Change
                             </button>
                         </form>
                         {errors.input && (
-                            <p className="text-center text-red-700">{errors.input.message}</p>
+                            <p className="text-center text-red-600">{errors.input.message}</p>
                         )}
                     </div>
                 </div>
@@ -186,7 +204,7 @@ const DashboardEditProduct = () => {
                     <span className="text-xs">Want to delete this Product?</span>
                     <button
                         onClick={handleClickOpen}
-                        className="text-red-500 text-center text-xs cursor-pointer w-fit"
+                        className="text-red-500 hover:text-red-600 text-center text-xs cursor-pointer w-fit"
                     >
                         DELETE PRODUCT!
                     </button>

@@ -42,8 +42,12 @@ const Categories = () => {
                         />
                     </Link>
                 </div>
+                {loading && <div className="overflow-hidden">
+                    <div className='h-32 w-full flex justify-center items-center animate-ping'>
+                        <img alt="logo" src="/Logo.svg" width={50} height={150} />
+                    </div>
+                </div>}
                 <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 lg:px-20 sm:px-10 px-5 sm:gap-5 gap-2">
-                    {loading && <span className="text-3xl">Loading...</span>}
                     {categoryImages.map((elem) => {
                         return (
                             <Link
