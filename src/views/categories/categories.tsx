@@ -1,7 +1,7 @@
 "use client"
 
 import HotDeals from "@/components/sections/HotDeals";
-import ButtonUI from "@/components/ui/ButtonUI";
+import ButtonUI from "@/components/ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 import useDataClient from "@/data/GetDataClient";
 import { IEachProduct } from "@/types/types";

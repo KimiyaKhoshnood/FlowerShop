@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ButtonUI from "../ui/ButtonUI";
+import ButtonUI from "../ButtonUI";
 
 const HotDeals = () => {
   return (

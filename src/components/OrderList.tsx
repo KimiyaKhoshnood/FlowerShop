@@ -91,7 +91,7 @@ const OrderList = ({
           Row {row} Details:
         </DialogTitle>
         <DialogContent dividers>
-          <div className="grid grid-cols-5 gap-5 bg-gray-100 p-2">
+          <div className="grid grid-cols-5 gap-5 bg-neutral-100 p-2">
             <div className="text-center">Image</div>
             <div className="text-center">Title</div>
             <div className="text-center">QTY</div>
@@ -102,7 +102,7 @@ const OrderList = ({
             return (
               <div
                 key={i}
-                className={`grid grid-cols-5 items-center gap-5 px-2 ${i % 2 ? "bg-gray-100" : ""
+                className={`grid grid-cols-5 items-center gap-5 px-2 ${i % 2 ? "bg-neutral-100" : ""
                   }`}
               >
                 <div className="flex justify-center">
@@ -132,16 +132,15 @@ const OrderList = ({
       </Dialog>
 
       <div
-        className={`grid grid-cols-5 divide-x py-2 ${row % 2 ? "bg-gray-100" : "bg-gray-50"
-          }`}
+        className={`grid grid-cols-5 py-1 ${row % 2 ? "bg-neutral-100" : "bg-neutral-50"}`}
       >
-        <div className="text-center">{row}</div>
-        <div className="text-center">{discount}%</div>
-        <div className="text-center">{sumQty()}</div>
-        <div className="text-center">{sumPricesWithDiscount().toFixed(2)}</div>
-        <div className="flex justify-center">
+        <div className="text-center py-2">{row}</div>
+        <div className="text-center py-2">{discount}%</div>
+        <div className="text-center py-2">{sumQty()}</div>
+        <div className="text-center py-2">{sumPricesWithDiscount().toFixed(2)}</div>
+        <div className="flex justify-center items-center">
           <button
-            className="px-2 w-fit bg-emerald-600/50"
+            className="px-2 py-0.5 w-fit h-fit bg-emerald-600/50 hover:bg-emerald-600/80 cursor-pointer rounded-sm"
             onClick={handleClickOpen}
           >
             MORE

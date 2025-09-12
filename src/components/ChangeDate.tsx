@@ -11,7 +11,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import ButtonUI from "./ui/ButtonUI";
+import ButtonUI from "./ButtonUI";
 import { useState } from "react";
 import { Dayjs } from "dayjs";
 import {

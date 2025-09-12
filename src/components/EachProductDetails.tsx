@@ -2,9 +2,9 @@
 import { IEachProduct } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { default as Button, default as ButtonUI } from "./ui/ButtonUI";
-import ChartRadialBar from "./ui/ChartRadialBar";
-import Rate from "./ui/Rate";
+import { default as Button, default as ButtonUI } from "./ButtonUI";
+import ChartRadialBar from "./ChartRadialBar";
+import Rate from "./Rate";
 
 const EachProductDetails = ({
   title,

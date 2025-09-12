@@ -4,7 +4,7 @@ import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import ButtonUI from "./ui/ButtonUI";
+import ButtonUI from "./ButtonUI";
 import Cookie from "js-cookie";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 

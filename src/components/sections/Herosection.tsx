@@ -1,7 +1,7 @@
 import Tulip from "../../../public/tulipSvg.svg";
 import CustomerService from "../../../public/Customer-Service.svg";
 import Image from "next/image";
-import ButtonUI from "@/components/ui/ButtonUI";
+import ButtonUI from "@/components/ButtonUI";
 import Link from "next/link";
 
 type feature = {

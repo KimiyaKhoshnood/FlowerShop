@@ -1,4 +1,4 @@
-import ProductCard from '@/components/ui/ProductCard';
+import ProductCard from '@/components/ProductCard';
 import { IEachProduct } from '@/types/types';
 
 const DashboardProducts = ({ allProducts }: { allProducts: IEachProduct[] }) => {

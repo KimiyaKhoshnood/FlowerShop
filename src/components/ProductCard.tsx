@@ -1,7 +1,7 @@
 import { IProductCardType } from "@/types/types";
 import Link from "next/link";
-import AddToCard from "../AddToCard";
-import CardPrice from "../CardPrice";
+import AddToCard from "./AddToCard";
+import CardPrice from "./CardPrice";
 
 const ProductCard = ({
   id,

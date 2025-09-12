@@ -4,7 +4,7 @@ import { IEachProduct } from "@/types/types";
 import useDataClient from "@/data/GetDataClient";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import ProductCard from "../../components/ui/ProductCard";
+import ProductCard from "../../components/ProductCard";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const ProductsByCategory = () => {

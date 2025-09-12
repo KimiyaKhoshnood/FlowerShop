@@ -1,5 +1,5 @@
 "use client";
-import ButtonUI from "@/components/ui/ButtonUI";
+import ButtonUI from "@/components/ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 import axios from "axios";
 import Cookie from "js-cookie";

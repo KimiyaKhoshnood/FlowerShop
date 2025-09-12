@@ -39,12 +39,12 @@ const Dashboard = () => {
     return (
         <div className="flex flex-col gap-0 sm:px-5">
             <h2 className="text-center p-5 text-4xl">Sales Dashboard</h2>
-            <div className="grid grid-cols-5 items-center bg-amber-300 divide-x text-center sm:text-xl py-1">
-                <div>Row</div>
-                <div>Discount</div>
-                <div>Total QTY</div>
-                <div>Total Price</div>
-                <div>Details</div>
+            <div className="grid grid-cols-5 items-center bg-neutral-50 rounded-t-lg text-center sm:text-xl py-1">
+                <div className="py-2">Row</div>
+                <div className="py-2">Discount</div>
+                <div className="py-2">Total QTY</div>
+                <div className="py-2">Total Price</div>
+                <div className="py-2">Details</div>
             </div>
             {orderList && orderList.map((elem, i) => {
                 return (

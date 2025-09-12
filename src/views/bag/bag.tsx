@@ -2,7 +2,7 @@
 
 import Discount from "@/components/Discount";
 import ShoppingBagCard from "@/components/ShoppingBagCard";
-import ButtonUI from "@/components/ui/ButtonUI";
+import ButtonUI from "@/components/ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 import { useShoppingItemsContext } from "@/context/context";
 import { IEachProduct } from "@/types/types";

@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardPrice from "../CardPrice";
-import ButtonUI from "../ui/ButtonUI";
+import ButtonUI from "../ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const HotProducts = () => {

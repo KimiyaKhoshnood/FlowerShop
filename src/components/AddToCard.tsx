@@ -1,6 +1,6 @@
 "use client";
 import { useShoppingItemsContext } from "@/context/context";
-import ButtonUI from "./ui/ButtonUI";
+import ButtonUI from "./ButtonUI";
 
 export const ProductQty = () => {
   const { shoppingItems } = useShoppingItemsContext();
