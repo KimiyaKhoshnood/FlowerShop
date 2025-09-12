@@ -6,13 +6,17 @@ import { baseUrl, endpoints } from "@/constants/endpoints";
 import useDataClient from "@/data/GetDataClient";
 import { IEachProduct } from "@/types/types";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const Categories = () => {
     const { loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
     const [categories, setCategories] = useState<string[]>([]);
-    const allProducts: IEachProduct[] =
-        useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
+
+    const { data } = useDataClient(`${baseUrl}${endpoints.products}/`);
+
+    const allProducts: IEachProduct[] = useMemo(() => {
+        return data || [];
+    }, [data]);
 
     useEffect(() => {
         if (allProducts) {

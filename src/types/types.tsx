@@ -11,3 +11,8 @@ export type IProductCardType = IEachProduct & {
   haveAddToCardSection: boolean;
   linkToUrl: string;
 };
+
+export type ICategory = {
+  name: string
+  id: number
+}

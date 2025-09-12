@@ -126,7 +126,7 @@ const Bag = () => {
                 </DialogContent>
                 <DialogActions sx={{ justifyContent: "center" }}>
                     <Button
-                        onClick={() => {paymentMethod && handleBuy()}}
+                        onClick={() => paymentMethod && handleBuy()}
                         disabled={!paymentMethod}
                         autoFocus
                         color="inherit"

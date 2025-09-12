@@ -1,6 +1,5 @@
 "use client";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 import {
   Button,
   Dialog,
@@ -8,8 +7,8 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import Image from "next/image";
-import { baseUrl, endpoints } from "@/constants/endpoints";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 type OrderList = {
   id: string;

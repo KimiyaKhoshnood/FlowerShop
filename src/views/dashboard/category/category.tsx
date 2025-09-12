@@ -1,6 +1,7 @@
 import NewCategoryForm from '@/components/sections/NewCategoryForm';
+import { ICategory } from '@/types/types';
 
-const Category = ({ allCategories }: { allCategories: any[] }) => {
+const Category = ({ allCategories }: { allCategories: ICategory[] }) => {
 
     return (
         <div className=''>
@@ -9,7 +10,7 @@ const Category = ({ allCategories }: { allCategories: any[] }) => {
             <div className='grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5 p-10'>
                 {
                     allCategories?.map((category) => (
-                        <div className='border p-7 rounded-lg text-center shadow bg-gradient-to-b from-(--BabyPink) to-transparent'>
+                        <div key={category.id} className='border p-7 rounded-lg text-center shadow bg-gradient-to-b from-(--BabyPink) to-transparent'>
                             <h4 className='text-2xl font-bold'>{category.name}</h4>
                             <span>id: {category.id}</span>
                         </div>

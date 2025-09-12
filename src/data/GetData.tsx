@@ -1,13 +1,15 @@
 import { baseUrl, endpoints } from "@/constants/endpoints";
 
 export const GetAllProducts = async () => {
-  const allProducts = (await fetch(`${baseUrl}${endpoints.products}/`)).json();
-  return allProducts;
+  const res = await fetch(`${baseUrl}${endpoints.products}/`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch products");
+  return res.json();
 };
 
 export const GetAllCategories = async () => {
-  const allCategories = (await fetch(`${baseUrl}${endpoints.categories}/`)).json();
-  return allCategories;
+  const res = await fetch(`${baseUrl}${endpoints.categories}/`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch categories");
+  return res.json();
 };
 
 export const GetRequestedProducts = async (url: string) => {

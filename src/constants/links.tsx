@@ -1,4 +1,4 @@
-const links = {
+export const links = {
     home: "/",
     store: "/store",
     categories: "/categories",

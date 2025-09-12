@@ -31,8 +31,12 @@ const Login = () => {
             Cookie.set("accessToken", access, { expires: 1 });
             Cookie.set("refreshToken", refresh, { expires: 2 });
 
-        } catch (err: any) {
-            console.error("خطا در لاگین:", err.response?.data);
+        } catch (err: unknown) {
+            if (axios.isAxiosError(err)) {
+                console.error("Error in Login:", err.response?.data);
+            } else {
+                console.error("Unknown Error:", err);
+            }
         }
         redirect("/dashboard");
     };

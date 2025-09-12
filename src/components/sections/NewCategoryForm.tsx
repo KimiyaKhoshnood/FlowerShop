@@ -15,7 +15,7 @@ const NewCategoryForm = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        // formState: { errors },
     } = useForm<Inputs>();
 
     const [openSnackbar, setOpenSnackbar] = useState(false);

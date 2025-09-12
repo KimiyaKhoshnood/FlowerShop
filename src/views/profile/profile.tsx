@@ -18,7 +18,7 @@ const Profile = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        // formState: { errors },
         reset
     } = useForm<Inputs>();
 
@@ -48,7 +48,7 @@ const Profile = () => {
         } else {
             console.log("No token found");
         }
-    }, []);
+    }, [reset]);
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
 

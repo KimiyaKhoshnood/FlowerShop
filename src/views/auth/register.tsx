@@ -35,8 +35,12 @@ const Register = () => {
             Cookie.set("accessToken", access, { expires: 1 });
             Cookie.set("refreshToken", refresh, { expires: 2 });
 
-        } catch (err: any) {
-            console.error("خطا در ثبت‌نام یا ورود:", err.response?.data || err.message);
+        } catch (err: unknown) {
+            if (axios.isAxiosError(err)) {
+                console.error("Error in Register or Login:", err?.response?.data || err?.message);
+            } else {
+                console.error("Unknown Error:", err);
+            }
         }
 
         redirect("/dashboard");
