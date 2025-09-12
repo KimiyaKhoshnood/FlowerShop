@@ -18,7 +18,7 @@ const ProductsByCategory = () => {
     useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
   const finalProducts: IEachProduct[] =
     useDataClient(
-      `${baseUrl}${endpoints.products}${url == "" ? "" : "?category=" + url}/`
+      `${baseUrl}${endpoints.products}/${url == "" ? "" : "?category=" + url + '/'}`
     ).data || [];
   const uniqueCategories: string[] = [
     ...new Set(allProducts.map((item) => item.category)),

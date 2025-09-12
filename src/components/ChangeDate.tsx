@@ -58,6 +58,11 @@ const ChangeDate = () => {
         aria-labelledby="customized-dialog-title"
         open={open}
         fullScreen={fullScreen}
+        sx={{
+          '.MuiDialog-paper': {
+            borderRadius: 4,
+          }
+        }}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           Select Delivery Date
@@ -90,7 +95,7 @@ const ChangeDate = () => {
                         {...props}
                         sx={{
                           "&.Mui-selected": {
-                            backgroundColor: "#4e0629 !important", 
+                            backgroundColor: "#4e0629 !important",
                             color: "#fff !important",
                           },
                           "&.Mui-selected:hover": {
@@ -116,7 +121,7 @@ const ChangeDate = () => {
               <h3 className="text-(--Burgundy) font-bold text-2xl md:block hidden">
                 Delivery Date
               </h3>
-              <hr className="md:block hidden"/>
+              <hr className="md:block hidden" />
               <p>
                 Please select a delivery date to obtain an accurate price. We
                 suggest selecting delivery date 2-3 days before the event date.

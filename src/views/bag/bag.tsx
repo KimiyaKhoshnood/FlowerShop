@@ -15,7 +15,23 @@ const Bag = () => {
     const { shoppingItems, handleCleanProducts, discount } = useShoppingItemsContext();
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [allProducts, setAllProducts] = useState<IEachProduct[]>([]);
+    const [paymentMethod, setPaymentMethod] = useState<string>();
     const [open, setOpen] = useState(false);
+
+    const totalAmount = shoppingItems
+        ?.reduce((total, item) => {
+            const selectedProduct = allProducts.find(
+                (product) => product.id == item.id
+            );
+            return (
+                total +
+                ((selectedProduct?.price || 0) *
+                    item.qty *
+                    (100 - discount)) /
+                100
+            );
+        }, 0)
+        .toFixed(2)
 
     useEffect(() => {
         axios(`${baseUrl}${endpoints.products}/`).then((res) => {
@@ -28,6 +44,7 @@ const Bag = () => {
     const handleClose = () => setOpen(false);
 
     const handleBuy = () => {
+        handleClose()
         const token = Cookie.get("accessToken");
 
         if (shoppingItems[0]) {
@@ -72,26 +89,51 @@ const Bag = () => {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                sx={{
+                    '.MuiDialog-paper': {
+                        borderRadius: 4,
+                    }
+                }}
             >
-                <DialogTitle id="alert-dialog-title">{"Are You Sure?"}</DialogTitle>
-                <DialogContent>
+                <DialogTitle id="alert-dialog-title" className="text-(--Burgundy) md:min-w-xl sm:min-w-md min-w-2xs">Choose Your Payment Method:</DialogTitle>
+                <DialogContent sx={{ paddingBottom: 3, alignContent: 'center' }}>
                     <DialogContentText id="alert-dialog-description">
-                        If you want to continue buying product, click buy.
+                        <div
+                            onClick={() => setPaymentMethod("Paypal")}
+                            className={`${paymentMethod=="Paypal" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
+                            <div className={`${paymentMethod=="Paypal" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
+                            <div>Paypal</div>
+                        </div>
+                        <div
+                            onClick={() => setPaymentMethod("Visa")}
+                            className={`${paymentMethod=="Visa" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
+                            <div className={`${paymentMethod=="Visa" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
+                            <div>Visa</div>
+                        </div>
+                        <div
+                            onClick={() => setPaymentMethod("Stripe")}
+                            className={`${paymentMethod=="Stripe" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
+                            <div className={`${paymentMethod=="Stripe" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
+                            <div>Stripe</div>
+                        </div>
+                        <div
+                            onClick={() => setPaymentMethod("Alipay")}
+                            className={`${paymentMethod=="Alipay" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
+                            <div className={`${paymentMethod=="Alipay" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
+                            <div>Alipay</div>
+                        </div>
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="inherit">
-                        Cancel
-                    </Button>
+                <DialogActions sx={{ justifyContent: "center" }}>
                     <Button
-                        onClick={() => {
-                            handleClose();
-                            handleBuy();
-                        }}
+                        onClick={() => {paymentMethod && handleBuy()}}
+                        disabled={!paymentMethod}
                         autoFocus
-                        color="info"
+                        color="inherit"
+                        variant="outlined"
+                        sx={{ borderRadius: 3, width: '100%' }}
                     >
-                        BUY
+                        Pay {totalAmount}$
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -109,21 +151,7 @@ const Bag = () => {
                     <p>
                         Total Price:{" "}
                         <span className="text-(--Burgundy) font-bold">
-                            {shoppingItems
-                                ?.reduce((total, item) => {
-                                    const selectedProduct = allProducts.find(
-                                        (product) => product.id == item.id
-                                    );
-                                    return (
-                                        total +
-                                        ((selectedProduct?.price || 0) *
-                                            item.qty *
-                                            (100 - discount)) /
-                                        100
-                                    );
-                                }, 0)
-                                .toFixed(2)}{" "}
-                            $
+                            {totalAmount}{" "}$
                         </span>
                     </p>
                     <p>
