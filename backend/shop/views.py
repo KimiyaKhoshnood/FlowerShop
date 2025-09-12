@@ -29,6 +29,13 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+    def get_queryset(self):
+        queryset = Product.objects.all()
+        category = self.request.query_params.get("category")
+        if category:
+            queryset = queryset.filter(category_id=category)
+        return queryset
+
 
 class DiscountViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Discount.objects.all()
