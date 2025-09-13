@@ -1,5 +1,6 @@
 "use client";
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { Links } from "@/constants/links";
 import { capitalizeFirstLetter } from "@/utils/utils";
 import {
     Alert,
@@ -56,7 +57,7 @@ const DashboardEditProduct = () => {
         }).then((res) => {
             console.log("Done", res);
             if (res.status == 200) {
-                redirect("/dashboard/product");
+                redirect(Links.dashboard.product);
             }
         }).catch((error) => {
             console.error("خطا در حذف:", error?.response?.data || error.message);
@@ -91,7 +92,7 @@ const DashboardEditProduct = () => {
                 console.log("Done", res);
                 if (res.status == 200) {
                     setOpenSuccessSnackbar(true);
-                    router.push("/dashboard/product")
+                    router.push(Links.dashboard.product)
                 }
             });
     };

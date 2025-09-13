@@ -1,6 +1,7 @@
 "use client";
 import ButtonUI from "@/components/ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { Links } from "@/constants/links";
 import axios from "axios";
 import Cookie from "js-cookie";
 import Link from "next/link";
@@ -38,7 +39,7 @@ const Login = () => {
                 console.error("Unknown Error:", err);
             }
         }
-        redirect("/dashboard");
+        redirect(Links.dashboard.base);
     };
 
     return (
@@ -68,7 +69,7 @@ const Login = () => {
             <p>
                 New User?{" "}
                 <span className="text-blue-500 hover:text-blue-600">
-                    <Link href={"/register"}>Register!</Link>
+                    <Link href={Links.register}>Register!</Link>
                 </span>
             </p>
         </>

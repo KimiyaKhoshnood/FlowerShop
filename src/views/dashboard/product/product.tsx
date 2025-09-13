@@ -1,4 +1,5 @@
 import ProductCard from '@/components/ProductCard';
+import { Links } from '@/constants/links';
 import { IEachProduct } from '@/types/types';
 
 const DashboardProducts = ({ allProducts }: { allProducts: IEachProduct[] }) => {
@@ -16,7 +17,7 @@ const DashboardProducts = ({ allProducts }: { allProducts: IEachProduct[] }) => 
                             image={eachProduct.image}
                             category={eachProduct.category}
                             haveAddToCardSection={false}
-                            linkToUrl="/dashboard/product/"
+                            linkToUrl={Links.dashboard.product}
                         />
                     );
                 })}

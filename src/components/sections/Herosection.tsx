@@ -3,6 +3,7 @@ import CustomerService from "../../../public/Customer-Service.svg";
 import Image from "next/image";
 import ButtonUI from "@/components/ButtonUI";
 import Link from "next/link";
+import { Links } from "@/constants/links";
 
 type feature = {
   image: string;
@@ -51,7 +52,7 @@ const Herosection = () => {
           {"Direct to you".toUpperCase()}
         </span>
         <div className="h-[1px] w-20 bg-(--Burgundy) my-3"></div>
-        <Link href={"/store"} className="rounded-3xl">
+        <Link href={Links.store} className="rounded-3xl">
           <ButtonUI
             text="Start Shopping"
             className="bg-(--Magenta) text-white mt-7 md:w-fit w-full"

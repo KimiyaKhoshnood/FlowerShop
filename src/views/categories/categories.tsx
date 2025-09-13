@@ -7,6 +7,7 @@ import useDataClient from "@/data/GetDataClient";
 import { IEachProduct } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { Links } from "@/constants/links";
 
 const Categories = () => {
     const { loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
@@ -39,7 +40,7 @@ const Categories = () => {
                     <h1 className="font-bold text-(--Burgundy) text-3xl text-center">
                         Shop by Category
                     </h1>
-                    <Link href={"/store"} className="sm:block hidden">
+                    <Link href={Links.store} className="sm:block hidden">
                         <ButtonUI
                             text="All products"
                             className="bg-(--Burgundy)/10 text-(--Burgundy)"
@@ -73,7 +74,7 @@ const Categories = () => {
                         );
                     })}
                 </div>
-                <Link href={"/store"} className="sm:hidden lg:px-20 sm:px-10 px-5">
+                <Link href={Links.store} className="sm:hidden lg:px-20 sm:px-10 px-5">
                     <ButtonUI
                         text="All products"
                         className="bg-(--Burgundy)/10 text-(--Burgundy) w-full"

@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CardPrice from "../CardPrice";
 import ButtonUI from "../ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { Links } from "@/constants/links";
 
 const HotProducts = () => {
   const data: IEachProduct[] =
@@ -22,7 +23,7 @@ const HotProducts = () => {
           Hot Products
         </h2>
         <div className="hidden sm:block">
-          <Link href={"/store"}>
+          <Link href={Links.store}>
             <ButtonUI
               text="All Hot Products"
               className="bg-(--BabyPink) text-(--Burgundy)"
@@ -84,7 +85,7 @@ const HotProducts = () => {
         )}
       </div>
       <div className="block md:hidden">
-        <Link href={"/store"}>
+        <Link href={Links.store}>
           <ButtonUI
             text="All Categories"
             className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"

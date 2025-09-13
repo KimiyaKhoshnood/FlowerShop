@@ -1,4 +1,5 @@
 "use client";
+import { Links } from "@/constants/links";
 import { capitalizeFirstLetter } from "@/utils/utils";
 import {
   Alert,
@@ -44,7 +45,7 @@ const EditSection = () => {
     }).then((res) => {
       console.log("Done", res);
       if (res.status == 200) {
-        redirect("/dashboard/product");
+        redirect(Links.dashboard.product);
       }
     }).catch((error) => {
       console.error("خطا در حذف:", error?.response?.data || error.message);
@@ -85,7 +86,7 @@ const EditSection = () => {
         console.log("Done", res);
         if (res.status == 200) {
           setOpenSuccessSnackbar(true);
-          router.push("/dashboard/product")
+          router.push(Links.dashboard.product)
         }
       });
   };

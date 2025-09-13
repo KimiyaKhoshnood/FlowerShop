@@ -9,6 +9,7 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonUI from "../ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { Links } from "@/constants/links";
 
 const ShopByCategory = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -36,7 +37,7 @@ const ShopByCategory = () => {
           Shop by Category
         </h2>
         <div className="hidden sm:block">
-          <Link href={"/categories"}>
+          <Link href={Links.categories}>
             <ButtonUI
               text="All Categories"
               className="bg-(--BabyPink) text-(--Burgundy)"
@@ -96,7 +97,7 @@ const ShopByCategory = () => {
         )}
       </div>
       <div className="block md:hidden">
-        <Link href={"/categories"}>
+        <Link href={Links.categories}>
           <ButtonUI
             text="All Categories"
             className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"

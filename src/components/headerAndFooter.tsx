@@ -11,6 +11,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { usePathname } from "next/navigation";
+import { Links } from "@/constants/links";
 
 export const Header = () => {
   const pathname = usePathname()
@@ -25,10 +26,10 @@ export const Header = () => {
         {['Home', 'All Products', 'Categories', 'Dashboard'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton href={
-              text == "Home" ? "/"
-                : text == "All Products" ? "/store"
-                  : text == "Dashboard" ? "/dashboard"
-                    : text == "Categories" ? "/categories"
+              text == "Home" ? Links.home
+                : text == "All Products" ? Links.store
+                  : text == "Dashboard" ? Links.dashboard.base
+                    : text == "Categories" ? Links.categories
                       : ""
             }>
               <ListItemText primary={text} />
@@ -47,7 +48,7 @@ export const Header = () => {
             </ListItem>
           ) : (
             <ListItem disablePadding>
-              <ListItemButton href="/login">
+              <ListItemButton href={Links.login}>
                 {/* <ListItemIcon>
             </ListItemIcon> */}
                 <ListItemText primary={"Login"} />
@@ -69,16 +70,16 @@ export const Header = () => {
           </div>
         </div>
         <div className="flex gap-8 items-center">
-          <Link href={"/"}><Image alt="logo" src={logo} width={144} /></Link>
+          <Link href={Links.home}><Image alt="logo" src={logo} width={144} /></Link>
         </div>
         <div className="md:flex hidden gap-8 items-center text-(--Burgundy) font-bold">
-          <Link className={pathname == "/" ? "border-b-2" : ""} href={"/"}>Home</Link>
-          <Link className={pathname == "/store" ? "border-b-2" : ""} href={"/store"}>Products</Link>
-          <Link className={pathname == "/categories" ? "border-b-2" : ""} href={"/categories"}>Categories</Link>
-          <Link className={pathname == "/dashboard" ? "border-b-2" : ""} href={"/dashboard"}>Dashboard</Link>
+          <Link className={pathname == Links.home ? "border-b-2" : ""} href={Links.home}>Home</Link>
+          <Link className={pathname == Links.store ? "border-b-2" : ""} href={Links.store}>Products</Link>
+          <Link className={pathname == Links.categories ? "border-b-2" : ""} href={Links.categories}>Categories</Link>
+          <Link className={pathname == Links.dashboard.base ? "border-b-2" : ""} href={Links.dashboard.base}>Dashboard</Link>
         </div>
         <div className="flex gap-8 items-center">
-          <Link href={"/bag"} className="flex relative">
+          <Link href={Links.bag} className="flex relative">
             <Image alt="Bag" src={Bag} />{" "}
             <div className="flex items-end absolute -bottom-1 -right-2">
               <ProductQty />
@@ -88,7 +89,7 @@ export const Header = () => {
             {Cookie.get("accessToken") ? (
               <LogoutButton />
             ) : (
-              <Link href={"/login"}><Image alt="Profile" src={Profile} /></Link>
+              <Link href={Links.login}><Image alt="Profile" src={Profile} /></Link>
             )}
           </div>
         </div>
@@ -104,28 +105,28 @@ export const DashboardHeader = () => {
     <div className="py-2 sm:px-8 px-4 shadow bg-amber-100/80 sticky top-12">
       <nav className="flex sm:justify-start sm:gap-8 justify-between">
         <Link
-          className={pathname == "/dashboard" ? "border-b-2 border-b-amber-600" : ""}
-          href={"/dashboard"}>
+          className={pathname == Links.dashboard.base ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.base}>
           Dashboard
         </Link>
         <Link
-          className={pathname == "/dashboard/profile" ? "border-b-2 border-b-amber-600" : ""}
-          href={"/dashboard/profile"}>
+          className={pathname == Links.dashboard.profile ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.profile}>
           Profile
         </Link>
         <Link
-          className={pathname == "/dashboard/product" ? "border-b-2 border-b-amber-600" : ""}
-          href={"/dashboard/product"}>
+          className={pathname == Links.dashboard.product ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.product}>
           Products
         </Link>
         <Link
-          className={pathname == "/dashboard/product/add" ? "border-b-2 border-b-amber-600" : ""}
-          href={"/dashboard/product/add"}>
+          className={pathname == Links.dashboard.addProduct ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.addProduct}>
           Add Product
         </Link>
         <Link
-          className={pathname == "/dashboard/category" ? "border-b-2 border-b-amber-600" : ""}
-          href={"/dashboard/category"}>
+          className={pathname == Links.dashboard.category ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.category}>
           Categories
         </Link>
       </nav>

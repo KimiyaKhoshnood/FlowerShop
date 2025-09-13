@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { default as Button, default as ButtonUI } from "./ButtonUI";
 import ChartRadialBar from "./ChartRadialBar";
 import Rate from "./Rate";
+import { Links } from "@/constants/links";
 
 const EachProductDetails = ({
   title,
@@ -26,7 +27,7 @@ const EachProductDetails = ({
     <div className="grid lg:grid-cols-3 grid-cols-1 gap-3">
       <div className="flex flex-col pt-5 justify-between items-center lg:bg-inherit bg-(--Burgundy)/10">
         <div className="w-full text-(--Burgundy) text-lg lg:block hidden">
-          <Link href={"/store"} className="font-bold">
+          <Link href={Links.store} className="font-bold">
             {"< Back To Tulip Category"}
           </Link>
         </div>

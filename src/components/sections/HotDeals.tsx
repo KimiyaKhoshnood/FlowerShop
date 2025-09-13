@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ButtonUI from "../ButtonUI";
+import { Links } from "@/constants/links";
 
 const HotDeals = () => {
   return (
@@ -24,7 +25,7 @@ const HotDeals = () => {
           <span className="text-xs">Terms and Conditions apply.</span>
         </div>
         <div className="md:pt-0 pt-5">
-          <Link href={"/store"} className="rounded-3xl block">
+          <Link href={Links.store} className="rounded-3xl block">
           <ButtonUI
             text="Shop now"
             className="bg-(--Burgundy) text-white md:w-fit w-full"
