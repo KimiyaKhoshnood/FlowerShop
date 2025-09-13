@@ -1,4 +1,5 @@
 "use client";
+import { baseUrl, endpoints } from "@/constants/endpoints";
 import { Links } from "@/constants/links";
 import { capitalizeFirstLetter } from "@/utils/utils";
 import {
@@ -38,7 +39,7 @@ const EditSection = () => {
 
   const handleDelete = () => {
     const token = Cookie.get("accessToken");
-    axios.delete(`http://127.0.0.1:8000/api/products/${id}/`, {
+    axios.delete(`${baseUrl}${endpoints.products}/${id}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -56,7 +57,7 @@ const EditSection = () => {
 
   useEffect(() => {
     axios(
-      `http://127.0.0.1:8000/api/products/${id}/`
+      `${baseUrl}${endpoints.products}/${id}/`
     ).then((res) => {
       setProductDetails(res.data);
     });
@@ -72,7 +73,7 @@ const EditSection = () => {
     const token = Cookie.get("accessToken");
     axios
       .patch(
-        `http://127.0.0.1:8000/api/products/${id}/`,
+        `${baseUrl}${endpoints.products}/${id}/`,
         {
           [selectedCategory]: data.input,
         },
