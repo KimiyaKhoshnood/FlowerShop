@@ -37,7 +37,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class DiscountViewSet(viewsets.ReadOnlyModelViewSet):
+class DiscountViewSet(viewsets.ModelViewSet):
     queryset = Discount.objects.all()
     serializer_class = DiscountSerializer
 
