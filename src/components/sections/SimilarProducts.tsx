@@ -10,7 +10,7 @@ import CardPrice from "../CardPrice";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const SimilarProducts = () => {
-  const data = useDataClient(`${baseUrl}${endpoints.products}`).data || [];
+  const data = useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
 
   return (
     <div className="md:px-10 px-5 py-10">

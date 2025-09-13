@@ -76,7 +76,7 @@ export const Header = () => {
           <Link className={pathname == Links.home ? "border-b-2" : ""} href={Links.home}>Home</Link>
           <Link className={pathname == Links.store ? "border-b-2" : ""} href={Links.store}>Products</Link>
           <Link className={pathname == Links.categories ? "border-b-2" : ""} href={Links.categories}>Categories</Link>
-          <Link className={pathname == Links.dashboard.base ? "border-b-2" : ""} href={Links.dashboard.base}>Dashboard</Link>
+          {/* <Link className={pathname == Links.dashboard.base ? "border-b-2" : ""} href={Links.dashboard.base}>Dashboard</Link> */}
         </div>
         <div className="flex gap-5 items-center">
           <Link href={Links.bag} className="flex relative">

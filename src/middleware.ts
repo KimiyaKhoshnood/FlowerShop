@@ -1,19 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Links } from "./constants/links";
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
   const { pathname } = request.nextUrl;
 
-  if (token && (pathname === Links.login || pathname === Links.register)) {
+  if (token && (pathname === "/login" || pathname === "/register")) {
     const url = request.nextUrl.clone();
-    url.pathname = Links.dashboard.base;
+    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
-  if (!token && (pathname.startsWith(Links.dashboard.base) || pathname.startsWith(Links.bag))) {
+  if (!token && (pathname.startsWith("/dashboard") || pathname.startsWith("/bag"))) {
     const url = request.nextUrl.clone();
-    url.pathname = Links.login;
+    url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
@@ -21,5 +20,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [`${Links.dashboard.base}/:path*`, Links.login, Links.register, Links.bag]
+  matcher: ["/dashboard/:path*", "/login", "/register", "/bag"]
 };

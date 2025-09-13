@@ -79,14 +79,13 @@ const ShopByCategory = () => {
                   className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center"
                 >
                     <div className="flex sm:flex-col items-center gap-2 relative">
-                      <div className="sm:w-40 sm:h-40 h-16 w-16 flex justify-center sm:bg-(--BabyPink)">
+                      <div className="w-40 h-40 flex justify-center sm:bg-(--BabyPink)">
                         <img alt="" src={product.image} width={160} height={160} />
                       </div>
                       <span className="absolute left-0 right-0 bottom-0 top-0 flex items-center justify-center backdrop-blur-sm bg-(--BabyPink)/50 hover:bg-(--BabyPink)/0 text-lg text-(--Burgundy) text-nowrap">
                         {product.category}
                       </span>
                     </div>
-                    <span className="sm:hidden">{">"}</span>
                 </Link>
               </SwiperSlide>
             ))}
