@@ -10,3 +10,4 @@ sqlparse==0.5.3
 tzdata==2025.2
 uritemplate==4.1.1
 djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.6.0
