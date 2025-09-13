@@ -78,20 +78,23 @@ export const Header = () => {
           <Link className={pathname == Links.categories ? "border-b-2" : ""} href={Links.categories}>Categories</Link>
           <Link className={pathname == Links.dashboard.base ? "border-b-2" : ""} href={Links.dashboard.base}>Dashboard</Link>
         </div>
-        <div className="flex gap-8 items-center">
+        <div className="flex gap-5 items-center">
           <Link href={Links.bag} className="flex relative">
             <Image alt="Bag" src={Bag} />{" "}
             <div className="flex items-end absolute -bottom-1 -right-2">
               <ProductQty />
             </div>
           </Link>
-          <div className="md:block hidden">
-            {Cookie.get("accessToken") ? (
-              <LogoutButton />
-            ) : (
-              <Link href={Links.login}><Image alt="Profile" src={Profile} /></Link>
-            )}
-          </div>
+          {Cookie.get("accessToken") ? (
+            <Link href={Links.dashboard.base} className="md:block hidden"><Image alt="Profile" src={Profile} width={33} height={33} /></Link>
+          ) : (
+            <Link href={Links.login} className="md:block hidden"><Image alt="Profile" src={Profile} width={33} height={33} /></Link>
+          )}
+          {Cookie.get("accessToken") ? (
+            <div className="md:block hidden h-fit"><LogoutButton /></div>
+          ) : (
+            <></>
+          )}
         </div>
       </nav>
     </header>
