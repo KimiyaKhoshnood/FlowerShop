@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-lvec5ai7c&q!+js&c7e_ands!xt56ik0k%z!05mu7y(w!s3@@)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "flowershop-bggx.onrender.com"
+]
 
 
 # Application definition
