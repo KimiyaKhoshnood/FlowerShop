@@ -2,6 +2,7 @@
 import ButtonUI from "@/components/ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
 import axios from "axios";
 import Cookie from "js-cookie";
 import Link from "next/link";
@@ -14,6 +15,8 @@ type Inputs = {
 };
 
 const Login = () => {
+    const { lang, dictionary } = useLanguage()
+
     const { register, handleSubmit } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -39,7 +42,7 @@ const Login = () => {
                 console.error("Unknown Error:", err);
             }
         }
-        redirect(Links.dashboard.base);
+        redirect(Links.dashboard.base(lang));
     };
 
     return (
@@ -69,7 +72,7 @@ const Login = () => {
             <p>
                 New User?{" "}
                 <span className="text-blue-500 hover:text-blue-600">
-                    <Link href={Links.register}>Register!</Link>
+                    <Link href={Links.register(lang)}>Register!</Link>
                 </span>
             </p>
         </>

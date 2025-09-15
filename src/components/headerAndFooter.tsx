@@ -12,8 +12,10 @@ import { useState } from "react";
 import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 export const Header = () => {
+  const { lang, dictionary } = useLanguage()
   const pathname = usePathname()
 
   const [openSidebar, setOpenSidebar] = useState(false)
@@ -26,10 +28,10 @@ export const Header = () => {
         {['Home', 'All Products', 'Categories', 'Dashboard'].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton href={
-              text == "Home" ? Links.home
-                : text == "All Products" ? Links.store
-                  : text == "Dashboard" ? Links.dashboard.base
-                    : text == "Categories" ? Links.categories
+              text == "Home" ? Links.home(lang)
+                : text == "All Products" ? Links.store(lang)
+                  : text == "Dashboard" ? Links.dashboard.base(lang)
+                    : text == "Categories" ? Links.categories(lang)
                       : ""
             }>
               <ListItemText primary={text} />
@@ -48,7 +50,7 @@ export const Header = () => {
             </ListItem>
           ) : (
             <ListItem disablePadding>
-              <ListItemButton href={Links.login}>
+              <ListItemButton href={Links.login(lang)}>
                 {/* <ListItemIcon>
             </ListItemIcon> */}
                 <ListItemText primary={"Login"} />
@@ -70,25 +72,25 @@ export const Header = () => {
           </div>
         </div>
         <div className="flex gap-8 items-center">
-          <Link href={Links.home}><Image alt="logo" src={logo} width={144} /></Link>
+          <Link href={Links.home(lang)}><Image alt="logo" src={logo} width={144} /></Link>
         </div>
         <div className="md:flex hidden gap-8 items-center text-(--Burgundy) font-bold">
-          <Link className={pathname == Links.home ? "border-b-2" : ""} href={Links.home}>Home</Link>
-          <Link className={pathname == Links.store ? "border-b-2" : ""} href={Links.store}>Products</Link>
-          <Link className={pathname == Links.categories ? "border-b-2" : ""} href={Links.categories}>Categories</Link>
+          <Link className={pathname == Links.home(lang) ? "border-b-2" : ""} href={Links.home(lang)}>Home</Link>
+          <Link className={pathname == Links.store(lang) ? "border-b-2" : ""} href={Links.store(lang)}>Products</Link>
+          <Link className={pathname == Links.categories(lang) ? "border-b-2" : ""} href={Links.categories(lang)}>Categories</Link>
           {/* <Link className={pathname == Links.dashboard.base ? "border-b-2" : ""} href={Links.dashboard.base}>Dashboard</Link> */}
         </div>
         <div className="flex gap-5 items-center">
-          <Link href={Links.bag} className="flex relative">
+          <Link href={Links.bag(lang)} className="flex relative">
             <Image alt="Bag" src={Bag} />{" "}
             <div className="flex items-end absolute -bottom-1 -right-2">
               <ProductQty />
             </div>
           </Link>
           {Cookie.get("accessToken") ? (
-            <Link href={Links.dashboard.base} className="md:block hidden"><Image alt="Profile" src={Profile} width={33} height={33} /></Link>
+            <Link href={Links.dashboard.base(lang)} className="md:block hidden"><Image alt="Profile" src={Profile} width={33} height={33} /></Link>
           ) : (
-            <Link href={Links.login} className="md:block hidden"><Image alt="Profile" src={Profile} width={33} height={33} /></Link>
+            <Link href={Links.login(lang)} className="md:block hidden"><Image alt="Profile" src={Profile} width={33} height={33} /></Link>
           )}
           {Cookie.get("accessToken") ? (
             <div className="md:block hidden h-fit"><LogoutButton /></div>
@@ -102,39 +104,40 @@ export const Header = () => {
 };
 
 export const DashboardHeader = () => {
+  const { lang, dictionary } = useLanguage()
   const pathname = usePathname()
 
   return (
     <div className="py-2 sm:px-8 px-4 shadow bg-amber-100/80 sticky top-12">
       <nav className="flex sm:justify-start sm:gap-8 justify-between">
         <Link
-          className={pathname == Links.dashboard.base ? "border-b-2 border-b-amber-600" : ""}
-          href={Links.dashboard.base}>
+          className={pathname == Links.dashboard.base(lang) ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.base(lang)}>
           Dashboard
         </Link>
         <Link
-          className={pathname == Links.dashboard.profile ? "border-b-2 border-b-amber-600" : ""}
-          href={Links.dashboard.profile}>
+          className={pathname == Links.dashboard.profile(lang) ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.profile(lang)}>
           Profile
         </Link>
         <Link
-          className={pathname == Links.dashboard.product ? "border-b-2 border-b-amber-600" : ""}
-          href={Links.dashboard.product}>
+          className={pathname == Links.dashboard.product(lang) ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.product(lang)}>
           Products
         </Link>
         <Link
-          className={pathname == Links.dashboard.addProduct ? "border-b-2 border-b-amber-600" : ""}
-          href={Links.dashboard.addProduct}>
+          className={pathname == Links.dashboard.addProduct(lang) ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.addProduct(lang)}>
           Add Product
         </Link>
         <Link
-          className={pathname == Links.dashboard.category ? "border-b-2 border-b-amber-600" : ""}
-          href={Links.dashboard.category}>
+          className={pathname == Links.dashboard.category(lang) ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.category(lang)}>
           Categories
         </Link>
         <Link
-          className={pathname == Links.dashboard.discounts ? "border-b-2 border-b-amber-600" : ""}
-          href={Links.dashboard.discounts}>
+          className={pathname == Links.dashboard.discounts(lang) ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.discounts(lang)}>
           Discounts
         </Link>
       </nav>

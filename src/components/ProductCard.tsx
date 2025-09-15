@@ -14,7 +14,7 @@ const ProductCard = ({
   return (
     <>
       <Link
-        href={`${linkToUrl}${id}`}
+        href={`${linkToUrl}/${id}`}
         className="border border-gray-200 rounded-md p-4 flex flex-col gap-2  items-center"
       >
         <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">

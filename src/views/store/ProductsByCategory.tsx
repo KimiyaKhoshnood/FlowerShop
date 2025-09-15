@@ -1,13 +1,16 @@
 "use client";
 
-import { IEachProduct } from "@/types/types";
+import { baseUrl, endpoints } from "@/constants/endpoints";
+import { Links } from "@/constants/links";
 import useDataClient from "@/data/GetDataClient";
+import { useLanguage } from "@/providers/LanguageProvider";
+import { IEachProduct } from "@/types/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import ProductCard from "../../components/ProductCard";
-import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const ProductsByCategory = () => {
+  const { lang, dictionary } = useLanguage()
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -28,7 +31,7 @@ const ProductsByCategory = () => {
     const params = new URLSearchParams(searchParams.toString());
     if (category) {
       params.set("category", category);
-      router.push(`/store?${params.toString()}`);
+      router.push(`${Links.store(lang)}?${params.toString()}`);
       setUrl(category);
     } else {
       params.delete("category");
@@ -84,7 +87,7 @@ const ProductsByCategory = () => {
                 image={eachProduct.image}
                 category={eachProduct.category}
                 haveAddToCardSection={false}
-                linkToUrl={`/store/`}
+                linkToUrl={Links.store(lang)}
               />
             );
           })}

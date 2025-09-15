@@ -1,9 +1,11 @@
-import Tulip from "../../../public/tulipSvg.svg";
-import CustomerService from "../../../public/Customer-Service.svg";
-import Image from "next/image";
+"use client"
+
 import ButtonUI from "@/components/ButtonUI";
-import Link from "next/link";
 import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
+import Image from "next/image";
+import CustomerService from "../../../public/Customer-Service.svg";
+import Tulip from "../../../public/tulipSvg.svg";
 
 type feature = {
   image: string;
@@ -40,6 +42,8 @@ const featuresProps: feature[] = [
 ];
 
 const Herosection = () => {
+  const { lang, dictionary } = useLanguage()
+
   return (
     <div className="shadow relative md:mb-20">
       <div
@@ -52,12 +56,11 @@ const Herosection = () => {
           {"Direct to you".toUpperCase()}
         </span>
         <div className="h-[1px] w-20 bg-(--Burgundy) my-3"></div>
-        <Link href={Links.store} className="rounded-3xl">
-          <ButtonUI
-            text="Start Shopping"
-            className="bg-(--Magenta) text-white mt-7 md:w-fit w-full"
-          />
-        </Link>
+        <ButtonUI
+          text="Start Shopping"
+          className="bg-(--Magenta) text-white mt-7 md:w-fit w-full"
+          url={Links.store(lang)}
+        />
       </div>
       <div className="lg:px-20 md:px-10 w-full md:absolute -bottom-16">
         <div className="sth bg-white/60 rounded-md grid lg:divide-x py-5 lg:grid-cols-4 grid-cols-2 w-full h-full  text-black/10 border">
@@ -67,7 +70,7 @@ const Herosection = () => {
                 key={elem.id}
                 className="flex md:flex-row flex-col items-center gap-4 md:px-7 p-3"
               >
-                <Image alt="" src={elem.image}  width={60} height={60} />
+                <Image alt="" src={elem.image} width={60} height={60} />
                 <div className="flex flex-col md:gap-2 text-(--Burgundy)">
                   <h3 className="md:text-xl text-sm">{elem.title}</h3>
                   <span className="text-xs md:block hidden">

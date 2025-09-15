@@ -1,29 +1,33 @@
 "use client";
-import { IEachProduct } from "@/types/types";
+import { baseUrl, endpoints } from "@/constants/endpoints";
+import { Links } from "@/constants/links";
 import useDataClient from "@/data/GetDataClient";
+import { useLanguage } from "@/providers/LanguageProvider";
+import { IEachProduct } from "@/types/types";
 import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import CardPrice from "../CardPrice";
 import ButtonUI from "../ButtonUI";
-import { baseUrl, endpoints } from "@/constants/endpoints";
-import { Links } from "@/constants/links";
+import CardPrice from "../CardPrice";
 
 const HotProducts = () => {
+
+  const { lang, dictionary } = useLanguage()
   const data: IEachProduct[] =
     useDataClient(`${baseUrl}${endpoints.products}/`)
       .data || [];
 
   return (
     <div className="md:px-10 px-5 py-10">
+      {/* {dictionary.title} */}
       <div className="flex justify-between lg:px-10">
         <h2 className="sm:text-4xl text-3xl text-(--Burgundy) font-bold">
           Hot Products
         </h2>
         <div className="hidden sm:block">
-          <Link href={Links.store}>
+          <Link href={Links.store(lang)}>
             <ButtonUI
               text="All Hot Products"
               className="bg-(--BabyPink) text-(--Burgundy)"
@@ -62,7 +66,7 @@ const HotProducts = () => {
               return (
                 <SwiperSlide key={product.id}>
                   <Link
-                    href={`/store/${product.id}`}
+                    href={`${Links.store(lang)}/${product.id}`}
                     className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center"
                   >
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
@@ -85,7 +89,7 @@ const HotProducts = () => {
         )}
       </div>
       <div className="block md:hidden">
-        <Link href={Links.store}>
+        <Link href={Links.store(lang)}>
           <ButtonUI
             text="All Categories"
             className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"

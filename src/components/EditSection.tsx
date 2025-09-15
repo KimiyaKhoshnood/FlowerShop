@@ -1,6 +1,7 @@
 "use client";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
 import { capitalizeFirstLetter } from "@/utils/utils";
 import {
   Alert,
@@ -23,6 +24,7 @@ type Inputs = {
 };
 
 const EditSection = () => {
+  const { lang, dictionary } = useLanguage()
   const [productDetails, setProductDetails] = useState();
   const [selectedCategory, setSelectedCategory] = useState<string>("title");
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
@@ -46,7 +48,7 @@ const EditSection = () => {
     }).then((res) => {
       console.log("Done", res);
       if (res.status == 200) {
-        redirect(Links.dashboard.product);
+        redirect(Links.dashboard.product(lang));
       }
     }).catch((error) => {
       console.error("خطا در حذف:", error?.response?.data || error.message);
@@ -87,7 +89,7 @@ const EditSection = () => {
         console.log("Done", res);
         if (res.status == 200) {
           setOpenSuccessSnackbar(true);
-          router.push(Links.dashboard.product)
+          router.push(Links.dashboard.product(lang))
         }
       });
   };

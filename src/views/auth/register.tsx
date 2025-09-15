@@ -2,6 +2,7 @@
 import ButtonUI from "@/components/ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
 import axios from "axios";
 import Cookie from "js-cookie";
 import Link from "next/link";
@@ -18,6 +19,8 @@ type Inputs = {
 };
 
 const Register = () => {
+    const { lang, dictionary } = useLanguage()
+
     const { register, handleSubmit } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
@@ -44,7 +47,7 @@ const Register = () => {
             }
         }
 
-        redirect(Links.dashboard.base);
+        redirect(Links.dashboard.base(lang));
 
     };
 
@@ -100,7 +103,7 @@ const Register = () => {
             <p>
                 New User?{" "}
                 <span className="text-blue-500 hover:text-blue-600">
-                    <Link href={Links.login}>Login!</Link>
+                    <Link href={Links.login(lang)}>Login!</Link>
                 </span>
             </p>
         </>

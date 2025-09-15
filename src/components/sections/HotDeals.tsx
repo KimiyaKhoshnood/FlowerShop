@@ -1,8 +1,12 @@
-import Link from "next/link";
+"use client"
+
 import ButtonUI from "../ButtonUI";
 import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 const HotDeals = () => {
+  const { lang, dictionary } = useLanguage()
+
   return (
     <div className="bg-(--BabyPink) lg:px-20 p-10 relative overflow-hidden">
       <div>
@@ -25,12 +29,11 @@ const HotDeals = () => {
           <span className="text-xs">Terms and Conditions apply.</span>
         </div>
         <div className="md:pt-0 pt-5">
-          <Link href={Links.store} className="rounded-3xl block">
           <ButtonUI
             text="Shop now"
             className="bg-(--Burgundy) text-white md:w-fit w-full"
+            url={Links.store(lang)}
           />
-          </Link>
         </div>
       </div>
     </div>

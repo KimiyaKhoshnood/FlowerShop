@@ -10,8 +10,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonUI from "../ButtonUI";
 import { baseUrl, endpoints } from "@/constants/endpoints";
 import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 const ShopByCategory = () => {
+  const { lang, dictionary } = useLanguage()
+  
   const [categories, setCategories] = useState<string[]>([]);
   const allData: IEachProduct[] =
     useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
@@ -37,7 +40,7 @@ const ShopByCategory = () => {
           Shop by Category
         </h2>
         <div className="hidden sm:block">
-          <Link href={Links.categories}>
+          <Link href={Links.categories(lang)}>
             <ButtonUI
               text="All Categories"
               className="bg-(--BabyPink) text-(--Burgundy)"
@@ -75,7 +78,7 @@ const ShopByCategory = () => {
             {categoryImages.map((product) => (
               <SwiperSlide key={product.category}>
                 <Link
-                  href={`/store?category=${product.category}`}
+                  href={`${Links.store(lang)}?category=${product.category}`}
                   className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center"
                 >
                     <div className="flex sm:flex-col items-center gap-2 relative">
@@ -93,7 +96,7 @@ const ShopByCategory = () => {
         )}
       </div>
       <div className="block md:hidden">
-        <Link href={Links.categories}>
+        <Link href={Links.categories(lang)}>
           <ButtonUI
             text="All Categories"
             className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"

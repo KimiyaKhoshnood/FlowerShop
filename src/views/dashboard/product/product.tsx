@@ -1,8 +1,13 @@
+"use client"
+
 import ProductCard from '@/components/ProductCard';
 import { Links } from '@/constants/links';
+import { useLanguage } from '@/providers/LanguageProvider';
 import { IEachProduct } from '@/types/types';
 
 const DashboardProducts = ({ allProducts }: { allProducts: IEachProduct[] }) => {
+    const { lang, dictionary } = useLanguage()
+    
     return (
         <div>
             <h2 className="text-center p-5 text-4xl">Edit Product</h2>
@@ -17,7 +22,7 @@ const DashboardProducts = ({ allProducts }: { allProducts: IEachProduct[] }) => 
                             image={eachProduct.image}
                             category={eachProduct.category}
                             haveAddToCardSection={false}
-                            linkToUrl={Links.dashboard.product}
+                            linkToUrl={Links.dashboard.product(lang)}
                         />
                     );
                 })}

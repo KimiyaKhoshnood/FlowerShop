@@ -8,8 +8,10 @@ import { IEachProduct } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 const Categories = () => {
+    const { lang, dictionary } = useLanguage()
     const { loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
     const [categories, setCategories] = useState<string[]>([]);
 
@@ -40,7 +42,7 @@ const Categories = () => {
                     <h1 className="font-bold text-(--Burgundy) text-3xl text-center">
                         Shop by Category
                     </h1>
-                    <Link href={Links.store} className="sm:block hidden">
+                    <Link href={Links.store(lang)} className="sm:block hidden">
                         <ButtonUI
                             text="All products"
                             className="bg-(--Burgundy)/10 text-(--Burgundy)"
@@ -56,7 +58,7 @@ const Categories = () => {
                     {categoryImages.map((elem) => {
                         return (
                             <Link
-                                href={`/store?category=${elem.category}`}
+                                href={`${Links.store(lang)}?category=${elem.category}`}
                                 key={elem.category}
                             >
                                 <div className="border border-gray-200 rounded-md sm:p-4 px-4 flex sm:flex-col gap-2 justify-between items-center">
@@ -74,7 +76,7 @@ const Categories = () => {
                         );
                     })}
                 </div>
-                <Link href={Links.store} className="sm:hidden lg:px-20 sm:px-10 px-5">
+                <Link href={Links.store(lang)} className="sm:hidden lg:px-20 sm:px-10 px-5">
                     <ButtonUI
                         text="All products"
                         className="bg-(--Burgundy)/10 text-(--Burgundy) w-full"

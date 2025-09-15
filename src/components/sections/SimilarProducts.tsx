@@ -8,8 +8,11 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardPrice from "../CardPrice";
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { Links } from "@/constants/links";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 const SimilarProducts = () => {
+  const { lang, dictionary } = useLanguage()
   const data = useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
 
   return (
@@ -50,7 +53,7 @@ const SimilarProducts = () => {
               return (
                 <SwiperSlide key={product.id}>
                   <Link
-                    href={`/store/${product.id}`}
+                    href={`${Links.store(lang)}/${product.id}`}
                     className="border border-gray-200 rounded-md p-4 flex flex-col gap-2 justify-center items-center"
                   >
                     <div className="sm:w-40 w-full sm:h-40 h-52 flex justify-center bg-(--BabyPink)">
