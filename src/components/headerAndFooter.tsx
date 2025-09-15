@@ -132,6 +132,11 @@ export const DashboardHeader = () => {
           href={Links.dashboard.category}>
           Categories
         </Link>
+        <Link
+          className={pathname == Links.dashboard.discounts ? "border-b-2 border-b-amber-600" : ""}
+          href={Links.dashboard.discounts}>
+          Discounts
+        </Link>
       </nav>
     </div>
   );

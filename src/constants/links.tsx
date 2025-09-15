@@ -11,5 +11,6 @@ export const Links = {
         product: "/dashboard/product",
         addProduct: "/dashboard/addProduct",
         category: "/dashboard/category",
+        discounts: "/dashboard/discounts",
     },
 }

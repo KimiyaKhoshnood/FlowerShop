@@ -36,6 +36,48 @@ const Dashboard = () => {
         }
     }, []);
 
+    // useEffect(() => {
+    //     const token = Cookie.get("accessToken");
+
+
+    //     if (token) {
+    //         axios
+    //             .get(`${baseUrl}${endpoints.discounts}/`, {
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`,
+    //                 },
+    //             })
+    //             .then((res) => {
+    //                 // setOrderList(res.data);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching orders:", error.response?.data);
+    //             });
+    //     } else {
+    //         console.log("No token found");
+    //     }
+
+    //     if (token) {
+    //         axios
+    //             .post(`${baseUrl}${endpoints.discounts}/`, {
+    //                 code: "OFF10",
+    //                 percent: 10,
+    //             }, {
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`,
+    //                 },
+    //             })
+    //             .then((res) => {
+    //                 // setOrderList(res.data);
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Error fetching orders:", error.response?.data);
+    //             });
+    //     } else {
+    //         console.log("No token found");
+    //     }
+    // }, []);
+
     return (
         <div className="flex flex-col gap-0 sm:px-5">
             <h2 className="text-center p-5 text-4xl">Sales Dashboard</h2>

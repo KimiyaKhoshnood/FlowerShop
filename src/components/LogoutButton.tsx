@@ -13,7 +13,7 @@ const LogoutButton = () => {
   return (
     <div onClick={handleLogout} className="cursor-pointer">
       <Image className="md:block hidden" alt="Profile" src={Logout} width={33} height={33} />
-      <div>Log Out</div>
+      <div className="md:hidden block">Log Out</div>
     </div>
   )
 }
