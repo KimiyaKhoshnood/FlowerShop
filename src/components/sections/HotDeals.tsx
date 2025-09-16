@@ -17,20 +17,20 @@ const HotDeals = () => {
       </div>
       <div className="flex md:flex-row flex-col justify-between md:items-center md:gap-5 gap-8 z-10">
         <div className="text-(--Burgundy) md:text-6xl text-5xl font-bold">
-          Hot Deals
+          {dictionary?.hotDeals?.title}
         </div>
         <div className="text-(--Burgundy) flex flex-col gap-2">
           <span className="font-bold md:text-xl text-lg">
-            {"Save 15% OFF on FILLERS & Tulips".toUpperCase()}
+            {dictionary?.hotDeals?.headline.toUpperCase()}
           </span>
           <span className="text-sm">
-            {"Shopping Hot Products on September 2022 you will save 15% OFF!"}
+            {dictionary?.hotDeals?.content}
           </span>
-          <span className="text-xs">Terms and Conditions apply.</span>
+          <span className="text-xs">{dictionary?.hotDeals?.caption}</span>
         </div>
         <div className="md:pt-0 pt-5">
           <ButtonUI
-            text="Shop now"
+            text={dictionary?.hotDeals?.button}
             className="bg-(--Burgundy) text-white md:w-fit w-full"
             url={Links.store(lang)}
           />

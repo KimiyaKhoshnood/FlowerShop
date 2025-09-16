@@ -51,8 +51,6 @@ export const Header = () => {
           ) : (
             <ListItem disablePadding>
               <ListItemButton href={Links.login(lang)}>
-                {/* <ListItemIcon>
-            </ListItemIcon> */}
                 <ListItemText primary={"Login"} />
               </ListItemButton>
             </ListItem>
@@ -75,12 +73,13 @@ export const Header = () => {
           <Link href={Links.home(lang)}><Image alt="logo" src={logo} width={144} /></Link>
         </div>
         <div className="md:flex hidden gap-8 items-center text-(--Burgundy) font-bold">
-          <Link className={pathname == Links.home(lang) ? "border-b-2" : ""} href={Links.home(lang)}>Home</Link>
-          <Link className={pathname == Links.store(lang) ? "border-b-2" : ""} href={Links.store(lang)}>Products</Link>
-          <Link className={pathname == Links.categories(lang) ? "border-b-2" : ""} href={Links.categories(lang)}>Categories</Link>
+          <Link className={pathname == Links.home(lang) ? "border-b-2" : ""} href={Links.home(lang)}>{dictionary?.header?.home}</Link>
+          <Link className={pathname == Links.store(lang) ? "border-b-2" : ""} href={Links.store(lang)}>{dictionary?.header?.products}</Link>
+          <Link className={pathname == Links.categories(lang) ? "border-b-2" : ""} href={Links.categories(lang)}>{dictionary?.header?.categories}</Link>
           {/* <Link className={pathname == Links.dashboard.base ? "border-b-2" : ""} href={Links.dashboard.base}>Dashboard</Link> */}
         </div>
         <div className="flex gap-5 items-center">
+          <Link href={pathname.includes('fa') ? pathname.replace('fa','en') : pathname.replace('en','fa')} className="text-(--Burgundy) px-0.5 py-1.5 hover:bg-neutral-100 rounded-md cursor-pointer">Fa/En</Link>
           <Link href={Links.bag(lang)} className="flex relative">
             <Image alt="Bag" src={Bag} />{" "}
             <div className="flex items-end absolute -bottom-1 -right-2">
@@ -146,8 +145,10 @@ export const DashboardHeader = () => {
 };
 
 export const Footer = () => {
+  const { dictionary } = useLanguage()
+  
   return <footer className="shadow flex justify-between items-center gap-5 p-10">
-    <p className="text-center text-xs text-(--Burgundy)">Developed By Kimia Khoshnood As A Test Project.</p>
+    <p className="text-center text-xs text-(--Burgundy)">{dictionary?.footer}</p>
     <Image alt="" src={logo} />
   </footer>;
 };

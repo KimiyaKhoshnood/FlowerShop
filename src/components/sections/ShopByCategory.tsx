@@ -37,12 +37,12 @@ const ShopByCategory = () => {
     <div className="md:px-10 px-5 py-10">
       <div className="flex justify-between lg:px-10">
         <h2 className="sm:text-4xl text-3xl text-(--Burgundy) font-bold">
-          Shop by Category
+          {dictionary?.home?.shopByCategory?.title}
         </h2>
         <div className="hidden sm:block">
           <Link href={Links.categories(lang)}>
             <ButtonUI
-              text="All Categories"
+              text={dictionary?.home?.shopByCategory?.button}
               className="bg-(--BabyPink) text-(--Burgundy)"
             />
           </Link>

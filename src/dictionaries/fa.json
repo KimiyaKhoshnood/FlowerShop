@@ -1,4 +1,67 @@
 {
     "common": {},
+    "header": {
+        "home": "صفحه اصلی",
+        "products": "محصولات",
+        "categories": "کتگوری ها"
+    },
+    "home": {
+        "hero": {
+            "title": "فروش عمده گل های تازه",
+            "caption": "مستقیم به شما",
+            "button": "شروع به خرید کنید",
+            "features": [
+                {
+                    "image": "Price.svg",
+                    "title": "قیمت عمده",
+                    "description": "Vel at hendrerit urna et maecenas venenatis.",
+                    "id": "1"
+                },
+                {
+                    "image": "Credit-Card-Blocked.svg",
+                    "title": "پرداخت امن",
+                    "description": "Vitae gravida arcu, ante lorem leo.",
+                    "id": "2"
+                },
+                {
+                    "image": "tulipSvg.svg",
+                    "title": "بهترین کیفیت",
+                    "description": "Tincidunt mattis vitae at massa id.",
+                    "id": "3"
+                },
+                {
+                    "image": "Customer-Service.svg",
+                    "title": "خدمات مشتریان",
+                    "description": "Donec potenti velit est vivamus velit.",
+                    "id": "4"
+                }
+            ]
+        },
+        "hotProducts": {
+            "title": "محصولات داغ",
+            "button": "همه محصولات داغ"
+        },
+        "shopByCategory": {
+            "title": "دسته بندی محصولات",
+            "button": "همه دسته بندی ها"
+        }
+    },
+    "store": {
+        "title": "خرید انواع گل ها",
+        "showAll": "نشان دادن همه",
+        "category": "دسته بندی"
+    },
+    "category": {
+        "title": "خرید بر اساس دسته بندی",
+        "button": "همه محصولات"
+    },
+    "hotDeals": {
+        "title": "معامله پرسود",
+        "headline": "۱۵٪ تخفیف روی فیلرها و لاله‌ها",
+        "content": "با خرید محصولات پرطرفدار در سپتامبر ۲۰۲۲، ۱۵٪ تخفیف بگیرید!",
+        "caption": "شرایط و ضوابط اعمال می‌شود.",
+        "button": "الان بخرید"
+    },
+    "footer": "این وبسایت یک پروژه تستی توسط کیمیا خوشنود است.",
     "title": "سلام"
 }

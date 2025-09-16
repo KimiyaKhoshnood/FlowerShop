@@ -40,11 +40,11 @@ const Categories = () => {
             <div className="flex flex-col gap-5 py-5">
                 <div className="lg:px-20 sm:px-10 px-5 flex justify-between">
                     <h1 className="font-bold text-(--Burgundy) text-3xl text-center">
-                        Shop by Category
+                        {dictionary?.category?.title}
                     </h1>
                     <Link href={Links.store(lang)} className="sm:block hidden">
                         <ButtonUI
-                            text="All products"
+                            text={dictionary?.category?.button}
                             className="bg-(--Burgundy)/10 text-(--Burgundy)"
                         />
                     </Link>

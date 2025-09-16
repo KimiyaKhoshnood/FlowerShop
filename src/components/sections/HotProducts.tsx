@@ -21,15 +21,14 @@ const HotProducts = () => {
 
   return (
     <div className="md:px-10 px-5 py-10">
-      {/* {dictionary.title} */}
       <div className="flex justify-between lg:px-10">
         <h2 className="sm:text-4xl text-3xl text-(--Burgundy) font-bold">
-          Hot Products
+          {dictionary?.home?.hotProducts?.title}
         </h2>
         <div className="hidden sm:block">
           <Link href={Links.store(lang)}>
             <ButtonUI
-              text="All Hot Products"
+              text={dictionary?.home?.hotProducts?.button}
               className="bg-(--BabyPink) text-(--Burgundy)"
             />
           </Link>
@@ -91,7 +90,7 @@ const HotProducts = () => {
       <div className="block md:hidden">
         <Link href={Links.store(lang)}>
           <ButtonUI
-            text="All Categories"
+            text={dictionary?.home?.hotProducts?.button}
             className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"
           />
         </Link>

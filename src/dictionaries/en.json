@@ -1,4 +1,67 @@
 {
     "common": {},
+    "header": {
+        "home": "Home",
+        "products": "Products",
+        "categories": "Categories"
+    },
+    "home": {
+        "hero": {
+            "title": "Fresh Wholesale Flowers",
+            "caption": "Direct to you",
+            "button": "Start Shopping",
+            "features": [
+                {
+                    "image": "Price.svg",
+                    "title": "Wholesale Prices",
+                    "description": "Vel at hendrerit urna et maecenas venenatis.",
+                    "id": "1"
+                },
+                {
+                    "image": "Credit-Card-Blocked.svg",
+                    "title": "Secure Checkout",
+                    "description": "Vitae gravida arcu, ante lorem leo.",
+                    "id": "2"
+                },
+                {
+                    "image": "tulipSvg.svg",
+                    "title": "Best Quality",
+                    "description": "Tincidunt mattis vitae at massa id.",
+                    "id": "3"
+                },
+                {
+                    "image": "Customer-Service.svg",
+                    "title": "Client Service",
+                    "description": "Donec potenti velit est vivamus velit.",
+                    "id": "4"
+                }
+            ]
+        },
+        "hotProducts": {
+            "title": "Hot Products",
+            "button": "All Hot Products"
+        },
+        "shopByCategory": {
+            "title": "Shop By Categories",
+            "button": "All Categories"
+        }
+    },
+    "store": {
+        "title": "Shop All Flowers",
+        "showAll": "Show All",
+        "category": "Category"
+    },
+    "category": {
+        "title": "Shop by Category",
+        "button": "All Products"
+    },
+    "hotDeals": {
+        "title": "Hot Deals",
+        "headline": "Save 15% OFF on FILLERS & Tulips",
+        "content": "Shopping Hot Products on September 2022 you will save 15% OFF!",
+        "caption": "Terms and Conditions apply.",
+        "button": "Shop now"
+    },
+    "footer": "Developed By Kimia Khoshnood As A Test Project.",
     "title": "hi"
 }

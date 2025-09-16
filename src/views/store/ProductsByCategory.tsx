@@ -8,6 +8,7 @@ import { IEachProduct } from "@/types/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import ProductCard from "../../components/ProductCard";
+import ChangeDate from "@/components/ChangeDate";
 
 const ProductsByCategory = () => {
   const { lang, dictionary } = useLanguage()
@@ -42,6 +43,13 @@ const ProductsByCategory = () => {
 
   return (
     <>
+      <div className="text-(--Burgundy) flex justify-between md:flex-row flex-col-reverse lg:px-20 md:px-10">
+        <h1 className="sm:text-4xl text-3xl font-bold md:p-0 py-5 px-10">
+          {dictionary?.store?.title}
+        </h1>
+        <ChangeDate />
+      </div>
+
       {loading && <div className="overflow-hidden">
         <div className='h-32 w-full flex justify-center items-center animate-ping'>
           <img alt="logo" src="/Logo.svg" width={50} height={150} />
@@ -49,16 +57,16 @@ const ProductsByCategory = () => {
       </div>}
 
       {loading || <div className="lg:px-20 px-10 w-full grid md:grid-cols-4 grid-cols-1">
-        <div className="py-5 pr-5">
+        <div className={`py-5 ${lang == 'en' ? "pr-5" : "pl-5"}`}>
           <div className="flex flex-col gap-2">
             <span
               onClick={() => handleCategorySelect()}
               className={`block w-full text-center border rounded-3xl py-1 text-(--Burgundy) hover:bg-(--Burgundy) hover:text-white cursor-pointer ${url == "" ? "bg-(--Burgundy) text-white" : ""
                 }`}
             >
-              Show All
+              {dictionary?.store?.showAll}
             </span>
-            <h3 className="text-(--Burgundy) font-bold text-lg">Category</h3>
+            <h3 className="text-(--Burgundy) font-bold text-lg">{dictionary?.store?.category}</h3>
             <div className="flex flex-wrap gap-2 text-(--Burgundy)">
               {uniqueCategories.map((elem, i) => {
                 return (

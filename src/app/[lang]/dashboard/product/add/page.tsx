@@ -1,7 +1,7 @@
 import DashboardAddProduct from '@/views/dashboard/product/addProduct'
 
-const Dashboard = () => {
+const page = () => {
   return <DashboardAddProduct />
 }
 
-export default Dashboard
+export default page

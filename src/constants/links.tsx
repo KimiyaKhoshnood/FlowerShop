@@ -1,5 +1,5 @@
 export const Links = {
-    home: (lang: string) => `/${lang}/`,
+    home: (lang: string) => `/${lang}`,
     store: (lang: string) => `/${lang}/store`,
     categories: (lang: string) => `/${lang}/categories`,
     login: (lang: string) => `/${lang}/login`,
@@ -9,7 +9,7 @@ export const Links = {
         base: (lang: string) => `/${lang}/dashboard`,
         profile: (lang: string) => `/${lang}/dashboard/profile`,
         product: (lang: string) => `/${lang}/dashboard/product`,
-        addProduct: (lang: string) => `/${lang}/dashboard/addProduct`,
+        addProduct: (lang: string) => `/${lang}/dashboard/product/add`,
         category: (lang: string) => `/${lang}/dashboard/category`,
         discounts: (lang: string) => `/${lang}/dashboard/discounts`,
     },
