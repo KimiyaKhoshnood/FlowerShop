@@ -1,5 +1,8 @@
 {
-    "common": {},
+    "common": {
+        "cancel": "Cancel",
+        "check": "Check"
+    },
     "header": {
         "home": "Home",
         "products": "Products",
@@ -54,6 +57,79 @@
     "category": {
         "title": "Shop by Category",
         "button": "All Products"
+    },
+    "bag": {
+        "totalDiscount": "Total Discount",
+        "totalPrice": "Total Price",
+        "deliveryDate": "Delivery Date",
+        "discountHint": "(Hint: use OFF5 or OFF10 or OFF15)",
+        "discount": {
+            "wrongCode": "Wrong discount code!",
+            "discountCodeQuestion": "Discount Code?",
+            "code": "Code",
+            "check": "Check",
+            "discountActive": "% discount is active",
+            "disable": "Disable"
+        }
+    },
+    "dashboard": {
+        "header": {
+            "dashboard": "Dashboard",
+            "profile": "Profile",
+            "products": "Products",
+            "addProduct": "Add Product",
+            "categories": "Categories",
+            "discounts": "Discounts"
+        },
+        "profile": {
+            "title": "Edit Profile",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "username": "Username",
+            "email": "Email",
+            "save": "Save",
+            "created": "Created"
+        },
+        "product": {
+            "title": "Edit Product",
+            "editProductTitle": "What do you want to change?",
+            "change": "Change",
+            "fieldRequired": "Field is Required!",
+            "deleteProductQuestion": "Want to delete this Product",
+            "deleteProduct": "Delete Product!",
+            "delete": "Delete",
+            "deleteModalTitle": "Are You Sure?",
+            "deleteModalContent": "This action can't be undone and it will be deleted permenantly.",
+            "copy": "copy",
+            "addProduct": "Add Product"
+        },
+        "category": {
+            "title": "Categories"
+        },
+        "orders": {
+            "title": "Sales Dashboard",
+            "headers": [
+                "Row",
+                "Discount",
+                "Total QTY",
+                "Total Price",
+                "Details"
+            ],
+            "more": "MORE",
+            "detailsTitle": "Row {0} Details:",
+            "detailsHeaders": [
+                "Image",
+                "Title",
+                "QTY",
+                "Price",
+                "Total Price"
+            ],
+            "totalPrice": "Total Price",
+            "discount": "Discount",
+            "priceWithDiscount": "Total Price With Discount",
+            "deliveryDate": "Delivery Date",
+            "ok": "OK"
+        }
     },
     "hotDeals": {
         "title": "Hot Deals",

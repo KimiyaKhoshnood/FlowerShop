@@ -7,12 +7,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import ButtonUI from "./ButtonUI";
 import Cookie from "js-cookie";
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 type Inputs = {
   discount: string;
 };
 
 const Discount = () => {
+  const { dictionary } = useLanguage()
   const [isPendingDiscount, setIsPendingDiscount] = useState<
     "noDiscount" | "Process" | "Discount" | boolean
   >(false);
@@ -50,7 +52,7 @@ const Discount = () => {
         onClose={() => setOpenSnackbar(false)}
       >
         <Alert onClose={() => setOpenSnackbar(false)} severity="error">
-          Wrong discount code!
+          {dictionary?.bag?.discount?.wrongCode}
         </Alert>
       </Snackbar>
 
@@ -61,7 +63,7 @@ const Discount = () => {
             className="rounded-3xl"
           >
             <ButtonUI
-              text="Discount Code?"
+              text={dictionary?.bag?.discount?.discountCodeQuestion}
               className="bg-(--Burgundy)/10 text-(--Burgundy)"
             />
           </span>
@@ -74,13 +76,13 @@ const Discount = () => {
           >
             <input
               type="text"
-              placeholder="Code"
+              placeholder={dictionary?.bag?.discount?.code}
               className="border rounded-md py-1 px-3"
               {...register("discount", { required: true })}
             />
             <button type="submit" className="rounded-3xl">
               <ButtonUI
-                text="Check"
+                text={dictionary?.bag?.discount?.check}
                 className="bg-(--Burgundy)/10 text-(--Burgundy)"
               />
             </button>
@@ -88,7 +90,7 @@ const Discount = () => {
         ) : null}
         {isPendingDiscount == false && discount != 0 ? (
           <>
-            <span className="py-2">{discount}% discount is active</span>{" "}
+            <span className="py-2">{discount}{dictionary?.bag?.discount?.discountActive}</span>{" "}
             <span
               onClick={() => {
                 setDiscount(0);
@@ -96,7 +98,7 @@ const Discount = () => {
               className="rounded-3xl"
             >
               <ButtonUI
-                text="Disable"
+                text={dictionary?.bag?.discount?.disable}
                 className="bg-(--Burgundy)/10 text-(--Burgundy) text-sm"
               />
             </span>

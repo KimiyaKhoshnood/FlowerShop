@@ -6,6 +6,7 @@ import Cookie from "js-cookie";
 import axios from "axios";
 import { Alert, Snackbar } from "@mui/material";
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 type Inputs = {
     username: string,
@@ -50,6 +51,7 @@ const Profile = () => {
         }
     }, [reset]);
 
+    const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -74,7 +76,7 @@ const Profile = () => {
 
     return (
         <>
-            <h2 className="text-center p-5 text-4xl">Edit Profile</h2>
+            <h2 className="text-center p-5 text-4xl">{dictionary?.dashboard?.profile?.title}</h2>
 
             <Snackbar
                 open={openSnackbar}
@@ -82,7 +84,7 @@ const Profile = () => {
                 onClose={() => setOpenSnackbar(false)}
             >
                 <Alert onClose={() => setOpenSnackbar(false)} severity="success">
-                    Created!
+                    {dictionary?.dashboard?.profile?.created}!
                 </Alert>
             </Snackbar>
 
@@ -91,36 +93,36 @@ const Profile = () => {
                 className=" flex flex-col w-96 mx-auto gap-1 p-3"
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <label htmlFor="first_name">First Name:<span className="text-red-500">*</span></label>
+                <label htmlFor="first_name">{dictionary?.dashboard?.profile?.firstName}:<span className="text-red-500">*</span></label>
                 <input
                     type="text"
-                    placeholder="First Name"
+                    placeholder={dictionary?.dashboard?.profile?.firstName}
                     className="border rounded-md py-1 px-3 mb-2"
                     {...register("first_name")}
                 />
-                <label htmlFor="last_name">Last Name:<span className="text-red-500">*</span></label>
+                <label htmlFor="last_name">{dictionary?.dashboard?.profile?.lastName}:<span className="text-red-500">*</span></label>
                 <input
                     type="text"
-                    placeholder="Last Name"
+                    placeholder={dictionary?.dashboard?.profile?.lastName}
                     className="border rounded-md py-1 px-3 mb-2"
                     {...register("last_name")}
                 />
-                <label htmlFor="username">Username:<span className="text-red-500">*</span></label>
+                <label htmlFor="username">{dictionary?.dashboard?.profile?.username}:<span className="text-red-500">*</span></label>
                 <input
                     type="text"
-                    placeholder="Username"
+                    placeholder={dictionary?.dashboard?.profile?.username}
                     className="border rounded-md py-1 px-3 mb-2"
                     {...register("username", { required: true })}
                 />
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">{dictionary?.dashboard?.profile?.email}:</label>
                 <input
                     type="text"
-                    placeholder="Email"
+                    placeholder={dictionary?.dashboard?.profile?.email}
                     className="border rounded-md py-1 px-3 mb-2"
                     {...register("email")}
                 />
                 <button type="submit" className="bg-(--Magenta) px-2 py-1 rounded-md">
-                    Save
+                    {dictionary?.dashboard?.profile?.save}
                 </button>
             </form>
         </>

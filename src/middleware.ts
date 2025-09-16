@@ -4,15 +4,19 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("accessToken")?.value;
   const { pathname } = request.nextUrl;
 
-  if (token && (pathname === "/login" || pathname === "/register")) {
+  const segments = pathname.split("/").filter(Boolean); 
+  const lang = segments[0];
+  const restPath = "/" + segments.slice(1).join("/");
+
+  if (token && (restPath === "/login" || restPath === "/register")) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = `/${lang}/dashboard`;
     return NextResponse.redirect(url);
   }
 
-  if (!token && (pathname.startsWith("/dashboard") || pathname.startsWith("/bag"))) {
+  if (!token && (restPath.startsWith("/dashboard") || restPath.startsWith("/bag"))) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
+    url.pathname = `/${lang}/login`;
     return NextResponse.redirect(url);
   }
 
@@ -20,5 +24,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/register", "/bag"]
+  matcher: ["/(fa|en)/dashboard/:path*", "/(fa|en)/(login|register|bag)"],
 };

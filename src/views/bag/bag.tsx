@@ -10,8 +10,10 @@ import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText,
 import axios from "axios";
 import Cookie from "js-cookie";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 const Bag = () => {
+    const { dictionary } = useLanguage()
     const { shoppingItems, handleCleanProducts, discount } = useShoppingItemsContext();
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [allProducts, setAllProducts] = useState<IEachProduct[]>([]);
@@ -145,23 +147,23 @@ const Bag = () => {
 
                 <div className="">
                     <p>
-                        Total Discount:{" "}
+                        {dictionary?.bag?.totalDiscount}:{" "}
                         <span className="text-(--Burgundy) font-bold">{discount}%</span>
                     </p>
                     <p>
-                        Total Price:{" "}
+                        {dictionary?.bag?.totalPrice}:{" "}
                         <span className="text-(--Burgundy) font-bold">
                             {totalAmount}{" "}$
                         </span>
                     </p>
                     <p>
-                        Delivery Date:{" "}
+                        {dictionary?.bag?.deliveryDate}:{" "}
                         <span className="text-(--Burgundy) font-bold">{"???"}</span>
                     </p>
 
                     <Discount />
                     <span className="text-yellow-500 text-xs">
-                        {"(Hint: use OFF5 or OFF10 or OFF15)"}
+                        {dictionary?.bag?.discountHint}
                     </span>
                 </div>
 

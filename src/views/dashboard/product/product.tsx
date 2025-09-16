@@ -10,7 +10,7 @@ const DashboardProducts = ({ allProducts }: { allProducts: IEachProduct[] }) => 
     
     return (
         <div>
-            <h2 className="text-center p-5 text-4xl">Edit Product</h2>
+            <h2 className="text-center p-5 text-4xl">{dictionary?.dashboard?.product?.title}</h2>
             <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5 pb-5">
                 {allProducts.map((eachProduct) => {
                     return (

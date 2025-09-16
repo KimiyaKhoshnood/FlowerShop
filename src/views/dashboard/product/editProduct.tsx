@@ -117,15 +117,15 @@ const DashboardEditProduct = () => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Are You Sure?"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{dictionary?.dashboard?.product?.deleteModalTitle}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        {"This action can't be undone and it will be deleted permenantly."}
+                        {dictionary?.dashboard?.product?.deleteModalContent}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="inherit">
-                        Cancel
+                        {dictionary?.common?.cancel?.toUpperCase()}
                     </Button>
                     <Button
                         onClick={() => {
@@ -135,14 +135,14 @@ const DashboardEditProduct = () => {
                         autoFocus
                         color="error"
                     >
-                        DELETE
+                        {dictionary?.dashboard?.product?.delete?.toUpperCase()}
                     </Button>
                 </DialogActions>
             </Dialog>
 
             <div className="px-10 py-2">
                 <h2 className="text-center p-5 text-4xl">
-                    What do you want to change?
+                    {dictionary?.dashboard?.product?.editProductTitle}
                 </h2>
 
                 <div className="py-2">
@@ -177,7 +177,7 @@ const DashboardEditProduct = () => {
                             <button
                                 onClick={() => navigator.clipboard.writeText(productDetails?.[selectedCategory] || "")}
                                 className="absolute right-0 top-0 bottom-0 content-center text-xs text-gray-300 hover:text-gray-500 cursor-pointer py-0.5 px-2.5">
-                                copy
+                                {dictionary?.dashboard?.product?.copy}
                             </button>
                         </div>
                         <form
@@ -187,14 +187,14 @@ const DashboardEditProduct = () => {
                             <input
                                 type="text"
                                 placeholder={capitalizeFirstLetter(selectedCategory)}
-                                className="border border-gray-300 px-4 py-2 focus:outline-0 rounded-l-lg w-full"
-                                {...register("input", { required: "Field is Required!" })}
+                                className={`border border-gray-300 px-4 py-2 focus:outline-0 w-full ${lang == 'fa' ? "rounded-r-lg" : "rounded-l-lg"}`}
+                                {...register("input", { required: dictionary?.dashboard?.product?.fieldRequired })}
                             />
                             <button
                                 type="submit"
-                                className="bg-emerald-500/80 hover:bg-emerald-500 cursor-pointer text-white py-2 px-5 rounded-r-lg"
+                                className={`bg-emerald-500/80 hover:bg-emerald-500 cursor-pointer text-white py-2 px-5 ${lang == 'fa' ? "rounded-l-lg" : "rounded-r-lg"}`}
                             >
-                                Change
+                                {dictionary?.dashboard?.product?.change}
                             </button>
                         </form>
                         {errors.input && (
@@ -204,12 +204,12 @@ const DashboardEditProduct = () => {
                 </div>
 
                 <div className="flex items-center mt-10 gap-2">
-                    <span className="text-xs">Want to delete this Product?</span>
+                    <span className="text-xs">{dictionary?.dashboard?.product?.deleteProductQuestion}</span>
                     <button
                         onClick={handleClickOpen}
                         className="text-red-500 hover:text-red-600 text-center text-xs cursor-pointer w-fit"
                     >
-                        DELETE PRODUCT!
+                        {dictionary?.dashboard?.product?.deleteProduct?.toUpperCase()}
                     </button>
                 </div>
             </div>

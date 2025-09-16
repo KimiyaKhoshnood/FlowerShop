@@ -1,5 +1,7 @@
 "use client";
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { useLanguage } from "@/providers/LanguageProvider";
+import { stringFormat } from "@/utils/utils";
 import {
   Button,
   Dialog,
@@ -28,6 +30,7 @@ const OrderList = ({
   discount: number;
   row: number;
 }) => {
+  const { dictionary } = useLanguage()
   const [open, setOpen] = useState(false);
   const [orderDetails, setOrderDetails] = useState<OrderList[]>([]);
   console.log("shoppingItems", shoppingItems);
@@ -87,15 +90,15 @@ const OrderList = ({
         open={open}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Row {row} Details:
+          {stringFormat(dictionary?.dashboard?.orders?.detailsTitle, row.toString())}
         </DialogTitle>
         <DialogContent dividers>
           <div className="grid grid-cols-5 gap-5 bg-neutral-100 p-2">
-            <div className="text-center">Image</div>
-            <div className="text-center">Title</div>
-            <div className="text-center">QTY</div>
-            <div className="text-center">Price</div>
-            <div className="text-center">Total Price</div>
+            {
+              dictionary?.dashboard?.orders?.detailsHeaders?.map((header: string) => (
+                <div className="text-center">{header}</div>
+              ))
+            }
           </div>
           {orderDetails.map((elem, i) => {
             return (
@@ -116,16 +119,16 @@ const OrderList = ({
               </div>
             );
           })}
-          <div className="pt-4">Total Price: {sumPrices()}</div>
-          <div className="">Discount: {discount}%</div>
+          <div className="pt-4">{dictionary?.dashboard?.orders?.totalPrice}: {sumPrices()}</div>
+          <div className="">{dictionary?.dashboard?.orders?.discount}: {discount}%</div>
           <div className="">
-            Total Price with Discount: {sumPricesWithDiscount().toFixed(2)}
+            {dictionary?.dashboard?.orders?.priceWithDiscount}: {sumPricesWithDiscount().toFixed(2)}
           </div>
-          <div className="">Delivery Date: {"????"}</div>
+          <div className="">{dictionary?.dashboard?.orders?.deliveryDate}: {"????"}</div>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            OK
+            {dictionary?.dashboard?.orders?.ok}
           </Button>
         </DialogActions>
       </Dialog>
@@ -142,7 +145,7 @@ const OrderList = ({
             className="px-2 py-0.5 w-fit h-fit bg-emerald-600/50 hover:bg-emerald-600/80 cursor-pointer rounded-sm"
             onClick={handleClickOpen}
           >
-            MORE
+            {dictionary?.dashboard?.orders?.more}
           </button>
         </div>
       </div>

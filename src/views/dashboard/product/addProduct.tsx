@@ -1,6 +1,7 @@
 "use client"
 
 import { baseUrl, endpoints } from "@/constants/endpoints";
+import { useLanguage } from "@/providers/LanguageProvider";
 import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
 import Cookie from "js-cookie";
@@ -22,6 +23,7 @@ const DashboardAddProduct = () => {
         formState: { errors },
     } = useForm<Inputs>();
 
+    const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
     // useEffect(()=>{
@@ -66,7 +68,7 @@ const DashboardAddProduct = () => {
 
     return (
         <div>
-            <h2 className='text-center p-5 text-4xl'>Add Product</h2>
+            <h2 className='text-center p-5 text-4xl'>{dictionary?.dashboard?.product?.addProduct}</h2>
 
             <Snackbar
                 open={openSnackbar}
@@ -123,7 +125,7 @@ const DashboardAddProduct = () => {
                     {...register("description", { required: true })}
                 />
                 <button type="submit" className="bg-(--Magenta) px-2 py-1 rounded-md">
-                    Check
+                    {dictionary?.common?.check}
                 </button>
             </form>
         </div>

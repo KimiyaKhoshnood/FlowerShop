@@ -112,33 +112,33 @@ export const DashboardHeader = () => {
         <Link
           className={pathname == Links.dashboard.base(lang) ? "border-b-2 border-b-amber-600" : ""}
           href={Links.dashboard.base(lang)}>
-          Dashboard
+          {dictionary?.dashboard?.header?.dashboard}
         </Link>
         <Link
           className={pathname == Links.dashboard.profile(lang) ? "border-b-2 border-b-amber-600" : ""}
           href={Links.dashboard.profile(lang)}>
-          Profile
+          {dictionary?.dashboard?.header?.profile}
         </Link>
         <Link
           className={pathname == Links.dashboard.product(lang) ? "border-b-2 border-b-amber-600" : ""}
           href={Links.dashboard.product(lang)}>
-          Products
+          {dictionary?.dashboard?.header?.products}
         </Link>
         <Link
           className={pathname == Links.dashboard.addProduct(lang) ? "border-b-2 border-b-amber-600" : ""}
           href={Links.dashboard.addProduct(lang)}>
-          Add Product
+          {dictionary?.dashboard?.header?.addProduct}
         </Link>
         <Link
           className={pathname == Links.dashboard.category(lang) ? "border-b-2 border-b-amber-600" : ""}
           href={Links.dashboard.category(lang)}>
-          Categories
+          {dictionary?.dashboard?.header?.categories}
         </Link>
-        <Link
+        {/* <Link
           className={pathname == Links.dashboard.discounts(lang) ? "border-b-2 border-b-amber-600" : ""}
           href={Links.dashboard.discounts(lang)}>
-          Discounts
-        </Link>
+          {dictionary?.dashboard?.header?.discounts}
+        </Link> */}
       </nav>
     </div>
   );

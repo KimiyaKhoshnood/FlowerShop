@@ -1,5 +1,8 @@
 {
-    "common": {},
+    "common": {
+        "cancel": "لغو",
+        "check": "بررسی"
+    },
     "header": {
         "home": "صفحه اصلی",
         "products": "محصولات",
@@ -54,6 +57,79 @@
     "category": {
         "title": "خرید بر اساس دسته بندی",
         "button": "همه محصولات"
+    },
+    "bag": {
+        "totalDiscount": "تخفیف کلی",
+        "totalPrice": "قیمت کل",
+        "deliveryDate": "زمان ارسال",
+        "discountHint": "(راهنمایی: از OFF5 یا OFF10 یا OFF15 استفاده کنید.)",
+        "discount": {
+            "wrongCode": "کد اشتباه وارد شده است!",
+            "discountCodeQuestion": "کد تخفیف؟",
+            "code": "کد",
+            "check": "بررسی",
+            "discountActive": "% تخفیف فعال است",
+            "disable": "غیرفعال"
+        }
+    },
+    "dashboard": {
+        "header": {
+            "dashboard": "داشبورد",
+            "profile": "پروفایل",
+            "products": "محصولات",
+            "addProduct": "افزودن محصول",
+            "categories": "کتگوری ها",
+            "discounts": "تخفیف ها"
+        },
+        "profile": {
+            "title": "ویرایش پروفایل",
+            "firstName": "نام",
+            "lastName": "نام خانوادگی",
+            "username": "نام کاربری",
+            "email": "ایمیل",
+            "save": "ذخیره",
+            "created": "ساخته شد"
+        },
+        "product": {
+            "title": "ویرایش محصول",
+            "editProductTitle": "چه چیزی رو میخوای تغییر بدی؟",
+            "change": "تغییر",
+            "fieldRequired": "فیلد اجباری است!",
+            "deleteProductQuestion": "آیا میخوای این محصول رو پاک کنی؟",
+            "deleteProduct": "محصول رو پاک کن!",
+            "delete": "پاک کن",
+            "deleteModalTitle": "آیا از این کار مطمئنی؟",
+            "deleteModalContent": "این اقدام قابل بازگشت نیست و برای همیشه حذف خواهد شد.",
+            "copy": "کپی",
+            "addProduct": "افزودن محصول"
+        },
+        "category": {
+            "title": "دسته بندی ها"
+        },
+        "orders": {
+            "title": "داشبورد فروش",
+            "headers": [
+                "ردیف",
+                "تخفیف",
+                "تعداد کل",
+                "قیمت کل",
+                "جزئیات"
+            ],
+            "more": "بیشتر",
+            "detailsTitle": "جزئیات ردیف {0}",
+            "detailsHeaders": [
+                "عکس",
+                "محصول",
+                "تعداد",
+                "قیمت",
+                "قیمت کل"
+            ],
+            "totalPrice": "قیمت کل",
+            "discount": "تخفیف",
+            "priceWithDiscount": "قیمت بعد از تخفیف",
+            "deliveryDate": "زمان ارسال",
+            "ok": "اوکی"
+        }
     },
     "hotDeals": {
         "title": "معامله پرسود",
