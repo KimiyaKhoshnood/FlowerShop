@@ -5,7 +5,7 @@ import { useLanguage } from "@/providers/LanguageProvider";
 import { Alert, Snackbar } from "@mui/material";
 import axios from "axios";
 import Cookie from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type Inputs = {
@@ -21,30 +21,21 @@ const DashboardAddProduct = () => {
         register,
         handleSubmit,
         formState: { errors },
+        watch,
     } = useForm<Inputs>();
+    const value = watch()
 
     const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [categories, setCategories] = useState<{ id: number, name: string }[]>();
 
-    // useEffect(()=>{
-    //   const token = Cookie.get("accessToken")
-
-    //   axios({
-    //     method: "POST",
-    //     url: `${baseUrl}${endpoints.categories}/`,
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //     data: { name: "Tulips" },
-    //   }).then((res) => {
-    //     console.log(res);
-    //     if (res.status == 201) {
-    //       setOpenSnackbar(true);
-    //     }
-    //   }).catch((err) => {
-    //     console.error("Error creating product:", err.response?.data || err.message);
-    //   })
-    // },[])
+    useEffect(() => {
+        axios(
+            `${baseUrl}${endpoints.categories}/`
+        ).then((res) => {
+            setCategories(res.data);
+        });
+    }, []);
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         console.log(data);
@@ -88,13 +79,13 @@ const DashboardAddProduct = () => {
                 <input
                     type="text"
                     placeholder={dictionary?.dashboard?.product?.title}
-                    className="border rounded-md py-1 px-3"
+                    className="border rounded-md py-1.5 px-3"
                     {...register("title", { required: true })}
                 />
                 <input
                     type="text"
                     placeholder={dictionary?.dashboard?.product?.price}
-                    className="border rounded-md py-1 px-3"
+                    className="border rounded-md py-1.5 px-3"
                     {...register("price", {
                         required: true,
                         pattern: {
@@ -112,16 +103,18 @@ const DashboardAddProduct = () => {
                     className="border rounded-md py-1 px-3"
                     {...register("image", { required: true })}
                 />
-                <input
-                    type="text"
-                    placeholder={dictionary?.dashboard?.product?.category}
-                    className="border rounded-md py-1 px-3"
-                    {...register("category", { required: true })}
-                />
+                <select defaultValue="" {...register("category", { required: true })} className={`border rounded-md py-2 px-3 transition-all duration-200 ${value.category=="" && "text-neutral-500 focus:text-neutral-950"}`}>
+                    <option value="" disabled className="text-neutral-900">
+                        {dictionary?.dashboard?.product?.category}
+                    </option>
+                    {categories?.map((category) => (
+                        <option key={category.id} value={category.name}>{category.name}</option>
+                    ))}
+                </select>
                 <input
                     type="text"
                     placeholder={dictionary?.dashboard?.product?.description}
-                    className="border rounded-md py-1 px-3"
+                    className="border rounded-md py-1.5 px-3"
                     {...register("description", { required: true })}
                 />
                 <button type="submit" className="bg-(--Magenta) px-2 py-1 rounded-md">

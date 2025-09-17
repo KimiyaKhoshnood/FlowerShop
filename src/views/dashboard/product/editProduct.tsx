@@ -29,6 +29,7 @@ const DashboardEditProduct = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>("title");
     const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
     const [open, setOpen] = useState(false);
+    const [categories, setCategories] = useState<{ id: number, name: string }[]>();
     const router = useRouter()
 
     const {
@@ -58,7 +59,7 @@ const DashboardEditProduct = () => {
             },
         }).then((res) => {
             console.log("Done", res);
-            if (res.status == 200) {
+            if (res.status == 200 || res.status == 204) {
                 redirect(Links.dashboard.product(lang));
             }
         }).catch((error) => {
@@ -75,6 +76,14 @@ const DashboardEditProduct = () => {
             setProductDetails(res.data);
         });
     }, [id]);
+
+    useEffect(() => {
+        axios(
+            `${baseUrl}${endpoints.categories}/`
+        ).then((res) => {
+            setCategories(res.data);
+        });
+    }, []);
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         const token = Cookie.get("accessToken");
@@ -184,12 +193,21 @@ const DashboardEditProduct = () => {
                             className="flex justify-center min-w-80 w-full"
                             onSubmit={handleSubmit(onSubmit)}
                         >
-                            <input
-                                type="text"
-                                placeholder={capitalizeFirstLetter(selectedCategory)}
-                                className={`border border-gray-300 px-4 py-2 focus:outline-0 w-full ${lang == 'fa' ? "rounded-r-lg" : "rounded-l-lg"}`}
-                                {...register("input", { required: dictionary?.dashboard?.product?.fieldRequired })}
-                            />
+                            {selectedCategory == "category"
+                                ? <select
+                                    {...register("input", { required: dictionary?.dashboard?.product?.fieldRequired })}
+                                    className={`border border-gray-300 px-4 py-2 focus:outline-0 w-full ${lang == 'fa' ? "rounded-r-lg" : "rounded-l-lg"}`}
+                                >
+                                    {categories?.map((category) => (
+                                        <option key={category.id} value={category.name}>{category.name}</option>
+                                    ))}
+                                </select>
+                                : <input
+                                    type="text"
+                                    placeholder={capitalizeFirstLetter(selectedCategory)}
+                                    className={`border border-gray-300 px-4 py-2 focus:outline-0 w-full ${lang == 'fa' ? "rounded-r-lg" : "rounded-l-lg"}`}
+                                    {...register("input", { required: dictionary?.dashboard?.product?.fieldRequired })}
+                                />}
                             <button
                                 type="submit"
                                 className={`bg-emerald-500/80 hover:bg-emerald-500 cursor-pointer text-white py-2 px-5 ${lang == 'fa' ? "rounded-l-lg" : "rounded-r-lg"}`}
