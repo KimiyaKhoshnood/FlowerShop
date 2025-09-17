@@ -1,6 +1,6 @@
 import { Footer, Header } from "@/components/headerAndFooter";
 import ContextProviderLayout from "@/context/context";
-import { getDictionary } from "@/dictionaries/dictionaries";
+import { getDictionary } from "@/i18n/dictionaries";
 import { LanguageProvider } from "@/providers/LanguageProvider";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
