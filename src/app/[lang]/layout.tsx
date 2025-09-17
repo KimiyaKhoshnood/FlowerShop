@@ -2,7 +2,23 @@ import { Footer, Header } from "@/components/headerAndFooter";
 import ContextProviderLayout from "@/context/context";
 import { getDictionary } from "@/dictionaries/dictionaries";
 import { LanguageProvider } from "@/providers/LanguageProvider";
+import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
+
+const iranSans = localFont({
+  src: "../../../public/fonts/MbSansFont_Medium.ttf",
+});
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export default async function Layout({
   children,
@@ -21,7 +37,7 @@ export default async function Layout({
   const dictionary = await getDictionary(resolvedParams.lang)
 
   return (
-    <div className="!min-h-screen flex flex-col" lang={resolvedParams.lang} dir={resolvedParams.lang === 'fa' ? 'rtl' : 'ltr'}>
+    <div className={`${resolvedParams.lang == 'fa' ? iranSans.className : (geistSans.variable, geistMono.variable)} antialiased !min-h-screen flex flex-col`} lang={resolvedParams.lang} dir={resolvedParams.lang === 'fa' ? 'rtl' : 'ltr'}>
       <ContextProviderLayout>
         <LanguageProvider dictionary={dictionary} lang={resolvedParams.lang}>
           <Header />
