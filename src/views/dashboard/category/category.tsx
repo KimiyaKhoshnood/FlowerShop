@@ -16,7 +16,7 @@ const Category = ({ allCategories }: { allCategories: ICategory[] }) => {
                     allCategories?.map((category) => (
                         <div key={category.id} className='border p-7 rounded-lg text-center shadow bg-gradient-to-b from-(--BabyPink) to-transparent'>
                             <h4 className='text-2xl font-bold'>{category.name}</h4>
-                            <span>id: {category.id}</span>
+                            <span>{dictionary?.dashboard?.category?.id}: {category.id}</span>
                         </div>
                     ))
                 }

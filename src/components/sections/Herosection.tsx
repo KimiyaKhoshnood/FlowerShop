@@ -4,8 +4,6 @@ import ButtonUI from "@/components/ButtonUI";
 import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
 import Image from "next/image";
-import CustomerService from "../../../public/Customer-Service.svg";
-import Tulip from "../../../public/tulipSvg.svg";
 
 type IFeature = {
   image: string;
@@ -13,33 +11,6 @@ type IFeature = {
   description: string;
   id: string;
 };
-
-const featuresProps: IFeature[] = [
-  {
-    image: "/Price.svg",
-    title: "Wholesale Prices",
-    description: "Vel at hendrerit urna et maecenas venenatis.",
-    id: "1",
-  },
-  {
-    image: "Credit-Card-Blocked.svg",
-    title: "Secure Checkout",
-    description: "Vitae gravida arcu, ante lorem leo.",
-    id: "2",
-  },
-  {
-    image: Tulip,
-    title: "Best Quality",
-    description: "Tincidunt mattis vitae at massa id.",
-    id: "3",
-  },
-  {
-    image: CustomerService,
-    title: "Client Service",
-    description: "Donec potenti velit est vivamus velit.",
-    id: "4",
-  },
-];
 
 const Herosection = () => {
   const { lang, dictionary } = useLanguage()

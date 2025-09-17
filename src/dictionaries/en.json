@@ -8,6 +8,19 @@
         "products": "Products",
         "categories": "Categories"
     },
+    "auth": {
+        "login": "Login",
+        "register": "Register",
+        "username": "Username",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "password": "Password",
+        "repeatPassword": "Repeat Password",
+        "email": "Email",
+        "check": "Check",
+        "loginToRegister": "New User?",
+        "registerToLogin": "Already Have an Account?"
+    },
     "home": {
         "hero": {
             "title": "Fresh Wholesale Flowers",
@@ -52,7 +65,25 @@
     "store": {
         "title": "Shop All Flowers",
         "showAll": "Show All",
-        "category": "Category"
+        "showMore": "Show More",
+        "showLess": "Show Less",
+        "category": "Category",
+        "perFlower": "per flower",
+        "addProduct": "Add Product",
+        "alsoLike": "You may also like",
+        "backButton": "Back To {0} Category",
+        "details": {
+            "colour": "Colour",
+            "bloomCount": "Bloom Count",
+            "stemsNumber": "Number of stems (Bunch)",
+            "openingSpeed": "Opening Speed",
+            "vaseLine": "Vase Line",
+            "headSize": "Head Size",
+            "stemSize": "Stem Size",
+            "availability": "Availability",
+            "reviews": "Reviews",
+            "productCare": "Product Care"
+        }
     },
     "category": {
         "title": "Shop by Category",
@@ -91,7 +122,7 @@
             "created": "Created"
         },
         "product": {
-            "title": "Edit Product",
+            "productTitle": "Edit Product",
             "editProductTitle": "What do you want to change?",
             "change": "Change",
             "fieldRequired": "Field is Required!",
@@ -101,10 +132,18 @@
             "deleteModalTitle": "Are You Sure?",
             "deleteModalContent": "This action can't be undone and it will be deleted permenantly.",
             "copy": "copy",
-            "addProduct": "Add Product"
+            "addProduct": "Add Product",
+            "title": "Title",
+            "price": "Price",
+            "image": "Image",
+            "category": "Category",
+            "description": "Description"
         },
         "category": {
-            "title": "Categories"
+            "title": "Categories",
+            "add": "Add",
+            "name": "Name",
+            "id": "id"
         },
         "orders": {
             "title": "Sales Dashboard",
@@ -138,6 +177,5 @@
         "caption": "Terms and Conditions apply.",
         "button": "Shop now"
     },
-    "footer": "Developed By Kimia Khoshnood As A Test Project.",
-    "title": "hi"
+    "footer": "Developed By Kimia Khoshnood As A Test Project."
 }

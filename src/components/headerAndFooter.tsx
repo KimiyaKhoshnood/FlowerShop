@@ -41,11 +41,16 @@ export const Header = () => {
       </List>
       <Divider />
       <List>
+        <ListItem disablePadding>
+          <ListItemButton href={pathname.includes('fa') ? pathname.replace('fa', 'en') : pathname.replace('en', 'fa')}>
+            <ListItemText primary="Fa/En" />
+          </ListItemButton>
+        </ListItem>
         {
           Cookie.get("accessToken") ? (
             <ListItem disablePadding>
               <ListItemButton>
-                <LogoutButton />
+                <div className="w-full"><LogoutButton /></div>
               </ListItemButton>
             </ListItem>
           ) : (
@@ -66,7 +71,7 @@ export const Header = () => {
         <div className="md:hidden block">
           <div className="flex relative" onClick={() => setOpenSidebar(!openSidebar)}>
             <Image alt="HamMenuIcon" src={HamMenuIcon} className="cursor-pointer" />
-            <Drawer open={openSidebar} onClose={toggleDrawer(false)}>{DrawerList}</Drawer>
+            <Drawer anchor={lang == 'fa' ? 'right' : 'left'} open={openSidebar} onClose={toggleDrawer(false)}>{DrawerList}</Drawer>
           </div>
         </div>
         <div className="flex gap-8 items-center">
@@ -79,7 +84,11 @@ export const Header = () => {
           {/* <Link className={pathname == Links.dashboard.base ? "border-b-2" : ""} href={Links.dashboard.base}>Dashboard</Link> */}
         </div>
         <div className="flex gap-5 items-center">
-          <Link href={pathname.includes('fa') ? pathname.replace('fa','en') : pathname.replace('en','fa')} className="text-(--Burgundy) px-0.5 py-1.5 hover:bg-neutral-100 rounded-md cursor-pointer">Fa/En</Link>
+          <Link
+            href={pathname.includes('fa') ? pathname.replace('fa', 'en') : pathname.replace('en', 'fa')}
+            className="text-(--Burgundy) px-0.5 py-1.5 hover:bg-neutral-100 rounded-md cursor-pointer md:block hidden">
+            Fa/En
+          </Link>
           <Link href={Links.bag(lang)} className="flex relative">
             <Image alt="Bag" src={Bag} />{" "}
             <div className="flex items-end absolute -bottom-1 -right-2">
@@ -146,7 +155,7 @@ export const DashboardHeader = () => {
 
 export const Footer = () => {
   const { dictionary } = useLanguage()
-  
+
   return <footer className="shadow flex justify-between items-center gap-5 p-10">
     <p className="text-center text-xs text-(--Burgundy)">{dictionary?.footer}</p>
     <Image alt="" src={logo} />

@@ -1,3 +1,5 @@
+"use client"
+
 import { IEachProduct } from '@/types/types'
 import AddToCard from '@/components/AddToCard'
 import CardPrice from '@/components/CardPrice'
@@ -5,8 +7,11 @@ import EachProductDetails from '@/components/EachProductDetails'
 import HotDeals from '@/components/sections/HotDeals'
 import SimilarProducts from '@/components/sections/SimilarProducts'
 import React from 'react'
+import { useLanguage } from '@/providers/LanguageProvider'
 
 const ProductView = ({ product, resolvedParams }: { product: IEachProduct, resolvedParams: { id: string } }) => {
+    const { dictionary } = useLanguage()
+    
     return (
         <>
             <div className="lg:bg-(--Burgundy)/10">
@@ -33,7 +38,7 @@ const ProductView = ({ product, resolvedParams }: { product: IEachProduct, resol
                             className="text-(--Burgundy) text-3xl"
                             justify="items-center"
                         />
-                        <span className="text-(--Burgundy) text-nowrap">per flower</span>
+                        <span className="text-(--Burgundy) text-nowrap">{dictionary?.store?.perFlower}</span>
                     </div>
                     <AddToCard id={resolvedParams.id} />
                 </div>

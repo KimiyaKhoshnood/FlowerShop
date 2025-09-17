@@ -96,7 +96,7 @@ const OrderList = ({
           <div className="grid grid-cols-5 gap-5 bg-neutral-100 p-2">
             {
               dictionary?.dashboard?.orders?.detailsHeaders?.map((header: string) => (
-                <div className="text-center">{header}</div>
+                <div key={header} className="text-center">{header}</div>
               ))
             }
           </div>

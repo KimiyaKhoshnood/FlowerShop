@@ -87,13 +87,13 @@ const DashboardAddProduct = () => {
             >
                 <input
                     type="text"
-                    placeholder="Title"
+                    placeholder={dictionary?.dashboard?.product?.title}
                     className="border rounded-md py-1 px-3"
                     {...register("title", { required: true })}
                 />
                 <input
                     type="text"
-                    placeholder="Price"
+                    placeholder={dictionary?.dashboard?.product?.price}
                     className="border rounded-md py-1 px-3"
                     {...register("price", {
                         required: true,
@@ -108,19 +108,19 @@ const DashboardAddProduct = () => {
                 )}
                 <input
                     type="text"
-                    placeholder="Image"
+                    placeholder={dictionary?.dashboard?.product?.image}
                     className="border rounded-md py-1 px-3"
                     {...register("image", { required: true })}
                 />
                 <input
                     type="text"
-                    placeholder="Category"
+                    placeholder={dictionary?.dashboard?.product?.category}
                     className="border rounded-md py-1 px-3"
                     {...register("category", { required: true })}
                 />
                 <input
                     type="text"
-                    placeholder="Description"
+                    placeholder={dictionary?.dashboard?.product?.description}
                     className="border rounded-md py-1 px-3"
                     {...register("description", { required: true })}
                 />

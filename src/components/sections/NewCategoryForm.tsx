@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Cookie from "js-cookie";
 import { Alert, Snackbar } from '@mui/material';
 import { baseUrl, endpoints } from '@/constants/endpoints';
+import { useLanguage } from '@/providers/LanguageProvider';
 
 type Inputs = {
     categoryName: string;
@@ -18,6 +19,7 @@ const NewCategoryForm = () => {
         // formState: { errors },
     } = useForm<Inputs>();
 
+    const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -61,12 +63,12 @@ const NewCategoryForm = () => {
             >
                 <input
                     type="text"
-                    placeholder="Name"
+                    placeholder={dictionary?.dashboard?.category?.name}
                     className="border rounded-md py-1 px-3"
                     {...register("categoryName", { required: true })}
                 />
                 <button type="submit" className="bg-(--Magenta) px-2 py-1 rounded-md">
-                    Add
+                    {dictionary?.dashboard?.category?.add}
                 </button>
             </form>
         </div>

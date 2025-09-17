@@ -48,7 +48,7 @@ const Login = () => {
     return (
         <>
             <div className="border border-gray-300 rounded-2xl p-16 flex flex-col justify-between gap-5">
-                <h1 className="text-4xl text-center pb-10">Login</h1>
+                <h1 className="text-4xl text-center pb-10">{dictionary?.auth?.login}</h1>
                 <form
                     action=""
                     className="flex flex-col gap-3 items-center"
@@ -56,23 +56,23 @@ const Login = () => {
                 >
                     <input
                         type="text"
-                        placeholder="Username"
+                        placeholder={dictionary?.auth?.username}
                         className="border rounded-md py-2 px-4"
                         {...register("username", { required: true })}
                     />
                     <input
                         type="text"
-                        placeholder="Password"
+                        placeholder={dictionary?.auth?.password}
                         className="border rounded-md py-2 px-4"
                         {...register("password", { required: true })}
                     />
-                    <ButtonUI text="Check" className="bg-(--Magenta)" />
+                    <ButtonUI text={dictionary?.auth?.check} className="bg-(--Magenta)" />
                 </form>
             </div>
             <p>
-                New User?{" "}
+                {dictionary?.auth?.loginToRegister}{" "}
                 <span className="text-blue-500 hover:text-blue-600">
-                    <Link href={Links.register(lang)}>Register!</Link>
+                    <Link href={Links.register(lang)}>{dictionary?.auth?.register}!</Link>
                 </span>
             </p>
         </>

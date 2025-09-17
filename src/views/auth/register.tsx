@@ -55,7 +55,7 @@ const Register = () => {
     return (
         <>
             <div className="border border-gray-300 rounded-2xl py-10 px-16 flex flex-col justify-between gap-5">
-                <h1 className="text-4xl text-center pb-10">Register</h1>
+                <h1 className="text-4xl text-center pb-10">{dictionary?.auth?.register}</h1>
                 <form
                     action=""
                     className="flex flex-col gap-2 items-center"
@@ -63,47 +63,47 @@ const Register = () => {
                 >
                     <input
                         type="text"
-                        placeholder="Username"
+                        placeholder={dictionary?.auth?.username}
                         className="border rounded-md py-1 px-4"
                         {...register("username", { required: true })}
                     />
                     <input
                         type="text"
-                        placeholder="Password"
+                        placeholder={dictionary?.auth?.password}
                         className="border rounded-md py-1 px-4"
                         {...register("password", { required: true })}
                     />
                     <input
                         type="text"
-                        placeholder="Password 2"
+                        placeholder={dictionary?.auth?.repeatPassword}
                         className="border rounded-md py-1 px-4"
                         {...register("password2", { required: true })}
                     />
                     <input
                         type="text"
-                        placeholder="Email"
+                        placeholder={dictionary?.auth?.email}
                         className="border rounded-md py-1 px-4"
                         {...register("email", { required: true })}
                     />
                     <input
                         type="text"
-                        placeholder="First Name"
+                        placeholder={dictionary?.auth?.firstName}
                         className="border rounded-md py-1 px-4"
                         {...register("first_name", { required: true })}
                     />
                     <input
                         type="text"
-                        placeholder="Last Name"
+                        placeholder={dictionary?.auth?.lastName}
                         className="border rounded-md py-1 px-4"
                         {...register("last_name", { required: true })}
                     />
-                    <ButtonUI text="Check" className="bg-(--Magenta)" />
+                    <ButtonUI text={dictionary?.auth?.check} className="bg-(--Magenta)" />
                 </form>
             </div>
             <p>
-                New User?{" "}
+                {dictionary?.auth?.registerToLogin}{" "}
                 <span className="text-blue-500 hover:text-blue-600">
-                    <Link href={Links.login(lang)}>Login!</Link>
+                    <Link href={Links.login(lang)}>{dictionary?.auth?.login}!</Link>
                 </span>
             </p>
         </>

@@ -7,11 +7,13 @@ import ChartRadialBar from "./ChartRadialBar";
 import Rate from "./Rate";
 import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { stringFormat } from "@/utils/utils";
 
 const EachProductDetails = ({
   title,
   image,
   description,
+  category
 }: IEachProduct) => {
   const { lang, dictionary } = useLanguage()
   const [showMore, setShowMore] = useState(true);
@@ -30,7 +32,7 @@ const EachProductDetails = ({
       <div className="flex flex-col pt-5 justify-between items-center lg:bg-inherit bg-(--Burgundy)/10">
         <div className="w-full text-(--Burgundy) text-lg lg:block hidden">
           <Link href={Links.store(lang)} className="font-bold">
-            {"< Back To Tulip Category"}
+            {'<'} {stringFormat(dictionary?.store?.backButton, category)}
           </Link>
         </div>
         <img
@@ -49,18 +51,18 @@ const EachProductDetails = ({
         className={`${showMore ? "flex" : "hidden"} flex-col gap-3 lg:p-0 px-5`}
       >
         <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex justify-between">
-          <span>{"Colour".toUpperCase()}</span>
+          <span>{dictionary?.store?.details?.colour?.toUpperCase()}</span>
           <span className="text-(--Burgundy)">Purpleish Blue</span>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between gap-3">
-            <span>{"Bloom Count".toUpperCase()}</span>
+            <span>{dictionary?.store?.details?.bloomCount?.toUpperCase()}</span>
             <span className="text-(--Burgundy) w-full text-end font-bold text-3xl">
               3
             </span>
           </div>
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between gap-3">
-            <span>{"Number of stems (Bunch)".toUpperCase()}</span>
+            <span>{dictionary?.store?.details?.stemsNumber?.toUpperCase()}</span>
             <span className="text-(--Burgundy) w-full text-end font-bold text-3xl">
               10
             </span>
@@ -68,7 +70,7 @@ const EachProductDetails = ({
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between">
-            <span>{"Opening Speed".toUpperCase()}</span>
+            <span>{dictionary?.store?.details?.openingSpeed?.toUpperCase()}</span>
             <ChartRadialBar
               data={[{ name: "Vase Life", value: 70, fill: "#4E0629" }]}
             />
@@ -77,7 +79,7 @@ const EachProductDetails = ({
             </div>
           </div>
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between">
-            <span>{"Vase Line".toUpperCase()}</span>
+            <span>{dictionary?.store?.details?.vaseLine?.toUpperCase()}</span>
             <ChartRadialBar
               data={[{ name: "Vase Life", value: 70, fill: "#4E0629" }]}
             />
@@ -88,13 +90,13 @@ const EachProductDetails = ({
         </div>
         <div className="grid grid-cols-2 gap-3 h-full">
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between gap-3 h-full">
-            <span>{"Head Size".toUpperCase()}</span>
+            <span>{dictionary?.store?.details?.headSize?.toUpperCase()}</span>
             <div className="text-(--Burgundy) w-full text-end">
               <span className="font-bold text-xl">6 - 7</span> <span>cm</span>
             </div>
           </div>
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between gap-3 h-full">
-            <span>{"Stem Size".toUpperCase()}</span>
+            <span>{dictionary?.store?.details?.stemSize?.toUpperCase()}</span>
             <div className="text-(--Burgundy) w-full text-end">
               <span className="font-bold text-xl">40 - 50</span> <span>cm</span>
             </div>
@@ -107,7 +109,7 @@ const EachProductDetails = ({
       >
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between gap-3">
-            <span>{"Availability".toUpperCase()}</span>
+            <span>{dictionary?.store?.details?.availability?.toUpperCase()}</span>
             <div className="w-full text-sm grid grid-cols-3 gap-2">
               <span className="text-center rounded-lg p-1 bg-(--Burgundy) text-white">
                 Jan
@@ -151,7 +153,7 @@ const EachProductDetails = ({
             </div>
           </div>
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between gap-3">
-            <span>{"Reviews".toUpperCase()}</span>
+            <span>{dictionary?.store?.details?.reviews?.toUpperCase()}</span>
             <div className=" w-full">
               <div className="text-center">
                 <Rate />
@@ -167,7 +169,7 @@ const EachProductDetails = ({
           </div>
         </div>
         <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 p-4 rounded-lg flex flex-col justify-between h-full gap-5">
-          <h3>{"Product Care".toUpperCase()}</h3>
+          <h3>{dictionary?.store?.details?.productCare?.toUpperCase()}</h3>
           <div className="text-(--Burgundy) flex flex-col gap-3">
             <p>
               Cut stems on an angle and remove any foliage below the water
@@ -190,7 +192,7 @@ const EachProductDetails = ({
         className="text-(--Burgundy) lg:hidden block px-5 rounded-2xl"
       >
         <ButtonUI
-          text={showMore ? "Show Less" : "Show More"}
+          text={showMore ? dictionary?.store?.showLess : dictionary?.store?.showMore}
           className="bg-(--Burgundy)/10 w-full"
         />
       </div>

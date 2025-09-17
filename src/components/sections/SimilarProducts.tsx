@@ -19,7 +19,7 @@ const SimilarProducts = () => {
     <div className="md:px-10 px-5 py-10">
       <div className="flex justify-between lg:px-10">
         <h2 className="sm:text-4xl text-3xl text-(--Burgundy) font-bold">
-          You may also like
+          {dictionary?.store?.alsoLike}
         </h2>
       </div>
       <div className="py-7 lg:px-10">

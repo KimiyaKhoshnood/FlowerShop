@@ -8,6 +8,19 @@
         "products": "محصولات",
         "categories": "کتگوری ها"
     },
+    "auth": {
+        "login": "ورود",
+        "register": "ثبت نام",
+        "username": "نام کاربری",
+        "firstName": "نام",
+        "lastName": "نام خانوادگی",
+        "password": "رمز عبور",
+        "repeatPassword": "تکرار رمز عبور",
+        "email": "ایمیل",
+        "check": "بررسی",
+        "loginToRegister": "کاربر جدبد هستید؟",
+        "registerToLogin": "حساب کاربری دارید؟"
+    },
     "home": {
         "hero": {
             "title": "فروش عمده گل های تازه",
@@ -52,7 +65,25 @@
     "store": {
         "title": "خرید انواع گل ها",
         "showAll": "نشان دادن همه",
-        "category": "دسته بندی"
+        "showMore": "نشان دادن بیشتر",
+        "showLess": "نشان دادن کمتر",
+        "category": "دسته بندی",
+        "perFlower": "برای هر گل",
+        "addProduct": "افزودن محصول",
+        "alsoLike": "ممکنه از این ها هم خوشت بیاد؟",
+        "backButton": "برگشت به کتگوری {0}",
+        "details": {
+            "colour": "رنگ",
+            "bloomCount": "تعداد شکوفه‌ها",
+            "stemsNumber": "تعداد ساقه‌ها (دسته)",
+            "openingSpeed": "سرعت باز شدن",
+            "vaseLine": "خط گلدان",
+            "headSize": "اندازه سر",
+            "stemSize": "اندازه ساقه‌",
+            "availability": "در دسترس بودن",
+            "reviews": "بررسی ها",
+            "productCare": "نگهداری محصول"
+        }
     },
     "category": {
         "title": "خرید بر اساس دسته بندی",
@@ -91,7 +122,7 @@
             "created": "ساخته شد"
         },
         "product": {
-            "title": "ویرایش محصول",
+            "productTitle": "ویرایش محصول",
             "editProductTitle": "چه چیزی رو میخوای تغییر بدی؟",
             "change": "تغییر",
             "fieldRequired": "فیلد اجباری است!",
@@ -101,10 +132,18 @@
             "deleteModalTitle": "آیا از این کار مطمئنی؟",
             "deleteModalContent": "این اقدام قابل بازگشت نیست و برای همیشه حذف خواهد شد.",
             "copy": "کپی",
-            "addProduct": "افزودن محصول"
+            "addProduct": "افزودن محصول",
+            "title": "نام",
+            "price": "قیمت",
+            "image": "عکس",
+            "category": "دسته بندی",
+            "description": "توضیحات"
         },
         "category": {
-            "title": "دسته بندی ها"
+            "title": "دسته بندی ها",
+            "add": "اضافه کردن",
+            "name": "نام",
+            "id": "آیدی"
         },
         "orders": {
             "title": "داشبورد فروش",
@@ -138,6 +177,5 @@
         "caption": "شرایط و ضوابط اعمال می‌شود.",
         "button": "الان بخرید"
     },
-    "footer": "این وبسایت یک پروژه تستی توسط کیمیا خوشنود است.",
-    "title": "سلام"
+    "footer": "این وبسایت یک پروژه تستی توسط کیمیا خوشنود است."
 }

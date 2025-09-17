@@ -1,6 +1,7 @@
 "use client";
 import { useShoppingItemsContext } from "@/context/context";
 import ButtonUI from "./ButtonUI";
+import { useLanguage } from "@/providers/LanguageProvider";
 
 export const ProductQty = () => {
   const { shoppingItems } = useShoppingItemsContext();
@@ -12,6 +13,7 @@ export const ProductQty = () => {
 };
 
 const AddToCard = ({ id }: { id: string }) => {
+  const { dictionary } = useLanguage()
   const { handleIncreaseProduct, handleDecreaseProduct, shoppingItems } =
     useShoppingItemsContext();
 
@@ -34,7 +36,7 @@ const AddToCard = ({ id }: { id: string }) => {
           className="w-fit rounded-3xl"
         >
           <ButtonUI
-            text="Add Product"
+            text={dictionary?.store?.addProduct}
             className="bg-(--Magenta) text-white text-nowrap"
           />
         </div>

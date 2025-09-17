@@ -4,6 +4,7 @@ import { createContext, useContext } from "react";
 
 interface LanguageContextType {
     lang: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dictionary: Record<string, any>;
 }
 
@@ -26,6 +27,7 @@ export const LanguageProvider = ({
 }: {
     children: React.ReactNode;
     lang: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dictionary: Record<string, any>;
 }) => {
     return (

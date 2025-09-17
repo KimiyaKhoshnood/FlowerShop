@@ -85,7 +85,7 @@ const Dashboard = () => {
             <h2 className="text-center p-5 text-4xl">{dictionary?.dashboard?.orders?.title}</h2>
             <div className="grid grid-cols-5 items-center bg-neutral-50 rounded-t-lg text-center sm:text-xl py-1">
                 {dictionary?.dashboard?.orders?.headers?.map((header:string)=>(
-                    <div className="py-2">{header}</div>
+                    <div key={header} className="py-2">{header}</div>
                 ))}
             </div>
             {orderList && orderList.map((elem, i) => {
