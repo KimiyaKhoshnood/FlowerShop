@@ -12,10 +12,8 @@ import { useLanguage } from "@/providers/LanguageProvider";
 
 const Categories = () => {
     const { lang, dictionary } = useLanguage()
-    const { loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
+    const { data, loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
     const [categories, setCategories] = useState<string[]>([]);
-
-    const { data } = useDataClient(`${baseUrl}${endpoints.products}/`);
 
     const allProducts: IEachProduct[] = useMemo(() => {
         return data || [];

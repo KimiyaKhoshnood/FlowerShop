@@ -17,9 +17,8 @@ const ProductsByCategory = () => {
 
   const [url, setUrl] = useState(searchParams.get("category") || "");
 
-  const { loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
-  const allProducts: IEachProduct[] =
-    useDataClient(`${baseUrl}${endpoints.products}/`).data || [];
+  const { data: allProducts = [], loading }: { data?: IEachProduct[], loading: boolean } = useDataClient(`${baseUrl}${endpoints.products}/`);
+
   const finalProducts: IEachProduct[] =
     useDataClient(
       `${baseUrl}${endpoints.products}/${url == "" ? "" : "?category=" + url}`

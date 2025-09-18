@@ -27,7 +27,7 @@ const Discount = () => {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const token = Cookie.get("accessToken")
-    axios(`${baseUrl}${endpoints.discounts}?code=${data.discount}/`, {
+    axios(`${baseUrl}${endpoints.discounts}/?code=${data.discount}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

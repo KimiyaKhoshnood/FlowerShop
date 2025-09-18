@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const useDataClient = (url: string) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

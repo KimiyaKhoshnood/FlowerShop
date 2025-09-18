@@ -1,3 +1,5 @@
+import Cookie from "js-cookie";
+
 export const capitalizeFirstLetter = (val: string) => {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
@@ -8,4 +10,8 @@ export const stringFormat = (pattern: string, ...params: Array<string>): string 
         outputString = outputString.replace("{" + (i) + "}", params[i]);
     }
     return outputString
+}
+
+export const getAccessToken = () => {
+    return Cookie.get("accessToken")
 }
