@@ -1,5 +1,5 @@
+import { GetProductByID } from "@/services/GetServerSideData";
 import { IEachProduct } from "@/types/types";
-import { GetProductByID } from "@/data/GetData";
 import ProductView from "@/views/productView/productView";
 
 type TPageProps = {

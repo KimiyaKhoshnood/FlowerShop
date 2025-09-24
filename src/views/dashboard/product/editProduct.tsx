@@ -1,7 +1,7 @@
 "use client";
-import { baseUrl, endpoints } from "@/constants/endpoints";
 import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { DeleteProductsService, GetCategoriesService, GetProductService, PatchProductsService } from "@/services/services";
 import { capitalizeFirstLetter } from "@/utils/utils";
 import {
     Alert,
@@ -13,8 +13,6 @@ import {
     DialogTitle,
     Snackbar,
 } from "@mui/material";
-import axios from "axios";
-import Cookie from "js-cookie";
 import { redirect, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -32,6 +30,8 @@ const DashboardEditProduct = () => {
     const [categories, setCategories] = useState<{ id: number, name: string }[]>();
     const router = useRouter()
 
+    const id = useParams().id;
+
     const {
         register,
         handleSubmit,
@@ -43,69 +43,49 @@ const DashboardEditProduct = () => {
         reset()
     }, [selectedCategory])
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const handleClickOpen = () => setOpen(true)
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const handleClose = () => setOpen(false)
 
     const handleDelete = () => {
-        const token = Cookie.get("accessToken");
-        axios.delete(`${baseUrl}${endpoints.products}/${id}/`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }).then((res) => {
-            console.log("Done", res);
-            if (res.status == 200 || res.status == 204) {
-                redirect(Links.dashboard.product(lang));
-            }
-        }).catch((error) => {
-            console.error("خطا در حذف:", error?.response?.data || error.message);
-        });
+        typeof id === 'string' && DeleteProductsService(id, DeleteProductsServiceCallback)
     };
 
-    const id = useParams().id;
-
     useEffect(() => {
-        axios(
-            `${baseUrl}${endpoints.products}/${id}/`
-        ).then((res) => {
-            setProductDetails(res.data);
-        });
+        typeof id === 'string' && GetProductService(id, ProductsServiceCallback)
     }, [id]);
 
     useEffect(() => {
-        axios(
-            `${baseUrl}${endpoints.categories}/`
-        ).then((res) => {
-            setCategories(res.data);
-        });
+        GetCategoriesService(CategoriesServiceCallback)
     }, []);
 
+    const PatchProductsServiceCallback = (_resultData: any, result: any) => {
+        if (!result.hasError) {
+            setOpenSuccessSnackbar(true);
+            router.push(Links.dashboard.product(lang))
+        }
+    }
+
+    const DeleteProductsServiceCallback = (_resultData: any, result: any) => {
+        if (!result.hasError) {
+            redirect(Links.dashboard.product(lang));
+        }
+    }
+
+    const ProductsServiceCallback = (resultData: any, result: any) => {
+        if (!result?.hasError) {
+            setProductDetails(resultData)
+        }
+    }
+
+    const CategoriesServiceCallback = (resultData: any, result: any) => {
+        if (!result?.hasError) {
+            setCategories(resultData)
+        }
+    }
+
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        const token = Cookie.get("accessToken");
-        axios
-            .patch(
-                `${baseUrl}${endpoints.products}/${id}/`,
-                {
-                    [selectedCategory]: data.input,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            )
-            .then((res) => {
-                console.log("Done", res);
-                if (res.status == 200) {
-                    setOpenSuccessSnackbar(true);
-                    router.push(Links.dashboard.product(lang))
-                }
-            });
+        typeof id === 'string' && PatchProductsService({ [selectedCategory]: data.input }, id, PatchProductsServiceCallback)
     };
 
     return (

@@ -1,16 +1,14 @@
 "use client"
 
+import ButtonUI from "@/components/ButtonUI";
 import Discount from "@/components/Discount";
 import ShoppingBagCard from "@/components/ShoppingBagCard";
-import ButtonUI from "@/components/ButtonUI";
-import { baseUrl, endpoints } from "@/constants/endpoints";
 import { useShoppingItemsContext } from "@/context/context";
+import { useLanguage } from "@/providers/LanguageProvider";
+import { GetProductsService, PostOrdersService } from "@/services/services";
 import { IEachProduct } from "@/types/types";
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from "@mui/material";
-import axios from "axios";
-import Cookie from "js-cookie";
 import { useEffect, useState } from "react";
-import { useLanguage } from "@/providers/LanguageProvider";
 
 const Bag = () => {
     const { dictionary } = useLanguage()
@@ -35,40 +33,38 @@ const Bag = () => {
         }, 0)
         .toFixed(2)
 
+    const ProductsServiceCallback = (resultData: any, result: any) => {
+        if (!result.hasError) {
+            setAllProducts(resultData);
+        }
+    }
+
     useEffect(() => {
-        axios(`${baseUrl}${endpoints.products}/`).then((res) => {
-            setAllProducts(res.data);
-        });
+        GetProductsService(ProductsServiceCallback);
     }, []);
 
     const handleClickOpen = () => setOpen(true);
 
     const handleClose = () => setOpen(false);
 
+    const OrdersServiceCallback = (_resultData: any, result: any) => {
+        if (!result.hasError) {
+            setOpenSnackbar(true);
+            handleCleanProducts();
+        }
+    }
+
     const handleBuy = () => {
         handleClose()
-        const token = Cookie.get("accessToken");
 
         if (shoppingItems[0]) {
-            axios
-                .post(`${baseUrl}${endpoints.orders}/`, {
-                    items: shoppingItems?.map((item) => ({
-                        product: Number(item.id),
-                        qty: Number(item.qty),
-                    })),
-                    id: 1,
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                .then((res) => {
-                    console.log(res);
-                    if (res.status == 201) {
-                        setOpenSnackbar(true);
-                        handleCleanProducts();
-                    }
-                });
+            PostOrdersService({
+                items: shoppingItems?.map((item) => ({
+                    product: Number(item.id),
+                    qty: Number(item.qty),
+                })),
+                id: 1,
+            }, OrdersServiceCallback)
         } else {
             console.log("Empty Bag!");
         }
@@ -102,26 +98,26 @@ const Bag = () => {
                     <DialogContentText id="alert-dialog-description">
                         <div
                             onClick={() => setPaymentMethod("Paypal")}
-                            className={`${paymentMethod=="Paypal" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
-                            <div className={`${paymentMethod=="Paypal" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
+                            className={`${paymentMethod == "Paypal" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
+                            <div className={`${paymentMethod == "Paypal" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
                             <div>Paypal</div>
                         </div>
                         <div
                             onClick={() => setPaymentMethod("Visa")}
-                            className={`${paymentMethod=="Visa" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
-                            <div className={`${paymentMethod=="Visa" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
+                            className={`${paymentMethod == "Visa" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
+                            <div className={`${paymentMethod == "Visa" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
                             <div>Visa</div>
                         </div>
                         <div
                             onClick={() => setPaymentMethod("Stripe")}
-                            className={`${paymentMethod=="Stripe" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
-                            <div className={`${paymentMethod=="Stripe" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
+                            className={`${paymentMethod == "Stripe" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
+                            <div className={`${paymentMethod == "Stripe" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
                             <div>Stripe</div>
                         </div>
                         <div
                             onClick={() => setPaymentMethod("Alipay")}
-                            className={`${paymentMethod=="Alipay" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
-                            <div className={`${paymentMethod=="Alipay" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
+                            className={`${paymentMethod == "Alipay" ? "border-(--Burgundy) text-(--Burgundy)" : "border-(--Burgundy)/20 text-(--Burgundy)/80"} cursor-pointer border rounded-lg flex items-center gap-3 p-4 my-1`}>
+                            <div className={`${paymentMethod == "Alipay" ? "bg-(--Burgundy) outline-(--Burgundy)" : "bg-(--Burgundy)/20 outline-(--Burgundy)/20"}  w-3 h-3 rounded-full border-2 outline-2 border-white`}></div>
                             <div>Alipay</div>
                         </div>
                     </DialogContentText>

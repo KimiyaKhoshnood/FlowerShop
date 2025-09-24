@@ -1,12 +1,10 @@
 "use client"
 
-import axios from 'axios';
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Cookie from "js-cookie";
 import { Alert, Snackbar } from '@mui/material';
-import { baseUrl, endpoints } from '@/constants/endpoints';
 import { useLanguage } from '@/providers/LanguageProvider';
+import { PostCategoriesService } from '@/services/services';
 
 type Inputs = {
     categoryName: string;
@@ -22,26 +20,17 @@ const NewCategoryForm = () => {
     const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
-        const token = Cookie.get("accessToken")
-        axios({
-            method: "POST",
-            url: `${baseUrl}${endpoints.categories}/`,
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            data: { name: data.categoryName },
-        }).then((res) => {
-            console.log(res);
-            if (res.status == 201) {
-                setOpenSnackbar(true);
-                window.location.reload()
-            }
-        }).catch((err) => {
-            console.error("Error creating product:", err.response?.data || err.message);
+    const CategoriesServiceCallback = (resultData: any, result: any) => {
+        if (!result.hasError) {
+            setOpenSnackbar(true);
+            window.location.reload()
+        } else {
+            console.error("Error creating product:", resultData || result);
+        }
+    }
 
-        });;
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        PostCategoriesService({ name: data.categoryName }, CategoriesServiceCallback)
     };
 
     return (

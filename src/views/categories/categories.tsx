@@ -1,23 +1,31 @@
 "use client"
 
-import HotDeals from "@/components/sections/HotDeals";
 import ButtonUI from "@/components/ButtonUI";
-import { baseUrl, endpoints } from "@/constants/endpoints";
-import useDataClient from "@/data/GetDataClient";
-import { IEachProduct } from "@/types/types";
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import HotDeals from "@/components/sections/HotDeals";
 import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { GetProductsService } from "@/services/services";
+import { IEachProduct } from "@/types/types";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Categories = () => {
     const { lang, dictionary } = useLanguage()
-    const { data, loading } = useDataClient(`${baseUrl}${endpoints.products}/`);
+    const [allProducts, setAllProducts] = useState<IEachProduct[]>([])
+    const [loading, setLoading] = useState(false)
     const [categories, setCategories] = useState<string[]>([]);
 
-    const allProducts: IEachProduct[] = useMemo(() => {
-        return data || [];
-    }, [data]);
+    const ProductsServiceCallback = (resultData: any, result: any) => {
+        setLoading(false)
+        if (!result.hasError) {
+            setAllProducts(resultData)
+        }
+    }
+
+    useEffect(() => {
+        setLoading(true)
+        GetProductsService(ProductsServiceCallback)
+    }, [])
 
     useEffect(() => {
         if (allProducts) {

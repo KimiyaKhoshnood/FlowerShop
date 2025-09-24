@@ -1,10 +1,8 @@
 "use client"
 
-import { baseUrl, endpoints } from "@/constants/endpoints";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { GetCategoriesService, PostProductService } from "@/services/services";
 import { Alert, Snackbar } from "@mui/material";
-import axios from "axios";
-import Cookie from "js-cookie";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -30,31 +28,25 @@ const DashboardAddProduct = () => {
     const [categories, setCategories] = useState<{ id: number, name: string }[]>();
 
     useEffect(() => {
-        axios(
-            `${baseUrl}${endpoints.categories}/`
-        ).then((res) => {
-            setCategories(res.data);
-        });
+        GetCategoriesService(CategoriesServiceCallback)
     }, []);
 
+    const CategoriesServiceCallback = (resultData: any, result: any) => {
+        if (!result.hasError) {
+            setCategories(resultData);
+        }
+    }
+
+    const ProductServiceCallback = (resultData: any, result: any) => {
+        if (!result.hasError) {
+            setOpenSnackbar(true);
+        } else {
+            console.error("Error creating product:", resultData || result)
+        }
+    }
+
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
-        const token = Cookie.get("accessToken")
-        axios({
-            method: "POST",
-            url: `${baseUrl}${endpoints.products}/`,
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            data: { ...data, price: parseInt(data.price) },
-        }).then((res) => {
-            console.log(res);
-            if (res.status == 201) {
-                setOpenSnackbar(true);
-            }
-        }).catch((err) => {
-            console.error("Error creating product:", err.response?.data || err.message);
-        });;
+        PostProductService({ ...data, price: parseInt(data.price) }, ProductServiceCallback)
     };
 
     return (
@@ -103,7 +95,7 @@ const DashboardAddProduct = () => {
                     className="border rounded-md py-1 px-3"
                     {...register("image", { required: true })}
                 />
-                <select defaultValue="" {...register("category", { required: true })} className={`border rounded-md py-2 px-3 transition-all duration-200 ${value.category=="" && "text-neutral-500 focus:text-neutral-950"}`}>
+                <select defaultValue="" {...register("category", { required: true })} className={`border rounded-md py-2 px-3 transition-all duration-200 ${value.category == "" && "text-neutral-500 focus:text-neutral-950"}`}>
                     <option value="" disabled className="text-neutral-900">
                         {dictionary?.dashboard?.product?.category}
                     </option>

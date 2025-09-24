@@ -1,19 +1,20 @@
+import { GetProductItemService } from "@/services/services";
 import { IEachProduct } from "@/types/types";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import AddToCard from "./AddToCard";
 import CardPrice from "./CardPrice";
-import { baseUrl, endpoints } from "@/constants/endpoints";
 
 const ShoppingBagCard = ({ id }: { id: string }) => {
-  const [productDetails, setProductDetails] = useState<IEachProduct | null>(
-    null
-  );
+  const [productDetails, setProductDetails] = useState<IEachProduct | null>(null);
+
+  const ProductItemServiceCallback = (resultData: any, result: any) => {
+    if (!result.hasError) {
+      setProductDetails(resultData)
+    }
+  }
 
   useEffect(() => {
-    axios(`${baseUrl}${endpoints.products}/${id}/`).then((res) => {
-      setProductDetails(res.data);
-    });
+    GetProductItemService(id, ProductItemServiceCallback)
   }, [id]);
 
   return (

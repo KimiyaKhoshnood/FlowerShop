@@ -1,4 +1,4 @@
-import { GetAllCategories } from '@/data/GetData';
+import { GetAllCategories } from '@/services/GetServerSideData';
 import { ICategory } from '@/types/types';
 import Category from '@/views/dashboard/category/category';
 

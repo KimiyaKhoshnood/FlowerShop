@@ -12,11 +12,6 @@ export const GetAllCategories = async () => {
   return res.json();
 };
 
-export const GetRequestedProducts = async (url: string) => {
-  const requestedProducts = (await fetch(url)).json();
-  return requestedProducts;
-};
-
 export const GetProductByID = async (id: string) => {
   const productByID = (
     await fetch(`${baseUrl}${endpoints.products}/${id}/`)

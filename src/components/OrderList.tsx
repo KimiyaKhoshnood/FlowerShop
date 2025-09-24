@@ -1,6 +1,6 @@
 "use client";
-import { baseUrl, endpoints } from "@/constants/endpoints";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { GetProductService } from "@/services/services";
 import { stringFormat } from "@/utils/utils";
 import {
   Button,
@@ -9,7 +9,6 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 type OrderList = {
@@ -33,7 +32,6 @@ const OrderList = ({
   const { dictionary } = useLanguage()
   const [open, setOpen] = useState(false);
   const [orderDetails, setOrderDetails] = useState<OrderList[]>([]);
-  console.log("shoppingItems", shoppingItems);
 
   const handleClickOpen = () => setOpen(true);
 
@@ -41,20 +39,28 @@ const OrderList = ({
 
   const fetchOrderDetails = async () => {
     try {
-      const requests = shoppingItems.map((item) =>
-        axios.get(`${baseUrl}${endpoints.products}/${item.product}/`).then((res) => ({
-          ...item,
-          ...res.data,
-        }))
+      const requests: Promise<OrderList>[] = shoppingItems.map(
+        (item) =>
+          new Promise<OrderList>((resolve, reject) => {
+            GetProductService(item.product.toString(), (resultData: any, result: any) => {
+              if (result.hasError) {
+                reject(result.message);
+              } else {
+                resolve({
+                  ...item,
+                  ...resultData,
+                });
+              }
+            });
+          })
       );
-      const results = await Promise.all(requests);
+
+      const results: OrderList[] = await Promise.all(requests);
       setOrderDetails(results);
     } catch (error) {
       console.error("Error fetching product details:", error);
     }
   };
-
-  console.log("orderDetails: ", orderDetails);
 
   useEffect(() => {
     if (shoppingItems.length > 0) {

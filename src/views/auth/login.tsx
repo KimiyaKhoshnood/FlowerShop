@@ -1,12 +1,12 @@
 "use client";
 import ButtonUI from "@/components/ButtonUI";
-import { baseUrl, endpoints } from "@/constants/endpoints";
 import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
-import axios from "axios";
+import { PostTokenService } from "@/services/services";
 import Cookie from "js-cookie";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type Inputs = {
@@ -18,31 +18,27 @@ const Login = () => {
     const { lang, dictionary } = useLanguage()
 
     const { register, handleSubmit } = useForm<Inputs>();
+    const [error, setError] = useState<{ hasError: boolean, errorText?: string }>({ hasError: false })
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        try {
-            const res = await axios.post(`${baseUrl}${endpoints.token}/`, data);
-            console.log("res: ", res);
+        const TokenServiceCallback = (resultData: any, result: any) => {
+            if (!result?.hasError) {
+                const access = resultData.access;
+                const refresh = resultData.refresh;
 
-            const loginRes = await axios.post(`${baseUrl}${endpoints.token}/`, {
-                username: data.username,
-                password: data.password,
-            });
+                Cookie.set("accessToken", access, { expires: 1 });
+                Cookie.set("refreshToken", refresh, { expires: 2 });
 
-            const access = loginRes.data.access;
-            const refresh = loginRes.data.refresh;
-
-            Cookie.set("accessToken", access, { expires: 1 });
-            Cookie.set("refreshToken", refresh, { expires: 2 });
-
-        } catch (err: unknown) {
-            if (axios.isAxiosError(err)) {
-                console.error("Error in Login:", err.response?.data);
+                setError({ hasError: false })
             } else {
-                console.error("Unknown Error:", err);
+                setError({ hasError: true, errorText: "Some Error Happened" })
+                console.log(resultData)
             }
+
+            redirect(Links.dashboard.base(lang));
         }
-        redirect(Links.dashboard.base(lang));
+
+        PostTokenService(data, TokenServiceCallback)
     };
 
     return (
@@ -66,6 +62,7 @@ const Login = () => {
                         className="border rounded-md py-2 px-4"
                         {...register("password", { required: true })}
                     />
+                    {error.hasError && <span className="text-red-600 text-sm">{error.errorText}</span>}
                     <ButtonUI text={dictionary?.auth?.check} className="bg-(--Magenta)" />
                 </form>
             </div>

@@ -1,4 +1,4 @@
-import { GetAllProducts } from "@/data/GetData";
+import { GetAllProducts } from "@/services/GetServerSideData";
 import { IEachProduct } from "@/types/types";
 import DashboardProducts from "@/views/dashboard/product/product";
 

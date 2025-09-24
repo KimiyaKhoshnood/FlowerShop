@@ -1,12 +1,10 @@
 "use client"
 
+import { useLanguage } from "@/providers/LanguageProvider";
+import { GetProfileService, PatchProfileService } from "@/services/services";
+import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Cookie from "js-cookie";
-import axios from "axios";
-import { Alert, Snackbar } from "@mui/material";
-import { baseUrl, endpoints } from "@/constants/endpoints";
-import { useLanguage } from "@/providers/LanguageProvider";
 
 type Inputs = {
     username: string,
@@ -24,54 +22,35 @@ const Profile = () => {
     } = useForm<Inputs>();
 
     useEffect(() => {
-        const token = Cookie.get("accessToken");
-
-        if (token) {
-            axios
-                .get(`${baseUrl}${endpoints.profile}/`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                .then((res) => {
-                    console.log(res.data);
-
-                    reset({
-                        first_name: res.data.first_name,
-                        last_name: res.data.last_name,
-                        email: res.data.email,
-                        username: res.data.username,
-                    });
-                })
-                .catch((error) => {
-                    console.error("Error fetching orders:", error.response?.data);
-                });
-        } else {
-            console.log("No token found");
-        }
+        GetProfileService(GetProfileServiceCallback)
     }, [reset]);
 
     const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
+    const GetProfileServiceCallback = (resultData: any, result: any) => {
+        if (!result.hasError) {
+            reset({
+                first_name: resultData.first_name,
+                last_name: resultData.last_name,
+                email: resultData.email,
+                username: resultData.username,
+            });
+        } else {
+            console.error("Error fetching orders");
+        }
+    }
+
+    const PatchProfileServiceCallback = (_resultData: any, result: any) => {
+        if (!result.hasError) {
+            setOpenSnackbar(true);
+        } else {
+            console.error("Error creating product");
+        }
+    }
+
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        console.log(data);
-        const token = Cookie.get("accessToken")
-        axios({
-            method: "PATCH",
-            url: `${baseUrl}${endpoints.profile}/`,
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            data: data,
-        }).then((res) => {
-            console.log(res);
-            if (res.status == 201) {
-                setOpenSnackbar(true);
-            }
-        }).catch((err) => {
-            console.error("Error creating product:", err.response?.data || err.message);
-        });;
+        PatchProfileService(data, PatchProfileServiceCallback)
     };
 
     return (

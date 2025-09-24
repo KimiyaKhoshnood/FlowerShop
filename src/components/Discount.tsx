@@ -1,13 +1,11 @@
 "use client";
 import { useShoppingItemsContext } from "@/context/context";
-import { Alert, Snackbar } from "@mui/material";
-import axios from "axios";
-import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import ButtonUI from "./ButtonUI";
-import Cookie from "js-cookie";
-import { baseUrl, endpoints } from "@/constants/endpoints";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { GetDiscountCodeService } from "@/services/services";
+import { Alert, Snackbar } from "@mui/material";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import ButtonUI from "./ButtonUI";
 
 type Inputs = {
   discount: string;
@@ -25,23 +23,20 @@ const Discount = () => {
 
   const { register, handleSubmit } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const token = Cookie.get("accessToken")
-    axios(`${baseUrl}${endpoints.discounts}/?code=${data.discount}/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then(
-      (res) => {
-        if (res.data.length != 0) {
-          setIsPendingDiscount(false);
-          setDiscount(res.data[0].percent);
-        } else {
-          setIsPendingDiscount(false);
-          setOpenSnackbar(true);
-        }
+  const DiscountCodeServiceCallback = (resultData: any, result: any) => {
+    if (!result?.hasError) {
+      if (resultData.length != 0) {
+        setIsPendingDiscount(false);
+        setDiscount(resultData[0].percent);
+      } else {
+        setIsPendingDiscount(false);
+        setOpenSnackbar(true);
       }
-    );
+    }
+  }
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    GetDiscountCodeService(data.discount, DiscountCodeServiceCallback)
   };
 
   return (
