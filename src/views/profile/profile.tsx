@@ -1,6 +1,7 @@
 "use client"
 
 import { useLanguage } from "@/providers/LanguageProvider";
+import { IWebServiceResult } from "@/services/BaseService";
 import { GetProfileService, PatchProfileService } from "@/services/services";
 import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -28,7 +29,7 @@ const Profile = () => {
     const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
-    const GetProfileServiceCallback = (resultData: any, result: any) => {
+    const GetProfileServiceCallback = (resultData: Inputs, result: IWebServiceResult) => {
         if (!result.hasError) {
             reset({
                 first_name: resultData.first_name,
@@ -41,7 +42,7 @@ const Profile = () => {
         }
     }
 
-    const PatchProfileServiceCallback = (_resultData: any, result: any) => {
+    const PatchProfileServiceCallback = (_resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
             setOpenSnackbar(true);
         } else {

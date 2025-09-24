@@ -2,6 +2,7 @@
 import ButtonUI from "@/components/ButtonUI";
 import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { IWebServiceResult } from "@/services/BaseService";
 import { PostRegisterService, PostTokenService } from "@/services/services";
 import Cookie from "js-cookie";
 import Link from "next/link";
@@ -26,7 +27,7 @@ const Register = () => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
 
-        const RegisterServiceCallback = (resultData: any, result: any) => {
+        const RegisterServiceCallback = (resultData: unknown, result: IWebServiceResult) => {
             if (!result?.hasError) {
                 PostTokenService({
                     username: data.username,
@@ -42,7 +43,7 @@ const Register = () => {
 
         PostRegisterService(data, RegisterServiceCallback)
 
-        const TokenServiceCallback = (resultData: any, result: any) => {
+        const TokenServiceCallback = (resultData: { access: string, refresh: string }, result: IWebServiceResult) => {
             if (!result?.hasError) {
                 const access = resultData.access;
                 const refresh = resultData.refresh;

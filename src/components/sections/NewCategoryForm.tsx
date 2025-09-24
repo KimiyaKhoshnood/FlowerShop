@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Alert, Snackbar } from '@mui/material';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { PostCategoriesService } from '@/services/services';
+import { IWebServiceResult } from '@/services/BaseService';
 
 type Inputs = {
     categoryName: string;
@@ -20,7 +21,7 @@ const NewCategoryForm = () => {
     const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
-    const CategoriesServiceCallback = (resultData: any, result: any) => {
+    const CategoriesServiceCallback = (resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
             setOpenSnackbar(true);
             window.location.reload()

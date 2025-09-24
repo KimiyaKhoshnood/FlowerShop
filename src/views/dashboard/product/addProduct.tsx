@@ -1,7 +1,9 @@
 "use client"
 
 import { useLanguage } from "@/providers/LanguageProvider";
+import { IWebServiceResult } from "@/services/BaseService";
 import { GetCategoriesService, PostProductService } from "@/services/services";
+import { ICategory } from "@/types/types";
 import { Alert, Snackbar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -31,13 +33,13 @@ const DashboardAddProduct = () => {
         GetCategoriesService(CategoriesServiceCallback)
     }, []);
 
-    const CategoriesServiceCallback = (resultData: any, result: any) => {
+    const CategoriesServiceCallback = (resultData: ICategory[], result: IWebServiceResult) => {
         if (!result.hasError) {
             setCategories(resultData);
         }
     }
 
-    const ProductServiceCallback = (resultData: any, result: any) => {
+    const ProductServiceCallback = (resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
             setOpenSnackbar(true);
         } else {

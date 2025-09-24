@@ -11,13 +11,14 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonUI from "../ButtonUI";
 import CardPrice from "../CardPrice";
+import { IWebServiceResult } from "@/services/BaseService";
 
 const HotProducts = () => {
 
 	const { lang, dictionary } = useLanguage()
-	const [data, setData] = useState([])
+	const [data, setData] = useState<IEachProduct[]>([])
 
-	const ProductsServiceCallback = (resultData: any, result: any) => {
+	const ProductsServiceCallback = (resultData: IEachProduct[], result: IWebServiceResult) => {
 		if (!result.hasError) {
 			setData(resultData)
 		}

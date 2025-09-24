@@ -5,6 +5,7 @@ import Discount from "@/components/Discount";
 import ShoppingBagCard from "@/components/ShoppingBagCard";
 import { useShoppingItemsContext } from "@/context/context";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { IWebServiceResult } from "@/services/BaseService";
 import { GetProductsService, PostOrdersService } from "@/services/services";
 import { IEachProduct } from "@/types/types";
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from "@mui/material";
@@ -33,7 +34,7 @@ const Bag = () => {
         }, 0)
         .toFixed(2)
 
-    const ProductsServiceCallback = (resultData: any, result: any) => {
+    const ProductsServiceCallback = (resultData: IEachProduct[], result: IWebServiceResult) => {
         if (!result.hasError) {
             setAllProducts(resultData);
         }
@@ -47,7 +48,7 @@ const Bag = () => {
 
     const handleClose = () => setOpen(false);
 
-    const OrdersServiceCallback = (_resultData: any, result: any) => {
+    const OrdersServiceCallback = (_resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
             setOpenSnackbar(true);
             handleCleanProducts();
@@ -63,7 +64,7 @@ const Bag = () => {
                     product: Number(item.id),
                     qty: Number(item.qty),
                 })),
-                id: 1,
+                id: "1",
             }, OrdersServiceCallback)
         } else {
             console.log("Empty Bag!");

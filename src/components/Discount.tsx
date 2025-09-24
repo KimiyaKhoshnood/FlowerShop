@@ -6,6 +6,8 @@ import { Alert, Snackbar } from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ButtonUI from "./ButtonUI";
+import { IDiscount } from "@/types/types";
+import { IWebServiceResult } from "@/services/BaseService";
 
 type Inputs = {
   discount: string;
@@ -23,7 +25,7 @@ const Discount = () => {
 
   const { register, handleSubmit } = useForm<Inputs>();
 
-  const DiscountCodeServiceCallback = (resultData: any, result: any) => {
+  const DiscountCodeServiceCallback = (resultData: IDiscount[], result: IWebServiceResult) => {
     if (!result?.hasError) {
       if (resultData.length != 0) {
         setIsPendingDiscount(false);

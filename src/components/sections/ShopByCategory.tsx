@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonUI from "../ButtonUI";
+import { IWebServiceResult } from "@/services/BaseService";
 
 const ShopByCategory = () => {
   const { lang, dictionary } = useLanguage()
@@ -17,7 +18,7 @@ const ShopByCategory = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [allData, setAllData] = useState<IEachProduct[]>([]);
 
-  const ProductsServiceCallback = (resultData: any, result: any) => {
+  const ProductsServiceCallback = (resultData: IEachProduct[], result: IWebServiceResult) => {
     if (!result.hasError) {
       setAllData(resultData)
     }

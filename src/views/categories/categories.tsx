@@ -4,6 +4,7 @@ import ButtonUI from "@/components/ButtonUI";
 import HotDeals from "@/components/sections/HotDeals";
 import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { IWebServiceResult } from "@/services/BaseService";
 import { GetProductsService } from "@/services/services";
 import { IEachProduct } from "@/types/types";
 import Link from "next/link";
@@ -15,7 +16,7 @@ const Categories = () => {
     const [loading, setLoading] = useState(false)
     const [categories, setCategories] = useState<string[]>([]);
 
-    const ProductsServiceCallback = (resultData: any, result: any) => {
+    const ProductsServiceCallback = (resultData: IEachProduct[], result: IWebServiceResult) => {
         setLoading(false)
         if (!result.hasError) {
             setAllProducts(resultData)

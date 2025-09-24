@@ -8,6 +8,7 @@ import { IEachProduct } from "@/types/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProductCard from "../../components/ProductCard";
+import { IWebServiceResult } from "@/services/BaseService";
 
 const ProductsByCategory = () => {
     const { lang, dictionary } = useLanguage()
@@ -37,7 +38,7 @@ const ProductsByCategory = () => {
         ...new Set(allProducts.map((item) => item.category)),
     ];
 
-    const ProductsServiceCallback = (resultData: any, result: any) => {
+    const ProductsServiceCallback = (resultData: IEachProduct[], result: IWebServiceResult) => {
         setLoading(false)
         if (!result.hasError) {
             setAllProducts(resultData)
@@ -45,7 +46,7 @@ const ProductsByCategory = () => {
         }
     }
 
-    const ProductsByCategoryServiceCallback = (resultData: any, result: any) => {
+    const ProductsByCategoryServiceCallback = (resultData: IEachProduct[], result: IWebServiceResult) => {
         setLoading(false)
         if (!result.hasError) {
             setFinalProducts(resultData)

@@ -1,13 +1,14 @@
 import { GetProductItemService } from "@/services/services";
-import { IEachProduct } from "@/types/types";
 import { useEffect, useState } from "react";
 import AddToCard from "./AddToCard";
 import CardPrice from "./CardPrice";
+import { IEachProduct } from "@/types/types";
+import { IWebServiceResult } from "@/services/BaseService";
 
 const ShoppingBagCard = ({ id }: { id: string }) => {
   const [productDetails, setProductDetails] = useState<IEachProduct | null>(null);
 
-  const ProductItemServiceCallback = (resultData: any, result: any) => {
+  const ProductItemServiceCallback = (resultData: IEachProduct, result: IWebServiceResult) => {
     if (!result.hasError) {
       setProductDetails(resultData)
     }

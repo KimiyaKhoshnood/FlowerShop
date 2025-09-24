@@ -1,24 +1,20 @@
 "use client";
 import OrderList from "@/components/OrderList";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { IWebServiceResult } from "@/services/BaseService";
 import { GetOrdersService } from "@/services/services";
+import { IOrder } from "@/types/types";
 import { useEffect, useState } from "react";
-
-type orderType = {
-    id: string;
-    items: { product: number; qty: number }[];
-    discount: number | null;
-};
 
 const Dashboard = () => {
     const { dictionary } = useLanguage()
-    const [orderList, setOrderList] = useState<orderType[]>();
+    const [orderList, setOrderList] = useState<IOrder[]>();
 
     useEffect(() => {
         GetOrdersService(OrdersServiceCallback)
     }, []);
 
-    const OrdersServiceCallback = (resultData: any, result: any) => {
+    const OrdersServiceCallback = (resultData: IOrder[], result: IWebServiceResult) => {
         if (!result?.hasError) {
             setOrderList(resultData)
         } else {

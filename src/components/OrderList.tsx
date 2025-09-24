@@ -1,6 +1,8 @@
 "use client";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { IWebServiceResult } from "@/services/BaseService";
 import { GetProductService } from "@/services/services";
+import { IEachProduct } from "@/types/types";
 import { stringFormat } from "@/utils/utils";
 import {
   Button,
@@ -11,12 +13,12 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
-type OrderList = {
+type IOrderList = {
   id: string;
   title: string;
   qty: number;
   price: number;
-  description: string;
+  description?: string;
   image: string;
 };
 
@@ -31,7 +33,7 @@ const OrderList = ({
 }) => {
   const { dictionary } = useLanguage()
   const [open, setOpen] = useState(false);
-  const [orderDetails, setOrderDetails] = useState<OrderList[]>([]);
+  const [orderDetails, setOrderDetails] = useState<IOrderList[]>([]);
 
   const handleClickOpen = () => setOpen(true);
 
@@ -39,10 +41,10 @@ const OrderList = ({
 
   const fetchOrderDetails = async () => {
     try {
-      const requests: Promise<OrderList>[] = shoppingItems.map(
+      const requests: Promise<IOrderList>[] = shoppingItems.map(
         (item) =>
-          new Promise<OrderList>((resolve, reject) => {
-            GetProductService(item.product.toString(), (resultData: any, result: any) => {
+          new Promise<IOrderList>((resolve, reject) => {
+            GetProductService(item.product.toString(), (resultData: IEachProduct, result: IWebServiceResult) => {
               if (result.hasError) {
                 reject(result.message);
               } else {
@@ -55,7 +57,7 @@ const OrderList = ({
           })
       );
 
-      const results: OrderList[] = await Promise.all(requests);
+      const results: IOrderList[] = await Promise.all(requests);
       setOrderDetails(results);
     } catch (error) {
       console.error("Error fetching product details:", error);

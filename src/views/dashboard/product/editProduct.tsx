@@ -1,7 +1,9 @@
 "use client";
 import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
+import { IWebServiceResult } from "@/services/BaseService";
 import { DeleteProductsService, GetCategoriesService, GetProductService, PatchProductsService } from "@/services/services";
+import { ICategory, IEachProduct } from "@/types/types";
 import { capitalizeFirstLetter } from "@/utils/utils";
 import {
     Alert,
@@ -23,8 +25,8 @@ type Inputs = {
 
 const DashboardEditProduct = () => {
     const { lang, dictionary } = useLanguage()
-    const [productDetails, setProductDetails] = useState();
-    const [selectedCategory, setSelectedCategory] = useState<string>("title");
+    const [productDetails, setProductDetails] = useState<IEachProduct>();
+    const [selectedCategory, setSelectedCategory] = useState<keyof IEachProduct>("title");
     const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
     const [open, setOpen] = useState(false);
     const [categories, setCategories] = useState<{ id: number, name: string }[]>();
@@ -48,44 +50,50 @@ const DashboardEditProduct = () => {
     const handleClose = () => setOpen(false)
 
     const handleDelete = () => {
-        typeof id === 'string' && DeleteProductsService(id, DeleteProductsServiceCallback)
+        if (typeof (id) === 'string') {
+            DeleteProductsService(id, DeleteProductsServiceCallback)
+        }
     };
 
     useEffect(() => {
-        typeof id === 'string' && GetProductService(id, ProductsServiceCallback)
+        if (typeof (id) === 'string') {
+            GetProductService(id, ProductsServiceCallback)
+        }
     }, [id]);
 
     useEffect(() => {
         GetCategoriesService(CategoriesServiceCallback)
     }, []);
 
-    const PatchProductsServiceCallback = (_resultData: any, result: any) => {
+    const PatchProductsServiceCallback = (_resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
             setOpenSuccessSnackbar(true);
             router.push(Links.dashboard.product(lang))
         }
     }
 
-    const DeleteProductsServiceCallback = (_resultData: any, result: any) => {
+    const DeleteProductsServiceCallback = (_resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
             redirect(Links.dashboard.product(lang));
         }
     }
 
-    const ProductsServiceCallback = (resultData: any, result: any) => {
+    const ProductsServiceCallback = (resultData: IEachProduct, result: IWebServiceResult) => {
         if (!result?.hasError) {
             setProductDetails(resultData)
         }
     }
 
-    const CategoriesServiceCallback = (resultData: any, result: any) => {
+    const CategoriesServiceCallback = (resultData: ICategory[], result: IWebServiceResult) => {
         if (!result?.hasError) {
             setCategories(resultData)
         }
     }
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        typeof id === 'string' && PatchProductsService({ [selectedCategory]: data.input }, id, PatchProductsServiceCallback)
+        if (typeof (id) === 'string') {
+            PatchProductsService({ [selectedCategory]: data.input }, id, PatchProductsServiceCallback)
+        }
     };
 
     return (
@@ -137,22 +145,19 @@ const DashboardEditProduct = () => {
                 <div className="py-2">
                     <div className="grid grid-cols-5 rounded-t-lg w-full">
                         {productDetails &&
-                            Object.keys(productDetails)
-                                .filter((item) => item !== "id")
-                                .map((elem) => {
-                                    return (
-                                        <div
-                                            key={elem}
-                                            onClick={() => setSelectedCategory(elem)}
-                                            className={`flex justify-center py-2 cursor-pointer rounded-lg hover:bg-amber-50/50 ${selectedCategory == elem
-                                                ? "border border-gray-300"
-                                                : ""
-                                                }`}
-                                        >
-                                            {capitalizeFirstLetter(elem)}
-                                        </div>
-                                    );
-                                })}
+                            Object.keys(productDetails).map((elem) => {
+                                if (elem === "id") return null;
+                                return (
+                                    <div
+                                        key={elem}
+                                        onClick={() => setSelectedCategory(elem as keyof IEachProduct)}
+                                        className={`flex justify-center py-2 cursor-pointer rounded-lg hover:bg-amber-50/50 ${selectedCategory === elem ? "border border-gray-300" : ""
+                                            }`}
+                                    >
+                                        {capitalizeFirstLetter(elem)}
+                                    </div>
+                                );
+                            })}
                     </div>
 
                     <div className="w-full flex flex-col items-center gap-2 py-10">
@@ -164,7 +169,7 @@ const DashboardEditProduct = () => {
                                 className="border border-gray-300 pr-10 pl-4 py-2 focus:outline-0 rounded-lg w-full bg-blue-50/50"
                             />
                             <button
-                                onClick={() => navigator.clipboard.writeText(productDetails?.[selectedCategory] || "")}
+                                onClick={() => navigator.clipboard.writeText(productDetails?.[selectedCategory]?.toString() || "")}
                                 className="absolute right-0 top-0 bottom-0 content-center text-xs text-gray-300 hover:text-gray-500 cursor-pointer py-0.5 px-2.5">
                                 {dictionary?.dashboard?.product?.copy}
                             </button>
