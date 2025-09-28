@@ -5,7 +5,6 @@ import ProductCard from '@/components/ProductCard';
 import { Links } from '@/constants/links';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { IEachProduct } from '@/types/types';
-import Link from 'next/link';
 
 const DashboardProducts = ({ allProducts }: { allProducts: IEachProduct[] }) => {
     const { lang, dictionary } = useLanguage()
