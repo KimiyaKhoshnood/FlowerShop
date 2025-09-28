@@ -121,7 +121,7 @@ export const DashboardHeader = () => {
         <Link
           className={pathname == Links.dashboard.base(lang) ? "border-b-2 border-b-amber-600" : ""}
           href={Links.dashboard.base(lang)}>
-          {dictionary?.dashboard?.header?.dashboard}
+          {dictionary?.dashboard?.header?.orders}
         </Link>
         <Link
           className={pathname == Links.dashboard.profile(lang) ? "border-b-2 border-b-amber-600" : ""}
@@ -132,11 +132,6 @@ export const DashboardHeader = () => {
           className={pathname == Links.dashboard.product(lang) ? "border-b-2 border-b-amber-600" : ""}
           href={Links.dashboard.product(lang)}>
           {dictionary?.dashboard?.header?.products}
-        </Link>
-        <Link
-          className={pathname == Links.dashboard.addProduct(lang) ? "border-b-2 border-b-amber-600" : ""}
-          href={Links.dashboard.addProduct(lang)}>
-          {dictionary?.dashboard?.header?.addProduct}
         </Link>
         <Link
           className={pathname == Links.dashboard.category(lang) ? "border-b-2 border-b-amber-600" : ""}

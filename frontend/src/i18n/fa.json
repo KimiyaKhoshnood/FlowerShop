@@ -105,7 +105,7 @@
     },
     "dashboard": {
         "header": {
-            "dashboard": "داشبورد",
+            "orders": "سفارشات",
             "profile": "پروفایل",
             "products": "محصولات",
             "addProduct": "افزودن محصول",

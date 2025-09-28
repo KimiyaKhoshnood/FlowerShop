@@ -105,7 +105,7 @@
     },
     "dashboard": {
         "header": {
-            "dashboard": "Dashboard",
+            "orders": "Orders",
             "profile": "Profile",
             "products": "Products",
             "addProduct": "Add Product",
