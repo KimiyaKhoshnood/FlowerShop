@@ -5,6 +5,12 @@ import { LanguageProvider } from "@/providers/LanguageProvider";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Flower Shop",
+  manifest: "/manifest.json",
+};
 
 const iranSans = localFont({
   src: "../../../public/fonts/MbSansFont_Medium.ttf",
