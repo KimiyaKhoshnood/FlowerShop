@@ -31,7 +31,7 @@ const Categories = () => {
     useEffect(() => {
         if (allProducts) {
             const uniqueCategories = [
-                ...new Set(allProducts.map((item) => item.category)),
+                ...new Set(allProducts.map((item) => item.category).filter(Boolean)),
             ];
             setCategories(uniqueCategories);
         }
@@ -49,12 +49,13 @@ const Categories = () => {
                     <h1 className="font-bold text-(--Burgundy) text-3xl text-center">
                         {dictionary?.category?.title}
                     </h1>
-                    <Link href={Links.store(lang)} className="sm:block hidden">
-                        <ButtonUI
+                    <div className="sm:block hidden">
+                          <ButtonUI
                             text={dictionary?.category?.button}
+                            url={Links.store(lang)}
                             className="bg-(--Burgundy)/10 text-(--Burgundy)"
-                        />
-                    </Link>
+                          />
+                        </div>
                 </div>
                 {loading && <div className="overflow-hidden">
                     <div className='h-32 w-full flex justify-center items-center animate-ping'>
@@ -83,12 +84,13 @@ const Categories = () => {
                         );
                     })}
                 </div>
-                <Link href={Links.store(lang)} className="sm:hidden lg:px-20 sm:px-10 px-5">
-                    <ButtonUI
-                        text="All products"
+                <div className="sm:hidden lg:px-20 sm:px-10 px-5">
+                      <ButtonUI
+                        text={dictionary?.category?.button}
+                        url={Links.store(lang)}
                         className="bg-(--Burgundy)/10 text-(--Burgundy) w-full"
-                    />
-                </Link>
+                      />
+                    </div>
             </div>
 
             <HotDeals />

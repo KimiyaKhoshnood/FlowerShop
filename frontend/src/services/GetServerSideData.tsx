@@ -12,9 +12,10 @@ export const GetAllCategories = async () => {
   return res.json();
 };
 
+/** Returns null when the product does not exist, so the page can show a 404. */
 export const GetProductByID = async (id: string) => {
-  const productByID = (
-    await fetch(`${baseUrl}${endpoints.products}/${id}/`)
-  ).json();
-  return productByID;
+  const res = await fetch(`${baseUrl}${endpoints.products}/${encodeURIComponent(id)}/`, { cache: "no-store" });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error("Failed to fetch product");
+  return res.json();
 };

@@ -15,7 +15,7 @@ import {
     DialogTitle,
     Snackbar,
 } from "@mui/material";
-import { redirect, useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -43,7 +43,7 @@ const DashboardEditProduct = () => {
 
     useEffect(() => {
         reset()
-    }, [selectedCategory])
+    }, [selectedCategory, reset])
 
     const handleClickOpen = () => setOpen(true)
 
@@ -69,12 +69,14 @@ const DashboardEditProduct = () => {
         if (!result.hasError) {
             setOpenSuccessSnackbar(true);
             router.push(Links.dashboard.product(lang))
+            router.refresh()
         }
     }
 
     const DeleteProductsServiceCallback = (_resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
-            redirect(Links.dashboard.product(lang));
+            router.push(Links.dashboard.product(lang));
+            router.refresh();
         }
     }
 
@@ -104,7 +106,7 @@ const DashboardEditProduct = () => {
                 onClose={() => setOpenSuccessSnackbar(false)}
             >
                 <Alert onClose={() => setOpenSuccessSnackbar(false)} severity="success">
-                    Edited!
+                    {dictionary?.dashboard?.product?.edited}
                 </Alert>
             </Snackbar>
 
@@ -164,7 +166,7 @@ const DashboardEditProduct = () => {
                         <div className="min-w-80 w-full block text-center relative">
                             <input
                                 type="text"
-                                value={productDetails?.[selectedCategory]}
+                                value={productDetails?.[selectedCategory] ?? ""}
                                 disabled
                                 className="border border-gray-300 pr-10 pl-4 py-2 focus:outline-0 rounded-lg w-full bg-blue-50/50"
                             />

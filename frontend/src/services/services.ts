@@ -8,15 +8,16 @@ import { ICategory, IDiscount, IEachProduct, IOrder, IProfile } from "@/types/ty
 export const PostTokenService = (data: { username: string; password: string }, callback: ICallback<{ access: string, refresh: string }>) =>
     PostRequest(`${endpoints.token}/`, data, callback, false);
 
-export const PostRegisterService = (data: { email: string; password: string }, callback: ICallback<{ success: boolean }>) =>
+export const PostRegisterService = (data: { username: string; email: string; password: string; password2: string; first_name: string; last_name: string }, callback: ICallback<{ success: boolean }>) =>
     PostRequest(`${endpoints.register}/`, data, callback, false);
 
 // -------------------- Products --------------------
+// Catalogue reads are public, so they never send a (possibly expired) token.
 export const GetProductsService = (callback: ICallback<IEachProduct[]>) =>
-    GetRequest(`${endpoints.products}/`, callback);
+    GetRequest(`${endpoints.products}/`, callback, false);
 
 export const GetProductService = (id: string, callback: ICallback<IEachProduct>) =>
-    GetRequest(`${endpoints.products}/${id}/`, callback);
+    GetRequest(`${endpoints.products}/${id}/`, callback, false);
 
 export const PostProductService = (data: Omit<IEachProduct, "id">, callback: ICallback<IEachProduct>) =>
     PostRequest(`${endpoints.products}/`, data, callback);
@@ -28,14 +29,14 @@ export const PatchProductsService = (data: Partial<IEachProduct>, id: string, ca
     PatchRequest(`${endpoints.products}/${id}/`, data, callback);
 
 export const GetProductItemService = (productId: string, callback: ICallback<IEachProduct>) =>
-    GetRequest(`${stringFormat(endpoints.productItem, productId)}/`, callback);
+    GetRequest(`${stringFormat(endpoints.productItem, productId)}/`, callback, false);
 
 export const GetProductsByCategoryService = (category: string, callback: ICallback<IEachProduct[]>) =>
-    GetRequest(stringFormat(endpoints.ProductsByCategory, category), callback);
+    GetRequest(stringFormat(endpoints.ProductsByCategory, encodeURIComponent(category)), callback, false);
 
 // -------------------- Categories --------------------
 export const GetCategoriesService = (callback: ICallback<ICategory[]>) =>
-    GetRequest(`${endpoints.categories}/`, callback);
+    GetRequest(`${endpoints.categories}/`, callback, false);
 
 export const PostCategoriesService = (data: Omit<ICategory, "id">, callback: ICallback<ICategory>) =>
     PostRequest(`${endpoints.categories}/`, data, callback);
@@ -44,7 +45,7 @@ export const PostCategoriesService = (data: Omit<ICategory, "id">, callback: ICa
 export const GetOrdersService = (callback: ICallback<IOrder[]>) =>
     GetRequest(`${endpoints.orders}/`, callback);
 
-export const PostOrdersService = (data: IOrder, callback: ICallback<IOrder>) =>
+export const PostOrdersService = (data: Omit<IOrder, "id">, callback: ICallback<IOrder>) =>
     PostRequest(`${endpoints.orders}/`, data, callback);
 
 // -------------------- Discounts --------------------
@@ -52,7 +53,7 @@ export const GetDiscountsService = (callback: ICallback<IDiscount[]>) =>
     GetRequest(`${endpoints.discounts}/`, callback);
 
 export const GetDiscountCodeService = (discountCode: string, callback: ICallback<IDiscount[]>) =>
-    GetRequest(`${stringFormat(endpoints.discountCode, discountCode)}/`, callback);
+    GetRequest(stringFormat(endpoints.discountCode, encodeURIComponent(discountCode)), callback);
 
 // -------------------- Profile --------------------
 export const GetProfileService = (callback: ICallback<IProfile>) =>

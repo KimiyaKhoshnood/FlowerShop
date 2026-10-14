@@ -8,7 +8,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Flower Shop",
+  title: {
+    default: "Flower Shop",
+    template: "%s | Flower Shop",
+  },
+  description: "A bilingual (English / Persian) flower shop built with Next.js and Django REST Framework.",
   manifest: "/manifest.json",
 };
 
@@ -43,7 +47,7 @@ export default async function Layout({
   const dictionary = await getDictionary(resolvedParams.lang)
 
   return (
-    <div className={`${resolvedParams.lang == 'fa' ? iranSans.className : (geistSans.variable, geistMono.variable)} antialiased !min-h-screen flex flex-col`} lang={resolvedParams.lang} dir={resolvedParams.lang === 'fa' ? 'rtl' : 'ltr'}>
+    <div className={`${resolvedParams.lang == 'fa' ? iranSans.className : `${geistSans.variable} ${geistMono.variable}`} antialiased !min-h-screen flex flex-col`} lang={resolvedParams.lang} dir={resolvedParams.lang === 'fa' ? 'rtl' : 'ltr'}>
       <ContextProviderLayout>
         <LanguageProvider dictionary={dictionary} lang={resolvedParams.lang}>
           <Header />

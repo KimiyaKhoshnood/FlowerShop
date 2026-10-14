@@ -4,11 +4,11 @@ from rest_framework.generics import RetrieveUpdateAPIView, CreateAPIView
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import viewsets
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Product, Discount, Order, Category
-from .serializers import (ProductSerializer, DiscountSerializer, OrderSerializer, CategorySerializer
-, TokenObtainPairSerializer, RegisterSerializer, UserSerializer)
+from .permissions import IsAdminOrReadOnly
+from .serializers import (ProductSerializer, DiscountSerializer, OrderSerializer, CategorySerializer,
+                          RegisterSerializer, UserSerializer)
 
 
 @api_view(['GET'])
@@ -25,12 +25,12 @@ def api_root(request, format=None):
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
+    queryset = Product.objects.select_related('category')
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly]
 
     def get_queryset(self):
-        queryset = Product.objects.all()
+        queryset = super().get_queryset()
         category = self.request.query_params.get("category")
         if category:
             queryset = queryset.filter(category__name=category)
@@ -38,14 +38,31 @@ class ProductViewSet(viewsets.ModelViewSet):
 
 
 class DiscountViewSet(viewsets.ModelViewSet):
+    """
+    Staff can manage every discount code. Regular users can only look up a
+    single code with `?code=...`, so the full list of codes stays secret.
+    """
     queryset = Discount.objects.all()
     serializer_class = DiscountSerializer
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        code = self.request.query_params.get("code")
+        if code:
+            return queryset.filter(code__iexact=code)
+        if self.request.user.is_staff:
+            return queryset
+        return queryset.none()
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
+    http_method_names = ['get', 'post', 'head', 'options']
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user).prefetch_related('items')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -54,7 +71,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly]
 
 
 # SIGN_UP AND LOGIN
@@ -62,11 +79,6 @@ class RegisterView(CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
-
-
-class TokenObtainPairViewSet(TokenObtainPairView):
-    permission_classes = (AllowAny,)
-    serializer_class = TokenObtainPairSerializer
 
 
 class UserProfileViewSet(RetrieveUpdateAPIView):

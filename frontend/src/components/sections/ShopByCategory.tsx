@@ -31,7 +31,7 @@ const ShopByCategory = () => {
   useEffect(() => {
     if (allData.length > 0) {
       const uniqueCategories = [
-        ...new Set(allData.map((item) => item.category)),
+        ...new Set(allData.map((item) => item.category).filter(Boolean)),
       ];
       setCategories(uniqueCategories);
     }
@@ -49,12 +49,11 @@ const ShopByCategory = () => {
           {dictionary?.home?.shopByCategory?.title}
         </h2>
         <div className="hidden sm:block">
-          <Link href={Links.categories(lang)}>
-            <ButtonUI
+          <ButtonUI
               text={dictionary?.home?.shopByCategory?.button}
+              url={Links.categories(lang)}
               className="bg-(--BabyPink) text-(--Burgundy)"
             />
-          </Link>
         </div>
       </div>
       <div className="py-7 lg:px-10">
@@ -105,12 +104,11 @@ const ShopByCategory = () => {
         )}
       </div>
       <div className="block md:hidden">
-        <Link href={Links.categories(lang)}>
-          <ButtonUI
-            text="All Categories"
+        <ButtonUI
+            text={dictionary?.home?.shopByCategory?.button}
+            url={Links.categories(lang)}
             className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"
           />
-        </Link>
       </div>
     </div>
   );

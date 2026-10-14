@@ -24,7 +24,8 @@ const Profile = () => {
 
     useEffect(() => {
         GetProfileService(GetProfileServiceCallback)
-    }, [reset]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -38,7 +39,7 @@ const Profile = () => {
                 username: resultData.username,
             });
         } else {
-            console.error("Error fetching orders");
+            console.error("Error fetching profile");
         }
     }
 
@@ -46,7 +47,7 @@ const Profile = () => {
         if (!result.hasError) {
             setOpenSnackbar(true);
         } else {
-            console.error("Error creating product");
+            console.error("Error saving profile");
         }
     }
 
@@ -70,7 +71,7 @@ const Profile = () => {
 
             <form
                 action=""
-                className=" flex flex-col w-96 mx-auto gap-1 p-3"
+                className="flex flex-col w-full max-w-96 mx-auto gap-1 p-3"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <label htmlFor="first_name">{dictionary?.dashboard?.profile?.firstName}:<span className="text-red-500">*</span></label>
@@ -78,30 +79,34 @@ const Profile = () => {
                     type="text"
                     placeholder={dictionary?.dashboard?.profile?.firstName}
                     className="border rounded-md py-1 px-3 mb-2"
-                    {...register("first_name")}
+                    id="first_name"
+                    {...register("first_name", { required: true })}
                 />
                 <label htmlFor="last_name">{dictionary?.dashboard?.profile?.lastName}:<span className="text-red-500">*</span></label>
                 <input
                     type="text"
                     placeholder={dictionary?.dashboard?.profile?.lastName}
                     className="border rounded-md py-1 px-3 mb-2"
-                    {...register("last_name")}
+                    id="last_name"
+                    {...register("last_name", { required: true })}
                 />
                 <label htmlFor="username">{dictionary?.dashboard?.profile?.username}:<span className="text-red-500">*</span></label>
                 <input
                     type="text"
                     placeholder={dictionary?.dashboard?.profile?.username}
                     className="border rounded-md py-1 px-3 mb-2"
+                    id="username"
                     {...register("username", { required: true })}
                 />
                 <label htmlFor="email">{dictionary?.dashboard?.profile?.email}:</label>
                 <input
-                    type="text"
+                    type="email"
                     placeholder={dictionary?.dashboard?.profile?.email}
                     className="border rounded-md py-1 px-3 mb-2"
+                    id="email"
                     {...register("email")}
                 />
-                <button type="submit" className="bg-(--Magenta) px-2 py-1 rounded-md">
+                <button type="submit" className="bg-(--Magenta) text-white px-2 py-1 rounded-md cursor-pointer">
                     {dictionary?.dashboard?.profile?.save}
                 </button>
             </form>

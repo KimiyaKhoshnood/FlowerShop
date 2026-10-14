@@ -14,8 +14,6 @@ type IFeature = {
 
 const Herosection = () => {
   const { lang, dictionary } = useLanguage()
-  console.log(dictionary, dictionary.home);
-  
 
   return (
     <div className="shadow relative md:mb-20">
@@ -43,7 +41,7 @@ const Herosection = () => {
                 key={feature.id}
                 className="flex md:flex-row flex-col items-center gap-4 md:px-7 p-3"
               >
-                <Image alt="" src={feature.image} width={60} height={60} />
+                <Image alt="" src={`/${feature.image}`} width={60} height={60} />
                 <div className="flex flex-col md:gap-2 text-(--Burgundy)">
                   <h3 className="md:text-xl text-sm">{feature.title}</h3>
                   <span className="text-xs md:block hidden">

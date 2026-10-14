@@ -1,8 +1,6 @@
 "use client";
 import { useLanguage } from "@/providers/LanguageProvider";
-import { IWebServiceResult } from "@/services/BaseService";
-import { GetProductService } from "@/services/services";
-import { IEachProduct } from "@/types/types";
+import { IEachProduct, IOrder } from "@/types/types";
 import { stringFormat } from "@/utils/utils";
 import {
   Button,
@@ -11,93 +9,45 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import { useState } from "react";
 
-type IOrderList = {
-  id: string;
-  title: string;
-  qty: number;
-  price: number;
-  description?: string;
-  image: string;
-};
+type IOrderLine = IEachProduct & { qty: number };
 
 const OrderList = ({
-  shoppingItems,
-  discount,
+  order,
+  products,
   row,
 }: {
-  shoppingItems: { product: number, qty: number }[];
-  discount: number;
+  order: IOrder;
+  products: IEachProduct[];
   row: number;
 }) => {
-  const { dictionary } = useLanguage()
+  const { lang, dictionary } = useLanguage()
   const [open, setOpen] = useState(false);
-  const [orderDetails, setOrderDetails] = useState<IOrderList[]>([]);
 
-  const handleClickOpen = () => setOpen(true);
+  const discount = order.discount_percent ?? 0;
+  const orderLines: IOrderLine[] = order.items.flatMap((item) => {
+    const product = products.find((product) => Number(product.id) == item.product);
+    return product ? [{ ...product, qty: item.qty }] : [];
+  });
 
-  const handleClose = () => setOpen(false);
+  const totalQty = order.items.reduce((total, item) => total + item.qty, 0);
+  const totalPrice = orderLines.reduce((total, line) => total + Number(line.price) * line.qty, 0);
+  const totalWithDiscount = (totalPrice * (100 - discount)) / 100;
 
-  const fetchOrderDetails = async () => {
-    try {
-      const requests: Promise<IOrderList>[] = shoppingItems.map(
-        (item) =>
-          new Promise<IOrderList>((resolve, reject) => {
-            GetProductService(item.product.toString(), (resultData: IEachProduct, result: IWebServiceResult) => {
-              if (result.hasError) {
-                reject(result.message);
-              } else {
-                resolve({
-                  ...item,
-                  ...resultData,
-                });
-              }
-            });
-          })
-      );
-
-      const results: IOrderList[] = await Promise.all(requests);
-      setOrderDetails(results);
-    } catch (error) {
-      console.error("Error fetching product details:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (shoppingItems.length > 0) {
-      fetchOrderDetails();
-    }
-  }, [shoppingItems]);
-
-  const sumQty = () => {
-    let qty = 0;
-    orderDetails.map((elem) => {
-      qty += elem.qty;
-    });
-    return qty;
-  };
-
-  const sumPrices = () => {
-    let prices = 0;
-    orderDetails.map((elem) => {
-      prices += elem.price * elem.qty;
-    });
-    return prices;
-  };
-
-  const sumPricesWithDiscount = () => {
-    return (sumPrices() * (100 - discount)) / 100;
-  };
+  const formatDate = (date?: string | null) => date
+    ? dayjs(date).toDate().toLocaleDateString(lang == "fa" ? "fa-IR" : "en-US", { year: "numeric", month: "short", day: "numeric" })
+    : "—";
 
   return (
     <>
       <Dialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+        onClose={() => setOpen(false)}
+        aria-labelledby={`order-${row}-title`}
         open={open}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+        <DialogTitle sx={{ m: 0, p: 2 }} id={`order-${row}-title`}>
           {stringFormat(dictionary?.dashboard?.orders?.detailsTitle, row.toString())}
         </DialogTitle>
         <DialogContent dividers>
@@ -108,34 +58,30 @@ const OrderList = ({
               ))
             }
           </div>
-          {orderDetails.map((elem, i) => {
-            return (
-              <div
-                key={i}
-                className={`grid grid-cols-5 items-center gap-5 px-2 ${i % 2 ? "bg-neutral-100" : ""
-                  }`}
-              >
-                <div className="flex justify-center">
-                  <img src={elem.image} alt="" width={56} height={56} />
-                </div>
-                <div className="text-center">{elem.title}</div>
-                <div className="text-center">{elem.qty}</div>
-                <div className="text-center">{elem.price}</div>
-                <div className="text-center">
-                  {(elem.price * elem.qty).toFixed(2)}
-                </div>
+          {orderLines.map((line, i) => (
+            <div
+              key={line.id}
+              className={`grid grid-cols-5 items-center gap-5 px-2 ${i % 2 ? "bg-neutral-100" : ""}`}
+            >
+              <div className="flex justify-center">
+                <img src={line.image} alt="" width={56} height={56} />
               </div>
-            );
-          })}
-          <div className="pt-4">{dictionary?.dashboard?.orders?.totalPrice}: {sumPrices()}</div>
-          <div className="">{dictionary?.dashboard?.orders?.discount}: {discount}%</div>
-          <div className="">
-            {dictionary?.dashboard?.orders?.priceWithDiscount}: {sumPricesWithDiscount().toFixed(2)}
-          </div>
-          <div className="">{dictionary?.dashboard?.orders?.deliveryDate}: {"????"}</div>
+              <div className="text-center">{line.title}</div>
+              <div className="text-center">{line.qty}</div>
+              <div className="text-center">{line.price}</div>
+              <div className="text-center">
+                {(Number(line.price) * line.qty).toFixed(2)}
+              </div>
+            </div>
+          ))}
+          <div className="pt-4">{dictionary?.dashboard?.orders?.totalPrice}: {totalPrice.toFixed(2)}</div>
+          <div>{dictionary?.dashboard?.orders?.discount}: {discount}%</div>
+          <div>{dictionary?.dashboard?.orders?.priceWithDiscount}: {totalWithDiscount.toFixed(2)}</div>
+          <div>{dictionary?.dashboard?.orders?.date}: {formatDate(order.created_at)}</div>
+          <div>{dictionary?.dashboard?.orders?.deliveryDate}: {formatDate(order.delivery_date)}</div>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={() => setOpen(false)}>
             {dictionary?.dashboard?.orders?.ok}
           </Button>
         </DialogActions>
@@ -146,12 +92,13 @@ const OrderList = ({
       >
         <div className="text-center py-2">{row}</div>
         <div className="text-center py-2">{discount}%</div>
-        <div className="text-center py-2">{sumQty()}</div>
-        <div className="text-center py-2">{sumPricesWithDiscount().toFixed(2)}</div>
+        <div className="text-center py-2">{totalQty}</div>
+        <div className="text-center py-2">{totalWithDiscount.toFixed(2)}</div>
         <div className="flex justify-center items-center">
           <button
+            type="button"
             className="px-2 py-0.5 w-fit h-fit bg-emerald-600/50 hover:bg-emerald-600/80 cursor-pointer rounded-sm"
-            onClick={handleClickOpen}
+            onClick={() => setOpen(true)}
           >
             {dictionary?.dashboard?.orders?.more}
           </button>

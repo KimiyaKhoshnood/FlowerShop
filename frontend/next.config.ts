@@ -1,20 +1,17 @@
-/** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa')({
-    dest: 'public',
-    register: true,
-    skipWaiting: true,
-  })
-  
-  module.exports = withPWA({
-    reactStrictMode: true,
-    images: {
-      remotePatterns: [
-        {
-          protocol: "https",
-          hostname: "flowershop-bggx.onrender.com",
-          port: "",
-          pathname: "/media/product_images/**",
-        },
-      ],
-    },
-  });
+import type { NextConfig } from "next";
+
+// next-pwa ships without type definitions, so it is loaded with require().
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  // A service worker in development caches stale pages and gets in the way.
+  disable: process.env.NODE_ENV === "development",
+});
+
+const nextConfig: NextConfig = {
+  reactStrictMode: true,
+};
+
+export default withPWA(nextConfig);

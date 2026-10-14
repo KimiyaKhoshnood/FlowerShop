@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Alert, Snackbar } from '@mui/material';
 import { useLanguage } from '@/providers/LanguageProvider';
@@ -15,8 +16,9 @@ const NewCategoryForm = () => {
     const {
         register,
         handleSubmit,
-        // formState: { errors },
+        reset,
     } = useForm<Inputs>();
+    const router = useRouter()
 
     const { dictionary } = useLanguage()
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -24,9 +26,10 @@ const NewCategoryForm = () => {
     const CategoriesServiceCallback = (resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
             setOpenSnackbar(true);
-            window.location.reload()
+            reset();
+            router.refresh();
         } else {
-            console.error("Error creating product:", resultData || result);
+            console.error("Error creating category:", resultData || result);
         }
     }
 
@@ -42,12 +45,11 @@ const NewCategoryForm = () => {
                 onClose={() => setOpenSnackbar(false)}
             >
                 <Alert onClose={() => setOpenSnackbar(false)} severity="success">
-                    Created!
+                    {dictionary?.common?.created}
                 </Alert>
             </Snackbar>
 
             <form
-                action=""
                 className="flex gap-3 p-3 mx-auto"
                 onSubmit={handleSubmit(onSubmit)}
             >
@@ -57,7 +59,7 @@ const NewCategoryForm = () => {
                     className="border rounded-md py-1 px-3"
                     {...register("categoryName", { required: true })}
                 />
-                <button type="submit" className="bg-(--Magenta) px-2 py-1 rounded-md">
+                <button type="submit" className="bg-(--Magenta) text-white px-2 py-1 rounded-md cursor-pointer">
                     {dictionary?.dashboard?.category?.add}
                 </button>
             </form>

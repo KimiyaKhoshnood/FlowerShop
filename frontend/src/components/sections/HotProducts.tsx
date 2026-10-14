@@ -35,12 +35,11 @@ const HotProducts = () => {
 					{dictionary?.home?.hotProducts?.title}
 				</h2>
 				<div className="hidden sm:block">
-					<Link href={Links.store(lang)}>
-						<ButtonUI
+					<ButtonUI
 							text={dictionary?.home?.hotProducts?.button}
+							url={Links.store(lang)}
 							className="bg-(--BabyPink) text-(--Burgundy)"
-						/>
-					</Link>
+					/>
 				</div>
 			</div>
 			<div className="py-7 lg:px-10">
@@ -97,12 +96,11 @@ const HotProducts = () => {
 				)}
 			</div>
 			<div className="block md:hidden">
-				<Link href={Links.store(lang)}>
-					<ButtonUI
+				<ButtonUI
 						text={dictionary?.home?.hotProducts?.button}
+						url={Links.store(lang)}
 						className="bg-(--BabyPink) text-(--Burgundy) md:w-fit w-full"
-					/>
-				</Link>
+				/>
 			</div>
 		</div>
 	);

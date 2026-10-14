@@ -1,12 +1,19 @@
 {
     "common": {
         "cancel": "Cancel",
-        "check": "Check"
+        "check": "Check",
+        "error": "Something went wrong. Please try again.",
+        "saved": "Saved!",
+        "created": "Created!"
     },
     "header": {
         "home": "Home",
         "products": "Products",
-        "categories": "Categories"
+        "categories": "Categories",
+        "dashboard": "Dashboard",
+        "login": "Login",
+        "logout": "Log out",
+        "switchLanguage": "فارسی"
     },
     "auth": {
         "login": "Login",
@@ -19,7 +26,9 @@
         "email": "Email",
         "check": "Check",
         "loginToRegister": "New User?",
-        "registerToLogin": "Already Have an Account?"
+        "registerToLogin": "Already Have an Account?",
+        "loginFailed": "Wrong username or password.",
+        "registerFailed": "Could not create your account."
     },
     "home": {
         "hero": {
@@ -30,25 +39,25 @@
                 {
                     "image": "Price.svg",
                     "title": "Wholesale Prices",
-                    "description": "Vel at hendrerit urna et maecenas venenatis.",
+                    "description": "Farm-to-door prices on every stem.",
                     "id": "1"
                 },
                 {
                     "image": "Credit-Card-Blocked.svg",
                     "title": "Secure Checkout",
-                    "description": "Vitae gravida arcu, ante lorem leo.",
+                    "description": "Pay your way, safely.",
                     "id": "2"
                 },
                 {
                     "image": "tulipSvg.svg",
                     "title": "Best Quality",
-                    "description": "Tincidunt mattis vitae at massa id.",
+                    "description": "Hand-picked, freshly cut flowers.",
                     "id": "3"
                 },
                 {
                     "image": "Customer-Service.svg",
                     "title": "Client Service",
-                    "description": "Donec potenti velit est vivamus velit.",
+                    "description": "Real florists, ready to help.",
                     "id": "4"
                 }
             ]
@@ -83,7 +92,15 @@
             "availability": "Availability",
             "reviews": "Reviews",
             "productCare": "Product Care"
-        }
+        },
+        "noReviews": "There are no reviews yet.",
+        "review": "Review",
+        "days": "Days",
+        "careTips": [
+            "Cut stems on an angle and remove any foliage below the water level.",
+            "Use a clean vase with cool water, away from direct sunlight, heat and air conditioners.",
+            "Re-cut the stems and change the water every 2-3 days to keep them fresh for up to two weeks."
+        ]
     },
     "category": {
         "title": "Shop by Category",
@@ -101,7 +118,14 @@
             "check": "Check",
             "discountActive": "% discount is active",
             "disable": "Disable"
-        }
+        },
+        "empty": "Your bag is empty. Time to pick some flowers!",
+        "goShopping": "Go shopping",
+        "buy": "Buy",
+        "pay": "Pay",
+        "choosePayment": "Choose your payment method",
+        "success": "Order placed! You can find it in your dashboard.",
+        "loginToOrder": "Please log in again to place your order."
     },
     "dashboard": {
         "header": {
@@ -119,7 +143,7 @@
             "username": "Username",
             "email": "Email",
             "save": "Save",
-            "created": "Created"
+            "created": "Saved"
         },
         "product": {
             "productTitle": "Edit Product",
@@ -137,7 +161,9 @@
             "price": "Price",
             "image": "Image",
             "category": "Category",
-            "description": "Description"
+            "description": "Description",
+            "onlyNumbers": "Only numbers are allowed!",
+            "edited": "Edited!"
         },
         "category": {
             "title": "Categories",
@@ -167,15 +193,25 @@
             "discount": "Discount",
             "priceWithDiscount": "Total Price With Discount",
             "deliveryDate": "Delivery Date",
-            "ok": "OK"
+            "ok": "OK",
+            "empty": "No orders yet.",
+            "date": "Ordered on"
         }
     },
     "hotDeals": {
         "title": "Hot Deals",
         "headline": "Save 15% OFF on FILLERS & Tulips",
-        "content": "Shopping Hot Products on September 2022 you will save 15% OFF!",
+        "content": "Order any fillers or tulips this season and save 15% with the code OFF15!",
         "caption": "Terms and Conditions apply.",
         "button": "Shop now"
     },
-    "footer": "Developed By Kimia Khoshnood As A Test Project."
+    "footer": "Made with love by Kimia Khoshnood.",
+    "delivery": {
+        "label": "Delivery Date",
+        "change": "Change",
+        "dialogTitle": "Select Delivery Date",
+        "hint": "Pick the day you want your flowers to arrive. We suggest 2-3 days before the event.",
+        "save": "Save",
+        "notSelected": "Not selected"
+    }
 }

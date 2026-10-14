@@ -15,30 +15,25 @@ type Inputs = {
 
 const Discount = () => {
   const { dictionary } = useLanguage()
-  const [isPendingDiscount, setIsPendingDiscount] = useState<
-    "noDiscount" | "Process" | "Discount" | boolean
-  >(false);
-
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const { setDiscount, discount } = useShoppingItemsContext();
+  const { setActiveDiscount, discount } = useShoppingItemsContext();
 
-  const { register, handleSubmit } = useForm<Inputs>();
+  const { register, handleSubmit, reset } = useForm<Inputs>();
 
   const DiscountCodeServiceCallback = (resultData: IDiscount[], result: IWebServiceResult) => {
-    if (!result?.hasError) {
-      if (resultData.length != 0) {
-        setIsPendingDiscount(false);
-        setDiscount(resultData[0].percent);
-      } else {
-        setIsPendingDiscount(false);
-        setOpenSnackbar(true);
-      }
+    if (!result?.hasError && resultData.length != 0) {
+      setActiveDiscount(resultData[0]);
+      setIsFormOpen(false);
+      reset();
+    } else {
+      setOpenSnackbar(true);
     }
   }
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    GetDiscountCodeService(data.discount, DiscountCodeServiceCallback)
+    GetDiscountCodeService(data.discount.trim(), DiscountCodeServiceCallback)
   };
 
   return (
@@ -54,21 +49,16 @@ const Discount = () => {
       </Snackbar>
 
       <div className="py-3">
-        {isPendingDiscount == false && discount == 0 ? (
-          <span
-            onClick={() => setIsPendingDiscount(true)}
-            className="rounded-3xl"
-          >
-            <ButtonUI
-              text={dictionary?.bag?.discount?.discountCodeQuestion}
-              className="bg-(--Burgundy)/10 text-(--Burgundy)"
-            />
-          </span>
-        ) : null}
-        {isPendingDiscount == true ? (
+        {!isFormOpen && discount == 0 && (
+          <ButtonUI
+            onClick={() => setIsFormOpen(true)}
+            text={dictionary?.bag?.discount?.discountCodeQuestion}
+            className="bg-(--Burgundy)/10 text-(--Burgundy)"
+          />
+        )}
+        {isFormOpen && (
           <form
-            action=""
-            className=" flex gap-3"
+            className="flex gap-3"
             onSubmit={handleSubmit(onSubmit)}
           >
             <input
@@ -77,30 +67,23 @@ const Discount = () => {
               className="border rounded-md py-1 px-3"
               {...register("discount", { required: true })}
             />
-            <button type="submit" className="rounded-3xl">
-              <ButtonUI
-                text={dictionary?.bag?.discount?.check}
-                className="bg-(--Burgundy)/10 text-(--Burgundy)"
-              />
-            </button>
+            <ButtonUI
+              type="submit"
+              text={dictionary?.bag?.discount?.check}
+              className="bg-(--Burgundy)/10 text-(--Burgundy)"
+            />
           </form>
-        ) : null}
-        {isPendingDiscount == false && discount != 0 ? (
-          <>
-            <span className="py-2">{discount}{dictionary?.bag?.discount?.discountActive}</span>{" "}
-            <span
-              onClick={() => {
-                setDiscount(0);
-              }}
-              className="rounded-3xl"
-            >
-              <ButtonUI
-                text={dictionary?.bag?.discount?.disable}
-                className="bg-(--Burgundy)/10 text-(--Burgundy) text-sm"
-              />
-            </span>
-          </>
-        ) : null}
+        )}
+        {!isFormOpen && discount != 0 && (
+          <div className="flex items-center gap-2">
+            <span className="py-2">{discount}{dictionary?.bag?.discount?.discountActive}</span>
+            <ButtonUI
+              onClick={() => setActiveDiscount(null)}
+              text={dictionary?.bag?.discount?.disable}
+              className="bg-(--Burgundy)/10 text-(--Burgundy) text-sm"
+            />
+          </div>
+        )}
       </div>
     </>
   );

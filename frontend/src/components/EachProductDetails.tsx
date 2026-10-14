@@ -2,7 +2,7 @@
 import { IEachProduct } from "@/types/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { default as Button, default as ButtonUI } from "./ButtonUI";
+import ButtonUI from "./ButtonUI";
 import ChartRadialBar from "./ChartRadialBar";
 import Rate from "./Rate";
 import { Links } from "@/constants/links";
@@ -20,6 +20,7 @@ const EachProductDetails = ({
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    setShowMore(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => setShowMore(e.matches);
 
@@ -37,7 +38,7 @@ const EachProductDetails = ({
         </div>
         <img
           src={image}
-          alt=""
+          alt={title}
           className="lg:w-full md:w-1/3 sm:w-1/2 w-full max-w-[500px] pr-5"
           width={500}
           height={500}
@@ -75,7 +76,7 @@ const EachProductDetails = ({
               data={[{ name: "Vase Life", value: 70, fill: "#4E0629" }]}
             />
             <div className="text-center text-(--Burgundy)">
-              <span className="font-bold">2</span> <span>Days</span>
+              <span className="font-bold">2</span> <span>{dictionary?.store?.days}</span>
             </div>
           </div>
           <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 rounded-lg flex flex-col justify-between">
@@ -84,7 +85,7 @@ const EachProductDetails = ({
               data={[{ name: "Vase Life", value: 70, fill: "#4E0629" }]}
             />
             <div className="text-center text-(--Burgundy)">
-              <span className="font-bold">5 - 7</span> <span>Days</span>
+              <span className="font-bold">5 - 7</span> <span>{dictionary?.store?.days}</span>
             </div>
           </div>
         </div>
@@ -158,10 +159,10 @@ const EachProductDetails = ({
               <div className="text-center">
                 <Rate />
               </div>
-              <span className="text-sm">There are no reviews yet.</span>
+              <span className="text-sm">{dictionary?.store?.noReviews}</span>
               <div>
-                <Button
-                  text="Review"
+                <ButtonUI
+                  text={dictionary?.store?.review}
                   className="bg-(--Burgundy)/10 text-(--Burgundy) w-full"
                 />
               </div>
@@ -171,27 +172,13 @@ const EachProductDetails = ({
         <div className="bg-white/80 border border-gray-200 px-4 lg:py-3 py-2 p-4 rounded-lg flex flex-col justify-between h-full gap-5">
           <h3>{dictionary?.store?.details?.productCare?.toUpperCase()}</h3>
           <div className="text-(--Burgundy) flex flex-col gap-3">
-            <p>
-              Cut stems on an angle and remove any foliage below the water
-              level.
-            </p>
-            <p>
-              Be sure to place them in a clean container with cool water and
-              keep them away from direct sunlight, heat sources and/or air
-              conditioners.
-            </p>
-            <p>
-              Re-cut and change water every 2-3 days and your lilies will last
-              7-14 days.
-            </p>
+            {dictionary?.store?.careTips?.map((tip: string) => <p key={tip}>{tip}</p>)}
           </div>
         </div>
       </div>
-      <div
-        onClick={() => setShowMore(!showMore)}
-        className="text-(--Burgundy) lg:hidden block px-5 rounded-2xl"
-      >
+      <div className="text-(--Burgundy) lg:hidden block px-5">
         <ButtonUI
+          onClick={() => setShowMore(!showMore)}
           text={showMore ? dictionary?.store?.showLess : dictionary?.store?.showMore}
           className="bg-(--Burgundy)/10 w-full"
         />

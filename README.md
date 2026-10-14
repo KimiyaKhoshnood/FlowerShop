@@ -1,71 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌷 Flower Shop
 
-## Getting Started
+A small, bilingual (English / فارسی) online flower shop: a **Next.js** storefront talking to a **Django REST Framework** API.
 
-First, run the development server:
+Browse 22 hand-drawn flowers, filter them by category, fill your bag, try a discount code, pick a delivery date and check out. Signed-in users get a dashboard with their order history and profile; staff users can also manage products and categories.
+
+> A just-for-fun side project — the payment step is a mock, no real money moves. 🌸
+
+## ✨ Features
+
+- **Bilingual UI** — English (LTR) and Persian (RTL) with a one-click language switch
+- **Shop** — product list with category filter, product pages, "you may also like" slider
+- **Bag** — persisted in `localStorage`, live totals, discount codes (`OFF5`, `OFF10`, `OFF15`), delivery date picker
+- **Accounts** — register / login with JWT, editable profile
+- **Dashboard** — your own orders with details; product & category management for staff
+- **PWA** — installable, with an offline-friendly service worker in production builds
+- **API docs** — Swagger UI and ReDoc out of the box
+
+## 🧱 Tech stack
+
+| Frontend | Backend |
+| --- | --- |
+| Next.js 15 (App Router) · React 19 · TypeScript | Django 5.2 · Django REST Framework |
+| Tailwind CSS 4 · MUI 7 · Swiper · Recharts | Simple JWT · django-cors-headers · drf-yasg |
+| react-hook-form · axios · next-pwa | SQLite (dev) |
+
+## 🚀 Getting started
+
+You need **Python 3.12+** and **Node.js 20+**.
+
+### 1. Backend (http://127.0.0.1:8000)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd backend
+python -m venv .venv
+.venv\Scripts\activate          # macOS / Linux: source .venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py seed_shop      # demo flowers, discount codes and an admin user
+python manage.py runserver
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`seed_shop` creates a staff account **admin / admin12345** (skip it with `--no-admin`). It is safe to run more than once.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Frontend (http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## Learn More
+The frontend talks to `http://127.0.0.1:8000` by default. To point it somewhere else, copy `frontend/.env.example` to `.env.local` and change `NEXT_PUBLIC_API_URL`.
 
-To learn more about Next.js, take a look at the following resources:
+## 🔌 API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Interactive docs: [Swagger UI](http://127.0.0.1:8000/swagger/) · [ReDoc](http://127.0.0.1:8000/redoc/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Endpoint | Methods | Who |
+| --- | --- | --- |
+| `/api/products/` (`?category=Roses`) | GET · POST · PATCH · DELETE | anyone reads, staff writes |
+| `/api/categories/` | GET · POST · PATCH · DELETE | anyone reads, staff writes |
+| `/api/discounts/?code=OFF10` | GET | signed-in users look up one code; staff manage all |
+| `/api/orders/` | GET · POST | signed-in users, only their own orders |
+| `/api/profile/` | GET · PATCH | signed-in user |
+| `/register/` | POST | anyone |
+| `/api/token/`, `/api/token/refresh/` | POST | anyone (JWT login) |
 
-## Deploy on Vercel
+Example order:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```json
+POST /api/orders/
+{
+  "discount": 2,
+  "delivery_date": "2026-11-01",
+  "items": [
+    { "product": 2, "qty": 1 },
+    { "product": 3, "qty": 2 }
+  ]
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚙️ Configuration
 
-## 🧠 API Documentation (Backend - Django)
+The backend reads these environment variables (see `backend/.env.example`); the defaults are meant for local development only.
 
-This project includes a fully functional backend written in **Django + Django REST Framework**, providing RESTful API endpoints for products, orders, and discount codes.
+| Variable | Default |
+| --- | --- |
+| `DJANGO_SECRET_KEY` | an insecure dev key |
+| `DJANGO_DEBUG` | `True` |
+| `DJANGO_ALLOWED_HOSTS` | `localhost,127.0.0.1` |
+| `CORS_ALLOWED_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` |
 
-### 🔗 Swagger UI  
-Access full API documentation here:  
-👉 [http://localhost:8000/swagger/](http://localhost:8000/swagger/)
+## 🧪 Tests & checks
 
-### 📘 ReDoc  
-An alternative, clean UI for the same API docs:  
-👉 [http://localhost:8000/redoc/](http://localhost:8000/redoc/)
+```bash
+cd backend && python manage.py test
+cd frontend && npm run lint && npm run typecheck
+```
+
+GitHub Actions runs all of these (plus a production build) on every push.
+
+## 📁 Project structure
+
+```
+backend/
+  flowershop_backend/   Django settings & root URLs
+  shop/                 models, serializers, views, permissions, tests
+    management/commands/seed_shop.py
+frontend/
+  src/app/[lang]/       routes (store, categories, bag, auth, dashboard)
+  src/views/            page-level components
+  src/components/       shared UI
+  src/i18n/             en.json / fa.json dictionaries
+  src/services/         API client
+```
 
 ---
 
-### 📦 Available API Endpoints
-
-#### 🛍 Products
-- `GET /products/` → Get all products
-- `POST /products/` → Create a new product  
-- `GET /products/<id>/` → Retrieve a specific product
-
-#### 🧾 Orders
-- `GET /orders/` → List all orders
-- `POST /orders/` → Create a new order
-
-Example POST body:
-```json
-{
-  "discount": 1,
-  "items": [
-    { "product": 2, "quantity": 1 },
-    { "product": 3, "quantity": 2 }
-  ]
-}
+Made with 💐 by Kimia Khoshnood.

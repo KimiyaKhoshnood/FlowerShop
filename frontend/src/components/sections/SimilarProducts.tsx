@@ -12,20 +12,22 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import CardPrice from "../CardPrice";
 import { IWebServiceResult } from "@/services/BaseService";
 
-const SimilarProducts = () => {
+const SimilarProducts = ({ category, excludeId }: { category: string, excludeId: string }) => {
     const { lang, dictionary } = useLanguage()
 
     const [data, setData] = useState<IEachProduct[]>([])
 
-    const ProductsServiceCallback = (resultData: IEachProduct[], result: IWebServiceResult) => {
-        if (!result.hasError) {
-            setData(resultData)
-        }
-    }
-
     useEffect(() => {
-        GetProductsService(ProductsServiceCallback)
-    }, [])
+        GetProductsService((resultData: IEachProduct[], result: IWebServiceResult) => {
+            if (result.hasError) return
+            const others = resultData.filter((product) => product.id != excludeId)
+            // Same category first, then the rest of the shop to keep the slider full.
+            setData([
+                ...others.filter((product) => product.category == category),
+                ...others.filter((product) => product.category != category),
+            ])
+        })
+    }, [category, excludeId])
 
     return (
         <div className="md:px-10 px-5 py-10">

@@ -1,4 +1,5 @@
 "use client"
+import { IDiscount } from "@/types/types";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ShoppingItems, TContextProvider } from "./contextType";
 
@@ -10,68 +11,58 @@ export default function ContextProviderLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {  
+}) {
 
   const [shoppingItems, setShoppingItems] = useState<ShoppingItems[]>([]);
-  const [discount, setDiscount] = useState<number>(0);
+  const [activeDiscount, setActiveDiscount] = useState<IDiscount | null>(null);
+  const [deliveryDate, setDeliveryDate] = useState<string | null>(null);
+  const [hasLoadedBag, setHasLoadedBag] = useState(false);
 
-  const handleIncreaseProduct = (id:string) => {
-    setShoppingItems((current:ShoppingItems[])=>{
-      const notInShoppingBag = current.find((item)=>item.id==id) == null
-
-      if (notInShoppingBag) {
-        return [...shoppingItems, { id: id, qty: 1 }]
+  const handleIncreaseProduct = (id: string) => {
+    setShoppingItems((current) => {
+      if (!current.some((item) => item.id == id)) {
+        return [...current, { id: id, qty: 1 }]
       }
-      else {
-        return current.map((item)=>{
-          if (item.id == id) {
-            return { ...item, qty: item.qty + 1 }
-          } else {
-            return item
-          }
-        }) 
-      }
+      return current.map((item) => item.id == id ? { ...item, qty: item.qty + 1 } : item)
     })
   }
 
-  const handleDecreaseProduct = (id:string) => {
-    setShoppingItems((current:ShoppingItems[])=>{
-      const findByID = current.find((item)=>item.id==id)
-    if (findByID) {
-      if (findByID?.qty==1) {
-        return current.filter((item)=>item.id!=id)
-      } else {
-        return current.map((item)=>{
-          if (item.id == id) {
-            return { ...item, qty: item.qty - 1 }
-          } else {
-            return item
-          }
-        }) 
-      }
-    } else {
-      return current
-    }
-    })
+  const handleDecreaseProduct = (id: string) => {
+    setShoppingItems((current) => current
+      .map((item) => item.id == id ? { ...item, qty: item.qty - 1 } : item)
+      .filter((item) => item.qty > 0))
   }
 
   const handleCleanProducts = () => {
     setShoppingItems([])
+    setActiveDiscount(null)
   }
 
-  useEffect(()=>{
-    const storedshoppingItems = localStorage.getItem("shoppingItems")
-    if (storedshoppingItems) {
-      setShoppingItems(JSON.parse(storedshoppingItems))
+  useEffect(() => {
+    try {
+      const storedShoppingItems = localStorage.getItem("shoppingItems")
+      if (storedShoppingItems) {
+        setShoppingItems(JSON.parse(storedShoppingItems))
+      }
+    } catch {
+      // Broken or blocked storage just means an empty bag.
     }
-  },[])
+    setHasLoadedBag(true)
+  }, [])
 
-  useEffect(()=>{
-    localStorage.setItem("shoppingItems", JSON.stringify(shoppingItems))
-  },[shoppingItems])
-  
+  useEffect(() => {
+    if (!hasLoadedBag) return
+    try {
+      localStorage.setItem("shoppingItems", JSON.stringify(shoppingItems))
+    } catch { }
+  }, [shoppingItems, hasLoadedBag])
+
   return (
-    <ContextProvider.Provider value={{ shoppingItems, handleIncreaseProduct, handleDecreaseProduct, handleCleanProducts, discount, setDiscount }}>
+    <ContextProvider.Provider value={{
+      shoppingItems, handleIncreaseProduct, handleDecreaseProduct, handleCleanProducts,
+      discount: activeDiscount?.percent ?? 0, activeDiscount, setActiveDiscount,
+      deliveryDate, setDeliveryDate,
+    }}>
       {children}
     </ContextProvider.Provider>
   );

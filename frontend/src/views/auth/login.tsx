@@ -4,9 +4,9 @@ import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
 import { IWebServiceResult } from "@/services/BaseService";
 import { PostTokenService } from "@/services/services";
-import Cookie from "js-cookie";
+import { saveTokens } from "@/utils/utils";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -17,54 +17,50 @@ type Inputs = {
 
 const Login = () => {
     const { lang, dictionary } = useLanguage()
+    const router = useRouter()
 
-    const { register, handleSubmit } = useForm<Inputs>();
-    const [error, setError] = useState<{ hasError: boolean, errorText?: string }>({ hasError: false })
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm<Inputs>();
+    const [error, setError] = useState<string>()
 
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const onSubmit: SubmitHandler<Inputs> = (data) => new Promise<void>((resolve) => {
         const TokenServiceCallback = (resultData: { access: string, refresh: string }, result: IWebServiceResult) => {
             if (!result?.hasError) {
-                const access = resultData.access;
-                const refresh = resultData.refresh;
-
-                Cookie.set("accessToken", access, { expires: 1 });
-                Cookie.set("refreshToken", refresh, { expires: 2 });
-
-                setError({ hasError: false })
+                saveTokens(resultData)
+                router.push(Links.dashboard.base(lang));
+                router.refresh();
             } else {
-                setError({ hasError: true, errorText: "Some Error Happened" })
-                console.log(resultData)
+                setError(dictionary?.auth?.loginFailed)
             }
-
-            redirect(Links.dashboard.base(lang));
+            resolve()
         }
 
         PostTokenService(data, TokenServiceCallback)
-    };
+    });
 
     return (
         <>
-            <div className="border border-gray-300 rounded-2xl p-16 flex flex-col justify-between gap-5">
+            <div className="border border-gray-300 rounded-2xl sm:p-16 p-8 flex flex-col justify-between gap-5">
                 <h1 className="text-4xl text-center pb-10">{dictionary?.auth?.login}</h1>
                 <form
-                    action=""
                     className="flex flex-col gap-3 items-center"
                     onSubmit={handleSubmit(onSubmit)}
                 >
                     <input
                         type="text"
+                        autoComplete="username"
                         placeholder={dictionary?.auth?.username}
                         className="border rounded-md py-2 px-4"
                         {...register("username", { required: true })}
                     />
                     <input
-                        type="text"
+                        type="password"
+                        autoComplete="current-password"
                         placeholder={dictionary?.auth?.password}
                         className="border rounded-md py-2 px-4"
                         {...register("password", { required: true })}
                     />
-                    {error.hasError && <span className="text-red-600 text-sm">{error.errorText}</span>}
-                    <ButtonUI text={dictionary?.auth?.check} className="bg-(--Magenta)" />
+                    {error && <span className="text-red-600 text-sm">{error}</span>}
+                    <ButtonUI type="submit" disabled={isSubmitting} text={dictionary?.auth?.check} className="bg-(--Magenta) text-white" />
                 </form>
             </div>
             <p>

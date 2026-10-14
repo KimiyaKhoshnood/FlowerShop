@@ -5,9 +5,13 @@ import { useLanguage } from "@/providers/LanguageProvider";
 
 export const ProductQty = () => {
   const { shoppingItems } = useShoppingItemsContext();
+  const totalQty = shoppingItems.reduce((total, item) => total + item.qty, 0);
+
+  if (totalQty == 0) return null;
+
   return (
-    <span className="bg-red-500 rounded-full w-5 h-5 text-sm flex justify-center items-center">
-      {shoppingItems.length}
+    <span className="bg-(--Magenta) text-white rounded-full min-w-5 h-5 px-1 text-xs flex justify-center items-center">
+      {totalQty}
     </span>
   );
 };
@@ -17,39 +21,30 @@ const AddToCard = ({ id }: { id: string }) => {
   const { handleIncreaseProduct, handleDecreaseProduct, shoppingItems } =
     useShoppingItemsContext();
 
-  const handleProductQty = () => {
-    const findByID = shoppingItems.find(
-      (shoppingItems) => shoppingItems.id == id
-    );
-    if (findByID == null) {
-      return 0;
-    } else {
-      return findByID?.qty;
-    }
-  };
+  const qty = shoppingItems.find((item) => item.id == id)?.qty ?? 0;
 
   return (
     <div className="h-fit">
-      {handleProductQty() == 0 ? (
-        <div
+      {qty == 0 ? (
+        <ButtonUI
           onClick={() => handleIncreaseProduct(id)}
-          className="w-fit rounded-3xl"
-        >
-          <ButtonUI
-            text={dictionary?.store?.addProduct}
-            className="bg-(--Magenta) text-white text-nowrap"
-          />
-        </div>
+          text={dictionary?.store?.addProduct}
+          className="bg-(--Magenta) text-white text-nowrap"
+        />
       ) : (
         <div className="flex text-(--Burgundy) text-3xl gap-2">
           <button
+            type="button"
+            aria-label="-1"
             onClick={() => handleDecreaseProduct(id)}
             className="w-7 text-center cursor-pointer"
           >
             -
           </button>
-          <span className="py-1">{handleProductQty()}</span>
+          <span className="py-1">{qty}</span>
           <button
+            type="button"
+            aria-label="+1"
             onClick={() => handleIncreaseProduct(id)}
             className="w-7 text-center cursor-pointer"
           >

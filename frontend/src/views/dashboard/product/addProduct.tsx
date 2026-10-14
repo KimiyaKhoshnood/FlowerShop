@@ -1,10 +1,12 @@
 "use client"
 
+import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
 import { IWebServiceResult } from "@/services/BaseService";
 import { GetCategoriesService, PostProductService } from "@/services/services";
 import { ICategory } from "@/types/types";
 import { Alert, Snackbar } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -25,7 +27,8 @@ const DashboardAddProduct = () => {
     } = useForm<Inputs>();
     const value = watch()
 
-    const { dictionary } = useLanguage()
+    const { lang, dictionary } = useLanguage()
+    const router = useRouter()
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [categories, setCategories] = useState<{ id: number, name: string }[]>();
 
@@ -42,13 +45,15 @@ const DashboardAddProduct = () => {
     const ProductServiceCallback = (resultData: unknown, result: IWebServiceResult) => {
         if (!result.hasError) {
             setOpenSnackbar(true);
+            router.push(Links.dashboard.product(lang));
+            router.refresh();
         } else {
             console.error("Error creating product:", resultData || result)
         }
     }
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        PostProductService({ ...data, price: parseInt(data.price) }, ProductServiceCallback)
+        PostProductService({ ...data, price: Number(data.price) }, ProductServiceCallback)
     };
 
     return (
@@ -61,7 +66,7 @@ const DashboardAddProduct = () => {
                 onClose={() => setOpenSnackbar(false)}
             >
                 <Alert onClose={() => setOpenSnackbar(false)} severity="success">
-                    Created!
+                    {dictionary?.common?.created}
                 </Alert>
             </Snackbar>
 
@@ -78,13 +83,14 @@ const DashboardAddProduct = () => {
                 />
                 <input
                     type="text"
+                    inputMode="decimal"
                     placeholder={dictionary?.dashboard?.product?.price}
                     className="border rounded-md py-1.5 px-3"
                     {...register("price", {
                         required: true,
                         pattern: {
-                            value: /^[0-9]+$/, // Only numbers allowed
-                            message: "Only numbers are allowed!",
+                            value: /^[0-9]+(\.[0-9]{1,2})?$/,
+                            message: dictionary?.dashboard?.product?.onlyNumbers,
                         },
                     })}
                 />
@@ -111,7 +117,7 @@ const DashboardAddProduct = () => {
                     className="border rounded-md py-1.5 px-3"
                     {...register("description", { required: true })}
                 />
-                <button type="submit" className="bg-(--Magenta) px-2 py-1 rounded-md">
+                <button type="submit" className="bg-(--Magenta) text-white px-2 py-1 rounded-md cursor-pointer">
                     {dictionary?.common?.check}
                 </button>
             </form>

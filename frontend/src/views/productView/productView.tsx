@@ -17,7 +17,7 @@ const ProductView = ({ product, resolvedParams }: { product: IEachProduct, resol
             <div className="lg:bg-(--Burgundy)/10">
                 <div className="lg:px-20 lg:pb-10 lg:pt-20">
                     <EachProductDetails
-                        category={product.id}
+                        category={product.category}
                         id={product.id}
                         title={product.title}
                         price={product.price}
@@ -46,7 +46,7 @@ const ProductView = ({ product, resolvedParams }: { product: IEachProduct, resol
             <div className="text-gray-300 lg:px-20 px-10">
                 <hr />
             </div>
-            <SimilarProducts />
+            <SimilarProducts category={product.category} excludeId={product.id} />
             <HotDeals />
         </>
     )

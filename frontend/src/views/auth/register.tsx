@@ -4,9 +4,9 @@ import { Links } from "@/constants/links";
 import { useLanguage } from "@/providers/LanguageProvider";
 import { IWebServiceResult } from "@/services/BaseService";
 import { PostRegisterService, PostTokenService } from "@/services/services";
-import Cookie from "js-cookie";
+import { getApiErrorMessage, saveTokens } from "@/utils/utils";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -19,96 +19,62 @@ type Inputs = {
     last_name: string
 };
 
+const inputClassName = "border rounded-md py-1 px-4"
+
 const Register = () => {
     const { lang, dictionary } = useLanguage()
+    const router = useRouter()
 
-    const { register, handleSubmit } = useForm<Inputs>();
-    const [error, setError] = useState<{ hasError: boolean, errorText?: string }>({ hasError: false })
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm<Inputs>();
+    const [error, setError] = useState<string>()
 
-    const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
+    const onSubmit: SubmitHandler<Inputs> = (data) => new Promise<void>((resolve) => {
+        const TokenServiceCallback = (resultData: { access: string, refresh: string }, result: IWebServiceResult) => {
+            if (!result?.hasError) {
+                saveTokens(resultData)
+                router.push(Links.dashboard.base(lang));
+                router.refresh();
+            } else {
+                router.push(Links.login(lang));
+            }
+            resolve()
+        }
 
         const RegisterServiceCallback = (resultData: unknown, result: IWebServiceResult) => {
             if (!result?.hasError) {
-                PostTokenService({
-                    username: data.username,
-                    password: data.password,
-                }, TokenServiceCallback)
-
-                setError({ hasError: false })
+                setError(undefined)
+                PostTokenService({ username: data.username, password: data.password }, TokenServiceCallback)
             } else {
-                setError({ hasError: true, errorText: "Some Error Happened" })
-                console.log(resultData)
+                setError(getApiErrorMessage(resultData, dictionary?.auth?.registerFailed))
+                resolve()
             }
         }
 
         PostRegisterService(data, RegisterServiceCallback)
-
-        const TokenServiceCallback = (resultData: { access: string, refresh: string }, result: IWebServiceResult) => {
-            if (!result?.hasError) {
-                const access = resultData.access;
-                const refresh = resultData.refresh;
-
-                Cookie.set("accessToken", access, { expires: 1 });
-                Cookie.set("refreshToken", refresh, { expires: 2 });
-
-                setError({ hasError: false })
-            } else {
-                setError({ hasError: true, errorText: "Some Error Happened" })
-                console.log(resultData)
-            }
-
-            redirect(Links.dashboard.base(lang));
-        }
-    };
-
+    });
 
     return (
         <>
-            <div className="border border-gray-300 rounded-2xl py-10 px-16 flex flex-col justify-between gap-5">
+            <div className="border border-gray-300 rounded-2xl py-10 sm:px-16 px-8 flex flex-col justify-between gap-5">
                 <h1 className="text-4xl text-center pb-10">{dictionary?.auth?.register}</h1>
                 <form
-                    action=""
                     className="flex flex-col gap-2 items-center"
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <input
-                        type="text"
-                        placeholder={dictionary?.auth?.username}
-                        className="border rounded-md py-1 px-4"
-                        {...register("username", { required: true })}
-                    />
-                    <input
-                        type="text"
-                        placeholder={dictionary?.auth?.password}
-                        className="border rounded-md py-1 px-4"
-                        {...register("password", { required: true })}
-                    />
-                    <input
-                        type="text"
-                        placeholder={dictionary?.auth?.repeatPassword}
-                        className="border rounded-md py-1 px-4"
-                        {...register("password2", { required: true })}
-                    />
-                    <input
-                        type="text"
-                        placeholder={dictionary?.auth?.email}
-                        className="border rounded-md py-1 px-4"
-                        {...register("email", { required: true })}
-                    />
-                    <input
-                        type="text"
-                        placeholder={dictionary?.auth?.firstName}
-                        className="border rounded-md py-1 px-4"
-                        {...register("first_name", { required: true })}
-                    />
-                    <input
-                        type="text"
-                        placeholder={dictionary?.auth?.lastName}
-                        className="border rounded-md py-1 px-4"
-                        {...register("last_name", { required: true })}
-                    />
-                    {error.hasError && <span className="text-red-600 text-sm">{error.errorText}</span>}
-                    <ButtonUI text={dictionary?.auth?.check} className="bg-(--Magenta)" />
+                    <input type="text" autoComplete="username" placeholder={dictionary?.auth?.username}
+                        className={inputClassName} {...register("username", { required: true })} />
+                    <input type="password" autoComplete="new-password" placeholder={dictionary?.auth?.password}
+                        className={inputClassName} {...register("password", { required: true })} />
+                    <input type="password" autoComplete="new-password" placeholder={dictionary?.auth?.repeatPassword}
+                        className={inputClassName} {...register("password2", { required: true })} />
+                    <input type="email" autoComplete="email" placeholder={dictionary?.auth?.email}
+                        className={inputClassName} {...register("email", { required: true })} />
+                    <input type="text" autoComplete="given-name" placeholder={dictionary?.auth?.firstName}
+                        className={inputClassName} {...register("first_name", { required: true })} />
+                    <input type="text" autoComplete="family-name" placeholder={dictionary?.auth?.lastName}
+                        className={inputClassName} {...register("last_name", { required: true })} />
+                    {error && <span className="text-red-600 text-sm max-w-64 text-center">{error}</span>}
+                    <ButtonUI type="submit" disabled={isSubmitting} text={dictionary?.auth?.check} className="bg-(--Magenta) text-white" />
                 </form>
             </div>
             <p>

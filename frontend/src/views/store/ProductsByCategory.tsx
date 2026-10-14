@@ -32,10 +32,10 @@ const ProductsByCategory = () => {
             setLoading(true)
             GetProductsByCategoryService(url, ProductsByCategoryServiceCallback)
         }
-    }, [url])
+    }, [url, allProducts])
 
     const uniqueCategories: string[] = [
-        ...new Set(allProducts.map((item) => item.category)),
+        ...new Set(allProducts.map((item) => item.category).filter(Boolean)),
     ];
 
     const ProductsServiceCallback = (resultData: IEachProduct[], result: IWebServiceResult) => {

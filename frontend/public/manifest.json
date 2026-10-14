@@ -1,11 +1,11 @@
 {
   "name": "Flower Shop",
   "short_name": "FlowerShop",
-  "description": "A beautiful flower shop.",
+  "description": "Fresh flowers, delivered. A bilingual demo shop.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#fffefe",
+  "theme_color": "#4e0629",
   "icons": [
     {
       "src": "/Logo.svg",

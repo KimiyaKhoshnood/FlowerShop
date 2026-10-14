@@ -1,12 +1,19 @@
 {
     "common": {
         "cancel": "لغو",
-        "check": "بررسی"
+        "check": "بررسی",
+        "error": "مشکلی پیش آمد. دوباره تلاش کنید.",
+        "saved": "ذخیره شد!",
+        "created": "ساخته شد!"
     },
     "header": {
         "home": "صفحه اصلی",
         "products": "محصولات",
-        "categories": "کتگوری ها"
+        "categories": "دسته‌بندی‌ها",
+        "dashboard": "داشبورد",
+        "login": "ورود",
+        "logout": "خروج",
+        "switchLanguage": "English"
     },
     "auth": {
         "login": "ورود",
@@ -18,8 +25,10 @@
         "repeatPassword": "تکرار رمز عبور",
         "email": "ایمیل",
         "check": "بررسی",
-        "loginToRegister": "کاربر جدبد هستید؟",
-        "registerToLogin": "حساب کاربری دارید؟"
+        "loginToRegister": "کاربر جدید هستید؟",
+        "registerToLogin": "حساب کاربری دارید؟",
+        "loginFailed": "نام کاربری یا رمز عبور اشتباه است.",
+        "registerFailed": "ساخت حساب کاربری انجام نشد."
     },
     "home": {
         "hero": {
@@ -30,25 +39,25 @@
                 {
                     "image": "Price.svg",
                     "title": "قیمت عمده",
-                    "description": "Vel at hendrerit urna et maecenas venenatis.",
+                    "description": "قیمت مستقیم از مزرعه برای هر شاخه.",
                     "id": "1"
                 },
                 {
                     "image": "Credit-Card-Blocked.svg",
                     "title": "پرداخت امن",
-                    "description": "Vitae gravida arcu, ante lorem leo.",
+                    "description": "با خیال راحت پرداخت کنید.",
                     "id": "2"
                 },
                 {
                     "image": "tulipSvg.svg",
                     "title": "بهترین کیفیت",
-                    "description": "Tincidunt mattis vitae at massa id.",
+                    "description": "گل‌های تازه و دست‌چین.",
                     "id": "3"
                 },
                 {
                     "image": "Customer-Service.svg",
                     "title": "خدمات مشتریان",
-                    "description": "Donec potenti velit est vivamus velit.",
+                    "description": "گل‌فروش‌های واقعی آماده کمک هستند.",
                     "id": "4"
                 }
             ]
@@ -71,7 +80,7 @@
         "perFlower": "برای هر گل",
         "addProduct": "افزودن محصول",
         "alsoLike": "ممکنه از این ها هم خوشت بیاد؟",
-        "backButton": "برگشت به کتگوری {0}",
+        "backButton": "برگشت به دسته‌بندی {0}",
         "details": {
             "colour": "رنگ",
             "bloomCount": "تعداد شکوفه‌ها",
@@ -83,7 +92,15 @@
             "availability": "در دسترس بودن",
             "reviews": "بررسی ها",
             "productCare": "نگهداری محصول"
-        }
+        },
+        "noReviews": "هنوز نظری ثبت نشده است.",
+        "review": "ثبت نظر",
+        "days": "روز",
+        "careTips": [
+            "ساقه‌ها را مورب ببرید و برگ‌های زیر سطح آب را جدا کنید.",
+            "گل‌ها را در گلدان تمیز با آب خنک و دور از نور مستقیم، گرما و کولر بگذارید.",
+            "هر ۲ تا ۳ روز ساقه‌ها را دوباره ببرید و آب را عوض کنید تا تا دو هفته تازه بمانند."
+        ]
     },
     "category": {
         "title": "خرید بر اساس دسته بندی",
@@ -101,7 +118,14 @@
             "check": "بررسی",
             "discountActive": "% تخفیف فعال است",
             "disable": "غیرفعال"
-        }
+        },
+        "empty": "سبد خرید شما خالی است. وقت انتخاب گل است!",
+        "goShopping": "برو به فروشگاه",
+        "buy": "خرید",
+        "pay": "پرداخت",
+        "choosePayment": "روش پرداخت را انتخاب کنید",
+        "success": "سفارش ثبت شد! می‌توانید آن را در داشبورد ببینید.",
+        "loginToOrder": "برای ثبت سفارش دوباره وارد شوید."
     },
     "dashboard": {
         "header": {
@@ -109,7 +133,7 @@
             "profile": "پروفایل",
             "products": "محصولات",
             "addProduct": "افزودن محصول",
-            "categories": "کتگوری ها",
+            "categories": "دسته‌بندی‌ها",
             "discounts": "تخفیف ها"
         },
         "profile": {
@@ -119,7 +143,7 @@
             "username": "نام کاربری",
             "email": "ایمیل",
             "save": "ذخیره",
-            "created": "ساخته شد"
+            "created": "ذخیره شد"
         },
         "product": {
             "productTitle": "ویرایش محصول",
@@ -137,7 +161,9 @@
             "price": "قیمت",
             "image": "عکس",
             "category": "دسته بندی",
-            "description": "توضیحات"
+            "description": "توضیحات",
+            "onlyNumbers": "فقط عدد مجاز است!",
+            "edited": "ویرایش شد!"
         },
         "category": {
             "title": "دسته بندی ها",
@@ -167,15 +193,25 @@
             "discount": "تخفیف",
             "priceWithDiscount": "قیمت بعد از تخفیف",
             "deliveryDate": "زمان ارسال",
-            "ok": "اوکی"
+            "ok": "اوکی",
+            "empty": "هنوز سفارشی ثبت نشده است.",
+            "date": "تاریخ سفارش"
         }
     },
     "hotDeals": {
         "title": "معامله پرسود",
         "headline": "۱۵٪ تخفیف روی فیلرها و لاله‌ها",
-        "content": "با خرید محصولات پرطرفدار در سپتامبر ۲۰۲۲، ۱۵٪ تخفیف بگیرید!",
+        "content": "این فصل روی فیلرها و لاله‌ها با کد OFF15 پانزده درصد تخفیف بگیرید!",
         "caption": "شرایط و ضوابط اعمال می‌شود.",
         "button": "الان بخرید"
     },
-    "footer": "این وبسایت یک پروژه تستی توسط کیمیا خوشنود است."
+    "footer": "ساخته شده با عشق توسط کیمیا خوشنود.",
+    "delivery": {
+        "label": "زمان ارسال",
+        "change": "تغییر",
+        "dialogTitle": "انتخاب زمان ارسال",
+        "hint": "روزی را که می‌خواهید گل‌ها برسند انتخاب کنید. پیشنهاد ما ۲ تا ۳ روز قبل از مراسم است.",
+        "save": "ذخیره",
+        "notSelected": "انتخاب نشده"
+    }
 }

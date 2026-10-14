@@ -11,6 +11,15 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    ignores: ["public/sw.js", "public/workbox-*.js", ".next/**", "next-env.d.ts"],
+  },
+  {
+    rules: {
+      // Product images are plain SVGs/URLs coming from the API.
+      "@next/next/no-img-element": "off",
+    },
+  },
 ];
 
 export default eslintConfig;
