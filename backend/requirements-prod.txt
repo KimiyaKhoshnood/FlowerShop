@@ -1,0 +1,3 @@
+-r requirements.txt
+gunicorn>=23
+whitenoise>=6.9

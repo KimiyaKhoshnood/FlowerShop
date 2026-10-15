@@ -1,8 +1,13 @@
-import Login from "@/views/auth/login";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { LoginForm } from "@/components/account/AuthForms";
+import { getDictionary } from "@/i18n/dictionaries";
 
-const page = () => {
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const t = await getDictionary((await params).lang);
+  return { title: t.auth.login, robots: { index: false } };
+}
 
-  return <Login />;
-};
-
-export default page;
+export default function LoginPage() {
+  return <Suspense><LoginForm /></Suspense>;
+}

@@ -1,61 +1,54 @@
-import { Footer, Header } from "@/components/headerAndFooter";
-import ContextProviderLayout from "@/context/context";
-import { getDictionary } from "@/i18n/dictionaries";
-import { LanguageProvider } from "@/providers/LanguageProvider";
-import { Geist, Geist_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import type { Metadata, Viewport } from "next";
+import { Geist, Playfair_Display, Vazirmatn } from "next/font/google";
 import { notFound } from "next/navigation";
-import type { Metadata } from "next";
+import { Suspense } from "react";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { getDictionary, isLang } from "@/i18n/dictionaries";
+import { SITE_URL } from "@/lib/config";
+import { Providers } from "./providers";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Flower Shop",
-    template: "%s | Flower Shop",
-  },
-  description: "A bilingual (English / Persian) flower shop built with Next.js and Django REST Framework.",
-  manifest: "/manifest.json",
-};
+const body = Geist({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const heading = Playfair_Display({ subsets: ["latin"], variable: "--font-heading", display: "swap" });
+// Vazirmatn: the clean, widely used Persian UI typeface.
+const persian = Vazirmatn({ subsets: ["arabic", "latin"], variable: "--font-persian", display: "swap" });
 
-const iranSans = localFont({
-  src: "../../../public/fonts/MbSansFont_Medium.ttf",
-});
+type Props = { children: React.ReactNode; params: Promise<{ lang: string }> };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  const t = await getDictionary(lang);
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: t.meta.title, template: `%s | ${lang === "fa" ? "گل‌فروشی" : "Flower Shop"}` },
+    description: t.meta.description,
+    manifest: "/manifest.json",
+    alternates: { languages: { en: "/en", fa: "/fa" } },
+    openGraph: { type: "website", siteName: "Flower Shop", locale: lang === "fa" ? "fa_IR" : "en_US" },
+  };
+}
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const viewport: Viewport = { themeColor: "#4e0629" };
 
-export default async function Layout({
-  children,
-  params
-}: Readonly<{
-  children: React.ReactNode;
-  params: Promise<{ lang: string }>
-}>) {
-  const resolvedParams = await params
-
-  if (!['fa', 'en'].includes(resolvedParams.lang)) {
-    notFound();
-  }
-
-
-  const dictionary = await getDictionary(resolvedParams.lang)
+export default async function LangLayout({ children, params }: Props) {
+  const { lang } = await params;
+  if (!isLang(lang)) notFound();
+  const dictionary = await getDictionary(lang);
+  const fonts = lang === "fa"
+    ? `${persian.variable} [--font-body:var(--font-persian)] [--font-heading:var(--font-persian)]`
+    : `${body.variable} ${heading.variable}`;
 
   return (
-    <div className={`${resolvedParams.lang == 'fa' ? iranSans.className : `${geistSans.variable} ${geistMono.variable}`} antialiased !min-h-screen flex flex-col`} lang={resolvedParams.lang} dir={resolvedParams.lang === 'fa' ? 'rtl' : 'ltr'}>
-      <ContextProviderLayout>
-        <LanguageProvider dictionary={dictionary} lang={resolvedParams.lang}>
-          <Header />
-          <div className="flex-1 h-full grow-1">{children}</div>
-          <hr className="text-gray-300 w-full" />
-          <Footer />
-        </LanguageProvider>
-      </ContextProviderLayout>
-    </div>
+    <html lang={lang} dir={lang === "fa" ? "rtl" : "ltr"} className={fonts}>
+      <body className="flex min-h-screen flex-col">
+        <Providers lang={lang} dictionary={dictionary}>
+          <Suspense>
+            <Header />
+          </Suspense>
+          <main className="flex-1">{children}</main>
+          <Footer lang={lang} t={dictionary} />
+        </Providers>
+      </body>
+    </html>
   );
 }

@@ -1,34 +1,56 @@
 # 🌷 Flower Shop
 
-A small, bilingual (English / فارسی) online flower shop: a **Next.js** storefront talking to a **Django REST Framework** API.
+A bilingual (English / فارسی) online flower shop — a **Next.js 15** storefront on top of a **Django REST Framework** API.
 
-Browse 22 hand-drawn flowers, filter them by category, fill your bag, try a discount code, pick a delivery date and check out. Signed-in users get a dashboard with their order history and profile; staff users can also manage products and categories.
+Customers browse and filter fresh flowers, read and write reviews, fill a bag, apply discount codes and check out with a delivery date. Staff get an admin panel with sales charts, order fulfilment, catalogue and discount management.
 
-> A just-for-fun side project — the payment step is a mock, no real money moves. 🌸
+> A portfolio project. Payments are mocked — no real money moves. 🌸
 
-## ✨ Features
+## ✨ Highlights
 
-- **Bilingual UI** — English (LTR) and Persian (RTL) with a one-click language switch
-- **Shop** — product list with category filter, product pages, "you may also like" slider
-- **Bag** — persisted in `localStorage`, live totals, discount codes (`OFF5`, `OFF10`, `OFF15`), delivery date picker
-- **Accounts** — register / login with JWT, editable profile
-- **Dashboard** — your own orders with details; product & category management for staff
-- **PWA** — installable, with an offline-friendly service worker in production builds
-- **API docs** — Swagger UI and ReDoc out of the box
+**Storefront**
+- English (LTR) and Persian (RTL) with localized digits, dates and currency; language picked from `Accept-Language`
+- Server-rendered catalogue with search, category / price / stock / sale filters, sorting and pagination — all in the URL
+- Product pages with florist details (vase life, stem length, season calendar), reviews and star ratings, JSON-LD for search engines
+- Bag that survives reloads and syncs across tabs; prices, discounts and shipping are always **calculated by the server**
+- Checkout with address, delivery date and payment method; order confirmation and tracking timeline
+- Account area: order history, cancelling orders, profile and password change
+
+**Admin** (`/en/admin`, staff only)
+- Overview with revenue, average order, a 14-day sales chart, best sellers, orders by status and low-stock alerts
+- Order fulfilment with an enforced status flow: pending → paid → shipped → delivered (or cancelled, which restocks)
+- Product editor (bilingual fields, pricing and sale price, stock, visibility, season months), categories and discount codes
+
+**Under the hood**
+- Order totals are snapshotted (unit prices, discount, shipping) so later price changes never rewrite history
+- Stock is reserved inside a database transaction with row locks; overselling is impossible
+- Discount codes with expiry, minimum order and usage limits; code checks and logins are rate-limited
+- JWT auth with silent token refresh; route protection in Next.js middleware, real permissions in the API
+- 35 backend tests, typed frontend (strict TypeScript, typed i18n dictionaries), CI on every push, Docker setup
 
 ## 🧱 Tech stack
 
 | Frontend | Backend |
 | --- | --- |
-| Next.js 15 (App Router) · React 19 · TypeScript | Django 5.2 · Django REST Framework |
-| Tailwind CSS 4 · MUI 7 · Swiper · Recharts | Simple JWT · django-cors-headers · drf-yasg |
-| react-hook-form · axios · next-pwa | SQLite (dev) |
+| Next.js 15 (App Router, Server Components) · React 19 · TypeScript | Django 5.2 · Django REST Framework |
+| Tailwind CSS 4 · MUI (dialogs, drawers) · Swiper · Recharts | Simple JWT · django-cors-headers · drf-yasg (OpenAPI) |
+| TanStack Query · react-hook-form · axios | SQLite (dev) · gunicorn + WhiteNoise (Docker) |
 
 ## 🚀 Getting started
 
+### Option A — Docker (one command)
+
+```bash
+docker compose up --build
+```
+
+Shop: http://localhost:3000 · API docs: http://localhost:8000/swagger/ · Admin: `admin` / `admin12345`
+
+### Option B — run locally
+
 You need **Python 3.12+** and **Node.js 20+**.
 
-### 1. Backend (http://127.0.0.1:8000)
+**Backend** (http://127.0.0.1:8000)
 
 ```bash
 cd backend
@@ -36,13 +58,13 @@ python -m venv .venv
 .venv\Scripts\activate          # macOS / Linux: source .venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py seed_shop      # demo flowers, discount codes and an admin user
+python manage.py seed_shop      # catalogue, discount codes, demo orders and an admin user
 python manage.py runserver
 ```
 
-`seed_shop` creates a staff account **admin / admin12345** (skip it with `--no-admin`). It is safe to run more than once.
+`seed_shop` is safe to re-run. It creates the staff account **admin / admin12345**, a few demo customers with reviews and two weeks of orders so the admin charts have data (`--no-admin`, `--no-demo` to skip).
 
-### 2. Frontend (http://localhost:3000)
+**Frontend** (http://localhost:3000)
 
 ```bash
 cd frontend
@@ -50,69 +72,81 @@ npm install
 npm run dev
 ```
 
-The frontend talks to `http://127.0.0.1:8000` by default. To point it somewhere else, copy `frontend/.env.example` to `.env.local` and change `NEXT_PUBLIC_API_URL`.
+Demo discount codes: `OFF5`, `OFF10`, `OFF15` (from $30), `WELCOME20` (from $40, first 100 uses).
 
 ## 🔌 API
 
-Interactive docs: [Swagger UI](http://127.0.0.1:8000/swagger/) · [ReDoc](http://127.0.0.1:8000/redoc/)
+Interactive docs at [`/swagger/`](http://127.0.0.1:8000/swagger/) and [`/redoc/`](http://127.0.0.1:8000/redoc/).
 
-| Endpoint | Methods | Who |
+| Endpoint | Methods | Access |
 | --- | --- | --- |
-| `/api/products/` (`?category=Roses`) | GET · POST · PATCH · DELETE | anyone reads, staff writes |
-| `/api/categories/` | GET · POST · PATCH · DELETE | anyone reads, staff writes |
-| `/api/discounts/?code=OFF10` | GET | signed-in users look up one code; staff manage all |
-| `/api/orders/` | GET · POST | signed-in users, only their own orders |
-| `/api/profile/` | GET · PATCH | signed-in user |
-| `/register/` | POST | anyone |
-| `/api/token/`, `/api/token/refresh/` | POST | anyone (JWT login) |
+| `/api/products/` · `/api/products/{slug}/` | GET · POST · PATCH · DELETE | read: anyone · write: staff |
+| `/api/products/{slug}/reviews/` | GET · POST | read: anyone · write: signed in (one review per product) |
+| `/api/categories/` · `/api/categories/{slug}/` | GET · POST · PATCH · DELETE | read: anyone · write: staff |
+| `/api/orders/quote/` | POST | anyone — prices a bag without ordering |
+| `/api/orders/` · `/api/orders/{id}/` · `…/cancel/` | GET · POST | signed in, own orders only |
+| `/api/discounts/validate/` | POST | anyone (rate-limited) |
+| `/api/discounts/` | CRUD | staff |
+| `/api/admin/orders/` · `/api/admin/stats/` | GET · PATCH | staff |
+| `/api/auth/register/` · `token/` · `token/refresh/` · `me/` · `password/` | — | accounts and JWT |
 
-Example order:
+Product list filters: `q`, `category`, `min_price`, `max_price`, `in_stock=1`, `on_sale=1`, `featured=1`, `ids=1,2`, `sort=newest|popular|rating|price|-price|title`, `page`, `page_size`.
 
-```json
+```http
 POST /api/orders/
 {
-  "discount": 2,
-  "delivery_date": "2026-11-01",
-  "items": [
-    { "product": 2, "qty": 1 },
-    { "product": 3, "qty": 2 }
-  ]
+  "items": [{ "product": 3, "qty": 2 }],
+  "discount_code": "OFF10",
+  "payment_method": "card",
+  "recipient_name": "Sara Ahmadi",
+  "phone": "+98 912 000 0000",
+  "city": "Tehran",
+  "address": "Valiasr St. 12",
+  "delivery_date": "2026-11-01"
 }
 ```
 
 ## ⚙️ Configuration
 
-The backend reads these environment variables (see `backend/.env.example`); the defaults are meant for local development only.
+See [`backend/.env.example`](backend/.env.example) and [`frontend/.env.example`](frontend/.env.example). The most important ones:
 
-| Variable | Default |
-| --- | --- |
-| `DJANGO_SECRET_KEY` | an insecure dev key |
-| `DJANGO_DEBUG` | `True` |
-| `DJANGO_ALLOWED_HOSTS` | `localhost,127.0.0.1` |
-| `CORS_ALLOWED_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` |
+| Variable | Default | |
+| --- | --- | --- |
+| `DJANGO_SECRET_KEY` | insecure dev key | **set this anywhere public** |
+| `DJANGO_DEBUG` | `True` | |
+| `DJANGO_ALLOWED_HOSTS` / `CORS_ALLOWED_ORIGINS` | localhost | |
+| `DJANGO_HTTPS` | `False` | secure cookies, HSTS and redirect behind a TLS proxy |
+| `SHOP_SHIPPING_FEE` / `SHOP_FREE_SHIPPING_FROM` | `5.00` / `50.00` | |
+| `NEXT_PUBLIC_API_URL` | `http://127.0.0.1:8000` | API address for the browser |
+| `INTERNAL_API_URL` | — | API address for the Next.js server, if different |
 
 ## 🧪 Tests & checks
 
 ```bash
 cd backend && python manage.py test
-cd frontend && npm run lint && npm run typecheck
+cd frontend && npm run lint && npm run typecheck && npm run build
 ```
 
-GitHub Actions runs all of these (plus a production build) on every push.
+GitHub Actions runs all of this plus a Docker build on every push.
 
 ## 📁 Project structure
 
 ```
 backend/
-  flowershop_backend/   Django settings & root URLs
-  shop/                 models, serializers, views, permissions, tests
+  flowershop_backend/     settings, root URLs
+  shop/
+    models.py             catalogue, reviews, discounts, orders
+    pricing.py            server-side quotes, discounts, shipping
+    serializers.py        validation, order creation, status rules
+    views.py              API endpoints, filters, admin stats
+    tests.py
     management/commands/seed_shop.py
-frontend/
-  src/app/[lang]/       routes (store, categories, bag, auth, dashboard)
-  src/views/            page-level components
-  src/components/       shared UI
-  src/i18n/             en.json / fa.json dictionaries
-  src/services/         API client
+frontend/src/
+  app/[lang]/             routes: shop, bag, checkout, account, admin…
+  components/             ui/, product/, checkout/, account/, admin/…
+  lib/                    API client, auth/session, cart, i18n, formatting
+  i18n/                   en.json / fa.json
+  middleware.ts           language routing and route protection
 ```
 
 ---

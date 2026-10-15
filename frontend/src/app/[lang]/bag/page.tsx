@@ -1,7 +1,12 @@
-import Bag from "@/views/bag/bag";
+import type { Metadata } from "next";
+import { BagView } from "@/components/checkout/BagView";
+import { getDictionary } from "@/i18n/dictionaries";
 
-const page = () => {
-  return <Bag />;
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const t = await getDictionary((await params).lang);
+  return { title: t.bag.title, robots: { index: false } };
+}
 
-export default page;
+export default function BagPage() {
+  return <BagView />;
+}

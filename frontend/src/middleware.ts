@@ -1,28 +1,68 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const LANGS = ["en", "fa"];
+const PROTECTED = ["/account", "/checkout", "/admin"];
+const GUEST_ONLY = ["/login", "/register"];
+
+/** Read a JWT payload without verifying it — only used to route; the API enforces access. */
+const claims = (token?: string): { is_staff?: boolean; exp?: number } | null => {
+  if (!token) return null;
+  try {
+    return JSON.parse(atob(token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")));
+  } catch {
+    return null;
+  }
+};
+
+const preferredLang = (request: NextRequest) =>
+  request.headers.get("accept-language")?.toLowerCase().startsWith("fa") ? "fa" : "en";
+
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get("accessToken")?.value;
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
+  const [, first, ...rest] = pathname.split("/");
 
-  const segments = pathname.split("/").filter(Boolean); 
-  const lang = segments[0];
-  const restPath = "/" + segments.slice(1).join("/");
-
-  if (token && (restPath === "/login" || restPath === "/register")) {
+  // Every page lives under /en or /fa.
+  if (!LANGS.includes(first)) {
     const url = request.nextUrl.clone();
-    url.pathname = `/${lang}/dashboard`;
+    url.pathname = `/${preferredLang(request)}${pathname === "/" ? "" : pathname}`;
     return NextResponse.redirect(url);
   }
 
-  if (!token && (restPath.startsWith("/dashboard") || restPath.startsWith("/bag"))) {
+  const lang = first;
+  const path = `/${rest.join("/")}`;
+  const redirectTo = (target: string) => {
     const url = request.nextUrl.clone();
-    url.pathname = `/${lang}/login`;
+    url.pathname = `/${lang}${target}`;
+    url.search = "";
+    return url;
+  };
+
+  // Old links from the first version of the shop.
+  if (path.startsWith("/dashboard")) return NextResponse.redirect(redirectTo("/account"));
+  if (path === "/store" || path.startsWith("/store/")) return NextResponse.redirect(redirectTo("/shop"));
+
+  const access = request.cookies.get("accessToken")?.value;
+  const refresh = request.cookies.get("refreshToken")?.value;
+  const signedIn = Boolean(access || refresh);
+
+  if (PROTECTED.some((prefix) => path === prefix || path.startsWith(`${prefix}/`)) && !signedIn) {
+    const url = redirectTo("/login");
+    url.searchParams.set("next", pathname + search);
     return NextResponse.redirect(url);
+  }
+
+  if (path.startsWith("/admin") && !claims(access ?? refresh)?.is_staff) {
+    return NextResponse.redirect(redirectTo("/account"));
+  }
+
+  if (GUEST_ONLY.includes(path) && signedIn) {
+    return NextResponse.redirect(redirectTo("/account"));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/(fa|en)/dashboard/:path*", "/(fa|en)/(login|register|bag)"],
+  // Skip API routes, Next internals and files with an extension (images, fonts, manifest…).
+  matcher: ["/((?!_next|api|.*\\..*).*)"],
 };

@@ -1,217 +1,406 @@
 {
+    "meta": {
+        "title": "Flower Shop — Fresh flowers, delivered",
+        "description": "Hand-picked fresh flowers by the stem or the bunch, delivered on the day you choose."
+    },
     "common": {
         "cancel": "Cancel",
-        "check": "Check",
+        "save": "Save",
+        "saving": "Saving…",
+        "delete": "Delete",
+        "edit": "Edit",
+        "add": "Add",
+        "back": "Back",
+        "close": "Close",
+        "confirm": "Confirm",
+        "loading": "Loading…",
         "error": "Something went wrong. Please try again.",
-        "saved": "Saved!",
-        "created": "Created!"
+        "retry": "Try again",
+        "all": "All",
+        "yes": "Yes",
+        "no": "No",
+        "required": "This field is required.",
+        "viewAll": "View all",
+        "saved": "Saved",
+        "created": "Created",
+        "deleted": "Deleted",
+        "actions": "Actions",
+        "page": "Page {0} of {1}",
+        "previous": "Previous",
+        "next": "Next",
+        "search": "Search"
     },
-    "header": {
+    "nav": {
         "home": "Home",
-        "products": "Products",
+        "shop": "Shop",
         "categories": "Categories",
-        "dashboard": "Dashboard",
-        "login": "Login",
+        "account": "My account",
+        "admin": "Admin",
+        "login": "Log in",
+        "register": "Sign up",
         "logout": "Log out",
-        "switchLanguage": "فارسی"
-    },
-    "auth": {
-        "login": "Login",
-        "register": "Register",
-        "username": "Username",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "password": "Password",
-        "repeatPassword": "Repeat Password",
-        "email": "Email",
-        "check": "Check",
-        "loginToRegister": "New User?",
-        "registerToLogin": "Already Have an Account?",
-        "loginFailed": "Wrong username or password.",
-        "registerFailed": "Could not create your account."
+        "bag": "Bag",
+        "menu": "Menu",
+        "language": "فارسی",
+        "searchPlaceholder": "Search flowers…",
+        "announcement": "Free delivery on orders over $50 · Order by 2 pm for next-day delivery",
+        "favorites": "Favourites"
     },
     "home": {
         "hero": {
-            "title": "Fresh Wholesale Flowers",
-            "caption": "Direct to you",
-            "button": "Start Shopping",
-            "features": [
-                {
-                    "image": "Price.svg",
-                    "title": "Wholesale Prices",
-                    "description": "Farm-to-door prices on every stem.",
-                    "id": "1"
-                },
-                {
-                    "image": "Credit-Card-Blocked.svg",
-                    "title": "Secure Checkout",
-                    "description": "Pay your way, safely.",
-                    "id": "2"
-                },
-                {
-                    "image": "tulipSvg.svg",
-                    "title": "Best Quality",
-                    "description": "Hand-picked, freshly cut flowers.",
-                    "id": "3"
-                },
-                {
-                    "image": "Customer-Service.svg",
-                    "title": "Client Service",
-                    "description": "Real florists, ready to help.",
-                    "id": "4"
-                }
+            "eyebrow": "Fresh from the grower",
+            "title": "Flowers that make the day",
+            "subtitle": "Hand-picked stems and bunches, delivered on the day you choose.",
+            "cta": "Shop flowers",
+            "secondary": "Browse categories"
+        },
+        "features": [
+            {
+                "icon": "Price.svg",
+                "title": "Grower prices",
+                "text": "Farm-to-door prices on every stem."
+            },
+            {
+                "icon": "Credit-Card-Blocked.svg",
+                "title": "Secure checkout",
+                "text": "Card, PayPal or SnappPay instalments."
+            },
+            {
+                "icon": "tulipSvg.svg",
+                "title": "Freshness promise",
+                "text": "Cut to order, never stored for weeks."
+            },
+            {
+                "icon": "Customer-Service.svg",
+                "title": "Real florists",
+                "text": "Help with every bouquet you plan."
+            }
+        ],
+        "featured": {
+            "title": "Florist favourites",
+            "subtitle": "What everyone is picking this week.",
+            "cta": "Shop all flowers"
+        },
+        "categories": {
+            "title": "Shop by category",
+            "subtitle": "From romantic roses to the perfect filler.",
+            "cta": "All categories"
+        },
+        "sale": {
+            "title": "On sale now",
+            "subtitle": "Seasonal favourites at a friendlier price.",
+            "cta": "See all deals"
+        },
+        "promo": {
+            "eyebrow": "New here?",
+            "title": "20% off your first bouquet",
+            "text": "Use the code WELCOME20 at checkout on orders from $40.",
+            "cta": "Start shopping"
+        }
+    },
+    "product": {
+        "addToBag": "Add to bag",
+        "added": "Added to your bag",
+        "outOfStock": "Sold out",
+        "onlyLeft": "Only {0} left",
+        "inStock": "In stock",
+        "sale": "Sale",
+        "off": "-{0}%",
+        "perBunch": "per bunch of {0} stems",
+        "quantity": "Quantity",
+        "backTo": "Back to {0}",
+        "related": "You may also like",
+        "details": {
+            "title": "Flower details",
+            "color": "Colour",
+            "stems": "Stems per bunch",
+            "vaseLife": "Vase life",
+            "days": "{0} days",
+            "stemLength": "Stem length",
+            "headSize": "Head size",
+            "cm": "{0} cm",
+            "season": "In season",
+            "category": "Category"
+        },
+        "care": {
+            "title": "Care tips",
+            "tips": [
+                "Cut the stems at an angle and remove leaves below the water line.",
+                "Use a clean vase with cool water, away from sun, heat and fruit.",
+                "Re-cut the stems and change the water every 2–3 days."
             ]
         },
-        "hotProducts": {
-            "title": "Hot Products",
-            "button": "All Hot Products"
-        },
-        "shopByCategory": {
-            "title": "Shop By Categories",
-            "button": "All Categories"
+        "reviews": {
+            "title": "Reviews",
+            "empty": "No reviews yet — be the first!",
+            "count": "{0} reviews",
+            "write": "Write a review",
+            "yourRating": "Your rating",
+            "comment": "What did you think?",
+            "submit": "Post review",
+            "update": "Update review",
+            "loginToReview": "Log in to write a review",
+            "thanks": "Thanks for your review!"
         }
     },
-    "store": {
-        "title": "Shop All Flowers",
-        "showAll": "Show All",
-        "showMore": "Show More",
-        "showLess": "Show Less",
+    "shop": {
+        "title": "Shop all flowers",
+        "subtitle": "Fresh stems by the bunch. Filter by category, price or what's in stock.",
+        "filters": "Filters",
         "category": "Category",
-        "perFlower": "per flower",
-        "addProduct": "Add Product",
-        "alsoLike": "You may also like",
-        "backButton": "Back To {0} Category",
-        "details": {
-            "colour": "Colour",
-            "bloomCount": "Bloom Count",
-            "stemsNumber": "Number of stems (Bunch)",
-            "openingSpeed": "Opening Speed",
-            "vaseLine": "Vase Line",
-            "headSize": "Head Size",
-            "stemSize": "Stem Size",
-            "availability": "Availability",
-            "reviews": "Reviews",
-            "productCare": "Product Care"
-        },
-        "noReviews": "There are no reviews yet.",
-        "review": "Review",
-        "days": "Days",
-        "careTips": [
-            "Cut stems on an angle and remove any foliage below the water level.",
-            "Use a clean vase with cool water, away from direct sunlight, heat and air conditioners.",
-            "Re-cut the stems and change the water every 2-3 days to keep them fresh for up to two weeks."
-        ]
+        "allCategories": "All categories",
+        "price": "Price",
+        "min": "Min",
+        "max": "Max",
+        "inStockOnly": "In stock only",
+        "onSaleOnly": "On sale",
+        "clear": "Clear all",
+        "searchFor": "Results for “{0}”",
+        "results": "{0} flowers",
+        "empty": "No flowers match these filters.",
+        "emptyHint": "Try removing a filter or searching for something else.",
+        "sort": {
+            "label": "Sort by",
+            "newest": "Newest",
+            "popular": "Most popular",
+            "rating": "Top rated",
+            "price": "Price: low to high",
+            "-price": "Price: high to low",
+            "title": "Name"
+        }
     },
-    "category": {
-        "title": "Shop by Category",
-        "button": "All Products"
+    "categories": {
+        "title": "Categories",
+        "subtitle": "Pick a family of flowers to explore.",
+        "count": "{0} flowers"
     },
     "bag": {
-        "totalDiscount": "Total Discount",
-        "totalPrice": "Total Price",
-        "deliveryDate": "Delivery Date",
-        "discountHint": "(Hint: use OFF5 or OFF10 or OFF15)",
-        "discount": {
-            "wrongCode": "Wrong discount code!",
-            "discountCodeQuestion": "Discount Code?",
-            "code": "Code",
-            "check": "Check",
-            "discountActive": "% discount is active",
-            "disable": "Disable"
-        },
-        "empty": "Your bag is empty. Time to pick some flowers!",
-        "goShopping": "Go shopping",
-        "buy": "Buy",
-        "pay": "Pay",
-        "choosePayment": "Choose your payment method",
-        "success": "Order placed! You can find it in your dashboard.",
-        "loginToOrder": "Please log in again to place your order."
-    },
-    "dashboard": {
-        "header": {
-            "orders": "Orders",
-            "profile": "Profile",
-            "products": "Products",
-            "addProduct": "Add Product",
-            "categories": "Categories",
-            "discounts": "Discounts"
-        },
-        "profile": {
-            "title": "Edit Profile",
-            "firstName": "First Name",
-            "lastName": "Last Name",
-            "username": "Username",
-            "email": "Email",
-            "save": "Save",
-            "created": "Saved"
-        },
-        "product": {
-            "productTitle": "Edit Product",
-            "editProductTitle": "What do you want to change?",
-            "change": "Change",
-            "fieldRequired": "Field is Required!",
-            "deleteProductQuestion": "Want to delete this Product",
-            "deleteProduct": "Delete Product!",
-            "delete": "Delete",
-            "deleteModalTitle": "Are You Sure?",
-            "deleteModalContent": "This action can't be undone and it will be deleted permenantly.",
-            "copy": "copy",
-            "addProduct": "Add Product",
-            "title": "Title",
-            "price": "Price",
-            "image": "Image",
-            "category": "Category",
-            "description": "Description",
-            "onlyNumbers": "Only numbers are allowed!",
-            "edited": "Edited!"
-        },
-        "category": {
-            "title": "Categories",
-            "add": "Add",
-            "name": "Name",
-            "id": "id"
-        },
-        "orders": {
-            "title": "Sales Dashboard",
-            "headers": [
-                "Row",
-                "Discount",
-                "Total QTY",
-                "Total Price",
-                "Details"
-            ],
-            "more": "MORE",
-            "detailsTitle": "Row {0} Details:",
-            "detailsHeaders": [
-                "Image",
-                "Title",
-                "QTY",
-                "Price",
-                "Total Price"
-            ],
-            "totalPrice": "Total Price",
-            "discount": "Discount",
-            "priceWithDiscount": "Total Price With Discount",
-            "deliveryDate": "Delivery Date",
-            "ok": "OK",
-            "empty": "No orders yet.",
-            "date": "Ordered on"
+        "title": "Your bag",
+        "empty": "Your bag is empty.",
+        "emptyHint": "Time to pick some flowers!",
+        "emptyCta": "Go shopping",
+        "remove": "Remove",
+        "summary": "Order summary",
+        "subtotal": "Subtotal",
+        "discount": "Discount ({0})",
+        "shipping": "Shipping",
+        "free": "Free",
+        "total": "Total",
+        "freeShippingHint": "Add {0} more for free shipping.",
+        "freeShippingDone": "You've unlocked free shipping!",
+        "checkout": "Checkout",
+        "continue": "Continue shopping",
+        "problems": "Some items need your attention:",
+        "code": {
+            "label": "Discount code",
+            "placeholder": "e.g. OFF10",
+            "apply": "Apply",
+            "remove": "Remove",
+            "applied": "{0} applied — {1}% off",
+            "hint": "Try OFF5, OFF10, OFF15 or WELCOME20."
         }
     },
-    "hotDeals": {
-        "title": "Hot Deals",
-        "headline": "Save 15% OFF on FILLERS & Tulips",
-        "content": "Order any fillers or tulips this season and save 15% with the code OFF15!",
-        "caption": "Terms and Conditions apply.",
-        "button": "Shop now"
+    "checkout": {
+        "title": "Checkout",
+        "shipping": "Delivery address",
+        "recipient": "Recipient name",
+        "phone": "Phone number",
+        "city": "City",
+        "address": "Street address",
+        "postalCode": "Postal code",
+        "note": "Gift message or note (optional)",
+        "delivery": "Delivery date",
+        "deliveryHint": "We deliver from tomorrow up to 60 days ahead.",
+        "payment": "Payment",
+        "methods": {
+            "card": "Credit / debit card",
+            "paypal": "PayPal",
+            "snapppay": "SnappPay"
+        },
+        "mockNotice": "This is a demo shop — no real payment is taken.",
+        "place": "Place order · {0}",
+        "placing": "Placing your order…",
+        "emptyBag": "Your bag is empty, so there's nothing to check out yet.",
+        "phoneInvalid": "Enter a valid phone number.",
+        "methodHints": {
+            "card": "Visa, Mastercard",
+            "paypal": "Pay with your PayPal account",
+            "snapppay": "Split into 4 instalments"
+        }
     },
-    "footer": "Made with love by Kimia Khoshnood.",
-    "delivery": {
-        "label": "Delivery Date",
-        "change": "Change",
-        "dialogTitle": "Select Delivery Date",
-        "hint": "Pick the day you want your flowers to arrive. We suggest 2-3 days before the event.",
-        "save": "Save",
-        "notSelected": "Not selected"
+    "order": {
+        "number": "Order {0}",
+        "placedOn": "Placed on {0}",
+        "thankYou": "Thank you for your order!",
+        "thankYouText": "We've received your order and will start preparing your flowers.",
+        "status": {
+            "pending": "Awaiting payment",
+            "paid": "Paid",
+            "shipped": "On its way",
+            "delivered": "Delivered",
+            "cancelled": "Cancelled"
+        },
+        "items": "Items",
+        "qty": "Qty",
+        "unitPrice": "Price",
+        "lineTotal": "Total",
+        "deliveryDate": "Delivery date",
+        "shipTo": "Ship to",
+        "payment": "Payment",
+        "cancel": "Cancel order",
+        "cancelTitle": "Cancel this order?",
+        "cancelText": "The flowers go back on the shelf and you won't be charged.",
+        "cancelled": "Your order was cancelled.",
+        "view": "View order",
+        "steps": [
+            "Placed",
+            "Paid",
+            "On its way",
+            "Delivered"
+        ]
+    },
+    "account": {
+        "title": "My account",
+        "hello": "Hello, {0}",
+        "orders": "Orders",
+        "profile": "Profile",
+        "security": "Password",
+        "noOrders": "You haven't ordered anything yet.",
+        "shopNow": "Find something lovely",
+        "profileSaved": "Your profile was saved.",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "changePassword": "Change password",
+        "passwordChanged": "Your password was changed.",
+        "memberSince": "Member since {0}"
+    },
+    "auth": {
+        "loginTitle": "Welcome back",
+        "loginSubtitle": "Log in to check out faster and track your orders.",
+        "registerTitle": "Create your account",
+        "registerSubtitle": "It takes less than a minute.",
+        "username": "Username",
+        "password": "Password",
+        "password2": "Repeat password",
+        "email": "Email",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "login": "Log in",
+        "register": "Create account",
+        "noAccount": "New here?",
+        "haveAccount": "Already have an account?",
+        "loginFailed": "Wrong username or password.",
+        "demoHint": "Demo admin: admin / admin12345"
+    },
+    "admin": {
+        "title": "Admin",
+        "overview": "Overview",
+        "products": "Products",
+        "categories": "Categories",
+        "orders": "Orders",
+        "discounts": "Discount codes",
+        "backToShop": "Back to shop",
+        "stats": {
+            "revenue": "Revenue",
+            "orders": "Orders",
+            "avgOrder": "Average order",
+            "customers": "Customers",
+            "salesChart": "Sales — last 14 days",
+            "topProducts": "Best sellers",
+            "lowStock": "Running low",
+            "ordersByStatus": "Orders by status",
+            "sold": "{0} sold",
+            "allGood": "Everything is well stocked."
+        },
+        "productForm": {
+            "new": "New product",
+            "edit": "Edit product",
+            "searchPlaceholder": "Search products…",
+            "title": "Title (English)",
+            "titleFa": "Title (Persian)",
+            "slug": "URL slug",
+            "slugHint": "Lowercase words joined by dashes, used in the product URL.",
+            "description": "Description (English)",
+            "descriptionFa": "Description (Persian)",
+            "category": "Category",
+            "noCategory": "No category",
+            "image": "Image URL or path",
+            "price": "Price ($)",
+            "compareAt": "Compare-at price ($)",
+            "compareAtHint": "Higher than the price to show it as a sale.",
+            "stock": "Stock",
+            "active": "Visible in the shop",
+            "featured": "Featured on the home page",
+            "color": "Colour (English)",
+            "colorFa": "Colour (Persian)",
+            "stems": "Stems per bunch",
+            "vaseLife": "Vase life (days)",
+            "stemLength": "Stem length (cm)",
+            "headSize": "Head size (cm)",
+            "season": "In season",
+            "hidden": "Hidden",
+            "deleteTitle": "Delete this product?",
+            "deleteText": "It disappears from the shop. Past orders keep their copy of it.",
+            "empty": "No products found."
+        },
+        "categoryForm": {
+            "new": "New category",
+            "name": "Name (English)",
+            "nameFa": "Name (Persian)",
+            "slug": "URL slug",
+            "description": "Description (English)",
+            "descriptionFa": "Description (Persian)",
+            "products": "Products",
+            "deleteTitle": "Delete this category?",
+            "deleteText": "Its products stay in the shop without a category."
+        },
+        "orderList": {
+            "searchPlaceholder": "Order number, customer…",
+            "allStatuses": "All statuses",
+            "customer": "Customer",
+            "date": "Date",
+            "moveTo": "Move to",
+            "empty": "No orders found."
+        },
+        "discountForm": {
+            "new": "New code",
+            "code": "Code",
+            "percent": "Percent off",
+            "active": "Active",
+            "validUntil": "Valid until",
+            "minOrder": "Minimum order ($)",
+            "maxUses": "Max uses",
+            "used": "Used",
+            "unlimited": "Unlimited",
+            "never": "No end date",
+            "deleteTitle": "Delete this code?",
+            "deleteText": "Customers won't be able to use it any more."
+        }
+    },
+    "footer": {
+        "tagline": "Fresh flowers by the stem and the bunch, delivered with care.",
+        "shop": "Shop",
+        "help": "Help",
+        "delivery": "Delivery",
+        "care": "Flower care",
+        "contact": "Contact us",
+        "rights": "© {0} Flower Shop. A portfolio project by Kimia Khoshnood.",
+        "demo": "Demo store — no real orders or payments."
+    },
+    "notFound": {
+        "title": "This page has wilted",
+        "text": "We couldn't find what you were looking for.",
+        "cta": "Back to the shop"
+    },
+    "errorPage": {
+        "title": "Something went wrong",
+        "text": "We couldn't load this page. It might be a temporary problem."
+    },
+    "favorites": {
+        "title": "Your favourites",
+        "add": "Save to favourites",
+        "remove": "Remove from favourites",
+        "empty": "No favourites yet.",
+        "emptyHint": "Tap the heart on any flower to keep it here for later."
     }
 }

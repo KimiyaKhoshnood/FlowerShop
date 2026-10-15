@@ -1,0 +1,7 @@
+node_modules
+.next
+.env*
+!.env.example
+npm-debug.log*
+public/sw.js
+public/workbox-*.js

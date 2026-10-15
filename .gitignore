@@ -49,22 +49,17 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-### venv ###
-# Virtualenv
+### Python virtualenvs ###
+# (Only whole venv folders — generic names like "lib" would hide frontend/src/lib.)
 .Python
-[Bb]in
-[Ii]nclude
-[Ll]ib
-[Ll]ib64
-[Ll]ocal
-[Ss]cripts
 pyvenv.cfg
-.venv
+.venv/
 venv/
 /backend/env/
 pip-selfcheck.json
-# Django database
+# Django
 db.sqlite3
+/backend/staticfiles/
 .idea/
 __pycache__/
 *.pyc

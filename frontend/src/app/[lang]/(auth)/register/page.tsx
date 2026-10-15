@@ -1,8 +1,13 @@
-import Register from "@/views/auth/register";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { RegisterForm } from "@/components/account/AuthForms";
+import { getDictionary } from "@/i18n/dictionaries";
 
-const page = () => {
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const t = await getDictionary((await params).lang);
+  return { title: t.auth.register, robots: { index: false } };
+}
 
-  return <Register />;
-};
-
-export default page;
+export default function RegisterPage() {
+  return <Suspense><RegisterForm /></Suspense>;
+}

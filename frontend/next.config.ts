@@ -12,6 +12,8 @@ const withPWA = require("next-pwa")({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // A self-contained server bundle for the Docker image.
+  output: "standalone",
 };
 
 export default withPWA(nextConfig);

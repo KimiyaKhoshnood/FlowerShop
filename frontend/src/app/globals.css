@@ -1,11 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), Georgia, "Times New Roman", serif;
+
+  --color-burgundy: #4e0629;
+  --color-burgundy-700: #3b041f;
+  --color-magenta: #dc466a;
+  --color-magenta-600: #c73358;
+  --color-blush: #fbeff4;
+  --color-blush-200: #f5dbe6;
+  --color-cream: #fffaf7;
+  --color-ink: #1f1a1c;
+  --color-muted: #6f6468;
+  --color-line: #ece4e7;
+
+  --radius-card: 1.25rem;
+  --shadow-soft: 0 10px 30px -12px rgb(78 6 41 / 0.18);
 }
 
 :root {
+  /* Kept for components written before the theme tokens existed. */
   --background: #fffefe;
   --foreground: #171717;
   --Burgundy: #4e0629;
@@ -13,53 +28,101 @@
   --BabyPink: #fbeff4;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  color: black;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Persian text reads better a little larger and with more line height. */
+html[lang="fa"] body {
+  line-height: 1.8;
+}
+
+/* Large Persian display type feels heavy, so Persian headings stay modest. */
+html[lang="fa"] h1.heading-display {
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  line-height: 1.6;
+}
+
+/* The one place a Persian heading is allowed to be a bit bigger. */
+html[lang="fa"] h1.hero-title {
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  line-height: 1.45;
+}
+
+/* Vazirmatn headings read best a little bolder than the body. */
+html[lang="fa"] .heading-display {
+  font-weight: 700;
+}
+
+html[lang="fa"] .font-display {
+  font-weight: 600;
+}
+
+html[lang="fa"] h2.heading-display {
+  font-size: clamp(1.35rem, 2vw, 1.6rem);
+  line-height: 1.6;
+}
+
+/* Letter-spacing breaks the joins between Persian letters. */
+html[lang="fa"] .eyebrow,
+html[lang="fa"] .tracking-wider,
+html[lang="fa"] [class*="tracking-["] {
+  letter-spacing: 0;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply rounded-(--radius-card) border border-line bg-white;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-magenta;
+  }
+
+  .heading-display {
+    @apply font-display text-burgundy;
+  }
+}
+
+/* Swiper arrows in the brand style. */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 12px !important;
+  font-weight: 700;
+  color: var(--color-burgundy);
   background: white;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.sth{
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
-}
-
-.swiper-button-prev:after{
-  color: #0a0a0a;
-  font-size: 12px !important;
-  font-weight: bolder;
-  border: solid #0a0a0a 1px; 
-  background-color: #ffffff;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
 }
 
-.swiper-button-next:after{
-  color: #0a0a0a;
-  font-size: 12px !important;
-  font-weight: bolder;
-  border: solid #0a0a0a 1px; 
-  background-color: #ffffff;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.swiper-button-disabled {
+  opacity: 0 !important;
 }
 
-.webkit-filter{
-  -webkit-filter: blur(8px);
+/* Hide the number spinners; quantity steppers have their own buttons. */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
